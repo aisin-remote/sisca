@@ -1,0 +1,82 @@
+@extends('layout.master')
+@section('title', 'Registrasi')
+
+@section('content')
+
+    <div class="container mt-2 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow rounded">
+                    <div class="card-body m-2 rounded"
+                        style="background-image:url('https://www.aisinindonesia.co.id/assetweb/image/login/bg.jpg');background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-position:center;">
+                        <div class="m-4">
+                            <h2>REGISTRATION</h2>
+                            <form action="/register" method="POST">
+                                @csrf
+
+                                <div class="mb-3 mt-3">
+                                    <label for="name" class="form-label">Name
+                                        <span class="text-danger">*</span></label>
+                                    <input type="name"
+                                        class="form-control @error('name')
+                                    is-invalid @enderror"
+                                        id="name" name="name" aria-describedby="name" required value="{{ old('name') }}" autofocus>
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="npk" class="form-label">NPK
+                                        <span class="text-danger">*</span></label>
+                                    <input type="npk"
+                                        class="form-control @error('npk')
+                                    is-invalid @enderror"
+                                        id="npk" name="npk" aria-describedby="npk" required value="{{ old('npk') }}" autofocus>
+                                    @error('npk')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password <span
+                                            class="text-danger">*</span></label>
+                                    <input type="password"
+                                        class="form-control @error('password')
+                                    is-invalid @enderror"
+                                        id="password" name="password">
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="passwordconfirmation" class="form-label">Password Confirmation <span
+                                            class="text-danger">*</span></label>
+                                    <input type="password"
+                                        class="form-control @error('passwordconfirmation')
+                                    is-invalid @enderror"
+                                        id="passwordconfirmation" name="passwordconfirmation">
+                                    @error('passwordconfirmation')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="btn btn-primary center-block w-100 mb-3">SIGN UP</button>
+                                <p class="text-muted">
+                                    Alredy have an account?
+                                    <a href="/login" style="font-weight: 700;" class="custom-link">
+                                        Login now.</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

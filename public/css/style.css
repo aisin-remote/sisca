@@ -1,0 +1,58 @@
+/* Styling for the element */
+.custom-link {
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+
+/* Underline effect on hover */
+.custom-link:hover {
+    text-decoration: underline;
+}
+
+.navbar .navbar-nav {
+    float: none;
+    vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.navbar-brand {
+    margin: 0 auto;
+    display: table;
+    margin-left: 30;
+}
+
+.nav-item:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.nav-item .nav-link:hover {
+    color: white;
+}
+
+body {
+    font-family: 'Poppins';
+    font-size: 16px;
+}
+
+/* Scroll To Top Botton */
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#scrollToTopBtn:hover {
+    background-color: #0056b3;
+}
