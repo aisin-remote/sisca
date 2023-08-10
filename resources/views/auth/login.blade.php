@@ -16,16 +16,25 @@
                                 </div>
                             @endif
 
-                            <form>
+                            <form action="/login" method="POST">
+                                @csrf
                                 <div class="mb-3 mt-3">
-                                    <label for="exampleInputEmail1" class="form-label">NPK <span
-                                            class="text-danger">*</span></label>
-                                    <input type="npk" class="form-control" id="npk" aria-describedby="npk">
+                                    <label for="npk" class="form-label">NPK <span class="text-danger">*</span></label>
+                                    <input type="npk"
+                                        class="form-control @error('npk')
+                                    is-invalid @enderror"
+                                        name="npk" id="npk" aria-describedby="npk" autofocus required
+                                        value="{{ old('npk') }}">
+                                    @error('npk')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password <span
                                             class="text-danger">*</span></label>
-                                    <input type="password" class="form-control" id="password">
+                                    <input type="password" class="form-control" id="password" name="password">
                                 </div>
                                 <button type="submit" class="btn btn-primary center-block w-100 mb-3">LOG IN</button>
                                 <p class="text-muted">
