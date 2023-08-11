@@ -22,6 +22,10 @@ class RegisterController extends Controller
             'password' => ['required', Password::min(8)->mixedCase()->letters()->numbers()->symbols()->uncompromised()]
         ]);
 
+        $request->validate([
+            'password_confirmation' => 'required|same:password'
+        ]);
+
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);

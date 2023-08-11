@@ -1,3 +1,4 @@
+// Scroll To Top
 window.onscroll = function() { scrollFunction() };
 
 function scrollFunction() {
@@ -12,3 +13,5 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function() {
     document.body.scrollTop = 0; // Untuk Safari
     document.documentElement.scrollTop = 0; // Untuk Chrome, Firefox, IE, Opera
 });
+
+

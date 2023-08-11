@@ -54,13 +54,13 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="passwordconfirmation" class="form-label">Password Confirmation <span
+                                    <label for="password_confirmation" class="form-label">Password Confirmation <span
                                             class="text-danger">*</span></label>
                                     <input type="password"
-                                        class="form-control @error('passwordconfirmation')
+                                        class="form-control @error('password_confirmation')
                                     is-invalid @enderror"
-                                        id="passwordconfirmation" name="passwordconfirmation">
-                                    @error('passwordconfirmation')
+                                        id="password_confirmation" name="password_confirmation">
+                                    @error('password_confirmation')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
