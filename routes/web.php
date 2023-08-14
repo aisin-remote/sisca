@@ -40,11 +40,12 @@ Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middlewar
 
 Route::resource('/dashboard/apar', AparController::class)->except('show')->middleware('auth');
 
-Route::get('/cekco2', function () {
-    return view('dashboard.checkCo2');
-});
-
 use App\Http\Controllers\CheckSheetCo2Controller;
 
 Route::get('/checksheetco2', [CheckSheetCo2Controller::class, 'index'])->name('checksheetco2.index');
 Route::post('/checksheetco2', [CheckSheetCo2Controller::class, 'store'])->name('checksheetco2.store');
+
+use App\Http\Controllers\CheckSheetPowderController;
+
+Route::get('/checksheetpowder', [CheckSheetPowderController::class, 'index'])->name('checksheetpowder.index');
+Route::post('/checksheetpowder', [CheckSheetPowderController::class, 'store'])->name('checksheetpowder.store');
