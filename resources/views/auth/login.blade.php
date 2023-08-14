@@ -10,9 +10,16 @@
                         style="background-image:url('https://www.aisinindonesia.co.id/assetweb/image/login/bg.jpg');background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-position:center;">
                         <div class="m-4">
                             <h2>LOGIN</h2>
+
                             @if (session()->has('message'))
                                 <div class="alert alert-success">
                                     {{ session()->get('message') }}
+                                </div>
+                            @endif
+
+                            @if (session()->has('loginError'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('loginError') }}
                                 </div>
                             @endif
 
