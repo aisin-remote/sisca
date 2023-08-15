@@ -61,3 +61,4 @@ Route::middleware(['auth'])->group(function () {
 use App\Http\Controllers\AparReportController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
+

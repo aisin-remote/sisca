@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class AparReportController extends Controller
 {
@@ -12,10 +13,13 @@ class AparReportController extends Controller
         return date('n', strtotime($date));
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $selectedYear = $request->input('selected_year', date('Y'));
         // Logic to generate CO2 issue codes and store in a temporary JSON file
-        $co2DataFromDatabase = DB::table('check_sheet_co2s')->get(); // Replace 'nama_tabel' with your table name
+        $co2DataFromDatabase = DB::table('check_sheet_co2s')
+            ->whereYear('tanggal_pengecekan', $selectedYear) // Filter data by selected year
+            ->get();
 
         $co2IssueCodes = [];
 
@@ -46,7 +50,9 @@ class AparReportController extends Controller
         Storage::put('temporary_co2_issue_codes.json', $co2IssueCodesJson); // Save CO2 JSON in a temporary file
 
         // Logic to generate Powder issue codes and store in a temporary JSON file
-        $powderDataFromDatabase = DB::table('check_sheet_powders')->get(); // Replace 'nama_tabel' with your table name
+        $powderDataFromDatabase = DB::table('check_sheet_powders')
+            ->whereYear('tanggal_pengecekan', $selectedYear) // Filter data by selected year
+            ->get();
 
         $powderIssueCodes = [];
 
@@ -78,6 +84,7 @@ class AparReportController extends Controller
         return view('dashboard.apar_report', [
             'co2IssueCodes' => $co2IssueCodes,
             'powderIssueCodes' => $powderIssueCodes,
+            'selectedYear' => $selectedYear,
         ]);
     }
 }
