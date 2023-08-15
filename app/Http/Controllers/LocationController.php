@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Apar;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
-class AparController extends Controller
+class LocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class AparController extends Controller
      */
     public function index()
     {
-        return view('dashboard.apar.index', [
-            'apars' => Apar::all()
+        return view('dashboard.location.index',[
+            'locations' => Location::all()
         ]);
     }
 
@@ -26,7 +26,7 @@ class AparController extends Controller
      */
     public function create()
     {
-        return view('dashboard.apar.create');
+        return view('dashboard.location.create');
     }
 
     /**
@@ -37,7 +37,12 @@ class AparController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'location_name'=>'required|unique:locations'
+        ]);
+
+        Location::create($validate);
+        return redirect()->route('data_location.index')->with('message', "Data Location {$validate['location_name']} berhasil ditambahkan");
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AparController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -38,7 +39,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 
-Route::resource('/dashboard/apar', AparController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/apar/data_apar', AparController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show')->middleware('auth');
 
 Route::get('/cekco2', function () {
     return view('dashboard.checkCo2');
