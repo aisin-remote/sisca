@@ -10,7 +10,7 @@ class CheckSheetPowderController extends Controller
     public function index()
     {
         $checkSheetPowders = CheckSheetPowder::all();
-        return view('dashboard.chechSheet.checkPowder', compact('checkSheetPowders'));
+        return view('dashboard.checkSheet.checkPowder', compact('checkSheetPowders'));
     }
 
     public function store(Request $request)
