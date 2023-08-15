@@ -57,3 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checksheetpowder', [CheckSheetPowderController::class, 'index'])->name('checksheetpowder.index');
     Route::post('/checksheetpowder', [CheckSheetPowderController::class, 'store'])->name('checksheetpowder.store');
 });
+
+use App\Http\Controllers\AparReportController;
+
+Route::get('/report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
