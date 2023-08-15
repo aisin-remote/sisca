@@ -41,6 +41,7 @@ Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middlewar
 
 // Route Apar
 Route::resource('/dashboard/apar/data_apar', AparController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/apar/data_apar/{data_apar}', [AparController::class, 'update'])->name('data_apar.update');
 
 
 // Route Location
