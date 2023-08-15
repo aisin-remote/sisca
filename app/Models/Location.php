@@ -11,6 +11,6 @@ class Location extends Model
     protected $guarded = [];
 
     public function apars(){
-        return $this->hasMany('App\Models\Apar');
+        return $this->hasMany(Apar::class);
     }
 }

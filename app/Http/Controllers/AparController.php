@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apar;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class AparController extends Controller
@@ -14,9 +15,8 @@ class AparController extends Controller
      */
     public function index()
     {
-        return view('dashboard.apar.index', [
-            'apars' => Apar::all()
-        ]);
+        $apars = Apar::get();
+        return view('dashboard.apar.index', compact('apars'));
     }
 
     /**
@@ -26,7 +26,8 @@ class AparController extends Controller
      */
     public function create()
     {
-        return view('dashboard.apar.create');
+        $locations = Location::all();
+        return view('dashboard.apar.create', compact('locations'));
     }
 
     /**
@@ -37,7 +38,16 @@ class AparController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'tag_number'=>'required|unique:apars',
+            'location_id'=>'required',
+            'expired'=>'required',
+            'post'=>'nullable',
+            'type'=>'required'
+        ]);
+
+        Apar::create($validate);
+        return redirect()->route('data_apar.index')->with('message', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
     }
 
     /**

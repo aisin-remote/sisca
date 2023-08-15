@@ -16,6 +16,7 @@
               <th scope="col">Expired</th>
               <th scope="col">Post</th>
               <th scope="col">Type</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -23,21 +24,21 @@
             <tr class="align-middle">
               <td>{{ $loop->iteration }}</td>
               <td>{{ $apar->tag_number }}</td>
-              <td>{{ $apar->location }}</td>
+              <td>{{ $apar->locations->location_name }}</td>
               <td>{{ $apar->expired }}</td>
               <td>{{ $apar->post }}</td>
               <td>{{ $apar->type }}</td>
               <td>
                 <form action="/" method="POST">
-                    <a href="/" class="badge bg-warning"><span data-feather="edit"></span></a>
+                    <a href="/" class="badge bg-warning">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Ingin menghapus Data UKT Mahasiswa?')"><span data-feather="x-circle"></span></button>
+                    <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Ingin menghapus Data UKT Mahasiswa?')">Delete</button>
                 </form>
               </td>
             </tr>
             @empty
-                <td colspan="8">Tidak ada data...</td>
+                <td colspan="12">Tidak ada data...</td>
             @endforelse
           </tbody>
         </table>

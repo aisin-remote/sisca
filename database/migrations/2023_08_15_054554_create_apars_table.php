@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('apars', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('location_id');
             $table->string('tag_number')->unique();
-            $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->year('expired');
-            $table->string('post');
+            $table->string('expired');
+            $table->string('post')->nullable()->default('-');
             $table->string('type');
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamps();
+
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 

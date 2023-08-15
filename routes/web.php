@@ -39,8 +39,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 
+// Route Apar
 Route::resource('/dashboard/apar/data_apar', AparController::class)->except('show')->middleware('auth');
-Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show')->middleware('auth');
+
+
+// Route Location
+Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show','destroy')->middleware('auth');
+Route::delete('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'destroy'])->name('data_location.destroy');
+// Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 use App\Http\Controllers\CheckSheetCo2Controller;
 

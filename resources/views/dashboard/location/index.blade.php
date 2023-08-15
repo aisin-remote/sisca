@@ -28,8 +28,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $location->location_name }}</td>
                         <td>
-                            <form action="/dashboard/apar/data_location/{{ $location->id }}" method="POST">
-                                <a href="/" class="badge text-bg-warning border-0">edit</a>
+                            <form action="{{ route('data_location.destroy',$location->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

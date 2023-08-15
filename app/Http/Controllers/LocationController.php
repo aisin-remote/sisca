@@ -62,10 +62,11 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-
-    }
+    // public function edit($id)
+    // {
+    //     $location = Location::findOrFail($id);
+    //     return view('dashboard.location.edit', compact('location'));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -74,10 +75,18 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     $location = Location::findOrFail($id);
+
+    //     $validateData = $request->validate([
+    //         'location_name' => 'required'
+    //     ]);
+
+    //     $location->update($validateData);
+
+    //     return redirect()->route('data_location.index')->with('success', 'Data berhasil di update.');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -85,10 +94,11 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Location $location)
+    public function destroy($id)
     {
-        Location::destroy($location->id);
+        $location = Location::find($id);
+        $location->delete();
 
-        return redirect('/dashboard/apar/data_location')->with('success', 'Data Location berhasil dihapus');
+        return redirect()->route('data_location.index')->with('success', 'Data Location berhasil dihapus');
     }
 }
