@@ -47,7 +47,7 @@ class AparController extends Controller
         ]);
 
         Apar::create($validate);
-        return redirect()->route('data_apar.index')->with('message', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
+        return redirect()->route('data_apar.index')->with('success', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
     }
 
     /**
@@ -69,8 +69,9 @@ class AparController extends Controller
      */
     public function edit($id)
     {
-        $apars = Apar::findOrFail($id);
-        return view('dashboard.apar.edit', compact('apars'));
+        $apar = Apar::findOrFail($id);
+        $locations = Location::all();
+        return view('dashboard.apar.edit', compact('apar', 'locations'));
     }
 
     /**
@@ -82,7 +83,18 @@ class AparController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apar = Apar::findOrFail($id);
+
+        $validateData = $request->validate([
+            'location_id'=>'required',
+            'expired'=>'required',
+            'post'=>'nullable',
+            'type'=>'required'
+        ]);
+
+        $apar->update($validateData);
+
+        return redirect()->route('data_apar.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
