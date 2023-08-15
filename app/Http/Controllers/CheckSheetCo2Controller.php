@@ -10,7 +10,7 @@ class CheckSheetCo2Controller extends Controller
     public function index()
     {
         $checkSheetCo2s = CheckSheetCo2::all();
-        return view('dashboard.checkCo2', compact('checkSheetCo2s'));
+        return view('dashboard.checkSheet.checkCo2', compact('checkSheetCo2s'));
     }
 
     public function store(Request $request)
