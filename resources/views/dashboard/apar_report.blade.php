@@ -4,23 +4,6 @@
 @section('content')
 <div class="container">
     <div>
-        <h4>Catatan:</h4>
-        <ul class="list-unstyled d-flex">
-            <li><strong>'a':</strong> Pressure </li>
-            <li class="mx-4"><strong>'b':</strong> Lock Pin</li>
-            <li><strong>'c':</strong> Regulator</li>
-            <li class="mx-4"><strong>'d':</strong> Tabung</li>
-            <li><strong>'e':</strong> Corong</li>
-            <li class="mx-4"><strong>'f':</strong> Hose</li>
-            <li><strong>'g':</strong> Powder</li>
-            <li class="mx-4"><strong>'h':</strong> Berat Tabung</li>
-            <li><strong>'a+b':</strong> Isi Ulang</li>
-        </ul>
-    </div>
-
-    <br>
-    <hr>
-    <div>
         <form class="form-inline" method="GET" action="{{ route('apar.report') }}">
             <div class="input-group mb-3 w-25">
                 <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
@@ -112,5 +95,22 @@
             @endforeach
         </tbody>
     </table>
+
+    <br>
+    <hr>
+    <div>
+        <h4>Catatan:</h4>
+        <ul class="list-unstyled d-flex">
+            <li><strong>'a':</strong> Pressure </li>
+            <li class="mx-4"><strong>'b':</strong> Lock Pin</li>
+            <li><strong>'c':</strong> Regulator</li>
+            <li class="mx-4"><strong>'d':</strong> Tabung</li>
+            <li><strong>'e':</strong> Corong</li>
+            <li class="mx-4"><strong>'f':</strong> Hose</li>
+            <li><strong>'g':</strong> Kadar Konsentrat</li>
+            <li class="mx-4"><strong>'h':</strong> Berat</li>
+            <li><strong>'a+b':</strong> Isi Ulang</li>
+        </ul>
+    </div>
 </div>
 @endsection
