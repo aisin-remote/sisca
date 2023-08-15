@@ -64,7 +64,7 @@ class LocationController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -85,8 +85,10 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Location $location)
     {
-        //
+        Location::destroy($location->id);
+
+        return redirect('/dashboard/apar/data_location')->with('success', 'Data Location berhasil dihapus');
     }
 }
