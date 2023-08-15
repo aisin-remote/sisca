@@ -29,8 +29,8 @@
               <td>{{ $apar->post }}</td>
               <td>{{ $apar->type }}</td>
               <td>
-                <form action="/" method="POST">
-                    <a href="/" class="badge bg-warning">Edit</a>
+                <form action="{{ route('data_apar.destroy',$apar->id) }}" method="POST">
+                    <a href="{{ route('data_apar.edit',$apar->id) }}" class="badge bg-warning">Edit</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Ingin menghapus Data UKT Mahasiswa?')">Delete</button>

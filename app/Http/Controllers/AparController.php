@@ -69,7 +69,8 @@ class AparController extends Controller
      */
     public function edit($id)
     {
-        //
+        $apars = Apar::findOrFail($id);
+        return view('dashboard.apar.edit', compact('apars'));
     }
 
     /**
@@ -92,6 +93,9 @@ class AparController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $apar = Apar::find($id);
+        $apar->delete();
+
+        return redirect()->route('data_apar.index')->with('success', 'Data Apar berhasil dihapus');
     }
 }
