@@ -48,6 +48,11 @@
             $('#sidebar').toggleClass('active');
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().substr(0, 10);
+        document.getElementById('tanggal_pengecekan').value = today;
+    });
 </script>
 </body>
 </html>

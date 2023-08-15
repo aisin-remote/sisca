@@ -1,10 +1,10 @@
 @extends('dashboard.app')
-@section('title', 'Check Sheet APAR CO2')
+@section('title', 'Check Sheet APAR Powder')
 
 @section('content')
 
 <div class="container">
-    <h1>Check Sheet APAR CO2</h1>
+    <h1>Check Sheet APAR Powder</h1>
     <hr>
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -28,7 +28,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
-                    <input type="date" class="form-control" id="tanggal_pengecekan" name="tanggal_pengecekan" required>
+                    <input type="date" class="form-control" id="tanggal_pengecekan" name="tanggal_pengecekan" required readonly>
                 </div>
                 <div class="mb-3">
                     <label for="npk" class="form-label">NPK</label>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="apar_number" class="form-label">Nomor Apar</label>
-                    <input type="text" class="form-control" id="apar_number" name="apar_number" required>
+                    <input type="text" class="form-control" id="apar_number" name="apar_number" required autofocus>
                 </div>
         </div>
         <div class="col-md-6">
