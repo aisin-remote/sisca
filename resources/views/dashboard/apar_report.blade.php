@@ -39,13 +39,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($co2IssueCodes as $aparNumber => $issueCode)
+            @foreach ($co2IssueCodesWithLocation as $issueCode)
             <tr>
-                <td>{{ $aparNumber }}</td>
-                <td></td>
+                <td>{{ $issueCode->apar_number }}</td>
+                <td>{{ $issueCode->location_name }}</td>
                 @for ($month = 1; $month <= 12; $month++) <td>
                     @php
-                    $issueCodeValue = $issueCode['months'][$month] ?? ''; // Get issue code for this month
+                    $issueCodeValue = $co2IssueCodes[$issueCode->apar_number]['months'][$month] ?? '';
                     if (is_array($issueCodeValue)) {
                     echo implode('+', $issueCodeValue);
                     } else {
@@ -58,6 +58,7 @@
             @endforeach
         </tbody>
     </table>
+
 
     <br>
     <hr>
@@ -76,13 +77,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($powderIssueCodes as $aparNumber => $issueCode)
+        @foreach ($powderIssueCodesWithLocation as $issueCode)
             <tr>
-                <td>{{ $aparNumber }}</td>
-                <td></td>
+                <td>{{ $issueCode->apar_number }}</td>
+                <td>{{ $issueCode->location_name }}</td>
                 @for ($month = 1; $month <= 12; $month++) <td>
                     @php
-                    $issueCodeValue = $issueCode['months'][$month] ?? ''; // Get issue code for this month
+                    $issueCodeValue = $powderIssueCodes[$issueCode->apar_number]['months'][$month] ?? '';
                     if (is_array($issueCodeValue)) {
                     echo implode('+', $issueCodeValue);
                     } else {

@@ -16,6 +16,20 @@ class AparReportController extends Controller
     public function index(Request $request)
     {
         $selectedYear = $request->input('selected_year', date('Y'));
+
+        $co2IssueCodesWithLocation = DB::table('check_sheet_co2s')
+            ->join('apars', 'check_sheet_co2s.apar_number', '=', 'apars.tag_number')
+            ->join('locations', 'apars.location_id', '=', 'locations.id')
+            ->whereYear('check_sheet_co2s.tanggal_pengecekan', $selectedYear)
+            ->select('check_sheet_co2s.apar_number', 'locations.location_name')
+            ->get();
+
+        $powderIssueCodesWithLocation = DB::table('check_sheet_powders')
+            ->join('apars', 'check_sheet_powders.apar_number', '=', 'apars.tag_number')
+            ->join('locations', 'apars.location_id', '=', 'locations.id')
+            ->whereYear('check_sheet_powders.tanggal_pengecekan', $selectedYear)
+            ->select('check_sheet_powders.apar_number', 'locations.location_name')
+            ->get();
         // Logic to generate CO2 issue codes and store in a temporary JSON file
         $co2DataFromDatabase = DB::table('check_sheet_co2s')
             ->whereYear('tanggal_pengecekan', $selectedYear) // Filter data by selected year
@@ -85,6 +99,8 @@ class AparReportController extends Controller
             'co2IssueCodes' => $co2IssueCodes,
             'powderIssueCodes' => $powderIssueCodes,
             'selectedYear' => $selectedYear,
+            'co2IssueCodesWithLocation' => $co2IssueCodesWithLocation,
+            'powderIssueCodesWithLocation' => $powderIssueCodesWithLocation,
         ]);
     }
 }
