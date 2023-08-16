@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Apar;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CheckSheetCo2Controller;
 
 class CheckSheetController extends Controller
 {
@@ -25,11 +26,11 @@ class CheckSheetController extends Controller
         $type = $apar->type;
 
         if ($type === 'co2') {
-            return view('dashboard.checkSheet.checkCo2', compact('tagNumber'));
+            return redirect()->route('checksheetco2', compact('tagNumber'));
         } elseif ($type === 'powder') {
-            return view('dashboard.checkSheet.checkPowder', compact('tagNumber'));
+            return redirect()->route('checksheetpowder', compact('tagNumber'));
         } elseif ($type === 'af11e') {
-            return view('dashboard.checkSheet.checkCo2', compact('tagNumber'));
+            return redirect()->route('checksheetco2', compact('tagNumber'));
         } else {
             return back()->with('error', 'Tipe tidak dikenali');
         }

@@ -7,10 +7,10 @@ use App\Models\CheckSheetPowder;
 
 class CheckSheetPowderController extends Controller
 {
-    public function index()
+    public function showForm($tagNumber)
     {
         $checkSheetPowders = CheckSheetPowder::all();
-        return view('dashboard.checkSheet.checkPowder', compact('checkSheetPowders'));
+        return view('dashboard.checkSheet.checkPowder', compact('checkSheetPowders', 'tagNumber'));
     }
 
     public function store(Request $request)
@@ -35,6 +35,6 @@ class CheckSheetPowderController extends Controller
         // Simpan data ke database menggunakan metode create
         CheckSheetPowder::create($validatedData);
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
     }
 }

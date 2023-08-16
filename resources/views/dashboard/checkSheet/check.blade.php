@@ -6,8 +6,13 @@
         <h1>Check Sheet Apar</h1>
     </div>
     @if (session()->has('error'))
-        <div class="alert alert-success col-lg-6">
+        <div class="alert alert-success col-lg-12">
             {{ session()->get('error') }}
+        </div>
+    @endif
+    @if (session()->has('success'))
+        <div class="alert alert-success col-lg-12">
+            {{ session()->get('success') }}
         </div>
     @endif
     <form action="{{ route('process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">

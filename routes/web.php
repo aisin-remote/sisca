@@ -51,24 +51,25 @@ Route::delete('/dashboard/apar/data_location/{data_location}', [LocationControll
 
 use App\Http\Controllers\CheckSheetController;
 
-Route::get('/checksheet', [CheckSheetController::class, 'showForm'])->name('show.form');
-Route::post('/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
+// checksheet
+Route::get('/dashboard/apar/checksheet', [CheckSheetController::class, 'showForm'])->name('show.form');
+Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
 
 use App\Http\Controllers\CheckSheetCo2Controller;
 
 
 // Menggunakan middleware auth untuk routes terkait checksheetco2
 Route::middleware(['auth'])->group(function () {
-    Route::get('/checksheetco2', [CheckSheetCo2Controller::class, 'index'])->name('checksheetco2.index');
-    Route::post('/checksheetco2', [CheckSheetCo2Controller::class, 'store'])->name('checksheetco2.store');
+    Route::get('/dashboard/apar/checksheetco2/{tagNumber}', [CheckSheetCo2Controller::class, 'showForm'])->name('checksheetco2');
+    Route::post('/dashboard/apar/process-checksheet-co2-af11e/{tagNumber}', [CheckSheetCo2Controller::class, 'store'])->name('process.checksheet.co2');
 });
 
 use App\Http\Controllers\CheckSheetPowderController;
 
 // Menggunakan middleware auth untuk routes terkait checksheetpowder
 Route::middleware(['auth'])->group(function () {
-    Route::get('/checksheetpowder', [CheckSheetPowderController::class, 'index'])->name('checksheetpowder.index');
-    Route::post('/checksheetpowder', [CheckSheetPowderController::class, 'store'])->name('checksheetpowder.store');
+    Route::get('/dashboard/apar/checksheetpowder/{tagNumber}', [CheckSheetPowderController::class, 'showForm'])->name('checksheetpowder');
+    Route::post('/dashboard/apar/process-checksheet-powder/{tagNumber}', [CheckSheetPowderController::class, 'store'])->name('process.checksheet.powder');
 });
 
 use App\Http\Controllers\AparReportController;
