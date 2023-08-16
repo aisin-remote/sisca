@@ -49,7 +49,13 @@ Route::resource('/dashboard/apar/data_location', LocationController::class)->exc
 Route::delete('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'destroy'])->name('data_location.destroy');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
+use App\Http\Controllers\CheckSheetController;
+
+Route::get('/checksheet', [CheckSheetController::class, 'showForm'])->name('show.form');
+Route::post('/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
+
 use App\Http\Controllers\CheckSheetCo2Controller;
+
 
 // Menggunakan middleware auth untuk routes terkait checksheetco2
 Route::middleware(['auth'])->group(function () {
