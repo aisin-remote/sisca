@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Check Sheet APAR CO2</h1>
+    <h1>Check Sheet APAR CO2/AF11E</h1>
     <hr>
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form action="/checksheetco2" method="POST">
+            <form action="{{ route('process.checksheet.co2', ['tagNumber' => $tagNumber]) }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="apar_number" class="form-label">Nomor Apar</label>
-                    <input type="text" class="form-control" id="apar_number" name="apar_number" required autofocus>
+                    <input type="text" class="form-control" id="apar_number" value="{{ $tagNumber }}" name="apar_number" required autofocus readonly>
                 </div>
         </div>
         <div class="col-md-6">
