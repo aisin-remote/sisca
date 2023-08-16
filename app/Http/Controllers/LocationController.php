@@ -42,7 +42,7 @@ class LocationController extends Controller
         ]);
 
         Location::create($validate);
-        return redirect()->route('data_location.index')->with('message', "Data Location {$validate['location_name']} berhasil ditambahkan");
+        return redirect()->route('data_location.index')->with('success', "Data Location {$validate['location_name']} berhasil ditambahkan");
     }
 
     /**
