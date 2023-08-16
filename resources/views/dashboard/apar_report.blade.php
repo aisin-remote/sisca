@@ -5,7 +5,7 @@
 <div class="container">
     <div>
         <form class="form-inline" method="GET" action="{{ route('apar.report') }}">
-            <div class="input-group mb-3 w-25">
+            <div class="input-group mb-3">
                 <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
                 <select class="form-select" name="selected_year" id="selected_year">
                     <option value="select" selected disabled>Select</option>
@@ -16,8 +16,9 @@
                         @endphp
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Tampilkan</button>
+            <button type="submit" class="btn btn-info ml-2">Tampilkan</button>
         </form>
+
         @if(request()->has('selected_year'))
         <p class="mt-2">Data untuk tahun {{ request('selected_year') }}</p>
         @endif
@@ -25,6 +26,7 @@
 
     <br>
     <hr>
+
     <h3>APAR CO2 Report</h3>
     <table class="text-center table table-striped">
         <thead class="align-middle">
@@ -39,17 +41,38 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($co2IssueCodesWithLocation as $issueCode)
+            @php
+            $co2Summarized = [];
+            foreach ($co2IssueCodesWithLocation as $issueCode) {
+            $aparNumber = $issueCode->apar_number;
+            if (!isset($co2Summarized[$aparNumber])) {
+            $co2Summarized[$aparNumber] = [
+            'location_name' => $issueCode->location_name,
+            'months' => array_fill(1, 12, []),
+            ];
+            }
+
+            foreach ($co2IssueCodes[$aparNumber]['months'] as $month => $codes) {
+            foreach ($codes as $code) {
+            if (!in_array($code, $co2Summarized[$aparNumber]['months'][$month])) {
+            $co2Summarized[$aparNumber]['months'][$month][] = $code;
+            }
+            }
+            }
+            }
+            @endphp
+
+            @foreach ($co2Summarized as $aparNumber => $data)
             <tr>
-                <td>{{ $issueCode->apar_number }}</td>
-                <td>{{ $issueCode->location_name }}</td>
+                <td>{{ $aparNumber }}</td>
+                <td>{{ $data['location_name'] }}</td>
                 @for ($month = 1; $month <= 12; $month++) <td>
                     @php
-                    $issueCodeValue = $co2IssueCodes[$issueCode->apar_number]['months'][$month] ?? '';
-                    if (is_array($issueCodeValue)) {
-                    echo implode('+', $issueCodeValue);
-                    } else {
-                    echo $issueCodeValue;
+                    $issueCodes = $data['months'][$month];
+                    if (in_array('OK', $issueCodes)) {
+                    echo 'OK';
+                    } elseif (!empty($issueCodes)) {
+                    echo implode('+', $issueCodes);
                     }
                     @endphp
                     </td>
@@ -77,17 +100,38 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($powderIssueCodesWithLocation as $issueCode)
+            @php
+            $powderSummarized = [];
+            foreach ($powderIssueCodesWithLocation as $issueCode) {
+            $aparNumber = $issueCode->apar_number;
+            if (!isset($powderSummarized[$aparNumber])) {
+            $powderSummarized[$aparNumber] = [
+            'location_name' => $issueCode->location_name,
+            'months' => array_fill(1, 12, []),
+            ];
+            }
+
+            foreach ($powderIssueCodes[$aparNumber]['months'] as $month => $codes) {
+            foreach ($codes as $code) {
+            if (!in_array($code, $powderSummarized[$aparNumber]['months'][$month])) {
+            $powderSummarized[$aparNumber]['months'][$month][] = $code;
+            }
+            }
+            }
+            }
+            @endphp
+
+            @foreach ($powderSummarized as $aparNumber => $data)
             <tr>
-                <td>{{ $issueCode->apar_number }}</td>
-                <td>{{ $issueCode->location_name }}</td>
+                <td>{{ $aparNumber }}</td>
+                <td>{{ $data['location_name'] }}</td>
                 @for ($month = 1; $month <= 12; $month++) <td>
                     @php
-                    $issueCodeValue = $powderIssueCodes[$issueCode->apar_number]['months'][$month] ?? '';
-                    if (is_array($issueCodeValue)) {
-                    echo implode('+', $issueCodeValue);
-                    } else {
-                    echo $issueCodeValue;
+                    $issueCodes = $data['months'][$month];
+                    if (in_array('OK', $issueCodes)) {
+                    echo 'OK';
+                    } elseif (!empty($issueCodes)) {
+                    echo implode('+', $issueCodes);
                     }
                     @endphp
                     </td>
@@ -99,6 +143,7 @@
 
     <br>
     <hr>
+
     <div>
         <h4>Catatan:</h4>
         <ul class="list-unstyled d-flex">
