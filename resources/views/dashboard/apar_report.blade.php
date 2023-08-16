@@ -39,17 +39,38 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($co2IssueCodesWithLocation as $issueCode)
+            @php
+            $co2Summarized = [];
+            foreach ($co2IssueCodesWithLocation as $issueCode) {
+            $aparNumber = $issueCode->apar_number;
+            if (!isset($co2Summarized[$aparNumber])) {
+            $co2Summarized[$aparNumber] = [
+            'location_name' => $issueCode->location_name,
+            'months' => array_fill(1, 12, []),
+            ];
+            }
+
+            foreach ($co2IssueCodes[$aparNumber]['months'] as $month => $codes) {
+            foreach ($codes as $code) {
+            if (!in_array($code, $co2Summarized[$aparNumber]['months'][$month])) {
+            $co2Summarized[$aparNumber]['months'][$month][] = $code;
+            }
+            }
+            }
+            }
+            @endphp
+
+            @foreach ($co2Summarized as $aparNumber => $data)
             <tr>
-                <td>{{ $issueCode->apar_number }}</td>
-                <td>{{ $issueCode->location_name }}</td>
+                <td>{{ $aparNumber }}</td>
+                <td>{{ $data['location_name'] }}</td>
                 @for ($month = 1; $month <= 12; $month++) <td>
                     @php
-                    $issueCodeValue = $co2IssueCodes[$issueCode->apar_number]['months'][$month] ?? '';
-                    if (is_array($issueCodeValue)) {
-                    echo implode('+', $issueCodeValue);
-                    } else {
-                    echo $issueCodeValue;
+                    $issueCodes = $data['months'][$month];
+                    if (in_array('OK', $issueCodes)) {
+                    echo 'OK';
+                    } elseif (!empty($issueCodes)) {
+                    echo implode('+', $issueCodes);
                     }
                     @endphp
                     </td>
@@ -77,17 +98,38 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($powderIssueCodesWithLocation as $issueCode)
+            @php
+            $powderSummarized = [];
+            foreach ($powderIssueCodesWithLocation as $issueCode) {
+            $aparNumber = $issueCode->apar_number;
+            if (!isset($powderSummarized[$aparNumber])) {
+            $powderSummarized[$aparNumber] = [
+            'location_name' => $issueCode->location_name,
+            'months' => array_fill(1, 12, []),
+            ];
+            }
+
+            foreach ($powderIssueCodes[$aparNumber]['months'] as $month => $codes) {
+            foreach ($codes as $code) {
+            if (!in_array($code, $powderSummarized[$aparNumber]['months'][$month])) {
+            $powderSummarized[$aparNumber]['months'][$month][] = $code;
+            }
+            }
+            }
+            }
+            @endphp
+
+            @foreach ($powderSummarized as $aparNumber => $data)
             <tr>
-                <td>{{ $issueCode->apar_number }}</td>
-                <td>{{ $issueCode->location_name }}</td>
+                <td>{{ $aparNumber }}</td>
+                <td>{{ $data['location_name'] }}</td>
                 @for ($month = 1; $month <= 12; $month++) <td>
                     @php
-                    $issueCodeValue = $powderIssueCodes[$issueCode->apar_number]['months'][$month] ?? '';
-                    if (is_array($issueCodeValue)) {
-                    echo implode('+', $issueCodeValue);
-                    } else {
-                    echo $issueCodeValue;
+                    $issueCodes = $data['months'][$month];
+                    if (in_array('OK', $issueCodes)) {
+                    echo 'OK';
+                    } elseif (!empty($issueCodes)) {
+                    echo implode('+', $issueCodes);
                     }
                     @endphp
                     </td>

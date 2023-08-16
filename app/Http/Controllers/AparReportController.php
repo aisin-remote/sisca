@@ -30,6 +30,7 @@ class AparReportController extends Controller
             ->whereYear('check_sheet_powders.tanggal_pengecekan', $selectedYear)
             ->select('check_sheet_powders.apar_number', 'locations.location_name')
             ->get();
+
         // Logic to generate CO2 issue codes and store in a temporary JSON file
         $co2DataFromDatabase = DB::table('check_sheet_co2s')
             ->whereYear('tanggal_pengecekan', $selectedYear) // Filter data by selected year
@@ -45,6 +46,7 @@ class AparReportController extends Controller
             if ($row->tabung !== 'OK') $issueCode[] = 'd';
             if ($row->corong !== 'OK') $issueCode[] = 'e';
             if ($row->hose !== 'OK') $issueCode[] = 'f';
+            if ($row->berat_tabung !== 'OK') $issueCode[] = 'h';
 
             $aparNumber = $row->apar_number;
             $month = $this->getMonthFromDate($row->tanggal_pengecekan);
@@ -77,6 +79,7 @@ class AparReportController extends Controller
             if ($row->regulator !== 'OK') $issueCode[] = 'c';
             if ($row->tabung !== 'OK') $issueCode[] = 'd';
             if ($row->hose !== 'OK') $issueCode[] = 'f';
+            if ($row->powder !== 'OK') $issueCode[] = 'g';
 
             $aparNumber = $row->apar_number;
             $month = $this->getMonthFromDate($row->tanggal_pengecekan);
