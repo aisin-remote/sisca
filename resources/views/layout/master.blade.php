@@ -27,11 +27,11 @@
 
 <body>
     <nav class="navbar navbar-expand-md" style="background-color: #FCFCFC;">
-        <div class="container">
+        <div class="container mx-auto">
             <a class="navbar-brand" href="/">
                 <img src="https://www.aisinindonesia.co.id/assetweb/image/logo/aisin-indonesia-logo.svg" alt="">
             </a>
-            <div class="position-relative">
+            {{-- <div class="position-relative">
                 <div class="d-flex justify-content-between align-items-center">
                     <button class="navbar-toggler position-absolute end-0 me-3"type="button" data-bs-toggle="collapse"
                         data-bs-target="#btn">
@@ -43,15 +43,6 @@
                 <ul class="navbar-nav ms-auto">
 
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/"><i class="bi bi-info-square"></i> Informasi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/"><i class="bi bi-bezier"></i> Jenis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/"><i class="bi bi-app-indicator"></i> Fungsi</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Hallo! {{ auth()->user()->name }}
@@ -70,26 +61,17 @@
 
                     @else
                         <li class="nav-item">
-                            <a class="nav-link mx-2" href="/"><i class="bi bi-info-square"></i> Informasi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/"><i class="bi bi-bezier"></i> Jenis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/"><i class="bi bi-app-indicator"></i> Fungsi</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link mx-2" href="/login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                         </li>
 
                     @endauth
 
                 </ul>
-            </div>
+            </div> --}}
         </div>
     </nav>
 
-    <div class="container pt-4 bg-white">
+    <div class="container mt-4 bg-white">
         <div class="row">
             <div class="col-lg-12">
                 @yield('content')

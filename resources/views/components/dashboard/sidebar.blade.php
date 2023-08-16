@@ -5,7 +5,6 @@
             <img src="https://www.aisinindonesia.co.id/assetweb/image/logo/aisin-indonesia-logo.svg" alt="">
         </a>
     </div>
-
     <ul class="list-unstyled components">
         <li class="">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
@@ -37,12 +36,6 @@
                     <a href="#">Page 3</a>
                 </li> --}}
             </ul>
-        </li>
-        <li>
-            <a href="#">Portfolio</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
         </li>
     </ul>
 </nav>
