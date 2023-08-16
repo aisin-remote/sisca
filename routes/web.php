@@ -37,7 +37,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // Route Apar
 Route::resource('/dashboard/apar/data_apar', AparController::class)->except('show')->middleware('auth');

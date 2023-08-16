@@ -6,7 +6,7 @@
         <h1>Check Sheet Apar</h1>
     </div>
     @if (session()->has('error'))
-        <div class="alert alert-success col-lg-12">
+        <div class="alert alert-success col-lg-6">
             {{ session()->get('error') }}
         </div>
     @endif
