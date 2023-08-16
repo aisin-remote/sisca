@@ -69,3 +69,6 @@ use App\Http\Controllers\AparReportController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
+use App\Http\Controllers\CombinedAparController;
+
+Route::get('/apar-report-all', [CombinedAparController::class, 'index'])->name('apar.report.all')->middleware('auth');
