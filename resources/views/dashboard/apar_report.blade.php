@@ -5,7 +5,7 @@
 <div class="container">
     <div>
         <form class="form-inline" method="GET" action="{{ route('apar.report') }}">
-            <div class="input-group mb-3 w-25">
+            <div class="input-group mb-3">
                 <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
                 <select class="form-select" name="selected_year" id="selected_year">
                     <option value="select" selected disabled>Select</option>
@@ -16,8 +16,9 @@
                         @endphp
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Tampilkan</button>
+            <button type="submit" class="btn btn-info ml-2">Tampilkan</button>
         </form>
+
         @if(request()->has('selected_year'))
         <p class="mt-2">Data untuk tahun {{ request('selected_year') }}</p>
         @endif
@@ -25,6 +26,7 @@
 
     <br>
     <hr>
+
     <h3>APAR CO2 Report</h3>
     <table class="text-center table table-striped">
         <thead class="align-middle">
@@ -141,6 +143,7 @@
 
     <br>
     <hr>
+
     <div>
         <h4>Catatan:</h4>
         <ul class="list-unstyled d-flex">
