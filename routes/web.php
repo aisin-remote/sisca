@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AparController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Models\Hydrant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +46,10 @@ Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('das
 Route::resource('/dashboard/apar/data_apar', AparController::class)->except('show')->middleware('auth');
 Route::put('/dashboard/apar/data_apar/{data_apar}', [AparController::class, 'update'])->name('data_apar.update');
 
+// Route Hydrant
+Route::resource('/dashboard/hydrant/data-hydrant', HydrantController::class)->except('show')->middleware('auth');
+Route::put('dashboard/hydrant/data-hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('data-hydrant.update');
+
 
 // Route Location
 Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show','destroy')->middleware('auth');
@@ -79,7 +85,7 @@ Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.r
 
 use App\Http\Controllers\CombinedAparController;
 
-Route::get('/apar-report-all', [CombinedAparController::class, 'index'])->name('apar.report.all')->middleware('auth');
+Route::get('/dashboard/home/checksheet-report-apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
 
 Route::get('/checksheethydrantindoor', function() {
     return view('dashboard.checkSheet.checkHydrantIndoor');
@@ -88,6 +94,7 @@ Route::get('/checksheethydrantindoor', function() {
 Route::get('/checksheethydrantoutdoor', function() {
     return view('dashboard.checkSheet.checkHydrantOutdoor');
 });
+
 
 Route::get('/checksheetnitrogenserver', function() {
     return view('dashboard.checkSheet.checkNitrogenServer');

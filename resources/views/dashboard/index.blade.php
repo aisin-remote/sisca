@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Apar</div>
+                <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Hydrant</div>
                 <div class="card-body">
                     <div class="chart-container">
                         <canvas id="barChart" class="img-fluid"></canvas>
@@ -60,8 +60,8 @@
                 }, {
                     label: 'NG',
                     data: {!! json_encode($data['notOkData']) !!},
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
                     borderWidth: 1
                 }]
             },
