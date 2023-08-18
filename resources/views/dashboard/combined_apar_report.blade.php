@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div>
-        <form class="form-inline" method="GET" action="{{ route('apar.report.all') }}">
+        <form class="form-inline" method="GET" action="{{ route('home.checksheet.apar') }}">
             <div class="input-group mb-3">
                 <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
                 <select class="form-select" name="selected_year" id="selected_year">
@@ -16,7 +16,7 @@
                         @endphp
                 </select>
             </div>
-            <button type="submit" class="btn btn-info ml-2">Tampilkan</button>
+            <button type="submit" class="btn btn-success ml-2">Tampilkan</button>
         </form>
 
         @if(request()->has('selected_year'))

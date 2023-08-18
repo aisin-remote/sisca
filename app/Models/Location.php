@@ -13,4 +13,8 @@ class Location extends Model
     public function apars(){
         return $this->hasMany(Apar::class);
     }
+
+    public function hydrants(){
+        return $this->hasMany(Hydrant::class);
+    }
 }
