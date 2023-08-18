@@ -92,3 +92,8 @@ Route::get('/checksheethydrantoutdoor', function() {
 Route::get('/checksheetnitrogenserver', function() {
     return view('dashboard.checkSheet.checkNitrogenServer');
 });
+
+Route::get('/checksheettabungco2', function() {
+    return view('dashboard.checkSheet.checkTabungCo2');
+});
+
