@@ -109,3 +109,6 @@ Route::get('/checksheettabungco2', function() {
     return view('dashboard.checkSheet.checkTabungCo2');
 });
 
+Route::get('/checksheettandu', function() {
+    return view('dashboard.checkSheet.checkTandu');
+});
