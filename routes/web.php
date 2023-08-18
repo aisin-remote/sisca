@@ -83,3 +83,7 @@ Route::get('/apar-report-all', [CombinedAparController::class, 'index'])->name('
 Route::get('/checksheethydrantindoor', function() {
     return view('dashboard.checkSheet.checkHydrantIndoor');
 });
+
+Route::get('/checksheethydrantoutdoor', function() {
+    return view('dashboard.checkSheet.checkHydrantOutdoor');
+});
