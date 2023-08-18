@@ -19,20 +19,29 @@
             </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card text-center">
-                <div class="card-header" style="background-color: #6d7fcc; color:white;">Apar</div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Apar</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="barChart" class="img-fluid"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Apar</div>
                 <div class="card-body">
-                    <div class="chart-container my-0" style="position: relative; height: 400px;">
-                        <canvas id="barChart" class="img-fluid my-0"></canvas>
+                    <div class="chart-container">
+                        <canvas id="barChart" class="img-fluid"></canvas>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Skrip JavaScript Chart.js di sini
-    </script>
+        </div>
+    </div>
 
 
 
