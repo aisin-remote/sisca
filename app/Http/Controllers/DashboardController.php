@@ -9,16 +9,19 @@ use App\Models\CheckSheetCo2;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // Contoh label bulan
+        $labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        $selectedYear = $request->input('year', date('Y'));
 
         $notOkData = [];
         $okData = [];
 
         foreach ($labels as $label) {
             // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
-            $notOkCount = CheckSheetCo2::whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+            $notOkCount = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
+                            ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
                              ->where(function ($query) {
                                 $query->where('pressure', 'NG')
                                       ->orWhere('hose', 'NG')
@@ -32,15 +35,16 @@ class DashboardController extends Controller
             $notOkData[] = $notOkCount;
 
             // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
-            $okCount = CheckSheetCo2::whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+            $okCount = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
+                             ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
                           ->where(function ($query) {
-                                $query->where('pressure', '<>', 'OK')
-                                      ->orWhere('hose', '<>', 'OK')
-                                      ->orWhere('corong', '<>', 'OK')
-                                      ->orWhere('tabung', '<>', 'OK')
-                                      ->orWhere('regulator', '<>', 'OK')
-                                      ->orWhere('lock_pin', '<>', 'OK')
-                                      ->orWhere('berat_tabung', '<>', 'OK');
+                                $query->where('pressure', 'OK')
+                                      ->where('hose', 'OK')
+                                      ->where('corong', 'OK')
+                                      ->where('tabung', 'OK')
+                                      ->where('regulator', 'OK')
+                                      ->where('lock_pin', 'OK')
+                                      ->where('berat_tabung', 'OK');
                             })
                              ->count();
             $okData[] = $okCount;
@@ -52,6 +56,8 @@ class DashboardController extends Controller
             'notOkData' => $notOkData,
         ];
 
-        return view('dashboard.index', compact('data'));
+        $availableYears = range(date('Y'), date('Y') + 1);
+
+        return view('dashboard.index', compact('data', 'availableYears'));
     }
 }

@@ -162,3 +162,7 @@ ul.CTAs a {
 .navbar .navbar-collapse {
     text-align: end;
 }
+
+.caret-none::after {
+    display: none;
+}
