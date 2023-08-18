@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
-use App\Models\Apar; // Assuming the Apar model is defined in 'app/Models/Apar.php'
-use App\Models\Location; // Assuming the Location model is defined in 'app/Models/Location.php'
-use App\Models\CheckSheetPowder; // Assuming the CheckSheetPowder model is defined
-use App\Models\CheckSheetCo2; // Assuming the CheckSheetCo2 model is defined
+use App\Models\Apar;
+use App\Models\Location;
+use App\Models\CheckSheetPowder;
+use App\Models\CheckSheetCo2;
 
 class CombinedAparController extends Controller
 {
@@ -18,8 +18,10 @@ class CombinedAparController extends Controller
         return date('n', strtotime($date));
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $selectedYear = $request->input('selected_year', date('Y'));
+
         $aparData = Apar::leftJoin('locations', 'apars.location_id', '=', 'locations.id')
             ->leftJoin('check_sheet_powders', 'apars.tag_number', '=', 'check_sheet_powders.apar_number')
             ->leftJoin('check_sheet_co2s', 'apars.tag_number', '=', 'check_sheet_co2s.apar_number')
@@ -39,41 +41,55 @@ class CombinedAparController extends Controller
             )
             ->get();
 
-        // Filter out entries with tanggal_pengecekan = null
-        $filteredAparData = $aparData->filter(function ($apar) {
-            return $apar->tanggal_pengecekan !== null;
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredAparData = $aparData->filter(function ($apar) use ($selectedYear) {
+            return $apar->tanggal_pengecekan !== null &&
+                date('Y', strtotime($apar->tanggal_pengecekan)) == $selectedYear;
         });
 
-        $mappedAparData = $filteredAparData->map(function ($apar) {
-            $issueCodes = [];
+        $mappedAparData = $filteredAparData->groupBy('apar_number')->map(function ($aparGroup) {
+            $aparNumber = $aparGroup[0]['apar_number'];
+            $aparType = $aparGroup[0]['type'];
+            $location_name = $aparGroup[0]['location_name'];
+            $months = [];
 
-            // Map issue codes for powder type
-            if ($apar['type'] === 'powder') {
-                if ($apar['pressure'] === 'NG') $issueCodes[] = 'a';
-                if ($apar['lock_pin'] === 'NG') $issueCodes[] = 'b';
-                if ($apar['regulator'] === 'NG') $issueCodes[] = 'c';
-                if ($apar['tabung'] === 'NG') $issueCodes[] = 'd';
-                if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
-                if ($apar['powder'] === 'NG') $issueCodes[] = 'g';
-            }
+            foreach ($aparGroup as $apar) {
+                $month = date('n', strtotime($apar['tanggal_pengecekan']));
+                $issueCodes = [];
 
-            // Map issue codes for co2 type
-            if ($apar['type'] === 'co2') {
-                if ($apar['pressure'] === 'NG') $issueCodes[] = 'a';
-                if ($apar['lock_pin'] === 'NG') $issueCodes[] = 'b';
-                if ($apar['regulator'] === 'NG') $issueCodes[] = 'c';
-                if ($apar['tabung'] === 'NG') $issueCodes[] = 'd';
-                if ($apar['corong'] === 'NG') $issueCodes[] = 'e';
-                if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
-                if ($apar['berat_tabung'] === 'NG') $issueCodes[] = 'h';
+                // Map issue codes for powder type
+                if ($apar['type'] === 'powder') {
+                    if ($apar['pressure'] === 'NG') $issueCodes[] = 'a';
+                    if ($apar['lock_pin'] === 'NG') $issueCodes[] = 'b';
+                    if ($apar['regulator'] === 'NG') $issueCodes[] = 'c';
+                    if ($apar['tabung'] === 'NG') $issueCodes[] = 'd';
+                    if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
+                    if ($apar['powder'] === 'NG') $issueCodes[] = 'g';
+                }
+
+                // Map issue codes for co2 type
+                if ($apar['type'] === 'co2') {
+                    if ($apar['pressure'] === 'NG') $issueCodes[] = 'a';
+                    if ($apar['lock_pin'] === 'NG') $issueCodes[] = 'b';
+                    if ($apar['regulator'] === 'NG') $issueCodes[] = 'c';
+                    if ($apar['tabung'] === 'NG') $issueCodes[] = 'd';
+                    if ($apar['corong'] === 'NG') $issueCodes[] = 'e';
+                    if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
+                    if ($apar['berat_tabung'] === 'NG') $issueCodes[] = 'h';
+                }
+
+                if (empty($issueCodes)) {
+                    $issueCodes[] = 'OK';
+                }
+
+                $months[$month] = $issueCodes;
             }
 
             return [
-                'apar_number' => $apar['apar_number'],
-                'type' => $apar['type'],
-                'location_name' => $apar['location_name'],
-                'tanggal_pengecekan' => $apar['tanggal_pengecekan'],
-                'issue_codes' => $issueCodes,
+                'apar_number' => $aparNumber,
+                'type' => $aparType,
+                'location_name' => $location_name,
+                'months' => $months,
             ];
         });
 
@@ -84,7 +100,8 @@ class CombinedAparController extends Controller
         Storage::disk('local')->put('apar_data.json', $jsonString);
 
         return view('dashboard.combined_apar_report', [
-            'aparData' => $filteredAparData,
+            'aparData' => $mappedAparData,
+            'selectedYear' => $selectedYear,
         ]);
     }
 }
