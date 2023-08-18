@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NitrogenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Hydrant;
@@ -48,7 +49,11 @@ Route::put('/dashboard/apar/data_apar/{data_apar}', [AparController::class, 'upd
 
 // Route Hydrant
 Route::resource('/dashboard/hydrant/data-hydrant', HydrantController::class)->except('show')->middleware('auth');
-Route::put('dashboard/hydrant/data-hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('data-hydrant.update');
+Route::put('/dashboard/hydrant/data-hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('data-hydrant.update');
+
+//Route Nitrogen
+Route::resource('/dashboard/nitrogen/data-nitrogen', NitrogenController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/nitrogen/data-nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('data-nitrogen.update');
 
 
 // Route Location
