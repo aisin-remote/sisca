@@ -6,11 +6,11 @@
         </a>
     </div>
     <ul class="list-unstyled components">
-        <li class="">
+        <li class="{{Request::is('dashboard/home*') ? 'active show' : ''}}">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/home*') ? 'show' : '' }}" id="homeSubmenu">
+                <li class="{{ Request::is('dashboard/home/grafik-status*') ? 'active' : '' }}">
+                    <a href="/dashboard/home/grafik-status">Grafik Status</a>
                 </li>
                 <li>
                     <a href="#">Home 2</a>

@@ -166,3 +166,12 @@ ul.CTAs a {
 .caret-none::after {
     display: none;
 }
+
+.chart-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

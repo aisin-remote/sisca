@@ -6,6 +6,7 @@ use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\array_except;
 use App\Models\CheckSheetCo2;
+use App\Models\CheckSheetPowder;
 
 class DashboardController extends Controller
 {
@@ -20,34 +21,59 @@ class DashboardController extends Controller
 
         foreach ($labels as $label) {
             // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
-            $notOkCount = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
-                            ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
-                             ->where(function ($query) {
-                                $query->where('pressure', 'NG')
-                                      ->orWhere('hose', 'NG')
-                                      ->orWhere('corong', 'NG')
-                                      ->orWhere('tabung', 'NG')
-                                      ->orWhere('regulator', 'NG')
-                                      ->orWhere('lock_pin', 'NG')
-                                      ->orWhere('berat_tabung', 'NG');
-                             })
-                             ->count();
-            $notOkData[] = $notOkCount;
+            $notOkCountCo2 = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pressure', 'NG')
+                        ->orWhere('hose', 'NG')
+                        ->orWhere('corong', 'NG')
+                        ->orWhere('tabung', 'NG')
+                        ->orWhere('regulator', 'NG')
+                        ->orWhere('lock_pin', 'NG')
+                        ->orWhere('berat_tabung', 'NG');
+                })
+                ->count();
+
+            $notOkCountPowder = CheckSheetPowder::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pressure', 'NG')
+                        ->orWhere('hose', 'NG')
+                        ->orWhere('tabung', 'NG')
+                        ->orWhere('regulator', 'NG')
+                        ->orWhere('lock_pin', 'NG')
+                        ->orWhere('powder', 'NG');
+                })
+                ->count();
+            $notOkData[] = $notOkCountCo2 + $notOkCountPowder;
 
             // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
-            $okCount = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
-                             ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
-                          ->where(function ($query) {
-                                $query->where('pressure', 'OK')
-                                      ->where('hose', 'OK')
-                                      ->where('corong', 'OK')
-                                      ->where('tabung', 'OK')
-                                      ->where('regulator', 'OK')
-                                      ->where('lock_pin', 'OK')
-                                      ->where('berat_tabung', 'OK');
-                            })
-                             ->count();
-            $okData[] = $okCount;
+            $okCountCo2 = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pressure', 'OK')
+                        ->where('hose', 'OK')
+                        ->where('corong', 'OK')
+                        ->where('tabung', 'OK')
+                        ->where('regulator', 'OK')
+                        ->where('lock_pin', 'OK')
+                        ->where('berat_tabung', 'OK');
+                })
+                ->count();
+
+            $okCountPowder = CheckSheetPowder::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pressure', 'OK')
+                        ->where('hose', 'OK')
+                        ->where('tabung', 'OK')
+                        ->where('regulator', 'OK')
+                        ->where('lock_pin', 'OK')
+                        ->where('powder', 'OK');
+                })
+                ->count();
+
+            $okData[] = $okCountCo2 + $okCountPowder;
         }
 
         $data = [

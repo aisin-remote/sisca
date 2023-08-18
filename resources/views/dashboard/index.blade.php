@@ -2,84 +2,38 @@
 @section('title', 'Home')
 
 @section('content')
-
-{{-- <h2>Collapsible Sidebar Using Bootstrap 4</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class="line"></div>
-
-<h2>Lorem Ipsum Dolor</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class="line"></div>
-
-<h2>Lorem Ipsum Dolor</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class="line"></div>
-
-<h3>Lorem Ipsum Dolor</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> --}}
-
-
-    {{-- <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-header" style="background-color: #6d7fcc; color:white;">Apar</div>
-                    <div class="card-body">
-                        <canvas id="barChart" style="max-height: 400px;"></canvas>
-                    </div>
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+        <h1>Grafik Status</h1>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle caret-none" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Pilih Tahun
+                </button>
+                <div class="dropdown-menu">
+                    @foreach ($availableYears as $year)
+                        <a class="dropdown-item"
+                            href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </div> --}}
-
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-md-6">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle caret-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pilih Tahun
-                        </button>
-                        <div class="dropdown-menu">
-                            @foreach ($availableYears as $year)
-                                <a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a>
-                            @endforeach
-                        </div>
-                    </div>
-
-
-
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-header" style="background-color: #6d7fcc; color:white;">Apar</div>
-                    <div class="card-body">
-                        <canvas id="barChart" style="max-height: 400px;"></canvas>
-                    </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header" style="background-color: #6d7fcc; color:white;">Apar</div>
+                <div class="card-body">
+                    <div class="chart-container my-0" style="position: relative; height: 400px;">
+                        <canvas id="barChart" class="img-fluid my-0"></canvas>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Skrip JavaScript Chart.js di sini
+    </script>
+
 
 
     <script>
@@ -91,8 +45,8 @@
                 datasets: [{
                     label: 'OK',
                     data: {!! json_encode($data['okData']) !!},
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
                     borderWidth: 1
                 }, {
                     label: 'NG',
