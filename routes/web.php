@@ -88,3 +88,7 @@ Route::get('/checksheethydrantindoor', function() {
 Route::get('/checksheethydrantoutdoor', function() {
     return view('dashboard.checkSheet.checkHydrantOutdoor');
 });
+
+Route::get('/checksheetnitrogenserver', function() {
+    return view('dashboard.checkSheet.checkNitrogenServer');
+});
