@@ -104,7 +104,6 @@ Route::get('/checksheethydrantoutdoor', function() {
     return view('dashboard.checkSheet.checkHydrantOutdoor');
 });
 
-
 Route::get('/checksheetnitrogenserver', function() {
     return view('dashboard.checkSheet.checkNitrogenServer');
 });
@@ -115,4 +114,20 @@ Route::get('/checksheettabungco2', function() {
 
 Route::get('/checksheettandu', function() {
     return view('dashboard.checkSheet.checkTandu');
+});
+
+Route::get('/checksheeteyewasherwwtp', function() {
+    return view('dashboard.checkSheet.checkEyewasherWWTP');
+});
+
+Route::get('/checksheeteyewashertps', function() {
+    return view('dashboard.checkSheet.checkEyewasherTPS');
+});
+
+Route::get('/checksheeteyewasherplant', function() {
+    return view('dashboard.checkSheet.checkEyewasherPlant');
+});
+
+Route::get('/checksheeteyewasherchemical', function() {
+    return view('dashboard.checkSheet.checkEyewasherChemical');
 });
