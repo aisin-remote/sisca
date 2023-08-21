@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NitrogenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SlingController;
 use App\Http\Controllers\TanduController;
 use App\Models\Eyewasher;
 use App\Models\Hydrant;
@@ -70,6 +71,10 @@ Route::put('/dashboard/tandu/data-tandu/{data_tandu}', [TanduController::class, 
 // Route Eye Washer
 Route::resource('/dashboard/eyewasher/data-eyewasher', EyewasherController::class)->except('show')->middleware('auth');
 Route::put('/dashboard/eyewasher/data-eyewasher/{data_eyewasher}', [EyewasherController::class, 'update'])->name('data-eyewasher.update');
+
+// Route Sling
+Route::resource('/dashboard/sling/data-sling', SlingController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/sling/data-sling/{data_sling}', [SlingController::class, 'update'])->name('data-sling.update');
 
 // Route Location
 Route::resource('/dashboard/location', LocationController::class)->except('show','destroy')->middleware('auth');

@@ -74,5 +74,13 @@
                 </li>
             </ul>
         </li>
+        <li class="{{Request::is('dashboard/sling*') ? 'active show' : ''}}">
+            <a href="#slingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sling</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/sling*') ? 'show' : '' }}" id="slingSubmenu">
+                <li class="{{ Request::is('dashboard/sling/data-sling*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard/sling/data-sling">Data Sling</a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </nav>

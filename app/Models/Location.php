@@ -34,4 +34,8 @@ class Location extends Model
     public function eyewashers(){
         return $this->hasMany(Eyewasher::class);
     }
+
+    public function slings(){
+        return $this->hasMany(Sling::class);
+    }
 }
