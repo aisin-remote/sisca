@@ -79,5 +79,19 @@
                 </li> --}}
             </ul>
         </li>
+        <li class="{{Request::is('dashboard/tandu*') ? 'active show' : ''}}">
+            <a href="#tanduSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tandu</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/tandu*') ? 'show' : '' }}" id="tanduSubmenu">
+                <li class="{{ Request::is('dashboard/tandu/data-tandu*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard/tandu/data-tandu">Data Tandu</a>
+                </li>
+                <li class="{{ Request::is('dashboard/apar/data_location*') ? 'active' : '' }}">
+                    <a class="nav_link" href="/dashboard/apar/data_location">Data Location</a>
+                </li>
+                {{-- <li>
+                    <a href="#">Page 3</a>
+                </li> --}}
+            </ul>
+        </li>
     </ul>
 </nav>
