@@ -38,11 +38,11 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'location_name'=>'required|unique:locations'
+            'location_name'=>'required|unique:tm_locations'
         ]);
 
         Location::create($validate);
-        return redirect()->route('data_location.index')->with('success', "Data Location {$validate['location_name']} berhasil ditambahkan");
+        return redirect()->route('location.index')->with('success', "Data Location {$validate['location_name']} berhasil ditambahkan");
     }
 
     /**
@@ -99,6 +99,6 @@ class LocationController extends Controller
         $location = Location::find($id);
         $location->delete();
 
-        return redirect()->route('data_location.index')->with('success', 'Data Location berhasil dihapus');
+        return redirect()->route('location.index')->with('success', 'Data Location berhasil dihapus');
     }
 }

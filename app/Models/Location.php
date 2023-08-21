@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     use HasFactory;
+    protected $table = 'tm_locations';
     protected $guarded = [];
 
     public function apars(){

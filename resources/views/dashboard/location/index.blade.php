@@ -1,11 +1,11 @@
 @extends('dashboard.app')
-@section('title', 'Data Location')
+@section('title', 'Location')
 
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Location</h1>
-        <a href="/dashboard/apar/data_location/create" class="btn btn-success"><span data-feather="file-plus"></span>
+        <a href="/dashboard/location/create" class="btn btn-success"><span data-feather="file-plus"></span>
             Tambah</a>
     </div>
     @if (session()->has('success'))
@@ -28,7 +28,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $location->location_name }}</td>
                         <td>
-                            <form action="{{ route('data_location.destroy',$location->id) }}" method="POST">
+                            <form action="{{ route('location.destroy',$location->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

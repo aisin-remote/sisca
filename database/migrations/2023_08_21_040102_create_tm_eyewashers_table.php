@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hydrants', function (Blueprint $table) {
+        Schema::create('tm_eyewashers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('location_id');
-            $table->string('no_hydrant')->unique();
-            $table->string('zona')->nullable()->default('-');
-            $table->string('type');
+            $table->string('no_eyewasher')->unique();
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('tm_locations')->onDelete('cascade');
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hydrants');
+        Schema::dropIfExists('tm_eyewashers');
     }
 };

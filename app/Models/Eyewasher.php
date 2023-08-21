@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Eyewasher extends Model
 {
     use HasFactory;
+    protected $table = 'tm_eyewashers';
     protected $guarded = [];
 
     public function locations()

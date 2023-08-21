@@ -13,10 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('tm_apars', function (Blueprint $table) {
             $table->id();
-            $table->string('location_name')->unique();
+            $table->unsignedBigInteger('location_id');
+            $table->string('tag_number')->unique();
+            $table->string('expired');
+            $table->string('post')->nullable()->default('-');
+            $table->string('type');
             $table->timestamps();
+
+            $table->foreign('location_id')->references('id')->on('tm_locations')->onDelete('cascade');
         });
     }
 
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('tm_apars');
     }
 };

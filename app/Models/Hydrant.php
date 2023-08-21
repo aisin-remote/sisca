@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hydrant extends Model
 {
     use HasFactory;
+    protected $table = 'tm_hydrants';
     protected $guarded = [];
 
     public function locations()

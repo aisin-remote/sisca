@@ -22,13 +22,13 @@ class CombinedAparController extends Controller
     {
         $selectedYear = $request->input('selected_year', date('Y'));
 
-        $aparData = Apar::leftJoin('locations', 'apars.location_id', '=', 'locations.id')
-            ->leftJoin('tt_check_sheet_powders', 'apars.tag_number', '=', 'tt_check_sheet_powders.apar_number')
-            ->leftJoin('tt_check_sheet_co2s', 'apars.tag_number', '=', 'tt_check_sheet_co2s.apar_number')
+        $aparData = Apar::leftJoin('tm_locations', 'tm_apars.location_id', '=', 'tm_locations.id')
+            ->leftJoin('tt_check_sheet_powders', 'tm_apars.tag_number', '=', 'tt_check_sheet_powders.apar_number')
+            ->leftJoin('tt_check_sheet_co2s', 'tm_apars.tag_number', '=', 'tt_check_sheet_co2s.apar_number')
             ->select(
-                'apars.tag_number as apar_number',
-                'apars.type',
-                'locations.location_name',
+                'tm_apars.tag_number as apar_number',
+                'tm_apars.type',
+                'tm_locations.location_name',
                 DB::raw('COALESCE(tt_check_sheet_powders.tanggal_pengecekan, tt_check_sheet_co2s.tanggal_pengecekan) AS tanggal_pengecekan'),
                 DB::raw('COALESCE(tt_check_sheet_powders.pressure, tt_check_sheet_co2s.pressure) AS pressure'),
                 DB::raw('COALESCE(tt_check_sheet_powders.hose, tt_check_sheet_co2s.hose) AS hose'),

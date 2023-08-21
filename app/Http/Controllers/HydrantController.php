@@ -39,7 +39,7 @@ class HydrantController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_hydrant'=>'required|unique:hydrants',
+            'no_hydrant'=>'required|unique:tm_hydrants',
             'location_id'=>'required',
             'zona'=>'nullable',
             'type'=>'required'

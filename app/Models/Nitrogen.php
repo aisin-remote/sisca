@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nitrogen extends Model
 {
     use HasFactory;
+    protected $table = 'tm_nitrogens';
     protected $guarded = [];
 
     public function locations()

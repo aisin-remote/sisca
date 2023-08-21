@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tandus', function (Blueprint $table) {
+        Schema::create('tm_tandus', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->string('no_tandu')->unique();
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('tm_locations')->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tandus');
+        Schema::dropIfExists('tm_tandus');
     }
 };

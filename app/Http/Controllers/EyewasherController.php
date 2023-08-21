@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eyewasher;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class EyewasherController extends Controller
@@ -26,7 +27,7 @@ class EyewasherController extends Controller
     public function create()
     {
         $locations = Location::all();
-        return view('dashboard.tandu.create', compact('locations'));
+        return view('dashboard.eyewasher.create', compact('locations'));
     }
 
     /**
@@ -38,12 +39,12 @@ class EyewasherController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_tandu'=>'required|unique:tandus',
+            'no_eyewasher'=>'required|unique:tm_eyewashers',
             'location_id'=>'required',
         ]);
 
-        Tandu::create($validate);
-        return redirect()->route('data-tandu.index')->with('success', "Data Tandu {$validate['no_tandu']} berhasil ditambahkan");
+        Eyewasher::create($validate);
+        return redirect()->route('data-eyewasher.index')->with('success', "Data Eye Washer {$validate['no_eyewasher']} berhasil ditambahkan");
     }
 
     /**
@@ -65,9 +66,9 @@ class EyewasherController extends Controller
      */
     public function edit($id)
     {
-        $tandu = Tandu::findOrFail($id);
+        $eyewasher = Eyewasher::findOrFail($id);
         $locations = Location::all();
-        return view('dashboard.tandu.edit', compact('tandu', 'locations'));
+        return view('dashboard.eyewasher.edit', compact('eyewasher', 'locations'));
     }
 
     /**
@@ -79,15 +80,15 @@ class EyewasherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tandu = Tandu::findOrFail($id);
+        $eyewasher = Eyewasher::findOrFail($id);
 
         $validateData = $request->validate([
             'location_id'=>'required',
         ]);
 
-        $tandu->update($validateData);
+        $eyewasher->update($validateData);
 
-        return redirect()->route('data-tandu.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('data-eyewasher.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -98,9 +99,9 @@ class EyewasherController extends Controller
      */
     public function destroy($id)
     {
-        $tandu = Tandu::find($id);
-        $tandu->delete();
+        $eyewasher = Eyewasher::find($id);
+        $eyewasher->delete();
 
-        return redirect()->route('data-tandu.index')->with('success', 'Data Tandu berhasil dihapus');
+        return redirect()->route('data-eyewasher.index')->with('success', 'Data Eye Washer berhasil dihapus');
     }
 }

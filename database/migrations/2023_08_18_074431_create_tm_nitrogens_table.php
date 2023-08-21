@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nitrogens', function (Blueprint $table) {
+        Schema::create('tm_nitrogens', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->string('no_tabung')->unique();
             $table->string('plant')->nullable()->default('-');
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('tm_locations')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nitrogens');
+        Schema::dropIfExists('tm_nitrogens');
     }
 };
