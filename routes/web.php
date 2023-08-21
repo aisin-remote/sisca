@@ -72,8 +72,8 @@ Route::resource('/dashboard/eyewasher/data-eyewasher', EyewasherController::clas
 Route::put('/dashboard/eyewasher/data-eyewasher/{data_eyewasher}', [EyewasherController::class, 'update'])->name('data-eyewasher.update');
 
 // Route Location
-Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show','destroy')->middleware('auth');
-Route::delete('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'destroy'])->name('data_location.destroy');
+Route::resource('/dashboard/location', LocationController::class)->except('show','destroy')->middleware('auth');
+Route::delete('/dashboard/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 use App\Http\Controllers\CheckSheetController;
