@@ -11,6 +11,14 @@
         @method('PUT')
         <div class="row">
             <div class="mb-3 col-md-6">
+                <label for="tag_number" class="form-label">Tag Number</label>
+                <input type="text" name="tag_number" id="tag_number" placeholder="Masukkan Tag Number"
+                    class="form-control @error('tag_number') is-invalid @enderror" value="{{ old('tag_number') ?? $apar->tag_number}}" readonly>
+                @error('tag_number')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Location</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
                     <option selected disabled>Pilih Location</option>

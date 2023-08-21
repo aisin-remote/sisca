@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\Co2Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\LocationController;
@@ -55,6 +56,9 @@ Route::put('/dashboard/hydrant/data-hydrant/{data_hydrant}', [HydrantController:
 Route::resource('/dashboard/nitrogen/data-nitrogen', NitrogenController::class)->except('show')->middleware('auth');
 Route::put('/dashboard/nitrogen/data-nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('data-nitrogen.update');
 
+// Route Co2
+Route::resource('/dashboard/co2/data-co2', Co2Controller::class)->except('show')->middleware('auth');
+Route::put('/dashboard/co2/data-co2/{data_co2}', [Co2Controller::class, 'update'])->name('data-co2.update');
 
 // Route Location
 Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show','destroy')->middleware('auth');
