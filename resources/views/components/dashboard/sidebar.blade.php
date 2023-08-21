@@ -65,5 +65,19 @@
                 </li> --}}
             </ul>
         </li>
+        <li class="{{Request::is('dashboard/co2*') ? 'active show' : ''}}">
+            <a href="#co2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Co2</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/co2*') ? 'show' : '' }}" id="co2Submenu">
+                <li class="{{ Request::is('dashboard/co2/data-co2*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard/co2/data-co2">Data Co2</a>
+                </li>
+                <li class="{{ Request::is('dashboard/apar/data_location*') ? 'active' : '' }}">
+                    <a class="nav_link" href="/dashboard/apar/data_location">Data Location</a>
+                </li>
+                {{-- <li>
+                    <a href="#">Page 3</a>
+                </li> --}}
+            </ul>
+        </li>
     </ul>
 </nav>

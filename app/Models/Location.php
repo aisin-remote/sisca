@@ -21,4 +21,8 @@ class Location extends Model
     public function nitrogens(){
         return $this->hasMany(Nitrogen::class);
     }
+
+    public function co2s(){
+        return $this->hasMany(Co2::class);
+    }
 }

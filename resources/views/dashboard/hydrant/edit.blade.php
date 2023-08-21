@@ -11,6 +11,14 @@
         @method('PUT')
         <div class="row">
             <div class="mb-3 col-md-6">
+                <label for="no_hydrant" class="form-label">No Hydrant</label>
+                <input type="text" name="no_hydrant" id="no_hydrant" placeholder="Masukkan No Hydrant"
+                    class="form-control @error('no_hydrant') is-invalid @enderror" value="{{ old('no_hydrant') ?? $hydrant->no_hydrant}}" readonly>
+                @error('no_hydrant')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Location</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
                     <option selected disabled>Pilih Location</option>
