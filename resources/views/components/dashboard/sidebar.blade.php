@@ -32,6 +32,9 @@
                 <li class="{{ Request::is('dashboard/apar/data_location*') ? 'active' : '' }}">
                     <a class="nav_link" href="/dashboard/apar/data_location">Data Location</a>
                 </li>
+                <li class="{{ Request::is('dashboard/apar/checksheet*') ? 'active' : '' }}">
+                    <a class="nav_link" href="/dashboard/apar/checksheet">Check Sheet Apar</a>
+                </li>
                 {{-- <li>
                     <a href="#">Page 3</a>
                 </li> --}}
@@ -46,9 +49,6 @@
                 <li class="{{ Request::is('dashboard/apar/data_location*') ? 'active' : '' }}">
                     <a class="nav_link" href="/dashboard/apar/data_location">Data Location</a>
                 </li>
-                {{-- <li>
-                    <a href="#">Page 3</a>
-                </li> --}}
             </ul>
         </li>
         <li class="{{Request::is('dashboard/nitrogen*') ? 'active show' : ''}}">
