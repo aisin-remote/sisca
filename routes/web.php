@@ -152,3 +152,7 @@ Route::get('/checksheettembinmonthly', function() {
 Route::get('/checksheettembindaily', function() {
     return view('dashboard.checkSheet.checkTembinDaily');
 });
+
+Route::get('/checksheetchainblock', function() {
+    return view('dashboard.checkSheet.checkChainBlock');
+});
