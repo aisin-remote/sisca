@@ -127,3 +127,7 @@ Route::get('/checksheeteyewasherplant', function() {
 Route::get('/checksheeteyewasherchemical', function() {
     return view('dashboard.checkSheet.checkEyewasherChemical');
 });
+
+Route::get('/checksheetslingwire', function() {
+    return view('dashboard.checkSheet.checkSlingWire');
+});
