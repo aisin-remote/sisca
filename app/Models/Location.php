@@ -25,4 +25,8 @@ class Location extends Model
     public function co2s(){
         return $this->hasMany(Co2::class);
     }
+
+    public function tandus(){
+        return $this->hasMany(Tandu::class);
+    }
 }
