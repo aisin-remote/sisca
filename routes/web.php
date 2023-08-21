@@ -115,3 +115,7 @@ Route::get('/checksheettandu', function() {
 Route::get('/checksheeteyewasherwwtp', function() {
     return view('dashboard.checkSheet.checkEyewasherWWTP');
 });
+
+Route::get('/checksheeteyewashertps', function() {
+    return view('dashboard.checkSheet.checkEyewasherTPS');
+});
