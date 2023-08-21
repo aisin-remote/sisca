@@ -123,3 +123,7 @@ Route::get('/checksheeteyewashertps', function() {
 Route::get('/checksheeteyewasherplant', function() {
     return view('dashboard.checkSheet.checkEyewasherPlant');
 });
+
+Route::get('/checksheeteyewasherchemical', function() {
+    return view('dashboard.checkSheet.checkEyewasherChemical');
+});
