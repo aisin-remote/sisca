@@ -17,22 +17,22 @@ class AparReportController extends Controller
     {
         $selectedYear = $request->input('selected_year', date('Y'));
 
-        $co2IssueCodesWithLocation = DB::table('check_sheet_co2s')
-            ->join('apars', 'check_sheet_co2s.apar_number', '=', 'apars.tag_number')
+        $co2IssueCodesWithLocation = DB::table('tt_check_sheet_co2s')
+            ->join('apars', 'tt_check_sheet_co2s.apar_number', '=', 'apars.tag_number')
             ->join('locations', 'apars.location_id', '=', 'locations.id')
-            ->whereYear('check_sheet_co2s.tanggal_pengecekan', $selectedYear)
-            ->select('check_sheet_co2s.apar_number', 'locations.location_name')
+            ->whereYear('tt_check_sheet_co2s.tanggal_pengecekan', $selectedYear)
+            ->select('tt_check_sheet_co2s.apar_number', 'locations.location_name')
             ->get();
 
-        $powderIssueCodesWithLocation = DB::table('check_sheet_powders')
-            ->join('apars', 'check_sheet_powders.apar_number', '=', 'apars.tag_number')
+        $powderIssueCodesWithLocation = DB::table('tt_check_sheet_powders')
+            ->join('apars', 'tt_check_sheet_powders.apar_number', '=', 'apars.tag_number')
             ->join('locations', 'apars.location_id', '=', 'locations.id')
-            ->whereYear('check_sheet_powders.tanggal_pengecekan', $selectedYear)
-            ->select('check_sheet_powders.apar_number', 'locations.location_name')
+            ->whereYear('tt_check_sheet_powders.tanggal_pengecekan', $selectedYear)
+            ->select('tt_check_sheet_powders.apar_number', 'locations.location_name')
             ->get();
 
         // Logic to generate CO2 issue codes and store in a temporary JSON file
-        $co2DataFromDatabase = DB::table('check_sheet_co2s')
+        $co2DataFromDatabase = DB::table('tt_check_sheet_co2s')
             ->whereYear('tanggal_pengecekan', $selectedYear) // Filter data by selected year
             ->get();
 
@@ -66,7 +66,7 @@ class AparReportController extends Controller
         Storage::put('temporary_co2_issue_codes.json', $co2IssueCodesJson); // Save CO2 JSON in a temporary file
 
         // Logic to generate Powder issue codes and store in a temporary JSON file
-        $powderDataFromDatabase = DB::table('check_sheet_powders')
+        $powderDataFromDatabase = DB::table('tt_check_sheet_powders')
             ->whereYear('tanggal_pengecekan', $selectedYear) // Filter data by selected year
             ->get();
 

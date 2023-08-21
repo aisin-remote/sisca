@@ -23,21 +23,21 @@ class CombinedAparController extends Controller
         $selectedYear = $request->input('selected_year', date('Y'));
 
         $aparData = Apar::leftJoin('locations', 'apars.location_id', '=', 'locations.id')
-            ->leftJoin('check_sheet_powders', 'apars.tag_number', '=', 'check_sheet_powders.apar_number')
-            ->leftJoin('check_sheet_co2s', 'apars.tag_number', '=', 'check_sheet_co2s.apar_number')
+            ->leftJoin('tt_check_sheet_powders', 'apars.tag_number', '=', 'tt_check_sheet_powders.apar_number')
+            ->leftJoin('tt_check_sheet_co2s', 'apars.tag_number', '=', 'tt_check_sheet_co2s.apar_number')
             ->select(
                 'apars.tag_number as apar_number',
                 'apars.type',
                 'locations.location_name',
-                DB::raw('COALESCE(check_sheet_powders.tanggal_pengecekan, check_sheet_co2s.tanggal_pengecekan) AS tanggal_pengecekan'),
-                DB::raw('COALESCE(check_sheet_powders.pressure, check_sheet_co2s.pressure) AS pressure'),
-                DB::raw('COALESCE(check_sheet_powders.hose, check_sheet_co2s.hose) AS hose'),
-                DB::raw('COALESCE(check_sheet_powders.tabung, check_sheet_co2s.tabung) AS tabung'),
-                DB::raw('COALESCE(check_sheet_powders.regulator, check_sheet_co2s.regulator) AS regulator'),
-                DB::raw('COALESCE(check_sheet_powders.lock_pin, check_sheet_co2s.lock_pin) AS lock_pin'),
-                'check_sheet_powders.powder',
-                'check_sheet_co2s.corong',
-                'check_sheet_co2s.berat_tabung'
+                DB::raw('COALESCE(tt_check_sheet_powders.tanggal_pengecekan, tt_check_sheet_co2s.tanggal_pengecekan) AS tanggal_pengecekan'),
+                DB::raw('COALESCE(tt_check_sheet_powders.pressure, tt_check_sheet_co2s.pressure) AS pressure'),
+                DB::raw('COALESCE(tt_check_sheet_powders.hose, tt_check_sheet_co2s.hose) AS hose'),
+                DB::raw('COALESCE(tt_check_sheet_powders.tabung, tt_check_sheet_co2s.tabung) AS tabung'),
+                DB::raw('COALESCE(tt_check_sheet_powders.regulator, tt_check_sheet_co2s.regulator) AS regulator'),
+                DB::raw('COALESCE(tt_check_sheet_powders.lock_pin, tt_check_sheet_co2s.lock_pin) AS lock_pin'),
+                'tt_check_sheet_powders.powder',
+                'tt_check_sheet_co2s.corong',
+                'tt_check_sheet_co2s.berat_tabung'
             )
             ->get();
 

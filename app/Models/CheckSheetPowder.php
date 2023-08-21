@@ -9,6 +9,8 @@ class CheckSheetPowder extends Model
 {
     use HasFactory;
 
+    protected $table = 'tt_check_sheet_powders';
+
     protected $fillable = [
         'tanggal_pengecekan',
         'npk',

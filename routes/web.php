@@ -162,3 +162,7 @@ Route::get('/checksheettembindaily', function() {
 Route::get('/checksheetchainblock', function() {
     return view('dashboard.checkSheet.checkChainBlock');
 });
+
+Route::get('/checksheethoistcrane', function() {
+    return view('dashboard.checkSheet.checkHoistCrane');
+});

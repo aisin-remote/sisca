@@ -9,6 +9,8 @@ class CheckSheetCo2 extends Model
 {
     use HasFactory;
 
+    protected $table = 'tt_check_sheet_co2s';
+
     protected $fillable = [
         'tanggal_pengecekan',
         'npk',
