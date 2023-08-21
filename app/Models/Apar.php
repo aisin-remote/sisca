@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Apar extends Model
 {
     use HasFactory;
+    protected $table = 'tm_apars';
     protected $guarded = [];
 
     public function locations()

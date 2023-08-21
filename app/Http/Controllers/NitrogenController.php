@@ -39,7 +39,7 @@ class NitrogenController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_tabung'=>'required|unique:nitrogens',
+            'no_tabung'=>'required|unique:tm_nitrogens',
             'location_id'=>'required',
             'plant'=>'nullable',
         ]);

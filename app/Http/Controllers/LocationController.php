@@ -38,7 +38,7 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'location_name'=>'required|unique:locations'
+            'location_name'=>'required|unique:tm_locations'
         ]);
 
         Location::create($validate);

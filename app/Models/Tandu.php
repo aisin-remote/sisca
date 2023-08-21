@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tandu extends Model
 {
     use HasFactory;
+    protected $table = 'tm_tandus';
     protected $guarded = [];
 
     public function locations()

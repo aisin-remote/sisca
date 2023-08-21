@@ -39,7 +39,7 @@ class AparController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'tag_number'=>'required|unique:apars',
+            'tag_number'=>'required|unique:tm_apars',
             'location_id'=>'required',
             'expired'=>'required',
             'post'=>'nullable',
