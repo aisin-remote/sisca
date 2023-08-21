@@ -93,5 +93,19 @@
                 </li> --}}
             </ul>
         </li>
+        <li class="{{Request::is('dashboard/eyewasher*') ? 'active show' : ''}}">
+            <a href="#eyewasherSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Eye Washer</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/eyewasher*') ? 'show' : '' }}" id="eyewasherSubmenu">
+                <li class="{{ Request::is('dashboard/eyewasher/data-eyewasher*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard/eyewasher/data-eyewasher">Data Eye Washer</a>
+                </li>
+                <li class="{{ Request::is('dashboard/apar/data_location*') ? 'active' : '' }}">
+                    <a class="nav_link" href="/dashboard/apar/data_location">Data Location</a>
+                </li>
+                {{-- <li>
+                    <a href="#">Page 3</a>
+                </li> --}}
+            </ul>
+        </li>
     </ul>
 </nav>

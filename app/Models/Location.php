@@ -29,4 +29,8 @@ class Location extends Model
     public function tandus(){
         return $this->hasMany(Tandu::class);
     }
+
+    public function eyewashers(){
+        return $this->hasMany(Eyewasher::class);
+    }
 }

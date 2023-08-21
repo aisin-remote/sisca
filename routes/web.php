@@ -3,6 +3,7 @@
 use App\Http\Controllers\AparController;
 use App\Http\Controllers\Co2Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EyewasherController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\NitrogenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TanduController;
+use App\Models\Eyewasher;
 use App\Models\Hydrant;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +66,10 @@ Route::put('/dashboard/co2/data-co2/{data_co2}', [Co2Controller::class, 'update'
 // Route Tandu
 Route::resource('/dashboard/tandu/data-tandu', TanduController::class)->except('show')->middleware('auth');
 Route::put('/dashboard/tandu/data-tandu/{data_tandu}', [TanduController::class, 'update'])->name('data-tandu.update');
+
+// Route Eye Washer
+Route::resource('/dashboard/eyewasher/data-eyewasher', EyewasherController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/eyewasher/data-eyewasher/{data_eyewasher}', [EyewasherController::class, 'update'])->name('data-eyewasher.update');
 
 // Route Location
 Route::resource('/dashboard/apar/data_location', LocationController::class)->except('show','destroy')->middleware('auth');
