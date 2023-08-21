@@ -17,4 +17,8 @@ class Location extends Model
     public function hydrants(){
         return $this->hasMany(Hydrant::class);
     }
+
+    public function nitrogens(){
+        return $this->hasMany(Nitrogen::class);
+    }
 }
