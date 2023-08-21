@@ -31,7 +31,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::get('/login', function() {
+Route::get('/login', function () {
     return view('auth.login');
 });
 
@@ -77,7 +77,7 @@ Route::resource('/dashboard/sling/data-sling', SlingController::class)->except('
 Route::put('/dashboard/sling/data-sling/{data_sling}', [SlingController::class, 'update'])->name('data-sling.update');
 
 // Route Location
-Route::resource('/dashboard/location', LocationController::class)->except('show','destroy')->middleware('auth');
+Route::resource('/dashboard/location', LocationController::class)->except('show', 'destroy')->middleware('auth');
 Route::delete('/dashboard/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
@@ -112,62 +112,76 @@ use App\Http\Controllers\CombinedAparController;
 
 Route::get('/dashboard/home/checksheet-report-apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
 
-Route::get('/checksheethydrantindoor', function() {
-    return view('dashboard.checkSheet.checkHydrantIndoor');
+use App\Http\Controllers\CheckSheetHydrantIndoorController;
+
+// Menggunakan middleware auth untuk routes terkait checksheethydrantindoor
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checksheethydrantindoor', function () {
+        return view('dashboard.checkSheet.checkHydrantIndoor');
+    })->name('checksheet.hydrantindoor');
+
+    Route::post('/dashboard/apar/process-checksheet-hydrantindoor', [CheckSheetHydrantIndoorController::class, 'store'])->name('process.checksheet.hydrantindoor');
 });
 
-Route::get('/checksheethydrantoutdoor', function() {
-    return view('dashboard.checkSheet.checkHydrantOutdoor');
+use App\Http\Controllers\CheckSheetHydrantOutdoorController;
+
+// Menggunakan middleware auth untuk routes terkait checksheethydrantoutdoor
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checksheethydrantoutdoor', function () {
+        return view('dashboard.checkSheet.checkHydrantOutdoor');
+    })->name('checksheet.hydrantoutdoor');
+
+    Route::post('/dashboard/apar/process-checksheet-hydrantoutdoor', [CheckSheetHydrantOutdoorController::class, 'store'])->name('process.checksheet.hydrantoutdoor');
 });
 
-Route::get('/checksheetnitrogenserver', function() {
+Route::get('/checksheetnitrogenserver', function () {
     return view('dashboard.checkSheet.checkNitrogenServer');
 });
 
-Route::get('/checksheettabungco2', function() {
+Route::get('/checksheettabungco2', function () {
     return view('dashboard.checkSheet.checkTabungCo2');
 });
 
-Route::get('/checksheettandu', function() {
+Route::get('/checksheettandu', function () {
     return view('dashboard.checkSheet.checkTandu');
 });
 
-Route::get('/checksheeteyewasherwwtp', function() {
+Route::get('/checksheeteyewasherwwtp', function () {
     return view('dashboard.checkSheet.checkEyewasherWWTP');
 });
 
-Route::get('/checksheeteyewashertps', function() {
+Route::get('/checksheeteyewashertps', function () {
     return view('dashboard.checkSheet.checkEyewasherTPS');
 });
 
-Route::get('/checksheeteyewasherplant', function() {
+Route::get('/checksheeteyewasherplant', function () {
     return view('dashboard.checkSheet.checkEyewasherPlant');
 });
 
-Route::get('/checksheeteyewasherchemical', function() {
+Route::get('/checksheeteyewasherchemical', function () {
     return view('dashboard.checkSheet.checkEyewasherChemical');
 });
 
-Route::get('/checksheetslingwire', function() {
+Route::get('/checksheetslingwire', function () {
     return view('dashboard.checkSheet.checkSlingWire');
 });
 
-Route::get('/checksheetslingbelt', function() {
+Route::get('/checksheetslingbelt', function () {
     return view('dashboard.checkSheet.checkSlingBelt');
 });
 
-Route::get('/checksheettembinmonthly', function() {
+Route::get('/checksheettembinmonthly', function () {
     return view('dashboard.checkSheet.checkTembinMonthly');
 });
 
-Route::get('/checksheettembindaily', function() {
+Route::get('/checksheettembindaily', function () {
     return view('dashboard.checkSheet.checkTembinDaily');
 });
 
-Route::get('/checksheetchainblock', function() {
+Route::get('/checksheetchainblock', function () {
     return view('dashboard.checkSheet.checkChainBlock');
 });
 
-Route::get('/checksheethoistcrane', function() {
+Route::get('/checksheethoistcrane', function () {
     return view('dashboard.checkSheet.checkHoistCrane');
 });

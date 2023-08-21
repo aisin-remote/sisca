@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form action="" method="POST">
+            <form action="{{ route('process.checksheet.hydrantindoor') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="hydrant_number" class="form-label">Nomor Hydrant</label>
-                    <input type="text" class="form-control" id="hydrant_number" value="" name="hydrant_number" required autofocus readonly>
+                    <input type="text" class="form-control" id="hydrant_number" name="hydrant_number" required autofocus>
                 </div>
         </div>
         <div class="col-md-6">
