@@ -139,3 +139,11 @@ Route::get('/checksheetslingwire', function() {
 Route::get('/checksheetslingbelt', function() {
     return view('dashboard.checkSheet.checkSlingBelt');
 });
+
+Route::get('/checksheettembinmonthly', function() {
+    return view('dashboard.checkSheet.checkTembinMonthly');
+});
+
+Route::get('/checksheettembindaily', function() {
+    return view('dashboard.checkSheet.checkTembinDaily');
+});
