@@ -10,7 +10,7 @@ class CheckSheetHydrantOutdoorController extends Controller
     public function showForm($tagNumber)
     {
         $checkSheetHydrantOutdoor = CheckSheetHydrantOutdoor::all();
-        return view('dashboard.checkSheet.checkHydraCheckSheetHydrantOutdoor', compact('checkSheetHydrantOutdoor', 'tagNumber'));
+        return view('dashboard.checkSheet.checkHydrantOutdoor', compact('checkSheetHydrantOutdoor', 'tagNumber'));
     }
     
     public function store(Request $request)
