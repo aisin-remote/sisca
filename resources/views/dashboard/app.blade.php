@@ -8,7 +8,7 @@
     <title>PT Aisin Indonesia | @yield('title')</title>
 
     <!-- Logo only -->
-    <link rel="icon" href="https://www.aisinindonesia.co.id/asset/img/aii.ico">
+    <link rel="icon" href="/foto/aii.ico">
 
     {{-- CSS & JS Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">

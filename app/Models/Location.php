@@ -42,4 +42,8 @@ class Location extends Model
     public function tembins(){
         return $this->hasMany(Tembin::class);
     }
+
+    public function chainblocks(){
+        return $this->hasMany(Chainblock::class);
+    }
 }

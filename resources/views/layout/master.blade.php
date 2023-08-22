@@ -11,7 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
     <!-- Logo only -->
-    <link rel="icon" href="https://www.aisinindonesia.co.id/asset/img/aii.ico">
+    <link rel="icon" href="/foto/aii.ico">
 
     <!-- CSS & JS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"

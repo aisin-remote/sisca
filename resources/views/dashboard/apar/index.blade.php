@@ -35,13 +35,16 @@
                         <td>{{ $apar->post }}</td>
                         <td>{{ $apar->type }}</td>
                         <td>
-                            <form action="{{ route('data_apar.destroy', $apar->id) }}" method="POST">
-                                <a href="{{ route('data_apar.edit', $apar->id) }}" class="badge bg-warning">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Apar?')">Delete</button>
-                            </form>
+                            <div class="d-flex align-items-center">
+                                <a href="{{ route('data_apar.show', $apar->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('data_apar.edit', $apar->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('data_apar.destroy', $apar->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Apar?')">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

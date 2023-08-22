@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\ChainblockController;
 use App\Http\Controllers\Co2Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EyewasherController;
@@ -50,7 +51,7 @@ Route::get('/dashboard/home/grafik-status', [DashboardController::class, 'index'
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // Route Apar
-Route::resource('/dashboard/apar/data_apar', AparController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/apar/data_apar', AparController::class)->middleware('auth');
 Route::put('/dashboard/apar/data_apar/{data_apar}', [AparController::class, 'update'])->name('data_apar.update');
 
 // Route Hydrant
@@ -80,6 +81,10 @@ Route::put('/dashboard/sling/data-sling/{data_sling}', [SlingController::class, 
 // Route Tembin
 Route::resource('/dashboard/tembin/data-tembin', TembinController::class)->except('show')->middleware('auth');
 Route::put('/dashboard/tembin/data-tembin/{data_tembin}', [TembinController::class, 'update'])->name('data-tembin.update');
+
+// Route Chain Block
+Route::resource('/dashboard/chainblock/data-chainblock', ChainblockController::class)->middleware('auth');
+Route::put('/dashboard/chainblock/data-chainblock/{data_chainblock}', [ChainblockController::class, 'update'])->name('data-chainblock.update');
 
 // Route Location
 Route::resource('/dashboard/location', LocationController::class)->except('show', 'destroy')->middleware('auth');

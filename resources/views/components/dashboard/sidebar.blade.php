@@ -2,7 +2,7 @@
 <nav id="sidebar">
     <div class="sidebar-header">
         <a class="navbar-brand d-flex justify-content-center" href="/">
-            <img src="https://www.aisinindonesia.co.id/assetweb/image/logo/aisin-indonesia-logo.svg" alt="">
+            <img src="/foto/logo-aiia.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;">
         </a>
     </div>
     <ul class="list-unstyled components">
@@ -87,6 +87,14 @@
             <ul class="collapse list-unstyled {{ Request::is('dashboard/tembin*') ? 'show' : '' }}" id="tembinSubmenu">
                 <li class="{{ Request::is('dashboard/tembin/data-tembin*') ? 'active' : '' }}">
                     <a class="nav-link" href="/dashboard/tembin/data-tembin">Data Tembin</a>
+                </li>
+            </ul>
+        </li>
+        <li class="{{Request::is('dashboard/chainblock*') ? 'active show' : ''}}">
+            <a href="#chainblockSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Chain Block</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/chainblock*') ? 'show' : '' }}" id="chainblockSubmenu">
+                <li class="{{ Request::is('dashboard/chainblock/data-chainblock*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard/chainblock/data-chainblock">Data Chain Block</a>
                 </li>
             </ul>
         </li>

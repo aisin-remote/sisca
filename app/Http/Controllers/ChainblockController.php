@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Apar;
+use App\Models\Chainblock;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
-class AparController extends Controller
+class ChainblockController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AparController extends Controller
      */
     public function index()
     {
-        $apars = Apar::get();
-        return view('dashboard.apar.index', compact('apars'));
+        $chainblocks = Chainblock::get();
+        return view('dashboard.chainblock.index', compact('chainblocks'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AparController extends Controller
     public function create()
     {
         $locations = Location::all();
-        return view('dashboard.apar.create', compact('locations'));
+        return view('dashboard.chainblock.create', compact('locations'));
     }
 
     /**
@@ -39,15 +39,13 @@ class AparController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'tag_number'=>'required|unique:tm_apars',
+            'no_chainblock'=>'required|unique:tm_chainblocks',
             'location_id'=>'required',
-            'expired'=>'required',
-            'post'=>'nullable',
-            'type'=>'required'
+            'handling_detail'=>'nullable',
         ]);
 
-        Apar::create($validate);
-        return redirect()->route('data_apar.index')->with('success', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
+        Chainblock::create($validate);
+        return redirect()->route('data-chainblock.index')->with('success', "Data Chain Block {$validate['no_chainblock']} berhasil ditambahkan");
     }
 
     /**
@@ -58,8 +56,7 @@ class AparController extends Controller
      */
     public function show($id)
     {
-        $apar = Apar::findOrFail($id);
-        return view('dashboard.apar.show', compact('apar'));
+        //
     }
 
     /**
@@ -70,9 +67,9 @@ class AparController extends Controller
      */
     public function edit($id)
     {
-        $apar = Apar::findOrFail($id);
+        $chainblock = Chainblock::findOrFail($id);
         $locations = Location::all();
-        return view('dashboard.apar.edit', compact('apar', 'locations'));
+        return view('dashboard.chainblock.edit', compact('chainblock', 'locations'));
     }
 
     /**
@@ -84,18 +81,16 @@ class AparController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $apar = Apar::findOrFail($id);
+        $chainblock = Chainblock::findOrFail($id);
 
         $validateData = $request->validate([
             'location_id'=>'required',
-            'expired'=>'required',
-            'post'=>'nullable',
-            'type'=>'required'
+            'handling_detail'=>'nullable',
         ]);
 
-        $apar->update($validateData);
+        $chainblock->update($validateData);
 
-        return redirect()->route('data_apar.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('data-chainblock.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -106,9 +101,9 @@ class AparController extends Controller
      */
     public function destroy($id)
     {
-        $apar = Apar::find($id);
-        $apar->delete();
+        $chainblock = Chainblock::find($id);
+        $chainblock->delete();
 
-        return redirect()->route('data_apar.index')->with('success', 'Data Apar berhasil dihapus');
+        return redirect()->route('data-chainblock.index')->with('success', 'Data Chain Block berhasil dihapus');
     }
 }
