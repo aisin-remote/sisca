@@ -134,8 +134,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/apar/process-checksheet-hydrantoutdoor', [CheckSheetHydrantOutdoorController::class, 'store'])->name('process.checksheet.hydrantoutdoor');
 });
 
-Route::get('/checksheetnitrogenserver', function () {
-    return view('dashboard.checkSheet.checkNitrogenServer');
+use App\Http\Controllers\CheckSheetNitrogenServerController;
+
+// Menggunakan middleware auth untuk routes terkait checksheetnitrogenserver
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checksheetnitrogenserver', function () {
+        return view('dashboard.checkSheet.checkNitrogenServer');
+    })->name('checksheet.nitrogen.server');
+
+    Route::post('/dashboard/apar/process-checksheet-nitrogen-server', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen.server');
 });
 
 Route::get('/checksheettabungco2', function () {
