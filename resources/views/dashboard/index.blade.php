@@ -5,41 +5,40 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Grafik Status</h1>
-            <div class="btn-group">
-                <button type="button" class="btn btn-success dropdown-toggle caret-none" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Pilih Tahun
-                </button>
-                <div class="dropdown-menu">
-                    @foreach ($availableYears as $year)
-                        <a class="dropdown-item"
-                            href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a>
-                    @endforeach
-                </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle caret-none" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Pilih Tahun
+            </button>
+            <div class="dropdown-menu">
+                @foreach ($availableYears as $year)
+                    <a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a>
+                @endforeach
             </div>
+        </div>
     </div>
     <div class="row justify-content-center">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 mb-3">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Apar</div>
                     <div class="card-body">
                         <div class="chart-container">
                             <canvas id="barChart" class="img-fluid"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Hydrant</div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="barChart" class="img-fluid"></canvas>
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Hydrant</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="barChart" class="img-fluid"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
         </div>
     </div>
 

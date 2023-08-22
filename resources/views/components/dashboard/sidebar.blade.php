@@ -82,5 +82,13 @@
                 </li>
             </ul>
         </li>
+        <li class="{{Request::is('dashboard/tembin*') ? 'active show' : ''}}">
+            <a href="#tembinSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tembin</a>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/tembin*') ? 'show' : '' }}" id="tembinSubmenu">
+                <li class="{{ Request::is('dashboard/tembin/data-tembin*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard/tembin/data-tembin">Data Tembin</a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </nav>

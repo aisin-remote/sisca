@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SlingController;
 use App\Http\Controllers\TanduController;
+use App\Http\Controllers\TembinController;
 use App\Models\Eyewasher;
 use App\Models\Hydrant;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,10 @@ Route::put('/dashboard/eyewasher/data-eyewasher/{data_eyewasher}', [EyewasherCon
 // Route Sling
 Route::resource('/dashboard/sling/data-sling', SlingController::class)->except('show')->middleware('auth');
 Route::put('/dashboard/sling/data-sling/{data_sling}', [SlingController::class, 'update'])->name('data-sling.update');
+
+// Route Tembin
+Route::resource('/dashboard/tembin/data-tembin', TembinController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/tembin/data-tembin/{data_tembin}', [TembinController::class, 'update'])->name('data-tembin.update');
 
 // Route Location
 Route::resource('/dashboard/location', LocationController::class)->except('show', 'destroy')->middleware('auth');

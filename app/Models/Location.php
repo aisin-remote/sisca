@@ -38,4 +38,8 @@ class Location extends Model
     public function slings(){
         return $this->hasMany(Sling::class);
     }
+
+    public function tembins(){
+        return $this->hasMany(Tembin::class);
+    }
 }

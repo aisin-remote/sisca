@@ -1,0 +1,22 @@
+@extends('dashboard.app')
+@section('title', 'Data Tembin')
+
+@section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+        <h1>Tambah Data Tembin</h1>
+    </div>
+    <form action="/dashboard/tembin/data-tembin" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="no_equip" class="form-label">No Equip</label>
+            <input type="text" name="no_equip" id="no_equip" placeholder="Masukkan No Equip" class="form-control @error('no_equip') is-invalid @enderror" value="{{old('no_equip')}}" required autofocus>
+            @error('no_equip')
+                <div class="text-danger">{{$message}}</div>
+            @enderror
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Tambah</button>
+    </form>
+
+@endsection
