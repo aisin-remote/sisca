@@ -15,7 +15,7 @@
     <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Sling</th>
                     <th scope="col">Area</th>
@@ -26,13 +26,14 @@
             </thead>
             <tbody>
                 @forelse ($slings as $sling)
-                    <tr class="align-middle">
+                    <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $sling->no_sling }}</td>
                         <td>{{ $sling->locations->location_name }}</td>
                         <td>{{ $sling->plant }}</td>
                         <td>{{ $sling->type }}</td>
                         <td>
+                            <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('data-sling.destroy', $sling->id) }}" method="POST">
                                 <a href="{{ route('data-sling.edit', $sling->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
@@ -40,6 +41,7 @@
                                 <button type="submit" class="badge bg-danger border-0"
                                     onclick="return confirm('Ingin menghapus Data Sling?')">Delete</button>
                             </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

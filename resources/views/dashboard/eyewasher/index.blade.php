@@ -15,7 +15,7 @@
     <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Eye Washer</th>
                     <th scope="col">Area</th>
@@ -24,11 +24,12 @@
             </thead>
             <tbody>
                 @forelse ($eyewashers as $eyewasher)
-                    <tr class="align-middle">
+                    <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $eyewasher->no_eyewasher }}</td>
                         <td>{{ $eyewasher->locations->location_name }}</td>
                         <td>
+                            <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('data-eyewasher.destroy', $eyewasher->id) }}" method="POST">
                                 <a href="{{ route('data-eyewasher.edit', $eyewasher->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
@@ -36,6 +37,7 @@
                                 <button type="submit" class="badge bg-danger border-0"
                                     onclick="return confirm('Ingin menghapus Data Eye Washer?')">Delete</button>
                             </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

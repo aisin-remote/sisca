@@ -15,7 +15,7 @@
     <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Hydrant</th>
                     <th scope="col">Location</th>
@@ -26,13 +26,14 @@
             </thead>
             <tbody>
                 @forelse ($hydrants as $hydrant)
-                    <tr class="align-middle">
+                    <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $hydrant->no_hydrant }}</td>
                         <td>{{ $hydrant->locations->location_name }}</td>
                         <td>{{ $hydrant->zona }}</td>
                         <td>{{ $hydrant->type }}</td>
                         <td>
+                            <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('data-hydrant.destroy', $hydrant->id) }}" method="POST">
                                 <a href="{{ route('data-hydrant.edit', $hydrant->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
@@ -40,6 +41,7 @@
                                 <button type="submit" class="badge bg-danger border-0"
                                     onclick="return confirm('Ingin menghapus Data Hydrant?')">Delete</button>
                             </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

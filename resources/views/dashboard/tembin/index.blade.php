@@ -16,7 +16,7 @@
     <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Equip</th>
                     <th scope="col">Aksi</th>
@@ -24,16 +24,18 @@
             </thead>
             <tbody>
                 @forelse ($tembins as $tembin)
-                    <tr class="align-middle">
+                    <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $tembin->no_equip }}</td>
                         <td>
+                            <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('data-tembin.destroy',$tembin->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"
                                     onclick="return confirm('Ingin menghapus Data Tembin?')">Delete</button>
                             </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

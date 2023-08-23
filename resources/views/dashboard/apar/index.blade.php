@@ -15,7 +15,7 @@
     <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">Tag Number</th>
                     <th scope="col">Location</th>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
                 @forelse ($apars as $apar)
-                    <tr class="align-middle">
+                    <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $apar->tag_number }}</td>
                         <td>{{ $apar->locations->location_name }}</td>
@@ -35,7 +35,7 @@
                         <td>{{ $apar->post }}</td>
                         <td>{{ $apar->type }}</td>
                         <td>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center justify-content-center">
                                 <a href="{{ route('data_apar.show', $apar->id) }}" class="badge bg-info me-2">Info</a>
                                 <a href="{{ route('data_apar.edit', $apar->id) }}" class="badge bg-warning me-2">Edit</a>
                                 <form action="{{ route('data_apar.destroy', $apar->id) }}" method="POST" class="delete-form">

@@ -39,7 +39,7 @@ class TanduController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_tandu'=>'required|unique:tandus',
+            'no_tandu'=>'required|unique:tm_tandus',
             'location_id'=>'required',
         ]);
 

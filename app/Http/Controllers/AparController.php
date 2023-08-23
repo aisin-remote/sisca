@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apar;
+use App\Models\CheckSheetCo2;
+use App\Models\CheckSheetPowder;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -59,7 +61,25 @@ class AparController extends Controller
     public function show($id)
     {
         $apar = Apar::findOrFail($id);
-        return view('dashboard.apar.show', compact('apar'));
+
+        if (!$apar) {
+            return back()->with('error', 'Apar tidak ditemukan.');
+        }
+
+        $type = $apar->type;
+
+        if ($type === 'co2') {
+            $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number)->get();
+            return view('dashboard.apar.show', compact('apar', 'checksheets'));
+        } elseif ($type === 'powder') {
+            $checksheets = CheckSheetPowder::where('apar_number', $apar->tag_number)->get();
+            return view('dashboard.apar.show', compact('apar', 'checksheets'));
+        } elseif ($type === 'af11e') {
+            $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number)->get();
+            return view('dashboard.apar.show', compact('apar', 'checksheets'));
+        } else {
+            return back()->with('error', 'Apar tidak dikenali');
+        }
     }
 
     /**

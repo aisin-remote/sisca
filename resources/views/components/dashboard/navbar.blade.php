@@ -1,5 +1,5 @@
 <!-- Page Content  -->
-<div id="content">
+<div class="content" id="content">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">

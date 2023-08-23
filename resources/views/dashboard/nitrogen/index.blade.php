@@ -15,7 +15,7 @@
     <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
-                <tr>
+                <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Tabung</th>
                     <th scope="col">Location</th>
@@ -25,12 +25,13 @@
             </thead>
             <tbody>
                 @forelse ($nitrogens as $nitrogen)
-                    <tr class="align-middle">
+                    <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $nitrogen->no_tabung }}</td>
                         <td>{{ $nitrogen->locations->location_name }}</td>
                         <td>{{ $nitrogen->plant }}</td>
                         <td>
+                            <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('data-nitrogen.destroy', $nitrogen->id) }}" method="POST">
                                 <a href="{{ route('data-nitrogen.edit', $nitrogen->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
@@ -38,6 +39,7 @@
                                 <button type="submit" class="badge bg-danger border-0"
                                     onclick="return confirm('Ingin menghapus Data Nitrogen?')">Delete</button>
                             </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
