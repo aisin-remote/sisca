@@ -67,16 +67,44 @@ class AparController extends Controller
         }
 
         $type = $apar->type;
+        $checksheets = null;
 
         if ($type === 'co2') {
-            $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number)->get();
+            $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number);
+
+            if (request()->has('tanggal_filter')) {
+                $tanggalFilter = request()->input('tanggal_filter');
+                $checksheets->whereDate('tanggal_pengecekan', $tanggalFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
             return view('dashboard.apar.show', compact('apar', 'checksheets'));
+
         } elseif ($type === 'powder') {
-            $checksheets = CheckSheetPowder::where('apar_number', $apar->tag_number)->get();
+            $checksheets = CheckSheetPowder::where('apar_number', $apar->tag_number);
+
+            if (request()->has('tanggal_filter')) {
+                $tanggalFilter = request()->input('tanggal_filter');
+                $checksheets->whereDate('tanggal_pengecekan', $tanggalFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
             return view('dashboard.apar.show', compact('apar', 'checksheets'));
+
         } elseif ($type === 'af11e') {
-            $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number)->get();
+            $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number);
+
+            if (request()->has('tanggal_filter')) {
+                $tanggalFilter = request()->input('tanggal_filter');
+                $checksheets->whereDate('tanggal_pengecekan', $tanggalFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
             return view('dashboard.apar.show', compact('apar', 'checksheets'));
+
         } else {
             return back()->with('error', 'Apar tidak dikenali');
         }

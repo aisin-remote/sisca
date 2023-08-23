@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetCo2;
 
@@ -37,5 +38,45 @@ class CheckSheetCo2Controller extends Controller
         CheckSheetCo2::create($validatedData);
 
         return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
+    }
+
+    public function edit ($id)
+    {
+        $checkSheetco2 = CheckSheetCo2::findOrFail($id);
+        return view('dashboard.apar.checksheetco2.edit', compact('checkSheetco2'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $checkSheetco2 = CheckSheetCo2::findOrFail($id);
+
+        // Validasi data yang diinputkan
+        $request->validate([
+            'pressure' => 'required',
+            'hose' => 'required',
+            'corong' => 'required',
+            'tabung' => 'required',
+            'regulator' => 'required',
+            'lock_pin' => 'required',
+            'berat_tabung' => 'required',
+        ]);
+
+        // Update data CheckSheetCo2 dengan data baru dari form
+        $checkSheetco2->update($request->all());
+
+        $apar = Apar::where('tag_number', $checkSheetco2->apar_number)->first();
+
+        if (!$apar) {
+            return back()->with('error', 'Apar tidak ditemukan.');
+        }
+
+        return redirect()->route('data_apar.show', $apar->id)->with('success1', 'Data Check Sheet Co2 berhasil diperbarui.');
+    }
+
+    public function destroy ($id) {
+        $checkSheetco2 = CheckSheetCo2::find($id);
+        $checkSheetco2->delete();
+
+        return back()->with('success1', 'Data Check Sheet Apar Co2 berhasil dihapus');
     }
 }

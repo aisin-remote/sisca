@@ -47,7 +47,27 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Riwayat Check Sheet Apar</h1>
+        <div class="form-group">
+            <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
+            <label for="tanggal_filter">Filter Tanggal:</label>
+            <div class="input-group">
+                <input type="date" name="tanggal_filter" class="form-control" id="tanggal_filter">
+                <button class="btn btn-success" id="filterButton">Filter</button>
+            </div>
+            </form>
+        </div>
+        {{-- <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
+            <label for="tanggal_filter">Filter Tanggal:</label>
+            <input type="date" name="tanggal_filter" id="tanggal_filter">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form> --}}
+
     </div>
+    @if (session()->has('success1'))
+        <div class="alert alert-success col-lg-12">
+            {{ session()->get('success1') }}
+        </div>
+    @endif
     @if ($apar->type === 'co2' || $apar->type === 'af11e')
         <div class="table-responsive col-lg-12">
             <table class="table table-striped table-sm">
@@ -84,14 +104,14 @@
                             <td class="text-center align-middle">{{ $checksheet->berat_tabung }}</td>
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a href="{{ route('data_apar.edit', $apar->id) }}"
+                                    <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
                                         class="badge bg-warning me-2">Edit</a>
-                                    <form action="{{ route('data_apar.destroy', $apar->id) }}" method="POST"
+                                    <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="badge bg-danger border-0"
-                                            onclick="return confirm('Ingin menghapus Data Apar?')">Delete</button>
+                                            onclick="return confirm('Ingin menghapus Data Check Sheet Apar Co2?')">Delete</button>
                                     </form>
                                 </div>
                             </td>
@@ -155,5 +175,13 @@
     @else
         <p>Type dari Apar tidak ditemukan</p>
     @endif
+
+    <script>
+        document.getElementById('filterButton').addEventListener('click', function () {
+            var selectedDate = document.getElementById('filterDate').value;
+            // Lakukan sesuatu dengan tanggal yang dipilih, misalnya memicu filter
+            console.log('Tanggal yang dipilih:', selectedDate);
+        });
+    </script>
 
 @endsection
