@@ -28,5 +28,76 @@
     </div>
     <button type="submit" class="btn btn-success">Check</button>
     </form>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+        <h5>Check Sheet Terbaru</h5>
+        <a href="/dashboard/apar/checksheet/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
+            Semua Check Sheet
+        </a>
+    </div>
+    @if (session()->has('success1'))
+        <div class="alert alert-success col-lg-12">
+            {{ session()->get('success1') }}
+        </div>
+    @endif
+    <div class="table-responsive col-lg-12">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr class="text-center align-middle">
+                    <th scope="col">#</th>
+                    <th scope="col">Tanggal Pengecekan</th>
+                    <th scope="col">Terakhir Update</th>
+                    <th scope="col">NPK</th>
+                    <th scope="col">Nomor Apar</th>
+                    <th>type</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($combinedLatestCheckSheets as $index => $checkSheet)
+                    <tr class="text-center align-middle">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $checkSheet->created_at->format('d F Y') }}</td>
+                        <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
+                        <td>{{ $checkSheet->npk }}</td>
+                        <td>{{ $checkSheet->apar_number }}</td>
+                        <td>{{ $checkSheet->apars->type }}</td>
+                        @if ($checkSheet->apars->type === 'co2' || $checkSheet->type === 'af11e')
+                            <td class="text-center align-middle">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a href="{{ route('apar.checksheetco2.edit', $checkSheet->id) }}"
+                                        class="badge bg-warning me-2">Edit</a>
+                                    <form action="{{ route('apar.checksheetco2.destroy', $checkSheet->id) }}" method="POST"
+                                        class="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="badge bg-danger border-0"
+                                            onclick="return confirm('Ingin menghapus Data Check Sheet Apar Co2?')">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        @elseif ($checkSheet->apars->type === 'powder')
+                            <td class="text-center align-middle">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a href="{{ route('apar.checksheetpowder.edit', $checkSheet->id) }}"
+                                        class="badge bg-warning me-2">Edit</a>
+                                    <form action="{{ route('apar.checksheetpowder.destroy', $checkSheet->id) }}" method="POST"
+                                        class="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="badge bg-danger border-0"
+                                            onclick="return confirm('Ingin menghapus Data Check Sheet Apar Powder?')">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        @else
+                            <p>Type dari Apar tidak ditemukan</p>
+                        @endif
+                    </tr>
+                @empty
+                    <td colspan="12">Tidak ada data...</td>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
 @endsection

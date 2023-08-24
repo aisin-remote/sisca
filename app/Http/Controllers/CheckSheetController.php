@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Apar;
 use Illuminate\Http\Request;
-use App\Http\Controllers\CheckSheetCo2Controller;
+use App\Models\CheckSheetCo2;
+use App\Models\CheckSheetPowder;
+use Carbon\Carbon;
 
 class CheckSheetController extends Controller
 {
+    public function index()
+    {
+        $checksheetco2 = CheckSheetCo2::get();
+        $checksheetpowder = CheckSheetPowder::get();
+
+        return view('dashboard.apar.checksheet.index', compact('checksheetco2', 'checksheetpowder'));
+    }
     public function showForm()
     {
-        return view('dashboard.checkSheet.check');
+        $latestCheckSheetPowders = CheckSheetPowder::orderBy('updated_at', 'desc')->take(10)->get();
+        $latestCheckSheetCo2 = CheckSheetCo2::orderBy('updated_at', 'desc')->take(10)->get();
+
+        $combinedLatestCheckSheets = $latestCheckSheetPowders->merge($latestCheckSheetCo2);
+
+        return view('dashboard.checkSheet.check', compact('combinedLatestCheckSheets'));
     }
 
     public function processForm(Request $request)

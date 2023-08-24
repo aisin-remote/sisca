@@ -5,17 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetCo2;
+use Carbon\Carbon;
 
 class CheckSheetCo2Controller extends Controller
 {
     public function showForm($tagNumber)
     {
         $checkSheetCo2s = CheckSheetCo2::all();
+
+        $lastMonth = Carbon::now()->subMonth();
+
+        $existingCheckSheet = CheckSheetCo2::where('apar_number', $tagNumber)
+            ->where('created_at', '>', $lastMonth)
+            ->first();
+
+        if ($existingCheckSheet) {
+            return redirect()->route('apar.checksheetco2.edit', $existingCheckSheet->id)
+                ->with('error', 'Check Sheet Co2 sudah ada dalam satu bulan terakhir untuk Apar ' . $tagNumber . '. Silahkan edit.');
+        }
+
         return view('dashboard.checkSheet.checkCo2', compact('checkSheetCo2s', 'tagNumber'));
     }
 
     public function store(Request $request)
     {
+        $lastMonth = Carbon::now()->subMonth();
+
+        $existingCheckSheet = CheckSheetCo2::where('apar_number', $request->apar_number)
+            ->where('created_at', '>', $lastMonth)
+            ->first();
+
+        if ($existingCheckSheet) {
+            return redirect()->route('apar.checksheetco2.edit', $existingCheckSheet->id)
+                ->with('error', 'Check Sheet Powder sudah ada dalam satu bulan terakhir untuk Apar ' . $request->apar_number . '. Silahkan edit.');
+        }
+
         // Validasi input
         $validatedData = $request->validate([
             'tanggal_pengecekan' => 'required|date',

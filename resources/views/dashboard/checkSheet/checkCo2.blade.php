@@ -15,6 +15,11 @@
         </ul>
     </div>
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-success col-lg-12">
+            {{ session()->get('error') }}
+        </div>
+    @endif
 
     @if(session('success'))
     <div class="alert alert-success">

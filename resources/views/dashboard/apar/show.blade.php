@@ -11,6 +11,11 @@
             {{ session()->get('success') }}
         </div>
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger col-lg-12">
+            {{ session()->get('error') }}
+        </div>
+    @endif
     <div class="card col-lg-6 mb-4">
         <div class="card-body">
             <div class="row">
@@ -154,14 +159,16 @@
                         <td>{{ $checksheet->regulator }}</td>
                         <td>{{ $checksheet->lock_pin }}</td>
                         <td>{{ $checksheet->powder }}</td>
-                        <td>
+                        <td class="text-center align-middle">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('data_apar.edit', $apar->id) }}" class="badge bg-warning me-2">Edit</a>
-                                <form action="{{ route('data_apar.destroy', $apar->id) }}" method="POST" class="delete-form">
+                                <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
+                                    class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"
+                                    class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="badge bg-danger border-0"
-                                        onclick="return confirm('Ingin menghapus Data Apar?')">Delete</button>
+                                        onclick="return confirm('Ingin menghapus Data Check Sheet Apar Powder?')">Delete</button>
                                 </form>
                             </div>
                         </td>

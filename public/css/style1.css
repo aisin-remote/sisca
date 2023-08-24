@@ -175,3 +175,8 @@ ul.CTAs a {
     align-items: center;
 }
 
+.bg-abu th,
+        .bg-abu td {
+            background-color: #f8f9fa;
+            color: #212529;
+        }

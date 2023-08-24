@@ -23,11 +23,16 @@ class CheckSheetPowder extends Model
         'powder',
     ];
 
+    public function apars()
+    {
+        return $this->belongsTo(Apar::class, 'apar_number', 'tag_number');
+    }
+
     // Jika tidak ingin menggunakan timestamps (created_at dan updated_at)
     // public $timestamps = false;
 
     // Atau jika ingin menggunakan timestamps
     public $timestamps = true;
-    
+
     // ... tambahkan relasi, method, atau atribut lainnya di sini
 }

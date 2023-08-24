@@ -96,6 +96,7 @@ use App\Http\Controllers\CheckSheetController;
 // checksheet
 Route::get('/dashboard/apar/checksheet', [CheckSheetController::class, 'showForm'])->name('show.form');
 Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
+Route::get('/dashboard/apar/checksheet/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
 
 use App\Http\Controllers\CheckSheetCo2Controller;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -104,6 +105,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/apar/checksheetco2/{tagNumber}', [CheckSheetCo2Controller::class, 'showForm'])->name('checksheetco2');
     Route::post('/dashboard/apar/process-checksheet-co2-af11e/{tagNumber}', [CheckSheetCo2Controller::class, 'store'])->name('process.checksheet.co2');
+
     Route::delete('/dashboard/apar/checksheetco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
     Route::get('/dashboard/apar/checksheetco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
     Route::put('/dashboard/apar/checksheetco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
@@ -115,6 +117,10 @@ use App\Http\Controllers\CheckSheetPowderController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/apar/checksheetpowder/{tagNumber}', [CheckSheetPowderController::class, 'showForm'])->name('checksheetpowder');
     Route::post('/dashboard/apar/process-checksheet-powder/{tagNumber}', [CheckSheetPowderController::class, 'store'])->name('process.checksheet.powder');
+
+    Route::delete('/dashboard/apar/checksheetpowder/{id}', [CheckSheetPowderController::class, 'destroy'])->name('apar.checksheetpowder.destroy');
+    Route::get('/dashboard/apar/checksheetpowder/{id}/edit', [CheckSheetPowderController::class, 'edit'])->name('apar.checksheetpowder.edit');
+    Route::put('/dashboard/apar/checksheetpowder/{id}', [CheckSheetPowderController::class, 'update'])->name('apar.checksheetpowder.update');
 });
 
 use App\Http\Controllers\AparReportController;
