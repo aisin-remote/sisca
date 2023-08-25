@@ -3,6 +3,7 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -56,12 +57,28 @@ a:focus {
     align-items: stretch;
 }
 
+.scroll {
+    height: 100vh;
+    position: fixed;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#sidebar::-webkit-scrollbar {
+    width: 0.1em; /* Lebar scrollbar */
+    background-color: transparent; /* Warna latar belakang scrollbar */
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Warna thumb scrollbar */
+}
+
 #sidebar {
     min-width: 250px;
     max-width: 250px;
     background: #7386D5;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 0.3s
 }
 
 #sidebar.active {
@@ -147,9 +164,11 @@ ul.CTAs a {
     #sidebar {
         margin-left: -250px;
     }
+
     #sidebar.active {
         margin-left: 0;
     }
+
     #sidebarCollapse span {
         display: none;
     }
@@ -176,7 +195,22 @@ ul.CTAs a {
 }
 
 .bg-abu th,
-        .bg-abu td {
-            background-color: #f8f9fa;
-            color: #212529;
-        }
+.bg-abu td {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.point-of-view {
+    transform: perspective(800px) rotateX(20deg);
+}
+
+.card-as-button {
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.card-as-button:hover {
+    background-color: #f8f9fa; /* Ubah warna latar belakang sesuai kebutuhan */
+    transform: scale(1.05); /* Efek zoom-in ketika dihover */
+    color: black;
+}

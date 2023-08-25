@@ -14,6 +14,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SlingController;
 use App\Http\Controllers\TanduController;
 use App\Http\Controllers\TembinController;
+use App\Models\Apar;
 use App\Models\Eyewasher;
 use App\Models\Hydrant;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,39 @@ Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('das
 // Route Apar
 Route::resource('/dashboard/apar/data_apar', AparController::class)->middleware('auth');
 Route::put('/dashboard/apar/data_apar/{data_apar}', [AparController::class, 'update'])->name('data_apar.update');
+// lokasi
+Route::get('/dashboard/apar/location', [AparController::class, 'location'])->name('apar.location.index')->middleware('auth');
+Route::get('/dashboard/apar/location/body', function () {
+    return view('dashboard.apar.location.body');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/kantin', function () {
+    return view('dashboard.apar.location.kantin');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/loker-pos', function () {
+    return view('dashboard.apar.location.loker');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/main-station', function () {
+    return view('dashboard.apar.location.main');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/masjid', function () {
+    return view('dashboard.apar.location.masjid');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/office', function () {
+    return view('dashboard.apar.location.office');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/pump-room', function () {
+    return view('dashboard.apar.location.pump');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/storage-chemical', function () {
+    return view('dashboard.apar.location.storage');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/unit', function () {
+    return view('dashboard.apar.location.unit');
+})->middleware('auth');
+Route::get('/dashboard/apar/location/wwt', function () {
+    return view('dashboard.apar.location.wwt');
+})->middleware('auth');
+
 
 // Route Hydrant
 Route::resource('/dashboard/hydrant/data-hydrant', HydrantController::class)->except('show')->middleware('auth');

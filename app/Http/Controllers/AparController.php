@@ -159,4 +159,9 @@ class AparController extends Controller
 
         return redirect()->route('data_apar.index')->with('success', 'Data Apar berhasil dihapus');
     }
+
+    public function location()
+    {
+        return view('dashboard.apar.location.index');
+    }
 }

@@ -1,5 +1,7 @@
+
 <!-- Sidebar  -->
 <nav id="sidebar">
+    <div id="sidebar" class="scroll">
     <div class="sidebar-header">
         <a class="navbar-brand d-flex justify-content-center" href="/">
             <img src="/foto/logo-aiia.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;">
@@ -29,9 +31,9 @@
                 <li class="{{ Request::is('dashboard/apar/checksheet*') ? 'active' : '' }}">
                     <a class="nav_link" href="/dashboard/apar/checksheet">Check Sheet Apar</a>
                 </li>
-                {{-- <li>
-                    <a href="#">Page 3</a>
-                </li> --}}
+                <li class="{{ Request::is('dashboard/apar/location*') ? 'active' : '' }}">
+                    <a class="nav_link" href="/dashboard/apar/location">Location Apar</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/hydrant*') ? 'active show' : ''}}">
@@ -99,4 +101,5 @@
             </ul>
         </li>
     </ul>
+</div>
 </nav>
