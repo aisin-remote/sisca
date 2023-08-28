@@ -5,6 +5,13 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>Data Check Sheet Apar Co2/AF11E</h3>
+        <form action="{{ route('checksheet.index') }}" method="GET">
+            <label for="tanggal_filter">Filter Tanggal:</label>
+            <div class="input-group">
+                <input type="date" name="tanggal_filter" class="form-control" id="tanggal_filter">
+                <button class="btn btn-success" id="filterButton">Filter</button>
+            </div>
+        </form>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">

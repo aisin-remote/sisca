@@ -10,10 +10,18 @@ use Carbon\Carbon;
 
 class CheckSheetController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $checksheetco2 = CheckSheetCo2::get();
-        $checksheetpowder = CheckSheetPowder::get();
+        $tanggal_filter = $request->input('tanggal_filter');
+
+
+        $checksheetco2 = CheckSheetCo2::when($tanggal_filter, function ($query) use ($tanggal_filter) {
+            return $query->where('tanggal_pengecekan', $tanggal_filter);
+        })->get();
+
+        $checksheetpowder = CheckSheetPowder::when($tanggal_filter, function ($query) use ($tanggal_filter) {
+            return $query->where('tanggal_pengecekan', $tanggal_filter);
+        })->get();
 
         return view('dashboard.apar.checksheet.index', compact('checksheetco2', 'checksheetpowder'));
     }
