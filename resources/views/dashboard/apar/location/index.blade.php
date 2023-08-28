@@ -11,7 +11,7 @@
             {{ session()->get('success') }}
         </div>
     @endif
-    <div class="row">
+    <div class="row d-flex flex-wrap">
         <div class="col-md-4 mb-3">
             <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/body'">
                 <p class="card-text">Body</p>

@@ -34,8 +34,8 @@
                 @forelse ($checksheetco2 as $checksheet)
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $checksheet->tanggal_pengecekan }}</td>
-                        <td>{{ $checksheet->updated_at }}</td>
+                        <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                        <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td>
                         <td>{{ $checksheet->npk }}</td>
                         <td>{{ $checksheet->apar_number }}</td>
                         <td>{{ $checksheet->pressure }}</td>
@@ -47,9 +47,10 @@
                         <td>{{ $checksheet->berat_tabung }}</td>
                         <td class="text-center align-middle">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('apar.checksheetco2.edit', $checkSheet->id) }}"
+                                <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
                                     class="badge bg-warning me-2">Edit</a>
-                                <form action="{{ route('apar.checksheetco2.destroy', $checkSheet->id) }}" method="POST"
+                                <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
                                     class="delete-form">
                                     @csrf
                                     @method('DELETE')
@@ -97,8 +98,8 @@
                 @forelse ($checksheetpowder as $checksheet)
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $checksheet->tanggal_pengecekan }}</td>
-                        <td>{{ $checksheet->updated_at }}</td>
+                        <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                        <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td>
                         <td>{{ $checksheet->npk }}</td>
                         <td>{{ $checksheet->apar_number }}</td>
                         <td>{{ $checksheet->pressure }}</td>
@@ -109,9 +110,10 @@
                         <td>{{ $checksheet->powder }}</td>
                         <td class="text-center align-middle">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('apar.checksheetpowder.edit', $checkSheet->id) }}"
+                                <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
                                     class="badge bg-warning me-2">Edit</a>
-                                <form action="{{ route('apar.checksheetpowder.destroy', $checkSheet->id) }}" method="POST"
+                                <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"
                                     class="delete-form">
                                     @csrf
                                     @method('DELETE')

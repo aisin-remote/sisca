@@ -11,7 +11,7 @@
             {{ session()->get('success') }}
         </div>
     @endif
-        <div class="row justify-content-center"> <!-- Mengatur container di tengah -->
+        <div class="row"> <!-- Mengatur container di tengah -->
             <div class="col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body text-center"> <!-- Mengatur card-title di tengah -->

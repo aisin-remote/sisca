@@ -19,12 +19,20 @@ return new class extends Migration
             $table->string('npk');
             $table->string('apar_number');
             $table->string('pressure');
+            $table->string('photo_pressure');
             $table->string('hose');
+            $table->string('photo_hose');
             $table->string('corong');
+            $table->string('photo_corong');
             $table->string('tabung');
+            $table->string('photo_tabung');
             $table->string('regulator');
+            $table->string('photo_regulator');
             $table->string('lock_pin');
+            $table->string('photo_lock_pin');
             $table->string('berat_tabung');
+            $table->string('photo_berat_tabung');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

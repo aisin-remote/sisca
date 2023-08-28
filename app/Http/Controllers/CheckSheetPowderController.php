@@ -46,13 +46,30 @@ class CheckSheetPowderController extends Controller
             'npk' => 'required',
             'apar_number' => 'required',
             'pressure' => 'required',
+            'photo_pressure' => 'required|image|file|max:3072',
             'hose' => 'required',
+            'photo_hose' => 'required|image|file|max:3072',
             'tabung' => 'required',
+            'photo_tabung' => 'required|image|file|max:3072',
             'regulator' => 'required',
+            'photo_regulator' => 'required|image|file|max:3072',
             'lock_pin' => 'required',
+            'photo_lock_pin' => 'required|image|file|max:3072',
             'powder' => 'required',
+            'photo_powder' => 'required|image|file|max:3072',
+            'description' => 'nullable|string|max:255',
             // tambahkan validasi untuk atribut lainnya
         ]);
+
+        if($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_powder')) {
+            $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');
+            $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-powder');
+            $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-powder');
+            $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-powder');
+            $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-powder');
+            $validatedData['photo_powder'] = $request->file('photo_powder')->store('checksheet-apar-powder');
+
+        }
 
         // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
         $validatedData['npk'] = auth()->user()->npk;
@@ -93,6 +110,13 @@ class CheckSheetPowderController extends Controller
         }
 
         return redirect()->route('data_apar.show', $apar->id)->with('success1', 'Data Check Sheet Powder berhasil diperbarui.');
+    }
+
+    public function show($id)
+    {
+        $checksheet = CheckSheetPowder::findOrFail($id);
+
+        return view('dashboard.apar.checksheet.show', compact('checksheet'));
     }
 
     public function destroy ($id) {

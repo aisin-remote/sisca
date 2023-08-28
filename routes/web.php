@@ -143,6 +143,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/dashboard/apar/checksheetco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
     Route::get('/dashboard/apar/checksheetco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
     Route::put('/dashboard/apar/checksheetco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
+    Route::get('/dashboard/apar/checksheetco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
+
 });
 
 use App\Http\Controllers\CheckSheetPowderController;
@@ -155,6 +157,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/dashboard/apar/checksheetpowder/{id}', [CheckSheetPowderController::class, 'destroy'])->name('apar.checksheetpowder.destroy');
     Route::get('/dashboard/apar/checksheetpowder/{id}/edit', [CheckSheetPowderController::class, 'edit'])->name('apar.checksheetpowder.edit');
     Route::put('/dashboard/apar/checksheetpowder/{id}', [CheckSheetPowderController::class, 'update'])->name('apar.checksheetpowder.update');
+    Route::get('/dashboard/apar/checksheetpowder/{id}/show', [CheckSheetPowderController::class, 'show'])->name('apar.checksheetpowder.show');
 });
 
 use App\Http\Controllers\AparReportController;

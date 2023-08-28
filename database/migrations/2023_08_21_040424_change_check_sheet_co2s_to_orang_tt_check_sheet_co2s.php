@@ -23,8 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('orang_tt_check_sheet_co2s', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tt_check_sheet_co2s');
     }
 };

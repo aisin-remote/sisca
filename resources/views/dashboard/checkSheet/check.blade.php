@@ -64,6 +64,7 @@
                         @if ($checkSheet->apars->type === 'co2' || $checkSheet->type === 'af11e')
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
+                                    <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
                                     <a href="{{ route('apar.checksheetco2.edit', $checkSheet->id) }}"
                                         class="badge bg-warning me-2">Edit</a>
                                     <form action="{{ route('apar.checksheetco2.destroy', $checkSheet->id) }}" method="POST"
@@ -78,6 +79,7 @@
                         @elseif ($checkSheet->apars->type === 'powder')
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
+                                    <a href="{{ route('apar.checksheetpowder.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
                                     <a href="{{ route('apar.checksheetpowder.edit', $checkSheet->id) }}"
                                         class="badge bg-warning me-2">Edit</a>
                                     <form action="{{ route('apar.checksheetpowder.destroy', $checkSheet->id) }}" method="POST"

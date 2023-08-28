@@ -5,6 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Info Apar</h1>
+        <a href="{{ route('data_apar.edit', $apar->id) }}" class="btn btn-warning">Edit</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -109,6 +110,7 @@
                             <td class="text-center align-middle">{{ $checksheet->berat_tabung }}</td>
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
+                                    <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
                                     <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
                                         class="badge bg-warning me-2">Edit</a>
                                     <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
@@ -161,6 +163,7 @@
                         <td>{{ $checksheet->powder }}</td>
                         <td class="text-center align-middle">
                             <div class="d-flex align-items-center justify-content-center">
+                                <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
                                 <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
                                     class="badge bg-warning me-2">Edit</a>
                                 <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"

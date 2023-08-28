@@ -16,11 +16,18 @@ class CheckSheetPowder extends Model
         'npk',
         'apar_number',
         'pressure',
+        'photo_pressure',
         'hose',
+        'photo_hose',
         'tabung',
+        'photo_tabung',
         'regulator',
+        'photo_regulator',
         'lock_pin',
+        'photo_lock_pin',
         'powder',
+        'photo_powder',
+        'description',
     ];
 
     public function apars()

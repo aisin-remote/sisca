@@ -1,7 +1,6 @@
 
 <!-- Sidebar  -->
 <nav id="sidebar">
-    <div id="sidebar" class="scroll">
     <div class="sidebar-header">
         <a class="navbar-brand d-flex justify-content-center" href="/">
             <img src="/foto/logo-aiia.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;">
@@ -9,7 +8,7 @@
     </div>
     <ul class="list-unstyled components">
         <li class="{{Request::is('dashboard/home*') ? 'active show' : ''}}">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+            <a href="#homeSubmenu" aria-controls="homeSubmenu"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
             <ul class="collapse list-unstyled {{ Request::is('dashboard/home*') ? 'show' : '' }}" id="homeSubmenu">
                 <li class="{{ Request::is('dashboard/home/grafik-status*') ? 'active' : '' }}">
                     <a href="/dashboard/home/grafik-status">Grafik Status</a>
@@ -101,5 +100,4 @@
             </ul>
         </li>
     </ul>
-</div>
 </nav>

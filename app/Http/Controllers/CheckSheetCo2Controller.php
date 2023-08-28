@@ -46,14 +46,33 @@ class CheckSheetCo2Controller extends Controller
             'npk' => 'required',
             'apar_number' => 'required',
             'pressure' => 'required',
+            'photo_pressure' => 'required|image|file|max:3072',
             'hose' => 'required',
+            'photo_hose' => 'required|image|file|max:3072',
             'corong' => 'required',
+            'photo_corong' => 'required|image|file|max:3072',
             'tabung' => 'required',
+            'photo_tabung' => 'required|image|file|max:3072',
             'regulator' => 'required',
+            'photo_regulator' => 'required|image|file|max:3072',
             'lock_pin' => 'required',
+            'photo_lock_pin' => 'required|image|file|max:3072',
             'berat_tabung' => 'required',
+            'photo_berat_tabung' => 'required|image|file|max:3072',
+            'description' => 'nullable|string|max:255',
             // tambahkan validasi untuk atribut lainnya
         ]);
+
+        if($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
+            $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
+            $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
+            $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
+            $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
+            $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
+            $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
+            $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
+
+        }
 
         // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
         $validatedData['npk'] = auth()->user()->npk;
@@ -95,6 +114,13 @@ class CheckSheetCo2Controller extends Controller
         }
 
         return redirect()->route('data_apar.show', $apar->id)->with('success1', 'Data Check Sheet Co2 berhasil diperbarui.');
+    }
+
+    public function show($id)
+    {
+        $checksheet = CheckSheetCo2::findOrFail($id);
+
+        return view('dashboard.apar.checksheet.show', compact('checksheet'));
     }
 
     public function destroy ($id) {
