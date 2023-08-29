@@ -30,7 +30,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form action="{{ route('apar.checksheetpowder.update', $checkSheetpowder->id) }}" method="POST">
+            <form action="{{ route('apar.checksheetpowder.update', $checkSheetpowder->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -56,12 +56,34 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="photo_pressure" class="form-label">Foto Pressure</label>
+                <input type="hidden" name="oldImage_pressure" value="{{ $checkSheetpowder->photo_pressure }}">
+                @if ($checkSheetpowder->photo_pressure)
+                    <img src="{{ asset('storage/' . $checkSheetpowder->photo_pressure) }}" class="photo-pressure-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                @else
+                    <img class="photo-pressure-preview img-fluid mb-3" style="max-height: 300px">
+                @endif
+
+                <input type="file" class="form-control" id="photo_pressure" name="photo_pressure" onchange="previewImage('photo_pressure', 'photo-pressure-preview')">
+            </div>
+            <div class="mb-3">
                 <label for="hose" class="form-label">Hose</label>
                 <select class="form-select" id="hose" name="hose">
                     <option value="" selected disabled>Select</option>
                     <option value="OK" {{ old('hose') ?? $checkSheetpowder->hose == 'OK' ? 'selected' : '' }}>OK</option>
                     <option value="NG" {{ old('pressure') ?? $checkSheetpowder->hose == 'NG' ? 'selected' : '' }}>NG</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="photo_hose" class="form-label">Foto Hose</label>
+                <input type="hidden" name="oldImage_hose" value="{{ $checkSheetpowder->photo_hose }}">
+                @if ($checkSheetpowder->photo_hose)
+                    <img src="{{ asset('storage/' . $checkSheetpowder->photo_hose) }}" class="photo-hose-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                @else
+                    <img class="photo-hose-preview img-fluid mb-3" style="max-height: 300px">
+                @endif
+
+                <input type="file" class="form-control" id="photo_hose" name="photo_hose" onchange="previewImage('photo_hose', 'photo-hose-preview')">
             </div>
             <div class="mb-3">
                 <label for="tabung" class="form-label">Tabung</label>
@@ -72,12 +94,34 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="photo_tabung" class="form-label">Foto Tabung</label>
+                <input type="hidden" name="oldImage_tabung" value="{{ $checkSheetpowder->photo_tabung }}">
+                @if ($checkSheetpowder->photo_tabung)
+                    <img src="{{ asset('storage/' . $checkSheetpowder->photo_tabung) }}" class="photo-tabung-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                @else
+                    <img class="photo-tabung-preview img-fluid mb-3" style="max-height: 300px">
+                @endif
+
+                <input type="file" class="form-control" id="photo_tabung" name="photo_tabung" onchange="previewImage('photo_tabung', 'photo-tabung-preview')">
+            </div>
+            <div class="mb-3">
                 <label for="regulator" class="form-label">Regulator</label>
                 <select class="form-select" id="regulator" name="regulator">
                     <option value="" selected disabled>Select</option>
                     <option value="OK" {{ old('regulator') ?? $checkSheetpowder->regulator == 'OK' ? 'selected' : '' }}>OK</option>
                     <option value="NG" {{ old('regulator') ?? $checkSheetpowder->regulator == 'NG' ? 'selected' : '' }}>NG</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="photo_regulator" class="form-label">Foto Regulator</label>
+                <input type="hidden" name="oldImage_regulator" value="{{ $checkSheetpowder->photo_regulator }}">
+                @if ($checkSheetpowder->photo_regulator)
+                    <img src="{{ asset('storage/' . $checkSheetpowder->photo_regulator) }}" class="photo-regulator-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                @else
+                    <img class="photo-regulator-preview img-fluid mb-3" style="max-height: 300px">
+                @endif
+
+                <input type="file" class="form-control" id="photo_regulator" name="photo_regulator" onchange="previewImage('photo_regulator', 'photo-regulator-preview')">
             </div>
             <div class="mb-3">
                 <label for="lock_pin" class="form-label">Lock Pin</label>
@@ -88,12 +132,38 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="photo_lock_pin" class="form-label">Foto Lock Pin</label>
+                <input type="hidden" name="oldImage_lock_pin" value="{{ $checkSheetpowder->photo_lock_pin }}">
+                @if ($checkSheetpowder->photo_lock_pin)
+                    <img src="{{ asset('storage/' . $checkSheetpowder->photo_lock_pin) }}" class="photo-lock_pin-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                @else
+                    <img class="photo-lock_pin-preview img-fluid mb-3" style="max-height: 300px">
+                @endif
+
+                <input type="file" class="form-control" id="photo_lock_pin" name="photo_lock_pin" onchange="previewImage('photo_lock_pin', 'photo-lock_pin-preview')">
+            </div>
+            <div class="mb-3">
                 <label for="powder" class="form-label">Powder</label>
                 <select class="form-select" id="powder" name="powder">
                     <option value="" selected disabled>Select</option>
                     <option value="OK" {{ old('powder') ?? $checkSheetpowder->powder == 'OK' ? 'selected' : '' }}>OK</option>
                     <option value="NG" {{ old('powder') ?? $checkSheetpowder->powder == 'NG' ? 'selected' : '' }}>NG</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="photo_powder" class="form-label">Foto Powder</label>
+                <input type="hidden" name="oldImage_powder" value="{{ $checkSheetpowder->photo_powder }}">
+                @if ($checkSheetpowder->photo_powder)
+                    <img src="{{ asset('storage/' . $checkSheetpowder->photo_powder) }}" class="photo-powder-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                @else
+                    <img class="photo-powder-preview img-fluid mb-3" style="max-height: 300px">
+                @endif
+
+                <input type="file" class="form-control" id="photo_powder" name="photo_powder" onchange="previewImage('photo_powder', 'photo-powder-preview')">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ old('description') ?? $checkSheetpowder->description}}</textarea>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetCo2;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class CheckSheetCo2Controller extends Controller
 {
@@ -71,7 +72,6 @@ class CheckSheetCo2Controller extends Controller
             $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
             $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
             $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
-
         }
 
         // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
@@ -94,18 +94,77 @@ class CheckSheetCo2Controller extends Controller
         $checkSheetco2 = CheckSheetCo2::findOrFail($id);
 
         // Validasi data yang diinputkan
-        $request->validate([
+        $rules = [
             'pressure' => 'required',
+            'photo_pressure' => 'image|file|max:3072',
             'hose' => 'required',
+            'photo_hose' => 'image|file|max:3072',
             'corong' => 'required',
+            'photo_corong' => 'image|file|max:3072',
             'tabung' => 'required',
+            'photo_tabung' => 'image|file|max:3072',
             'regulator' => 'required',
+            'photo_regulator' => 'image|file|max:3072',
             'lock_pin' => 'required',
+            'photo_lock_pin' => 'image|file|max:3072',
             'berat_tabung' => 'required',
-        ]);
+            'photo_berat_tabung' => 'image|file|max:3072',
+            'description' => 'nullable|string|max:255',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if($request->file('photo_pressure')) {
+            if($request->oldImage_pressure) {
+                Storage::delete($request->oldImage_pressure);
+            }
+            $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
+        }
+
+        if($request->file('photo_hose')){
+            if($request->oldImage_hose) {
+                Storage::delete($request->oldImage_hose);
+            }
+            $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
+        }
+
+        if($request->file('photo_corong')){
+            if($request->oldImage_corong) {
+                Storage::delete($request->oldImage_corong);
+            }
+            $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
+        }
+
+        if($request->file('photo_tabung')){
+            if($request->oldImage_tabung) {
+                Storage::delete($request->oldImage_tabung);
+            }
+            $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
+        }
+
+        if($request->file('photo_regulator')){
+            if($request->oldImage_regulator) {
+                Storage::delete($request->oldImage_regulator);
+            }
+            $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
+        }
+
+        if($request->file('photo_lock_pin')){
+            if($request->oldImage_lock_pin) {
+                Storage::delete($request->oldImage_lock_pin);
+            }
+            $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
+        }
+
+        if($request->file('photo_berat_tabung')){
+            if($request->oldImage_berat_tabung) {
+                Storage::delete($request->oldImage_berat_tabung);
+            }
+            $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
+        }
 
         // Update data CheckSheetCo2 dengan data baru dari form
-        $checkSheetco2->update($request->all());
+        $checkSheetco2->update($validatedData);
 
         $apar = Apar::where('tag_number', $checkSheetco2->apar_number)->first();
 
@@ -125,6 +184,17 @@ class CheckSheetCo2Controller extends Controller
 
     public function destroy ($id) {
         $checkSheetco2 = CheckSheetCo2::find($id);
+
+        if($checkSheetco2->photo_pressure || $checkSheetco2->photo_hose || $checkSheetco2->photo_corong || $checkSheetco2->photo_tabung || $checkSheetco2->photo_regulator || $checkSheetco2->photo_lock_pin || $checkSheetco2->photo_berat_tabung) {
+            Storage::delete($checkSheetco2->photo_pressure);
+            Storage::delete($checkSheetco2->photo_hose);
+            Storage::delete($checkSheetco2->photo_corong);
+            Storage::delete($checkSheetco2->photo_tabung);
+            Storage::delete($checkSheetco2->photo_regulator);
+            Storage::delete($checkSheetco2->photo_lock_pin);
+            Storage::delete($checkSheetco2->photo_berat_tabung);
+        }
+
         $checkSheetco2->delete();
 
         return back()->with('success1', 'Data Check Sheet Apar Co2 berhasil dihapus');

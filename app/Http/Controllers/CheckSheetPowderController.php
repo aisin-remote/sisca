@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetPowder;
+use Illuminate\Support\Facades\Storage;
 
 class CheckSheetPowderController extends Controller
 {
@@ -91,17 +92,68 @@ class CheckSheetPowderController extends Controller
         $checkSheetpowder = CheckSheetPowder::findOrFail($id);
 
         // Validasi data yang diinputkan
-        $request->validate([
+        $rules = [
             'pressure' => 'required',
+            'photo_pressure' => 'image|file|max:3072',
             'hose' => 'required',
+            'photo_hose' => 'image|file|max:3072',
             'tabung' => 'required',
+            'photo_tabung' => 'image|file|max:3072',
             'regulator' => 'required',
+            'photo_regulator' => 'image|file|max:3072',
             'lock_pin' => 'required',
+            'photo_lock_pin' => 'image|file|max:3072',
             'powder' => 'required',
-        ]);
+            'photo_powder' => 'required|image|file|max:3072',
+            'description' => 'nullable|string|max:255',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if($request->file('photo_pressure')) {
+            if($request->oldImage_pressure) {
+                Storage::delete($request->oldImage_pressure);
+            }
+            $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');
+        }
+
+        if($request->file('photo_hose')){
+            if($request->oldImage_hose) {
+                Storage::delete($request->oldImage_hose);
+            }
+            $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-powder');
+        }
+
+        if($request->file('photo_tabung')){
+            if($request->oldImage_tabung) {
+                Storage::delete($request->oldImage_tabung);
+            }
+            $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-powder');
+        }
+
+        if($request->file('photo_regulator')){
+            if($request->oldImage_regulator) {
+                Storage::delete($request->oldImage_regulator);
+            }
+            $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-powder');
+        }
+
+        if($request->file('photo_lock_pin')){
+            if($request->oldImage_lock_pin) {
+                Storage::delete($request->oldImage_lock_pin);
+            }
+            $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-powder');
+        }
+
+        if($request->file('photo_powder')){
+            if($request->oldImage_powder) {
+                Storage::delete($request->oldImage_powder);
+            }
+            $validatedData['photo_powder'] = $request->file('photo_powder')->store('checksheet-apar-powder');
+        }
 
         // Update data CheckSheetCo2 dengan data baru dari form
-        $checkSheetpowder->update($request->all());
+        $checkSheetpowder->update($validatedData);
 
         $apar = Apar::where('tag_number', $checkSheetpowder->apar_number)->first();
 
@@ -121,6 +173,16 @@ class CheckSheetPowderController extends Controller
 
     public function destroy ($id) {
         $checkSheetpowder = CheckSheetPowder::find($id);
+
+        if($checkSheetpowder->photo_pressure || $checkSheetpowder->photo_hose || $checkSheetpowder->photo_tabung || $checkSheetpowder->photo_regulator || $checkSheetpowder->photo_lock_pin || $checkSheetpowder->photo_powder) {
+            Storage::delete($checkSheetpowder->photo_pressure);
+            Storage::delete($checkSheetpowder->photo_hose);
+            Storage::delete($checkSheetpowder->photo_tabung);
+            Storage::delete($checkSheetpowder->photo_regulator);
+            Storage::delete($checkSheetpowder->photo_lock_pin);
+            Storage::delete($checkSheetpowder->photo_powder);
+        }
+
         $checkSheetpowder->delete();
 
         return back()->with('success1', 'Data Check Sheet Apar Powder berhasil dihapus');

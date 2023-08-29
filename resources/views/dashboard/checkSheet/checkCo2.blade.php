@@ -136,6 +136,10 @@
                 <img class="photo-berat_tabung-preview img-fluid mb-3" style="max-height: 300px">
                 <input type="file" class="form-control" id="photo_berat_tabung" name="photo_berat_tabung" required onchange="previewImage('photo_berat_tabung', 'photo-berat_tabung-preview')">
             </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ old('description')}}</textarea>
+            </div>
         </div>
     </div>
 </div>
