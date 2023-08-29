@@ -16,6 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
     {{-- CSS & JS Self --}}
     <link rel="stylesheet" href="/css/style1.css">
@@ -56,7 +58,9 @@
             <x-dashboard.navbar />
 
             @yield('content')
-
+            <button id="scrollToTopBtn">
+                <i class="bi bi-arrow-up"></i>
+            </button>
         </div>
     </div>
     <script>
@@ -85,6 +89,14 @@
                 imgPreview.src = oFREvent.target.result;
             }
         }
+
+        document.getElementById('scrollToTopBtn').addEventListener('click', function() {
+        // Scroll kembali ke atas halaman
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Gunakan 'smooth' untuk animasi scroll
+        });
+    });
     </script>
 </body>
 

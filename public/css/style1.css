@@ -211,3 +211,45 @@ ul.CTAs a {
     background-color: #f8f9fa;
     transform: scale(1.05);
 }
+
+/* Gaya untuk tombol scroll to top */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    background-color: #87CEFA;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 0px;
+    cursor: pointer;
+}
+
+#scrollToTopBtn:hover {
+    background-color: #007BFF;
+}
+
+#scrollToTopBtn i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+}
+
+.dropdown-toggle::after {
+    content: none; /* Hilangkan panah bawaan dari tombol dropdown */
+}
+
+.dropdown-toggle {
+    padding-right: 1.5rem; /* Tambahkan sedikit ruang di sebelah kanan teks */
+}
+
+.dropdown-toggle .bi {
+    margin-left: 0.5rem; /* Berikan sedikit jarak antara teks dan ikon */
+}
