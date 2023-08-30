@@ -21,6 +21,7 @@
         <li class="{{ Request::is('dashboard/location*') ? 'active show' : '' }}">
             <a class="nav_link" href="/dashboard/location">Location</a>
         </li>
+        <span class="sidebar-title">FIRE PREVENTION</span>
         <li class="{{Request::is('dashboard/apar*') ? 'active show' : ''}}">
             <a href="#aparSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Apar</a>
             <ul class="collapse list-unstyled {{ Request::is('dashboard/apar*') ? 'show' : '' }}" id="aparSubmenu">
@@ -59,6 +60,7 @@
                 </li>
             </ul>
         </li>
+        <span class="sidebar-title">EMERGENCY</span>
         <li class="{{Request::is('dashboard/tandu*') ? 'active show' : ''}}">
             <a href="#tanduSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tandu</a>
             <ul class="collapse list-unstyled {{ Request::is('dashboard/tandu*') ? 'show' : '' }}" id="tanduSubmenu">
@@ -75,6 +77,7 @@
                 </li>
             </ul>
         </li>
+        <span class="sidebar-title">LIFTING</span>
         <li class="{{Request::is('dashboard/sling*') ? 'active show' : ''}}">
             <a href="#slingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sling</a>
             <ul class="collapse list-unstyled {{ Request::is('dashboard/sling*') ? 'show' : '' }}" id="slingSubmenu">

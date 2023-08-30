@@ -58,6 +58,7 @@
                 <img class="photo-pressure-preview img-fluid mb-3" style="max-height: 300px">
                 <input type="file" class="form-control" id="photo_pressure" name="photo_pressure" required onchange="previewImage('photo_pressure', 'photo-pressure-preview')">
             </div>
+
             <div class="mb-3">
                 <label for="hose" class="form-label">Hose</label>
                 <select class="form-select" id="hose" name="hose" required>

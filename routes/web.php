@@ -248,3 +248,7 @@ Route::get('/checksheetchainblock', function () {
 Route::get('/checksheethoistcrane', function () {
     return view('dashboard.checkSheet.checkHoistCrane');
 });
+
+// Check Profil & Change Password
+Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
+Route::post('/dashboard/profile', [ProfileController::class, 'changePassword'])->middleware('auth');

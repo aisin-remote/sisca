@@ -46,6 +46,9 @@
     </script>
     {{-- Chart JS --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    {{-- ajax JS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 </head>
 
 <body>
@@ -91,12 +94,16 @@
         }
 
         document.getElementById('scrollToTopBtn').addEventListener('click', function() {
-        // Scroll kembali ke atas halaman
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // Gunakan 'smooth' untuk animasi scroll
+            // Scroll kembali ke atas halaman
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Gunakan 'smooth' untuk animasi scroll
+            });
         });
-    });
+
+
+
+
     </script>
 </body>
 

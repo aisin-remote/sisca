@@ -17,15 +17,19 @@
                 <form action="/logout" method="POST">
                     @csrf
                     <button type="button" class="btn aktif rounded border-0 mx-auto dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="bi bi-person me-2"></i> Hallo! {{ auth()->user()->name }}
+                        <i class="bi bi-person me-2"></i>Hallo! {{ auth()->user()->name }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="/dashboard/profile">Profile</a>
+                        </li>
                         <li>
                             <button type="submit" class="dropdown-item" style="font-size: 14px;">Logout</button>
                         </li>
                     </ul>
                 </form>
             </div>
+
 
         </div>
     </nav>
