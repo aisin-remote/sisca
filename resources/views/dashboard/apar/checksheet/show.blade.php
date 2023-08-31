@@ -29,6 +29,10 @@
                             <td>{{ $checksheet->apar_number }}</td>
                         </tr>
                         <tr>
+                            <th>Location Apar</th>
+                            <td>{{ $checksheet->apars->locations->location_name }}</td>
+                        </tr>
+                        <tr>
                             <th>Pressure</th>
                             <td>{{ $checksheet->pressure }}</td>
                         </tr>
@@ -127,6 +131,10 @@
                         <tr>
                             <th>APAR Number</th>
                             <td>{{ $checksheet->apar_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Location Apar</th>
+                            <td>{{ $checksheet->apars->locations->location_name }}</td>
                         </tr>
                         <tr>
                             <th>Pressure</th>

@@ -6,6 +6,8 @@ use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetCo2;
 use App\Models\CheckSheetPowder;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AparCheckSheetExport;
 use Carbon\Carbon;
 
 class CheckSheetController extends Controller

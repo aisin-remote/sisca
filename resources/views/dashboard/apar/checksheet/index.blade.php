@@ -5,6 +5,11 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>Data Check Sheet Apar Co2/AF11E</h3>
+        <form action="{{ route('export.checksheetsco2') }}" method="POST">
+            @method('POST')
+            @csrf
+            <button type="submit" class="btn btn-primary">Export to Excel</button>
+        </form>
         <form action="{{ route('checksheet.index') }}" method="GET">
             <label for="tanggal_filter">Filter Tanggal:</label>
             <div class="input-group">
@@ -27,6 +32,7 @@
                     <th scope="col">Terakhir Update</th>
                     <th scope="col">NPK</th>
                     <th scope="col">Apar Number</th>
+                    <th scope="col">Location Apar</th>
                     <th scope="col">Pressure</th>
                     <th scope="col">Hose</th>
                     <th scope="col">Corong</th>
@@ -45,6 +51,7 @@
                         <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td>
                         <td>{{ $checksheet->npk }}</td>
                         <td>{{ $checksheet->apar_number }}</td>
+                        <td>{{ $checksheet->apars->locations->location_name }}</td>
                         <td>{{ $checksheet->pressure }}</td>
                         <td>{{ $checksheet->hose }}</td>
                         <td>{{ $checksheet->corong }}</td>
@@ -92,6 +99,7 @@
                     <th scope="col">Terakhir Update</th>
                     <th scope="col">NPK</th>
                     <th scope="col">Apar Number</th>
+                    <th scope="col">Location Apar</th>
                     <th scope="col">Pressure</th>
                     <th scope="col">Hose</th>
                     <th scope="col">Tabung</th>
@@ -109,6 +117,7 @@
                         <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td>
                         <td>{{ $checksheet->npk }}</td>
                         <td>{{ $checksheet->apar_number }}</td>
+                        <td>{{ $checksheet->apars->locations->location_name }}</td>
                         <td>{{ $checksheet->pressure }}</td>
                         <td>{{ $checksheet->hose }}</td>
                         <td>{{ $checksheet->tabung }}</td>

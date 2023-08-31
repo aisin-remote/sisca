@@ -8,6 +8,9 @@ use App\Models\CheckSheetCo2;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class CheckSheetCo2Controller extends Controller
 {
     public function showForm($tagNumber)
@@ -64,7 +67,7 @@ class CheckSheetCo2Controller extends Controller
             // tambahkan validasi untuk atribut lainnya
         ]);
 
-        if($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
+        if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
             $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
             $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
             $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
@@ -83,7 +86,7 @@ class CheckSheetCo2Controller extends Controller
         return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
     }
 
-    public function edit ($id)
+    public function edit($id)
     {
         $checkSheetco2 = CheckSheetCo2::findOrFail($id);
         return view('dashboard.apar.checksheetco2.edit', compact('checkSheetco2'));
@@ -114,50 +117,50 @@ class CheckSheetCo2Controller extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('photo_pressure')) {
-            if($request->oldImage_pressure) {
+        if ($request->file('photo_pressure')) {
+            if ($request->oldImage_pressure) {
                 Storage::delete($request->oldImage_pressure);
             }
             $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
         }
 
-        if($request->file('photo_hose')){
-            if($request->oldImage_hose) {
+        if ($request->file('photo_hose')) {
+            if ($request->oldImage_hose) {
                 Storage::delete($request->oldImage_hose);
             }
             $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
         }
 
-        if($request->file('photo_corong')){
-            if($request->oldImage_corong) {
+        if ($request->file('photo_corong')) {
+            if ($request->oldImage_corong) {
                 Storage::delete($request->oldImage_corong);
             }
             $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
         }
 
-        if($request->file('photo_tabung')){
-            if($request->oldImage_tabung) {
+        if ($request->file('photo_tabung')) {
+            if ($request->oldImage_tabung) {
                 Storage::delete($request->oldImage_tabung);
             }
             $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
         }
 
-        if($request->file('photo_regulator')){
-            if($request->oldImage_regulator) {
+        if ($request->file('photo_regulator')) {
+            if ($request->oldImage_regulator) {
                 Storage::delete($request->oldImage_regulator);
             }
             $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
         }
 
-        if($request->file('photo_lock_pin')){
-            if($request->oldImage_lock_pin) {
+        if ($request->file('photo_lock_pin')) {
+            if ($request->oldImage_lock_pin) {
                 Storage::delete($request->oldImage_lock_pin);
             }
             $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
         }
 
-        if($request->file('photo_berat_tabung')){
-            if($request->oldImage_berat_tabung) {
+        if ($request->file('photo_berat_tabung')) {
+            if ($request->oldImage_berat_tabung) {
                 Storage::delete($request->oldImage_berat_tabung);
             }
             $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
@@ -182,10 +185,11 @@ class CheckSheetCo2Controller extends Controller
         return view('dashboard.apar.checksheet.show', compact('checksheet'));
     }
 
-    public function destroy ($id) {
+    public function destroy($id)
+    {
         $checkSheetco2 = CheckSheetCo2::find($id);
 
-        if($checkSheetco2->photo_pressure || $checkSheetco2->photo_hose || $checkSheetco2->photo_corong || $checkSheetco2->photo_tabung || $checkSheetco2->photo_regulator || $checkSheetco2->photo_lock_pin || $checkSheetco2->photo_berat_tabung) {
+        if ($checkSheetco2->photo_pressure || $checkSheetco2->photo_hose || $checkSheetco2->photo_corong || $checkSheetco2->photo_tabung || $checkSheetco2->photo_regulator || $checkSheetco2->photo_lock_pin || $checkSheetco2->photo_berat_tabung) {
             Storage::delete($checkSheetco2->photo_pressure);
             Storage::delete($checkSheetco2->photo_hose);
             Storage::delete($checkSheetco2->photo_corong);
@@ -198,5 +202,38 @@ class CheckSheetCo2Controller extends Controller
         $checkSheetco2->delete();
 
         return back()->with('success1', 'Data Check Sheet Apar Co2 berhasil dihapus');
+    }
+
+    public function exportExcelWithTemplate()
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve data from the checksheetsco2 table
+        $data = CheckSheetCo2::select('tanggal_pengecekan', 'npk', 'apar_number', 'pressure', 'hose')
+            ->get();
+
+        // Start row to populate data in Excel
+        $row = 2;
+
+        foreach ($data as $item) {
+            $worksheet->setCellValue('A' . $row, $item->tanggal_pengecekan);
+            $worksheet->setCellValue('B' . $row, $item->npk);
+            $worksheet->setCellValue('C' . $row, $item->apar_number);
+            $worksheet->setCellValue('D' . $row, $item->pressure);
+            $worksheet->setCellValue('E' . $row, $item->hose);
+
+            // Increment row for the next data
+            $row++;
+        }
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/template.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }

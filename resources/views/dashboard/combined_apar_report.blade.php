@@ -109,50 +109,5 @@
         </div>
         </div>
       </div>
-    {{-- <div class="row mt-3">
-        <div class="col-md-12">
-            <p><strong>Keterangan kerusakan:</strong></p>
-        </div>
-    </div>
-    <div class="container mx-5">
-        <div class="table-responsive">
-            <table class="table table-borderless bg-abu">
-                <thead>
-                    <tr>
-                        <td scope="col">1. Pressure</td>
-                        <td scope="col">= a</td>
-                        <td scope="col"></td>
-                        <td scope="col">4. Tabung</td>
-                        <td scope="col">= d</td>
-                        <td scope="col"></td>
-                        <td scope="col">7. Kadar Konsentrat</td>
-                        <td scope="col">= g</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="col">2. Lock Pin</td>
-                        <td scope="col">= b</td>
-                        <td scope="col"></td>
-                        <td scope="col">5. Corong/Nozzle</td>
-                        <td scope="col">= e</td>
-                        <td scope="col"></td>
-                        <td scope="col">8. Berat APAR</td>
-                        <td scope="col">= H</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">3. Regulator</td>
-                        <td scope="col">= c</td>
-                        <td scope="col"></td>
-                        <td scope="col">6. Hose</td>
-                        <td scope="col">= f</td>
-                        <td scope="col"></td>
-                        <td scope="col">9. Isi Ulang</td>
-                        <td scope="col">= a+b</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div> --}}
 </div>
 @endsection

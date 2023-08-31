@@ -252,3 +252,6 @@ Route::get('/checksheethoistcrane', function () {
 // Check Profil & Change Password
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/dashboard/profile', [ProfileController::class, 'changePassword'])->middleware('auth');
+
+Route::post('/export-data', [CheckSheetCo2Controller::class, 'exportExcelWithTemplate'])->name('export.checksheetsco2');
+
