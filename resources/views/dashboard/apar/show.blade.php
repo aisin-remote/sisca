@@ -69,13 +69,23 @@
         </form> --}}
 
     </div>
+    <form action="{{ route('export.checksheetsco2') }}" method="POST">
+        @method('POST')
+        @csrf
+        <div class="form-group mb-3">
+            <label for="tahun">Pilih Tahun:</label>
+            <input type="number" name="tahun" id="tahun" min="2000" max="2099" step="1" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
+    </form>
+
     @if (session()->has('success1'))
         <div class="alert alert-success col-lg-12">
             {{ session()->get('success1') }}
         </div>
     @endif
     @if ($apar->type === 'co2' || $apar->type === 'af11e')
-        <div class="table-responsive col-lg-12">
+        <div class="table-responsive col-lg-12 mt-3">
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
@@ -130,7 +140,7 @@
             </table>
         </div>
     @elseif ($apar->type === 'powder')
-    <div class="table-responsive col-lg-12">
+    <div class="table-responsive col-lg-12 mt-3">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>

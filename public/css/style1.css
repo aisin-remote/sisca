@@ -264,3 +264,18 @@ ul.CTAs a {
     color: #051c74; /* Warna teks sesuai kebutuhan */
     background-color: #6d7fcc; /* Warna latar belakang sesuai kebutuhan */
 }
+
+.zoom-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 600px; /* Atur lebar maksimum sesuai kebutuhan Anda */
+    overflow: hidden;
+}
+
+.zoom-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+    transform-origin: top left;
+}

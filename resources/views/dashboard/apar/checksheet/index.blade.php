@@ -5,11 +5,11 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>Data Check Sheet Apar Co2/AF11E</h3>
-        <form action="{{ route('export.checksheetsco2') }}" method="POST">
+        {{-- <form action="{{ route('export.checksheetsco2') }}" method="POST">
             @method('POST')
             @csrf
             <button type="submit" class="btn btn-primary">Export to Excel</button>
-        </form>
+        </form> --}}
         <form action="{{ route('checksheet.index') }}" method="GET">
             <label for="tanggal_filter">Filter Tanggal:</label>
             <div class="input-group">
@@ -29,7 +29,7 @@
                 <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">Tanggal Pengecekan</th>
-                    <th scope="col">Terakhir Update</th>
+                    {{-- <th scope="col">Terakhir Update</th> --}}
                     <th scope="col">NPK</th>
                     <th scope="col">Apar Number</th>
                     <th scope="col">Location Apar</th>
@@ -48,7 +48,7 @@
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
-                        <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td>
+                        {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                         <td>{{ $checksheet->npk }}</td>
                         <td>{{ $checksheet->apar_number }}</td>
                         <td>{{ $checksheet->apars->locations->location_name }}</td>
@@ -61,7 +61,8 @@
                         <td>{{ $checksheet->berat_tabung }}</td>
                         <td class="text-center align-middle">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}"
+                                    class="badge bg-info me-2">Info</a>
                                 <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
                                     class="badge bg-warning me-2">Edit</a>
                                 <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
@@ -96,7 +97,7 @@
                 <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">Tanggal Pengecekan</th>
-                    <th scope="col">Terakhir Update</th>
+                    {{-- <th scope="col">Terakhir Update</th> --}}
                     <th scope="col">NPK</th>
                     <th scope="col">Apar Number</th>
                     <th scope="col">Location Apar</th>
@@ -114,7 +115,7 @@
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
-                        <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td>
+                        {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                         <td>{{ $checksheet->npk }}</td>
                         <td>{{ $checksheet->apar_number }}</td>
                         <td>{{ $checksheet->apars->locations->location_name }}</td>
@@ -126,7 +127,8 @@
                         <td>{{ $checksheet->powder }}</td>
                         <td class="text-center align-middle">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}"
+                                    class="badge bg-info me-2">Info</a>
                                 <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
                                     class="badge bg-warning me-2">Edit</a>
                                 <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"

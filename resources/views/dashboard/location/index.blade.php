@@ -2,6 +2,19 @@
 @section('title', 'Location')
 
 @section('content')
+<div class="d-flex justify-content-between">
+    <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <img src="{{ asset('foto/lokasi/Keterangan.png') }}" alt="Keterangan Gambar" style="max-width: 100%; height: auto;">
+    </div>
+    <div class="col-md d-flex justify-content-center align-items-center">
+        <div class="zoom-container">
+            <img class="zoom-image" src="{{ asset('foto/lokasi/Mapping All Equipment.png') }}" alt="Mapping All Equipment">
+        </div>
+    </div>
+</div>
+
+
+
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Location</h1>
@@ -29,12 +42,12 @@
                         <td>{{ $location->location_name }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('location.destroy',$location->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Location?')">Delete</button>
-                            </form>
+                                <form action="{{ route('location.destroy', $location->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Location?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

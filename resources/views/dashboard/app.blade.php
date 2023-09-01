@@ -103,7 +103,28 @@
 
 
 
+        const zoomContainer = document.querySelector('.zoom-container');
+    const zoomImage = zoomContainer.querySelector('.zoom-image');
 
+    zoomContainer.addEventListener('mousemove', function(event) {
+        const rect = zoomContainer.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const imageWidth = zoomImage.width;
+        const imageHeight = zoomImage.height;
+
+        const scale = 2; // Faktor zoom
+
+        const translateX = -(x * scale - x);
+        const translateY = -(y * scale - y);
+
+        zoomImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+    });
+
+    zoomContainer.addEventListener('mouseleave', function() {
+        zoomImage.style.transform = 'scale(1) translate(0, 0)';
+    });
     </script>
 </body>
 
