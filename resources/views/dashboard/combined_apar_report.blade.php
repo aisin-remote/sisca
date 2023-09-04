@@ -27,7 +27,28 @@
     <br>
     <hr>
 
-    <h3>All APAR Report</h3>
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 col-lg-12">
+        <h3>All APAR Report</h3>
+        <div class="form-group">
+            <form action="" method="GET">
+                <label for="tahun_filter">Download Check Sheet Apar</label>
+                <div class="input-group">
+                    <select name="tahun_filter" id="tahun_filter" class="form-control">
+                            <option value="asiap">asiap</option>
+                    </select>
+                    <button class="btn btn-primary" id="filterButton">Filter</button>
+                </div>
+            </form>
+        </div>
+
+        {{-- <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
+            <label for="tanggal_filter">Filter Tanggal:</label>
+            <input type="date" name="tanggal_filter" id="tanggal_filter">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form> --}}
+
+    </div>
     <table class="text-center table table-striped">
         <thead class="align-middle">
             <tr>

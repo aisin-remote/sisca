@@ -7,6 +7,7 @@ use App\Models\CheckSheetCo2;
 use App\Models\CheckSheetPowder;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AparController extends Controller
 {
@@ -41,11 +42,11 @@ class AparController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'tag_number'=>'required|unique:tm_apars',
-            'location_id'=>'required',
-            'expired'=>'required',
-            'post'=>'nullable',
-            'type'=>'required'
+            'tag_number' => 'required|unique:tm_apars',
+            'location_id' => 'required',
+            'expired' => 'required',
+            'post' => 'nullable',
+            'type' => 'required'
         ]);
 
         Apar::create($validate);
@@ -71,40 +72,45 @@ class AparController extends Controller
 
         if ($type === 'co2') {
             $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number);
+            $firstYear = CheckSheetCo2::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetCo2::max(DB::raw('YEAR(tanggal_pengecekan)'));
 
-            if (request()->has('tanggal_filter')) {
-                $tanggalFilter = request()->input('tanggal_filter');
-                $checksheets->whereDate('tanggal_pengecekan', $tanggalFilter);
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereDate('tanggal_pengecekan', $tahunFilter);
             }
 
             $checksheets = $checksheets->get();
 
-            return view('dashboard.apar.show', compact('apar', 'checksheets'));
+            return view('dashboard.apar.show', compact('apar', 'checksheets', 'firstYear', 'lastYear'));
 
         } elseif ($type === 'powder') {
             $checksheets = CheckSheetPowder::where('apar_number', $apar->tag_number);
+            $firstYear = CheckSheetPowder::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetPowder::max(DB::raw('YEAR(tanggal_pengecekan)'));
 
-            if (request()->has('tanggal_filter')) {
-                $tanggalFilter = request()->input('tanggal_filter');
-                $checksheets->whereDate('tanggal_pengecekan', $tanggalFilter);
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereDate('tanggal_pengecekan', $tahunFilter);
             }
 
             $checksheets = $checksheets->get();
 
-            return view('dashboard.apar.show', compact('apar', 'checksheets'));
+            return view('dashboard.apar.show', compact('apar', 'checksheets', 'firstYear', 'lastYear'));
 
         } elseif ($type === 'af11e') {
             $checksheets = CheckSheetCo2::where('apar_number', $apar->tag_number);
+            $firstYear = CheckSheetCo2::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetCo2::max(DB::raw('YEAR(tanggal_pengecekan)'));
 
-            if (request()->has('tanggal_filter')) {
-                $tanggalFilter = request()->input('tanggal_filter');
-                $checksheets->whereDate('tanggal_pengecekan', $tanggalFilter);
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereDate('tanggal_pengecekan', $tahunFilter);
             }
 
             $checksheets = $checksheets->get();
 
-            return view('dashboard.apar.show', compact('apar', 'checksheets'));
-
+            return view('dashboard.apar.show', compact('apar', 'checksheets', 'firstYear', 'lastYear'));
         } else {
             return back()->with('error', 'Apar tidak dikenali');
         }
@@ -135,10 +141,10 @@ class AparController extends Controller
         $apar = Apar::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
-            'expired'=>'required',
-            'post'=>'nullable',
-            'type'=>'required'
+            'location_id' => 'required',
+            'expired' => 'required',
+            'post' => 'nullable',
+            'type' => 'required'
         ]);
 
         $apar->update($validateData);

@@ -15,76 +15,122 @@ class CheckSheetCo2Controller extends Controller
 {
     public function showForm($tagNumber)
     {
-        $checkSheetCo2s = CheckSheetCo2::all();
+        // Mendapatkan bulan dan tahun saat ini
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
 
-        $lastMonth = Carbon::now()->subMonth();
-
+        // Mencari entri CheckSheetCo2 untuk bulan dan tahun saat ini
         $existingCheckSheet = CheckSheetCo2::where('apar_number', $tagNumber)
-            ->where('created_at', '>', $lastMonth)
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
             ->first();
 
         if ($existingCheckSheet) {
+            // Jika sudah ada entri, tampilkan halaman edit
             return redirect()->route('apar.checksheetco2.edit', $existingCheckSheet->id)
-                ->with('error', 'Check Sheet Co2 sudah ada dalam satu bulan terakhir untuk Apar ' . $tagNumber . '. Silahkan edit.');
+                ->with('error', 'Check Sheet Co2 sudah ada untuk Apar ' . $tagNumber . ' pada bulan ini. Silahkan edit.');
+        } else {
+            // Jika belum ada entri, tampilkan halaman create
+            $checkSheetCo2s = CheckSheetCo2::all();
+            return view('dashboard.checkSheet.checkCo2', compact('checkSheetCo2s', 'tagNumber'));
         }
-
-        return view('dashboard.checkSheet.checkCo2', compact('checkSheetCo2s', 'tagNumber'));
     }
+
 
     public function store(Request $request)
     {
-        $lastMonth = Carbon::now()->subMonth();
+        // Mendapatkan bulan dan tahun saat ini
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
 
+        // Mencari entri CheckSheetCo2 untuk bulan dan tahun saat ini
         $existingCheckSheet = CheckSheetCo2::where('apar_number', $request->apar_number)
-            ->where('created_at', '>', $lastMonth)
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
             ->first();
 
         if ($existingCheckSheet) {
-            return redirect()->route('apar.checksheetco2.edit', $existingCheckSheet->id)
-                ->with('error', 'Check Sheet Powder sudah ada dalam satu bulan terakhir untuk Apar ' . $request->apar_number . '. Silahkan edit.');
+            // Jika sudah ada entri, perbarui entri tersebut
+            $validatedData = $request->validate([
+                'tanggal_pengecekan' => 'required|date',
+                'npk' => 'required',
+                'apar_number' => 'required',
+                'pressure' => 'required',
+                'photo_pressure' => 'required|image|file|max:3072',
+                'hose' => 'required',
+                'photo_hose' => 'required|image|file|max:3072',
+                'corong' => 'required',
+                'photo_corong' => 'required|image|file|max:3072',
+                'tabung' => 'required',
+                'photo_tabung' => 'required|image|file|max:3072',
+                'regulator' => 'required',
+                'photo_regulator' => 'required|image|file|max:3072',
+                'lock_pin' => 'required',
+                'photo_lock_pin' => 'required|image|file|max:3072',
+                'berat_tabung' => 'required',
+                'photo_berat_tabung' => 'required|image|file|max:3072',
+                'description' => 'nullable|string|max:255',
+                // tambahkan validasi untuk atribut lainnya
+            ]);
+
+            if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
+                $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
+            }
+
+            // Perbarui data entri yang sudah ada
+            $existingCheckSheet->update($validatedData);
+
+            return redirect()->route('show.form')->with('success', 'Data berhasil diperbarui.');
+        } else {
+            // Jika belum ada entri, buat entri baru
+            $validatedData = $request->validate([
+                'tanggal_pengecekan' => 'required|date',
+                'npk' => 'required',
+                'apar_number' => 'required',
+                'pressure' => 'required',
+                'photo_pressure' => 'required|image|file|max:3072',
+                'hose' => 'required',
+                'photo_hose' => 'required|image|file|max:3072',
+                'corong' => 'required',
+                'photo_corong' => 'required|image|file|max:3072',
+                'tabung' => 'required',
+                'photo_tabung' => 'required|image|file|max:3072',
+                'regulator' => 'required',
+                'photo_regulator' => 'required|image|file|max:3072',
+                'lock_pin' => 'required',
+                'photo_lock_pin' => 'required|image|file|max:3072',
+                'berat_tabung' => 'required',
+                'photo_berat_tabung' => 'required|image|file|max:3072',
+                'description' => 'nullable|string|max:255',
+                // tambahkan validasi untuk atribut lainnya
+            ]);
+
+            if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
+                $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
+            }
+
+            // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
+            $validatedData['npk'] = auth()->user()->npk;
+
+            // Simpan data baru ke database menggunakan metode create
+            CheckSheetCo2::create($validatedData);
+
+            return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
         }
-
-        // Validasi input
-        $validatedData = $request->validate([
-            'tanggal_pengecekan' => 'required|date',
-            'npk' => 'required',
-            'apar_number' => 'required',
-            'pressure' => 'required',
-            'photo_pressure' => 'required|image|file|max:3072',
-            'hose' => 'required',
-            'photo_hose' => 'required|image|file|max:3072',
-            'corong' => 'required',
-            'photo_corong' => 'required|image|file|max:3072',
-            'tabung' => 'required',
-            'photo_tabung' => 'required|image|file|max:3072',
-            'regulator' => 'required',
-            'photo_regulator' => 'required|image|file|max:3072',
-            'lock_pin' => 'required',
-            'photo_lock_pin' => 'required|image|file|max:3072',
-            'berat_tabung' => 'required',
-            'photo_berat_tabung' => 'required|image|file|max:3072',
-            'description' => 'nullable|string|max:255',
-            // tambahkan validasi untuk atribut lainnya
-        ]);
-
-        if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
-            $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
-            $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
-            $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
-            $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
-            $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
-            $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
-            $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
-        }
-
-        // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
-        $validatedData['npk'] = auth()->user()->npk;
-
-        // Simpan data ke database menggunakan metode create
-        CheckSheetCo2::create($validatedData);
-
-        return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
     }
+
 
     public function edit($id)
     {
@@ -204,15 +250,23 @@ class CheckSheetCo2Controller extends Controller
         return back()->with('success1', 'Data Check Sheet Apar Co2 berhasil dihapus');
     }
 
-    public function exportExcelWithTemplate()
+    public function exportExcelWithTemplate(Request $request)
     {
         // Load the template Excel file
-        $templatePath = public_path('templates/template.xlsx');
+        $templatePath = public_path('templates/template-checksheet-co.xlsx');
         $spreadsheet = IOFactory::load($templatePath);
         $worksheet = $spreadsheet->getActiveSheet();
 
-        // Retrieve data from the checksheetsco2 table
+        // Retrieve tag_number from the form
+        $tagNumber = $request->input('tag_number');
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
         $data = CheckSheetCo2::select('tanggal_pengecekan', 'pressure', 'hose', 'corong', 'tabung', 'regulator', 'lock_pin', 'berat_tabung')
+            ->whereYear('tanggal_pengecekan', $selectedYear)
+            ->where('apar_number', $tagNumber) // Gunakan nilai tag_number yang diambil dari form
             ->get();
 
         // Start row to populate data in Excel
@@ -277,9 +331,9 @@ class CheckSheetCo2Controller extends Controller
 
         // Create a new Excel writer and save the modified spreadsheet
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $outputPath = public_path('templates/template.xlsx');
+        $outputPath = public_path('templates/checksheet-co.xlsx');
         $writer->save($outputPath);
 
-        return response()->download($outputPath);
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }

@@ -55,13 +55,18 @@
         <h1>Riwayat Check Sheet Apar</h1>
         <div class="form-group">
             <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
-            <label for="tanggal_filter">Filter Tanggal:</label>
-            <div class="input-group">
-                <input type="date" name="tanggal_filter" class="form-control" id="tanggal_filter">
-                <button class="btn btn-success" id="filterButton">Filter</button>
-            </div>
+                <label for="tahun_filter">Filter Tahun:</label>
+                <div class="input-group">
+                    <select name="tahun_filter" id="tahun_filter" class="form-control">
+                        @for ($year = $firstYear; $year <= $lastYear; $year++)
+                            <option value="{{ $year }}" {{ request('tahun_filter') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                        @endfor
+                    </select>
+                    <button class="btn btn-success" id="filterButton">Filter</button>
+                </div>
             </form>
         </div>
+
         {{-- <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
             <label for="tanggal_filter">Filter Tanggal:</label>
             <input type="date" name="tanggal_filter" id="tanggal_filter">
@@ -69,15 +74,55 @@
         </form> --}}
 
     </div>
-    <form action="{{ route('export.checksheetsco2') }}" method="POST">
-        @method('POST')
-        @csrf
-        <div class="form-group mb-3">
-            <label for="tahun">Pilih Tahun:</label>
-            <input type="number" name="tahun" id="tahun" min="2000" max="2099" step="1" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
-    </form>
+    @if ($apar->type  === 'co2')
+        <form action="{{ route('export.checksheetsco2') }}" method="POST" class="col-md-6">
+            @method('POST')
+            @csrf
+            <div class="form-group mb-3">
+                <label for="tahun">Download Checksheet Apar</label>
+                <select name="tahun" id="tahun" class="form-control" required>
+                    @for ($year = $firstYear; $year <= $lastYear; $year++)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
+                <!-- Tambahkan input hidden untuk tag_number -->
+            <input type="hidden" name="tag_number" value="{{ $apar->tag_number }}">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
+        </form>
+    @elseif ($apar->type  === 'af11e')
+        <form action="{{ route('export.checksheetsco2') }}" method="POST" class="col-md-6">
+            @method('POST')
+            @csrf
+            <div class="form-group mb-3">
+                <label for="tahun">Download Checksheet Apar</label>
+                <select name="tahun" id="tahun" class="form-control" required>
+                    @for ($year = $firstYear; $year <= $lastYear; $year++)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
+                <!-- Tambahkan input hidden untuk tag_number -->
+            <input type="hidden" name="tag_number" value="{{ $apar->tag_number }}">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
+        </form>
+    @elseif ($apar->type  === 'powder')
+        <form action="{{ route('export.checksheetspowder') }}" method="POST" class="col-md-6">
+            @method('POST')
+            @csrf
+            <div class="form-group mb-3">
+                <label for="tahun">Download Checksheet Apar</label>
+                <select name="tahun" id="tahun" class="form-control" required>
+                    @for ($year = $firstYear; $year <= $lastYear; $year++)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
+                <!-- Tambahkan input hidden untuk tag_number -->
+            <input type="hidden" name="tag_number" value="{{ $apar->tag_number }}">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
+        </form>
+    @endif
 
     @if (session()->has('success1'))
         <div class="alert alert-success col-lg-12">

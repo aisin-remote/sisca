@@ -253,5 +253,7 @@ Route::get('/checksheethoistcrane', function () {
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/dashboard/profile', [ProfileController::class, 'changePassword'])->middleware('auth');
 
-Route::post('/export-data', [CheckSheetCo2Controller::class, 'exportExcelWithTemplate'])->name('export.checksheetsco2');
+Route::post('/export-checksheet-co2', [CheckSheetCo2Controller::class, 'exportExcelWithTemplate'])->name('export.checksheetsco2');
+Route::post('/export-checksheet-powder', [CheckSheetPowderController::class, 'exportExcelWithTemplate'])->name('export.checksheetspowder');
+
 

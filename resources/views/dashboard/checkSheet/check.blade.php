@@ -61,7 +61,7 @@
                         <td>{{ $checkSheet->npk }}</td>
                         <td>{{ $checkSheet->apar_number }}</td>
                         <td>{{ $checkSheet->apars->type }}</td>
-                        @if ($checkSheet->apars->type === 'co2' || $checkSheet->type === 'af11e')
+                        @if ($checkSheet->apars->type === 'co2' || $checkSheet->apars->type === 'af11e')
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
