@@ -31,13 +31,19 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 col-lg-12">
         <h3>All APAR Report</h3>
         <div class="form-group">
-            <form action="" method="GET">
-                <label for="tahun_filter">Download Check Sheet Apar</label>
+            <form action="{{ route('export.checksheetsapar') }}" method="POST">
+                @method('POST')
+                @csrf
+                <label for="tahun">Download Check Sheet Apar</label>
                 <div class="input-group">
-                    <select name="tahun_filter" id="tahun_filter" class="form-control">
-                            <option value="asiap">asiap</option>
+                    <select name="tahun" id="tahun" class="form-control">
+                        @php
+                        $currentYear = date('Y');
+                        for ($year = $currentYear - 5; $year <= $currentYear; $year++) { echo "<option value=\" $year\">$year</option>";
+                            }
+                            @endphp
                     </select>
-                    <button class="btn btn-primary" id="filterButton">Filter</button>
+                    <button class="btn btn-primary" id="filterButton">Download</button>
                 </div>
             </form>
         </div>
