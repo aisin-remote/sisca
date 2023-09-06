@@ -46,7 +46,7 @@ class HydrantController extends Controller
         ]);
 
         Hydrant::create($validate);
-        return redirect()->route('data-hydrant.index')->with('success', "Data Hydrant {$validate['no_hydrant']} berhasil ditambahkan");
+        return redirect()->route('hydrant.index')->with('success', "Data Hydrant {$validate['no_hydrant']} berhasil ditambahkan");
     }
 
     /**
@@ -92,7 +92,7 @@ class HydrantController extends Controller
 
         $hydrant->update($validateData);
 
-        return redirect()->route('data-hydrant.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('hydrant.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -106,6 +106,6 @@ class HydrantController extends Controller
         $hydrant = Hydrant::find($id);
         $hydrant->delete();
 
-        return redirect()->route('data-hydrant.index')->with('success', 'Data Hydrant berhasil dihapus');
+        return redirect()->route('hydrant.index')->with('success', 'Data Hydrant berhasil dihapus');
     }
 }

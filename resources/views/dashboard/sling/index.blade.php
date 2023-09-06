@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Sling</h1>
-        <a href="/dashboard/sling/data-sling/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/sling/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -34,8 +34,8 @@
                         <td>{{ $sling->type }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('data-sling.destroy', $sling->id) }}" method="POST">
-                                <a href="{{ route('data-sling.edit', $sling->id) }}" class="badge bg-warning">Edit</a>
+                            <form action="{{ route('sling.destroy', $sling->id) }}" method="POST">
+                                <a href="{{ route('sling.edit', $sling->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

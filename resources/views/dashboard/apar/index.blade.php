@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Apar</h1>
-        <a href="/dashboard/apar/data_apar/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/apar/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -36,9 +36,9 @@
                         <td>{{ $apar->type }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('data_apar.show', $apar->id) }}" class="badge bg-info me-2">Info</a>
-                                <a href="{{ route('data_apar.edit', $apar->id) }}" class="badge bg-warning me-2">Edit</a>
-                                <form action="{{ route('data_apar.destroy', $apar->id) }}" method="POST" class="delete-form">
+                                <a href="{{ route('apar.show', $apar->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('apar.edit', $apar->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('apar.destroy', $apar->id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="badge bg-danger border-0"

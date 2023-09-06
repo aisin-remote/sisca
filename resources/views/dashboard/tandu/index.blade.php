@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Tandu</h1>
-        <a href="/dashboard/tandu/data-tandu/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/tandu/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -30,8 +30,8 @@
                         <td>{{ $tandu->locations->location_name }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('data-tandu.destroy', $tandu->id) }}" method="POST">
-                                <a href="{{ route('data-tandu.edit', $tandu->id) }}" class="badge bg-warning">Edit</a>
+                            <form action="{{ route('tandu.destroy', $tandu->id) }}" method="POST">
+                                <a href="{{ route('tandu.edit', $tandu->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

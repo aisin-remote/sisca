@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h1>Check Sheet Apar</h1>
+        <h1>Check Sheet Hydrant</h1>
     </div>
     @if (session()->has('error'))
         <div class="alert alert-success col-lg-6">
@@ -15,13 +15,13 @@
             {{ session()->get('success') }}
         </div>
     @endif
-    <form action="{{ route('process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
+    <form action="{{ route('hydrant.process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         <div class="row">
         <div class="mb-3 col-md-6">
-            <label for="tag_number" class="form-label">Tag Number</label>
-            <input type="text" name="tag_number" id="tag_number" placeholder="Masukkan Tag Number" class="form-control @error('tag_number') is-invalid @enderror" value="{{old('tag_number')}}" required autofocus>
-            @error('tag_number')
+            <label for="hydrant_number" class="form-label">No Hydrant</label>
+            <input type="text" name="hydrant_number" id="hydrant_number" placeholder="Masukkan No Hydrant" class="form-control @error('hydrant_number') is-invalid @enderror" value="{{old('hydrant_number')}}" required autofocus>
+            @error('hydrant_number')
                 <div class="text-danger">{{$message}}</div>
             @enderror
         </div>
@@ -30,7 +30,7 @@
     </form>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h5>Check Sheet Terbaru</h5>
-        <a href="/dashboard/check-sheet/apar/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
+        <a href="/dashboard/hydrant/checksheet/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
             Semua Check Sheet
         </a>
     </div>
@@ -47,8 +47,8 @@
                     <th scope="col">Tanggal Pengecekan</th>
                     <th scope="col">Terakhir Update</th>
                     <th scope="col">NPK</th>
-                    <th scope="col">Nomor Apar</th>
-                    <th>type</th>
+                    <th scope="col">Nomor Hydrant</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -59,40 +59,40 @@
                         <td>{{ $checkSheet->created_at->format('d F Y') }}</td>
                         <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
                         <td>{{ $checkSheet->npk }}</td>
-                        <td>{{ $checkSheet->apar_number }}</td>
-                        <td>{{ $checkSheet->apars->type }}</td>
-                        @if ($checkSheet->apars->type === 'co2' || $checkSheet->apars->type === 'af11e')
+                        <td>{{ $checkSheet->hydrant_number }}</td>
+                        <td>{{ $checkSheet->hydrants->type }}</td>
+                        @if ($checkSheet->hydrants->type === 'Indoor')
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                    <a href="{{ route('apar.checksheetco2.edit', $checkSheet->id) }}"
+                                    <a href="{{ route('hydrant.checksheetindoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                    <a href="{{ route('hydrant.checksheetindoor.edit', $checkSheet->id) }}"
                                         class="badge bg-warning me-2">Edit</a>
-                                    <form action="{{ route('apar.checksheetco2.destroy', $checkSheet->id) }}" method="POST"
+                                    <form action="{{ route('hydrant.checksheetindoor.destroy', $checkSheet->id) }}" method="POST"
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="badge bg-danger border-0"
-                                            onclick="return confirm('Ingin menghapus Data Check Sheet Apar Co2?')">Delete</button>
+                                            onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Indoor?')">Delete</button>
                                     </form>
                                 </div>
                             </td>
-                        @elseif ($checkSheet->apars->type === 'powder')
+                        @elseif ($checkSheet->hydrants->type === 'Outdoor')
                             <td class="text-center align-middle">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a href="{{ route('apar.checksheetpowder.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                    <a href="{{ route('apar.checksheetpowder.edit', $checkSheet->id) }}"
+                                    <a href="{{ route('hydrant.checksheetoutdoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                    <a href="{{ route('hydrant.checksheetoutdoor.edit', $checkSheet->id) }}"
                                         class="badge bg-warning me-2">Edit</a>
-                                    <form action="{{ route('apar.checksheetpowder.destroy', $checkSheet->id) }}" method="POST"
+                                    <form action="{{ route('hydrant.checksheetoutdoor.destroy', $checkSheet->id) }}" method="POST"
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="badge bg-danger border-0"
-                                            onclick="return confirm('Ingin menghapus Data Check Sheet Apar Powder?')">Delete</button>
+                                            onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Outdoor?')">Delete</button>
                                     </form>
                                 </div>
                             </td>
                         @else
-                            <p>Type dari Apar tidak ditemukan</p>
+                            <p>Type dari Hydrant tidak ditemukan</p>
                         @endif
                     </tr>
                 @empty

@@ -45,7 +45,7 @@ class ChainblockController extends Controller
         ]);
 
         Chainblock::create($validate);
-        return redirect()->route('data-chainblock.index')->with('success', "Data Chain Block {$validate['no_chainblock']} berhasil ditambahkan");
+        return redirect()->route('chain-block.index')->with('success', "Data Chain Block {$validate['no_chainblock']} berhasil ditambahkan");
     }
 
     /**
@@ -90,7 +90,7 @@ class ChainblockController extends Controller
 
         $chainblock->update($validateData);
 
-        return redirect()->route('data-chainblock.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('chain-block.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -104,6 +104,6 @@ class ChainblockController extends Controller
         $chainblock = Chainblock::find($id);
         $chainblock->delete();
 
-        return redirect()->route('data-chainblock.index')->with('success', 'Data Chain Block berhasil dihapus');
+        return redirect()->route('chain-block.index')->with('success', 'Data Chain Block berhasil dihapus');
     }
 }

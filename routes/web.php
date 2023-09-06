@@ -46,104 +46,124 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard.index');
-Route::get('/dashboard/home/grafik-status', [DashboardController::class, 'index'])->name('dashboard.grafik');
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.grafik');
 
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // Route Apar
-Route::resource('/dashboard/apar/data_apar', AparController::class)->middleware('auth');
-Route::put('/dashboard/apar/data_apar/{data_apar}', [AparController::class, 'update'])->name('data_apar.update');
+Route::resource('/dashboard/master/apar', AparController::class)->middleware('auth');
+Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update');
 // lokasi
-Route::get('/dashboard/apar/location', [AparController::class, 'location'])->name('apar.location.index')->middleware('auth');
-Route::get('/dashboard/apar/location/body', function () {
+Route::get('/dashboard/location/apar', [AparController::class, 'location'])->name('apar.location.index')->middleware('auth');
+Route::get('/dashboard/location/apar/body', function () {
     return view('dashboard.apar.location.body');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/kantin', function () {
+Route::get('/dashboard/location/apar/kantin', function () {
     return view('dashboard.apar.location.kantin');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/loker-pos', function () {
+Route::get('/dashboard/location/apar/loker-pos', function () {
     return view('dashboard.apar.location.loker');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/main-station', function () {
+Route::get('/dashboard/location/apar/main-station', function () {
     return view('dashboard.apar.location.main');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/masjid', function () {
+Route::get('/dashboard/location/apar/masjid', function () {
     return view('dashboard.apar.location.masjid');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/office', function () {
+Route::get('/dashboard/location/apar/office', function () {
     return view('dashboard.apar.location.office');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/pump-room', function () {
+Route::get('/dashboard/location/apar/pump-room', function () {
     return view('dashboard.apar.location.pump');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/storage-chemical', function () {
+Route::get('/dashboard/location/apar/storage-chemical', function () {
     return view('dashboard.apar.location.storage');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/unit', function () {
+Route::get('/dashboard/location/apar/unit', function () {
     return view('dashboard.apar.location.unit');
 })->middleware('auth');
-Route::get('/dashboard/apar/location/wwt', function () {
+Route::get('/dashboard/location/apar/wwt', function () {
     return view('dashboard.apar.location.wwt');
 })->middleware('auth');
 
 
 // Route Hydrant
-Route::resource('/dashboard/hydrant/data-hydrant', HydrantController::class)->except('show')->middleware('auth');
-Route::put('/dashboard/hydrant/data-hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('data-hydrant.update');
+Route::resource('/dashboard/master/hydrant', HydrantController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('hydrant.update');
 
 //Route Nitrogen
-Route::resource('/dashboard/nitrogen/data-nitrogen', NitrogenController::class)->except('show')->middleware('auth');
-Route::put('/dashboard/nitrogen/data-nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('data-nitrogen.update');
+Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('nitrogen.update');
 
 // Route Co2
-Route::resource('/dashboard/co2/data-co2', Co2Controller::class)->except('show')->middleware('auth');
-Route::put('/dashboard/co2/data-co2/{data_co2}', [Co2Controller::class, 'update'])->name('data-co2.update');
+Route::resource('/dashboard/master/co2', Co2Controller::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/co2/{data_co2}', [Co2Controller::class, 'update'])->name('co2.update');
 
 // Route Tandu
-Route::resource('/dashboard/tandu/data-tandu', TanduController::class)->except('show')->middleware('auth');
-Route::put('/dashboard/tandu/data-tandu/{data_tandu}', [TanduController::class, 'update'])->name('data-tandu.update');
+Route::resource('/dashboard/master/tandu', TanduController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/tandu/{data_tandu}', [TanduController::class, 'update'])->name('tandu.update');
 
 // Route Eye Washer
-Route::resource('/dashboard/eyewasher/data-eyewasher', EyewasherController::class)->except('show')->middleware('auth');
-Route::put('/dashboard/eyewasher/data-eyewasher/{data_eyewasher}', [EyewasherController::class, 'update'])->name('data-eyewasher.update');
+Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/eye-washer/{data_eyewasher}', [EyewasherController::class, 'update'])->name('eye-washer.update');
 
 // Route Sling
-Route::resource('/dashboard/sling/data-sling', SlingController::class)->except('show')->middleware('auth');
-Route::put('/dashboard/sling/data-sling/{data_sling}', [SlingController::class, 'update'])->name('data-sling.update');
+Route::resource('/dashboard/master/sling', SlingController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/sling/{data_sling}', [SlingController::class, 'update'])->name('sling.update');
 
 // Route Tembin
-Route::resource('/dashboard/tembin/data-tembin', TembinController::class)->except('show')->middleware('auth');
-Route::put('/dashboard/tembin/data-tembin/{data_tembin}', [TembinController::class, 'update'])->name('data-tembin.update');
+Route::resource('/dashboard/master/tembin', TembinController::class)->except('show')->middleware('auth');
+Route::put('/dashboard/master/tembin/{data_tembin}', [TembinController::class, 'update'])->name('tembin.update');
 
 // Route Chain Block
-Route::resource('/dashboard/chainblock/data-chainblock', ChainblockController::class)->middleware('auth');
-Route::put('/dashboard/chainblock/data-chainblock/{data_chainblock}', [ChainblockController::class, 'update'])->name('data-chainblock.update');
+Route::resource('/dashboard/master/chain-block', ChainblockController::class)->middleware('auth');
+Route::put('/dashboard/master/chain-block/{data_chainblock}', [ChainblockController::class, 'update'])->name('data-chainblock.update');
 
 // Route Location
-Route::resource('/dashboard/location', LocationController::class)->except('show', 'destroy')->middleware('auth');
-Route::delete('/dashboard/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy');
+Route::resource('/dashboard/master/location', LocationController::class)->except('show', 'destroy')->middleware('auth');
+Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 use App\Http\Controllers\CheckSheetController;
+use App\Http\Controllers\CheckSheetHydrantController;
+use App\Http\Controllers\CheckSheetHydrantIndoorController;
+use App\Models\CheckSheetHydrantIndoor;
 
 // checksheet
-Route::get('/dashboard/apar/checksheet', [CheckSheetController::class, 'showForm'])->name('show.form');
+Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
 Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
-Route::get('/dashboard/apar/checksheet/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
+Route::get('/dashboard/check-sheet/apar/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
+
+Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
+Route::post('/dashboard/hydrant/process-checksheet', [CheckSheetHydrantController::class, 'processForm'])->name('hydrant.process.form');
+Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantController::class, 'index'])->name('hydrant.checksheet.index');
+
+//lagi fix ini (hapus jika indoor sudah kelar)
+// Menggunakan middleware auth untuk routes terkait checksheetco2
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/hydrant/checksheetindoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'showForm'])->name('checksheetindoor');
+    Route::post('/dashboard/hydrant/process-checksheet-hydrant-indoor/{hydrantNumber}', [CheckSheetHydrantIndoor::class, 'store'])->name('process.checksheet.indoor');
+
+    Route::delete('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
+    Route::get('/dashboard/check-sheet/aparco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
+    Route::put('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
+    Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
+
+});
+
 
 use App\Http\Controllers\CheckSheetCo2Controller;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Menggunakan middleware auth untuk routes terkait checksheetco2
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard/apar/checksheetco2/{tagNumber}', [CheckSheetCo2Controller::class, 'showForm'])->name('checksheetco2');
+    Route::get('/dashboard/check-sheet/aparco2/{tagNumber}', [CheckSheetCo2Controller::class, 'showForm'])->name('checksheetco2');
     Route::post('/dashboard/apar/process-checksheet-co2-af11e/{tagNumber}', [CheckSheetCo2Controller::class, 'store'])->name('process.checksheet.co2');
 
-    Route::delete('/dashboard/apar/checksheetco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
-    Route::get('/dashboard/apar/checksheetco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
-    Route::put('/dashboard/apar/checksheetco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
-    Route::get('/dashboard/apar/checksheetco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
+    Route::delete('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
+    Route::get('/dashboard/check-sheet/aparco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
+    Route::put('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
+    Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
 
 });
 
@@ -151,13 +171,13 @@ use App\Http\Controllers\CheckSheetPowderController;
 
 // Menggunakan middleware auth untuk routes terkait checksheetpowder
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard/apar/checksheetpowder/{tagNumber}', [CheckSheetPowderController::class, 'showForm'])->name('checksheetpowder');
+    Route::get('/dashboard/check-sheet/aparpowder/{tagNumber}', [CheckSheetPowderController::class, 'showForm'])->name('checksheetpowder');
     Route::post('/dashboard/apar/process-checksheet-powder/{tagNumber}', [CheckSheetPowderController::class, 'store'])->name('process.checksheet.powder');
 
-    Route::delete('/dashboard/apar/checksheetpowder/{id}', [CheckSheetPowderController::class, 'destroy'])->name('apar.checksheetpowder.destroy');
-    Route::get('/dashboard/apar/checksheetpowder/{id}/edit', [CheckSheetPowderController::class, 'edit'])->name('apar.checksheetpowder.edit');
-    Route::put('/dashboard/apar/checksheetpowder/{id}', [CheckSheetPowderController::class, 'update'])->name('apar.checksheetpowder.update');
-    Route::get('/dashboard/apar/checksheetpowder/{id}/show', [CheckSheetPowderController::class, 'show'])->name('apar.checksheetpowder.show');
+    Route::delete('/dashboard/check-sheet/aparpowder/{id}', [CheckSheetPowderController::class, 'destroy'])->name('apar.checksheetpowder.destroy');
+    Route::get('/dashboard/check-sheet/aparpowder/{id}/edit', [CheckSheetPowderController::class, 'edit'])->name('apar.checksheetpowder.edit');
+    Route::put('/dashboard/check-sheet/aparpowder/{id}', [CheckSheetPowderController::class, 'update'])->name('apar.checksheetpowder.update');
+    Route::get('/dashboard/check-sheet/aparpowder/{id}/show', [CheckSheetPowderController::class, 'show'])->name('apar.checksheetpowder.show');
 });
 
 use App\Http\Controllers\AparReportController;
@@ -166,9 +186,7 @@ Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.r
 
 use App\Http\Controllers\CombinedAparController;
 
-Route::get('/dashboard/home/checksheet-report-apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
-
-use App\Http\Controllers\CheckSheetHydrantIndoorController;
+Route::get('/dashboard/report/apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
 
 // Menggunakan middleware auth untuk routes terkait checksheethydrantindoor
 Route::middleware(['auth'])->group(function () {
@@ -253,6 +271,7 @@ Route::get('/checksheethoistcrane', function () {
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/dashboard/profile', [ProfileController::class, 'changePassword'])->middleware('auth');
 
+// Export Checksheet
 Route::post('/export-checksheet-co2', [CheckSheetCo2Controller::class, 'exportExcelWithTemplate'])->name('export.checksheetsco2');
 Route::post('/export-checksheet-powder', [CheckSheetPowderController::class, 'exportExcelWithTemplate'])->name('export.checksheetspowder');
 Route::post('/export-checksheet-apar', [CombinedAparController::class, 'exportExcelWithTemplate'])->name('export.checksheetsapar');

@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Co2</h1>
-        <a href="/dashboard/co2/data-co2/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/co2/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -32,8 +32,8 @@
                         <td>{{ $co2->plant }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('data-co2.destroy', $co2->id) }}" method="POST">
-                                <a href="{{ route('data-co2.edit', $co2->id) }}" class="badge bg-warning">Edit</a>
+                            <form action="{{ route('co2.destroy', $co2->id) }}" method="POST">
+                                <a href="{{ route('co2.edit', $co2->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

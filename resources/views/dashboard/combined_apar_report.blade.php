@@ -48,7 +48,7 @@
             </form>
         </div>
 
-        {{-- <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
+        {{-- <form action="{{ route('apar.show', $apar->id) }}" method="GET">
             <label for="tanggal_filter">Filter Tanggal:</label>
             <input type="date" name="tanggal_filter" id="tanggal_filter">
             <button type="submit" class="btn btn-primary">Filter</button>

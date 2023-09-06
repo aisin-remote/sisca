@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Info Apar</h1>
-        <a href="{{ route('data_apar.edit', $apar->id) }}" class="btn btn-warning">Edit</a>
+        <a href="{{ route('apar.edit', $apar->id) }}" class="btn btn-warning">Edit</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -54,7 +54,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Riwayat Check Sheet Apar</h1>
         <div class="form-group">
-            <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
+            <form action="{{ route('apar.show', $apar->id) }}" method="GET">
                 <label for="tahun_filter">Filter Tahun:</label>
                 <div class="input-group">
                     <select name="tahun_filter" id="tahun_filter" class="form-control">
@@ -67,7 +67,7 @@
             </form>
         </div>
 
-        {{-- <form action="{{ route('data_apar.show', $apar->id) }}" method="GET">
+        {{-- <form action="{{ route('apar.show', $apar->id) }}" method="GET">
             <label for="tanggal_filter">Filter Tanggal:</label>
             <input type="date" name="tanggal_filter" id="tanggal_filter">
             <button type="submit" class="btn btn-primary">Filter</button>
@@ -125,7 +125,7 @@
     @endif
 
     @if (session()->has('success1'))
-        <div class="alert alert-success col-lg-12">
+        <div class="mt-2 alert alert-success col-lg-12">
             {{ session()->get('success1') }}
         </div>
     @endif

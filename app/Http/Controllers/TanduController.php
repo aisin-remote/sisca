@@ -44,7 +44,7 @@ class TanduController extends Controller
         ]);
 
         Tandu::create($validate);
-        return redirect()->route('data-tandu.index')->with('success', "Data Tandu {$validate['no_tandu']} berhasil ditambahkan");
+        return redirect()->route('tandu.index')->with('success', "Data Tandu {$validate['no_tandu']} berhasil ditambahkan");
     }
 
     /**
@@ -88,7 +88,7 @@ class TanduController extends Controller
 
         $tandu->update($validateData);
 
-        return redirect()->route('data-tandu.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('tandu.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -102,6 +102,6 @@ class TanduController extends Controller
         $tandu = Tandu::find($id);
         $tandu->delete();
 
-        return redirect()->route('data-tandu.index')->with('success', 'Data Tandu berhasil dihapus');
+        return redirect()->route('tandu.index')->with('success', 'Data Tandu berhasil dihapus');
     }
 }

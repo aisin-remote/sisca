@@ -45,7 +45,7 @@ class NitrogenController extends Controller
         ]);
 
         Nitrogen::create($validate);
-        return redirect()->route('data-nitrogen.index')->with('success', "Data Nitrogen {$validate['no_tabung']} berhasil ditambahkan");
+        return redirect()->route('nitrogen.index')->with('success', "Data Nitrogen {$validate['no_tabung']} berhasil ditambahkan");
     }
 
     /**
@@ -90,7 +90,7 @@ class NitrogenController extends Controller
 
         $nitrogen->update($validateData);
 
-        return redirect()->route('data-nitrogen.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('nitrogen.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -104,6 +104,6 @@ class NitrogenController extends Controller
         $nitrogen = Nitrogen::find($id);
         $nitrogen->delete();
 
-        return redirect()->route('data-nitrogen.index')->with('success', 'Data Nitrogen berhasil dihapus');
+        return redirect()->route('nitrogen.index')->with('success', 'Data Nitrogen berhasil dihapus');
     }
 }

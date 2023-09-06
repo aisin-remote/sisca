@@ -42,7 +42,7 @@ class TembinController extends Controller
         ]);
 
         Tembin::create($validate);
-        return redirect()->route('data-tembin.index')->with('success', "Data Tembin {$validate['no_equip']} berhasil ditambahkan");
+        return redirect()->route('tembin.index')->with('success', "Data Tembin {$validate['no_equip']} berhasil ditambahkan");
     }
 
     /**
@@ -99,6 +99,6 @@ class TembinController extends Controller
         $tembin = Tembin::find($id);
         $tembin->delete();
 
-        return redirect()->route('data-tembin.index')->with('success', 'Data Tembin berhasil dihapus');
+        return redirect()->route('tembin.index')->with('success', 'Data Tembin berhasil dihapus');
     }
 }

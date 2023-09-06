@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Nitrogen</h1>
-        <a href="/dashboard/nitrogen/data-nitrogen/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/nitrogen/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -32,8 +32,8 @@
                         <td>{{ $nitrogen->plant }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('data-nitrogen.destroy', $nitrogen->id) }}" method="POST">
-                                <a href="{{ route('data-nitrogen.edit', $nitrogen->id) }}" class="badge bg-warning">Edit</a>
+                            <form action="{{ route('nitrogen.destroy', $nitrogen->id) }}" method="POST">
+                                <a href="{{ route('nitrogen.edit', $nitrogen->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

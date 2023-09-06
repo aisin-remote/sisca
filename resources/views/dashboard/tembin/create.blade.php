@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Tambah Data Tembin</h1>
     </div>
-    <form action="/dashboard/tembin/data-tembin" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
+    <form action="/dashboard/master/tembin" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         <div class="row">
         <div class="mb-3 col-md-6">

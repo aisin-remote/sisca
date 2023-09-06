@@ -4,7 +4,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h1>Grafik Status</h1>
+        <h1>Dashboard</h1>
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle caret-none" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">

@@ -93,7 +93,7 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: block;
 }
 
@@ -278,4 +278,11 @@ ul.CTAs a {
     height: auto;
     transition: transform 0.3s;
     transform-origin: top left;
+}
+
+.menu{
+    border-bottom: 1px solid #d3d3d3;
+}
+.submenu{
+    border-top: 1px solid #d3d3d3;
 }

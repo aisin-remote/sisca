@@ -2,23 +2,10 @@
 @section('title', 'Location')
 
 @section('content')
-<div class="d-flex justify-content-between">
-    <div class="col-md-3 d-flex justify-content-center align-items-center">
-        <img src="{{ asset('foto/lokasi/Keterangan.png') }}" alt="Keterangan Gambar" style="max-width: 100%; height: auto;">
-    </div>
-    <div class="col-md d-flex justify-content-center align-items-center">
-        <div class="zoom-container">
-            <img class="zoom-image" src="{{ asset('foto/lokasi/Mapping All Equipment.png') }}" alt="Mapping All Equipment">
-        </div>
-    </div>
-</div>
-
-
-
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Location</h1>
-        <a href="/dashboard/location/create" class="btn btn-success"><span data-feather="file-plus"></span>
+        <a href="/dashboard/master/location/create" class="btn btn-success"><span data-feather="file-plus"></span>
             Tambah</a>
     </div>
     @if (session()->has('success'))

@@ -46,7 +46,7 @@ class SlingController extends Controller
         ]);
 
         Sling::create($validate);
-        return redirect()->route('data-sling.index')->with('success', "Data Sling {$validate['no_sling']} berhasil ditambahkan");
+        return redirect()->route('sling.index')->with('success', "Data Sling {$validate['no_sling']} berhasil ditambahkan");
     }
 
     /**
@@ -92,7 +92,7 @@ class SlingController extends Controller
 
         $sling->update($validateData);
 
-        return redirect()->route('data-sling.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('sling.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -106,6 +106,6 @@ class SlingController extends Controller
         $sling = Sling::find($id);
         $sling->delete();
 
-        return redirect()->route('data-sling.index')->with('success', 'Data Sling berhasil dihapus');
+        return redirect()->route('sling.index')->with('success', 'Data Sling berhasil dihapus');
     }
 }

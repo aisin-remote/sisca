@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Chain Block</h1>
-        <a href="/dashboard/chainblock/data-chainblock/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/chain-block/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -32,8 +32,8 @@
                         <td>{{ $chainblock->handling_detail }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('data-chainblock.destroy', $chainblock->id) }}" method="POST">
-                                <a href="{{ route('data-chainblock.edit', $chainblock->id) }}" class="badge bg-warning">Edit</a>
+                            <form action="{{ route('chain-block.destroy', $chainblock->id) }}" method="POST">
+                                <a href="{{ route('chain-block.edit', $chainblock->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

@@ -207,7 +207,7 @@ class CheckSheetPowderController extends Controller
             return back()->with('error', 'Apar tidak ditemukan.');
         }
 
-        return redirect()->route('data_apar.show', $apar->id)->with('success1', 'Data Check Sheet Powder berhasil diperbarui.');
+        return redirect()->route('apar.show', $apar->id)->with('success1', 'Data Check Sheet Powder berhasil diperbarui.');
     }
 
     public function show($id)

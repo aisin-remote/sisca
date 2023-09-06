@@ -13,52 +13,52 @@
     @endif
     <div class="row d-flex flex-wrap">
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/body'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/body'">
                 <p class="card-text">Body</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/kantin'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/kantin'">
                 <p class="card-text">Kantin</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/loker-pos'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/loker-pos'">
                 <p class="card-text">Locker & Pos</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/main-station'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/main-station'">
                 <p class="card-text">Main Station</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/masjid'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/masjid'">
                 <p class="card-text">Masjid</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/office'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/office'">
                 <p class="card-text">Office</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/pump-room'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/pump-room'">
                 <p class="card-text">Pump Room</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/storage-chemical'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/storage-chemical'">
                 <p class="card-text">Storage Chemical</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/unit'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/unit'">
                 <p class="card-text">Unit</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/apar/location/wwt'">
+            <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/apar/wwt'">
                 <p class="card-text">WWT</p>
             </div>
         </div>

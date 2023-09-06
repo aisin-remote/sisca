@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Hydrant</h1>
-        <a href="/dashboard/hydrant/data-hydrant/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        <a href="/dashboard/master/hydrant/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -34,8 +34,8 @@
                         <td>{{ $hydrant->type }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('data-hydrant.destroy', $hydrant->id) }}" method="POST">
-                                <a href="{{ route('data-hydrant.edit', $hydrant->id) }}" class="badge bg-warning">Edit</a>
+                            <form action="{{ route('hydrant.destroy', $hydrant->id) }}" method="POST">
+                                <a href="{{ route('hydrant.edit', $hydrant->id) }}" class="badge bg-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="badge bg-danger border-0"

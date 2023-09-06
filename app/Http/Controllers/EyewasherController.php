@@ -44,7 +44,7 @@ class EyewasherController extends Controller
         ]);
 
         Eyewasher::create($validate);
-        return redirect()->route('data-eyewasher.index')->with('success', "Data Eye Washer {$validate['no_eyewasher']} berhasil ditambahkan");
+        return redirect()->route('eye-washer.index')->with('success', "Data Eye Washer {$validate['no_eyewasher']} berhasil ditambahkan");
     }
 
     /**
@@ -88,7 +88,7 @@ class EyewasherController extends Controller
 
         $eyewasher->update($validateData);
 
-        return redirect()->route('data-eyewasher.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('eye-washer.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -102,6 +102,6 @@ class EyewasherController extends Controller
         $eyewasher = Eyewasher::find($id);
         $eyewasher->delete();
 
-        return redirect()->route('data-eyewasher.index')->with('success', 'Data Eye Washer berhasil dihapus');
+        return redirect()->route('eye-washer.index')->with('success', 'Data Eye Washer berhasil dihapus');
     }
 }

@@ -45,7 +45,7 @@ class Co2Controller extends Controller
         ]);
 
         Co2::create($validate);
-        return redirect()->route('data-co2.index')->with('success', "Data Co2 {$validate['no_tabung']} berhasil ditambahkan");
+        return redirect()->route('co2.index')->with('success', "Data Co2 {$validate['no_tabung']} berhasil ditambahkan");
     }
 
     /**
@@ -90,7 +90,7 @@ class Co2Controller extends Controller
 
         $co2->update($validateData);
 
-        return redirect()->route('data-co2.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('co2.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -104,6 +104,6 @@ class Co2Controller extends Controller
         $co2 = Co2::find($id);
         $co2->delete();
 
-        return redirect()->route('data-co2.index')->with('success', 'Data Co2 berhasil dihapus');
+        return redirect()->route('co2.index')->with('success', 'Data Co2 berhasil dihapus');
     }
 }

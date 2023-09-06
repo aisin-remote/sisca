@@ -50,7 +50,7 @@ class AparController extends Controller
         ]);
 
         Apar::create($validate);
-        return redirect()->route('data_apar.index')->with('success', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
+        return redirect()->route('apar.index')->with('success', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
     }
 
     /**
@@ -77,7 +77,7 @@ class AparController extends Controller
 
             if (request()->has('tahun_filter')) {
                 $tahunFilter = request()->input('tahun_filter');
-                $checksheets->whereDate('tanggal_pengecekan', $tahunFilter);
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
             }
 
             $checksheets = $checksheets->get();
@@ -91,7 +91,7 @@ class AparController extends Controller
 
             if (request()->has('tahun_filter')) {
                 $tahunFilter = request()->input('tahun_filter');
-                $checksheets->whereDate('tanggal_pengecekan', $tahunFilter);
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
             }
 
             $checksheets = $checksheets->get();
@@ -149,7 +149,7 @@ class AparController extends Controller
 
         $apar->update($validateData);
 
-        return redirect()->route('data_apar.index')->with('success', 'Data berhasil di update.');
+        return redirect()->route('apar.index')->with('success', 'Data berhasil di update.');
     }
 
     /**
@@ -163,7 +163,7 @@ class AparController extends Controller
         $apar = Apar::find($id);
         $apar->delete();
 
-        return redirect()->route('data_apar.index')->with('success', 'Data Apar berhasil dihapus');
+        return redirect()->route('apar.index')->with('success', 'Data Apar berhasil dihapus');
     }
 
     public function location()

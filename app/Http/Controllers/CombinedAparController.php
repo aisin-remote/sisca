@@ -179,7 +179,7 @@ public function exportExcelWithTemplate(Request $request)
             }
 
             if (empty($issueCodes)) {
-                $issueCodes[] = 'OK';
+                $issueCodes[] = '√';
             }
 
             $months[$month] = $issueCodes;
