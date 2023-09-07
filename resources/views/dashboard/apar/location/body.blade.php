@@ -11,15 +11,17 @@
             {{ session()->get('success') }}
         </div>
     @endif
-        <div class="row justify-content-center"> <!-- Mengatur container di tengah -->
-            <div class="col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-body text-center"> <!-- Mengatur card-title di tengah -->
-                        <h3 class="card-title point-of-view">Mapping Apar Body</h3>
-                        <!-- Tambahan informasi lainnya jika perlu -->
-                    </div>
-                    <img src="/foto/lokasi-apar/Mapping APAR Body.png" class="card-img-top" alt="Apar Body">
+    <div class="row justify-content-center"> <!-- Mengatur container di tengah -->
+        <div class="col-md-11 mb-4">
+            <div class="card">
+                <div class="card-body text-center"> <!-- Mengatur card-title di tengah -->
+                    <h3 class="card-title point-of-view">Mapping Apar Body</h3>
+                    <!-- Tambahan informasi lainnya jika perlu -->
                 </div>
+                <figure class="zoom mb-0 mt-0" onmousemove="zoom(event)" style="background-image: url('/foto/lokasi-apar/APAR Body Plant.png');">
+                    <img class="img-fluid" style="max-height: 80vh;" src="/foto/lokasi-apar/APAR Body Plant.png"/>
+                  </figure>
             </div>
         </div>
+    </div>
 @endsection

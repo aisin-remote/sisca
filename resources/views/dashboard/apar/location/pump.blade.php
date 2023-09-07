@@ -12,15 +12,14 @@
         </div>
     @endif
         <div class="row justify-content-center"> <!-- Mengatur container di tengah -->
-            <div class="col-md-12 mb-4">
+            <div class="col-md-11 mb-4">
                 <div class="card">
-                    <div class="card-body text-center"> <!-- Mengatur card-title di tengah -->
-                        <h3 class="card-title point-of-view">Mapping Apar Pump Room</h3>
-                        <!-- Tambahan informasi lainnya jika perlu -->
+                    <div class="card">
+                        <figure class="zoom mb-0 mt-0" onmousemove="zoom(event)" style="background-image: url('/foto/lokasi-apar/Mapping APAR Pump Room.jpg');">
+                            <img class="img-fluid" style="max-height: 90vh;" src="/foto/lokasi-apar/Mapping APAR Pump Room.jpg"/>
+                          </figure>
                     </div>
-                    <img src="/foto/lokasi-apar/Mapping APAR Pump Room.png" class="card-img-top" alt="Apar Pump Room">
                 </div>
             </div>
         </div>
-
 @endsection

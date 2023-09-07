@@ -265,20 +265,23 @@ ul.CTAs a {
     background-color: #6d7fcc; /* Warna latar belakang sesuai kebutuhan */
 }
 
-.zoom-container {
+figure.zoom {
+    background-position: 50% 50%;
     position: relative;
-    display: inline-block;
-    width: 100%;
-    max-width: 600px; /* Atur lebar maksimum sesuai kebutuhan Anda */
-    overflow: hidden;
-}
-
-.zoom-image {
     width: 100%;
     height: auto;
-    transition: transform 0.3s;
-    transform-origin: top left;
-}
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  figure.zoom img:hover {
+    opacity: 0;
+  }
+  figure.zoom img {
+    transition: opacity .5s;
+    display: block;
+    width: 100%;
+  }
+
 
 .menu{
     border-bottom: 1px solid #d3d3d3;
@@ -286,3 +289,24 @@ ul.CTAs a {
 .submenu{
     border-top: 1px solid #d3d3d3;
 }
+
+.container {
+    display: flex;
+  }
+
+  .left {
+    flex: 30%;
+    padding: 10px; /* Tambahkan padding jika diperlukan */
+  }
+
+  .right {
+    flex: 70%;
+    padding: 10px; /* Tambahkan padding jika diperlukan */
+  }
+
+  .keterangan-img,
+  .mapping-img {
+    width: 100%; /* Pastikan gambar mengisi seluruh lebar divnya */
+    height: auto; /* Biarkan tinggi sesuai dengan proporsinya */
+    max-height: 80vh;
+  }

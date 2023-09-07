@@ -20,6 +20,11 @@
                 </span>
             </a>
             <ul class="collapse list-unstyled {{ Request::is('dashboard/location*') ? 'show' : '' }}" id="locationSubmenu">
+                <li class="{{ Request::is('dashboard/location/all-equipment*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/location/all-equipment">All Equipment</a>
+                </li>
+            </ul>
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/location*') ? 'show' : '' }}" id="locationSubmenu">
                 <li class="{{ Request::is('dashboard/location/apar*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/location/apar">Apar</a>
                 </li>

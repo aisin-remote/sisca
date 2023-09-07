@@ -56,6 +56,9 @@ Route::resource('/dashboard/master/apar', AparController::class)->middleware('au
 Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update');
 // lokasi
 Route::get('/dashboard/location/apar', [AparController::class, 'location'])->name('apar.location.index')->middleware('auth');
+Route::get('/dashboard/location/all-equipment', function () {
+    return view('dashboard.location.mapping');
+})->middleware('auth');
 Route::get('/dashboard/location/apar/body', function () {
     return view('dashboard.apar.location.body');
 })->middleware('auth');
