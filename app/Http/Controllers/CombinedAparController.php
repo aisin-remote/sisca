@@ -29,6 +29,8 @@ class CombinedAparController extends Controller
             ->select(
                 'tm_apars.tag_number as apar_number',
                 'tm_apars.type',
+                'tm_apars.expired',
+                'tm_apars.post',
                 'tm_locations.location_name',
                 DB::raw('COALESCE(tt_check_sheet_powders.tanggal_pengecekan, tt_check_sheet_co2s.tanggal_pengecekan) AS tanggal_pengecekan'),
                 DB::raw('COALESCE(tt_check_sheet_powders.pressure, tt_check_sheet_co2s.pressure) AS pressure'),
@@ -52,6 +54,8 @@ class CombinedAparController extends Controller
             $aparNumber = $aparGroup[0]['apar_number'];
             $aparType = $aparGroup[0]['type'];
             $location_name = $aparGroup[0]['location_name'];
+            $aparExpired = $aparGroup[0]['expired'];
+            $aparPost = $aparGroup[0]['post'];
             $months = [];
 
             foreach ($aparGroup as $apar) {
@@ -90,6 +94,8 @@ class CombinedAparController extends Controller
                 'apar_number' => $aparNumber,
                 'type' => $aparType,
                 'location_name' => $location_name,
+                'expired' => $aparExpired,
+                'post' => $aparPost,
                 'months' => $months,
             ];
         });

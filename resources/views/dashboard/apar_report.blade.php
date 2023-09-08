@@ -28,6 +28,7 @@
     <hr>
 
     <h3>APAR CO2 Report</h3>
+    <div class="table-responsive">
     <table class="text-center table table-striped">
         <thead class="align-middle">
             <tr>
@@ -81,12 +82,14 @@
             @endforeach
         </tbody>
     </table>
+</div>
 
 
     <br>
     <hr>
 
     <h3>APAR Powder Report</h3>
+    <div class="table-responsive">
     <table class="text-center table table-striped">
         <thead class="align-middle">
             <tr>
@@ -140,6 +143,7 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 
     <br>
     <hr>

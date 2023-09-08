@@ -49,6 +49,20 @@
 
     {{-- ajax JS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+
+    {{-- Data Table --}}
+    <!-- File CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
+
+<!-- File JavaScript -->
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -101,39 +115,19 @@
             });
         });
 
+        function zoom(e) {
+            var zoomer = e.currentTarget;
+            e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+            e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+            x = offsetX / zoomer.offsetWidth * 100
+            y = offsetY / zoomer.offsetHeight * 100
+            zoomer.style.backgroundPosition = x + '% ' + y + '%';
+        }
 
-
-        const zoomContainer = document.querySelector('.zoom-container');
-    const zoomImage = zoomContainer.querySelector('.zoom-image');
-
-    zoomContainer.addEventListener('mousemove', function(event) {
-        const rect = zoomContainer.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        const imageWidth = zoomImage.width;
-        const imageHeight = zoomImage.height;
-
-        const scale = 2; // Faktor zoom
-
-        const translateX = -(x * scale - x);
-        const translateY = -(y * scale - y);
-
-        zoomImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-    });
-
-    zoomContainer.addEventListener('mouseleave', function() {
-        zoomImage.style.transform = 'scale(1) translate(0, 0)';
-    });
-
-    function zoom(e){
-  var zoomer = e.currentTarget;
-  e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
-  e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
-  x = offsetX/zoomer.offsetWidth*100
-  y = offsetY/zoomer.offsetHeight*100
-  zoomer.style.backgroundPosition = x + '% ' + y + '%';
-}
+        <!-- Panggil Fungsi -->
+//     $(document).ready(function() {
+// 	$('.table-paginate').dataTable();
+//  } );
     </script>
 </body>
 

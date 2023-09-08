@@ -11,15 +11,14 @@
             {{ session()->get('success') }}
         </div>
     @endif
-    <div class="container">
+    <div class="containere">
         <div class="left">
           <!-- Gambar Keterangan (30% lebar) -->
           <img src="\foto\lokasi\Keterangan.png" alt="Gambar Keterangan" class="keterangan-img">
         </div>
-        <div class="right zoom-container">
-          <!-- All Mapping (70% lebar) -->
-          <img src="\foto\lokasi\Mapping All Equipment.png" alt="All Mapping Equipment" class="zoom-image mapping-img">
-        </div>
+        <figure class="zoom mb-0 mt-0" onmousemove="zoom(event)" style="background-image: url('/foto/lokasi/Mapping All Equipment.jpg');">
+            <img class="img-fluid" style="max-height: 80vh;" src="/foto/lokasi/Mapping All Equipment.jpg"/>
+          </figure>
       </div>
 
 @endsection
