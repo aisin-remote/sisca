@@ -2,7 +2,7 @@
 @section('title', 'All APAR Report')
 
 @section('content')
-    <form class="form-inline mb-5 col-lg-12" method="GET" action="{{ route('home.checksheet.apar') }}">
+    <form class="form-inline mb-5 col-sm-12" method="GET" action="{{ route('home.checksheet.apar') }}">
         <div class="input-group mb-3">
             <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
             <select class="form-select" name="selected_year" id="selected_year">
@@ -23,7 +23,7 @@
     @endif
 
     <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-sm-12">
         <h3>All APAR Report</h3>
         <div class="form-group">
             <form action="{{ route('export.checksheetsapar') }}" method="POST">
@@ -44,12 +44,10 @@
             </form>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="card rounded-bottom-0 mb-0">
+        <div class="card rounded-bottom-0 mb-0 col-md-12">
             <div class="card-body">
-                <div class="table-responsive col-lg-12">
-                    <table class="table table-responsive table-striped table-bordered" id="dtBasicExample"
-                        style="white-space: nowrap;">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm table-bordered col-md-12" id="dtBasicExample" style="width: 100%">
                         <thead>
                             <tr>
                                 <th rowspan="2">Tag Number</th>
@@ -95,14 +93,13 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="card rounded-top-0 mt-0 col-lg-12">
         <div class="card-body">
             <p class="card-title"><strong>Keterangan Kerusakan:</strong></p>
             {{-- <div class="container"> --}}
             {{-- <div class="table-responsive"> --}}
-            <table class="table table-borderless">
+            <table class="table table-sm table-borderless">
                 <thead>
                     <tr>
                         <td scope="col">1. Pressure</td>
@@ -144,20 +141,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            var table = $('#dtBasicExample').DataTable({
-                responsive: false;
-                scrollX: true, // Tambahkan opsi scrollX
-                fixedHeader: true
-            });
-
-            // Mengatur lebar kolom berdasarkan konten
-            table.columns().every(function() {
-                var that = this;
-
-                $(window).on('resize', function() {
-                    that.adjust();
-                });
-            });
+            var table = $('#dtBasicExample').DataTable();
         });
     </script>
 
