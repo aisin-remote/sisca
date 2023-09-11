@@ -1,6 +1,6 @@
 
 <!-- Page Content  -->
-<div style="margin-left: 0px" class="content">
+<div style="margin-left: 0px">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">

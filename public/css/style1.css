@@ -62,6 +62,7 @@ a:focus {
     background: #7386D5;
     color: #fff;
     transition: all 0.3s;
+    z-index: 99;
 
     position: fixed;
     height: 100%;
@@ -144,6 +145,7 @@ ul.CTAs a {
 #content {
     width: 100%;
     padding: 20px;
+    max-width: 100wh;
     min-height: 100vh;
     transition: all 0.3s;
     margin-left: 250px;
@@ -159,7 +161,7 @@ ul.CTAs a {
 
 @media (max-width: 768px) {
     #sidebar {
-        /* margin-left: -250px; */
+        margin-left: 0px;
     }
     #sidebar.active {
         margin-left: -250px;

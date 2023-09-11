@@ -85,6 +85,7 @@
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
                 $('#content').toggleClass('active');
+                $('body').toggleClass('sidebar-active'); // Tambahkan ini
             });
         });
 
@@ -124,10 +125,9 @@
             zoomer.style.backgroundPosition = x + '% ' + y + '%';
         }
 
-        <!-- Panggil Fungsi -->
-//     $(document).ready(function() {
-// 	$('.table-paginate').dataTable();
-//  } );
+        $(document).ready(function() {
+            var table = $('#dtBasicExample').DataTable();
+        });
     </script>
 </body>
 

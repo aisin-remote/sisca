@@ -31,7 +31,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $apar->tag_number }}</td>
                         <td>{{ $apar->locations->location_name }}</td>
-                        <td>{{ $apar->expired }}</td>
+                        <td>{{ strftime('%e %B %Y', strtotime($apar->expired)) }}</td>
                         <td>{{ $apar->post }}</td>
                         <td>{{ $apar->type }}</td>
                         <td>
