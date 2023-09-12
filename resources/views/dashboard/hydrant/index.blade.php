@@ -13,7 +13,7 @@
         </div>
     @endif
     <div class="table-responsive col-lg-12">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" id="dtBasicExample">
             <thead>
                 <tr class="text-center align-middle">
                     <th scope="col">#</th>

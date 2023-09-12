@@ -47,83 +47,89 @@ class CheckSheetPowderController extends Controller
             ->first();
 
         if ($existingCheckSheet) {
-            if ($existingCheckSheet) {
-                // Jika sudah ada entri, perbarui entri tersebut
-                $validatedData = $request->validate([
-                    'tanggal_pengecekan' => 'required|date',
-                    'npk' => 'required',
-                    'apar_number' => 'required',
-                    'pressure' => 'required',
-                    'photo_pressure' => 'required|image|file|max:3072',
-                    'hose' => 'required',
-                    'photo_hose' => 'required|image|file|max:3072',
-                    'tabung' => 'required',
-                    'photo_tabung' => 'required|image|file|max:3072',
-                    'regulator' => 'required',
-                    'photo_regulator' => 'required|image|file|max:3072',
-                    'lock_pin' => 'required',
-                    'photo_lock_pin' => 'required|image|file|max:3072',
-                    'powder' => 'required',
-                    'photo_powder' => 'required|image|file|max:3072',
-                    'description' => 'nullable|string|max:255',
-                    // tambahkan validasi untuk atribut lainnya
-                ]);
+            // Jika sudah ada entri, perbarui entri tersebut
+            $validatedData = $request->validate([
+                'tanggal_pengecekan' => 'required|date',
+                'npk' => 'required',
+                'apar_number' => 'required',
+                'pressure' => 'required',
+                'catatan_pressure' => 'nullable|string|max:255',
+                'photo_pressure' => 'required|image|file|max:3072',
+                'hose' => 'required',
+                'catatan_hose' => 'nullable|string|max:255',
+                'photo_hose' => 'required|image|file|max:3072',
+                'tabung' => 'required',
+                'catatan_tabung' => 'nullable|string|max:255',
+                'photo_tabung' => 'required|image|file|max:3072',
+                'regulator' => 'required',
+                'catatan_regulator' => 'nullable|string|max:255',
+                'photo_regulator' => 'required|image|file|max:3072',
+                'lock_pin' => 'required',
+                'catatan_lock_pin' => 'nullable|string|max:255',
+                'photo_lock_pin' => 'required|image|file|max:3072',
+                'powder' => 'required',
+                'catatan_powder' => 'nullable|string|max:255',
+                'photo_powder' => 'required|image|file|max:3072',
+                // tambahkan validasi untuk atribut lainnya
+            ]);
 
-                if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
-                    $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
-                    $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
-                    $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
-                    $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
-                    $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-co2-af11e');
-                    $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-co2-af11e');
-                    $validatedData['photo_berat_tabung'] = $request->file('photo_berat_tabung')->store('checksheet-apar-co2-af11e');
-                }
-
-                // Perbarui data entri yang sudah ada
-                $existingCheckSheet->update($validatedData);
-
-                return redirect()->route('show.form')->with('success', 'Data berhasil diperbarui.');
-            } else {
-                // Jika belum ada entri, buat entri baru
-                $validatedData = $request->validate([
-                    'tanggal_pengecekan' => 'required|date',
-                    'npk' => 'required',
-                    'apar_number' => 'required',
-                    'pressure' => 'required',
-                    'photo_pressure' => 'required|image|file|max:3072',
-                    'hose' => 'required',
-                    'photo_hose' => 'required|image|file|max:3072',
-                    'corong' => 'required',
-                    'photo_corong' => 'required|image|file|max:3072',
-                    'tabung' => 'required',
-                    'photo_tabung' => 'required|image|file|max:3072',
-                    'regulator' => 'required',
-                    'photo_regulator' => 'required|image|file|max:3072',
-                    'lock_pin' => 'required',
-                    'photo_lock_pin' => 'required|image|file|max:3072',
-                    'berat_tabung' => 'required',
-                    'photo_berat_tabung' => 'required|image|file|max:3072',
-                    'description' => 'nullable|string|max:255',
-                    // tambahkan validasi untuk atribut lainnya
-                ]);
-
-                if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_powder')) {
-                    $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');
-                    $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-powder');
-                    $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-powder');
-                    $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-powder');
-                    $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-powder');
-                    $validatedData['photo_powder'] = $request->file('photo_powder')->store('checksheet-apar-powder');
-                }
-
-                // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
-                $validatedData['npk'] = auth()->user()->npk;
-
-                // Simpan data baru ke database menggunakan metode create
-                CheckSheetPowder::create($validatedData);
-
-                return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
+            if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_powder')) {
+                $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');
+                $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-powder');
+                $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-powder');
+                $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-powder');
+                $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-powder');
+                $validatedData['photo_powder'] = $request->file('photo_powder')->store('checksheet-apar-powder');
             }
+
+            // Perbarui data entri yang sudah ada
+            $existingCheckSheet->update($validatedData);
+
+            return redirect()->route('show.form')->with('success', 'Data berhasil diperbarui.');
+        } else {
+            // Jika belum ada entri, buat entri baru
+            $validatedData = $request->validate([
+                'tanggal_pengecekan' => 'required|date',
+                'npk' => 'required',
+                'apar_number' => 'required',
+                'pressure' => 'required',
+                'catatan_pressure' => 'nullable|string|max:255',
+                'photo_pressure' => 'required|image|file|max:3072',
+                'hose' => 'required',
+                'catatan_hose' => 'nullable|string|max:255',
+                'photo_hose' => 'required|image|file|max:3072',
+                'tabung' => 'required',
+                'catatan_tabung' => 'nullable|string|max:255',
+                'photo_tabung' => 'required|image|file|max:3072',
+                'regulator' => 'required',
+                'catatan_regulator' => 'nullable|string|max:255',
+                'photo_regulator' => 'required|image|file|max:3072',
+                'lock_pin' => 'required',
+                'catatan_lock_pin' => 'nullable|string|max:255',
+                'photo_lock_pin' => 'required|image|file|max:3072',
+                'powder' => 'required',
+                'catatan_powder' => 'nullable|string|max:255',
+                'photo_powder' => 'required|image|file|max:3072',
+                // tambahkan validasi untuk atribut lainnya
+            ]);
+
+            if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_powder')) {
+                $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');
+                $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-powder');
+                $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-powder');
+                $validatedData['photo_regulator'] = $request->file('photo_regulator')->store('checksheet-apar-powder');
+                $validatedData['photo_lock_pin'] = $request->file('photo_lock_pin')->store('checksheet-apar-powder');
+                $validatedData['photo_powder'] = $request->file('photo_powder')->store('checksheet-apar-powder');
+            }
+
+            // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
+            $validatedData['npk'] = auth()->user()->npk;
+
+
+            // Simpan data baru ke database menggunakan metode create
+            CheckSheetPowder::create($validatedData);
+
+            return redirect()->route('show.form')->with('success', 'Data berhasil disimpan.');
         }
     }
 
@@ -140,18 +146,23 @@ class CheckSheetPowderController extends Controller
         // Validasi data yang diinputkan
         $rules = [
             'pressure' => 'required',
+            'catatan_pressure' => 'nullable|string|max:255',
             'photo_pressure' => 'image|file|max:3072',
             'hose' => 'required',
+            'catatan_hose' => 'nullable|string|max:255',
             'photo_hose' => 'image|file|max:3072',
             'tabung' => 'required',
+            'catatan_tabung' => 'nullable|string|max:255',
             'photo_tabung' => 'image|file|max:3072',
             'regulator' => 'required',
+            'catatan_regulator' => 'nullable|string|max:255',
             'photo_regulator' => 'image|file|max:3072',
             'lock_pin' => 'required',
+            'catatan_lock_pin' => 'nullable|string|max:255',
             'photo_lock_pin' => 'image|file|max:3072',
             'powder' => 'required',
-            'photo_powder' => 'required|image|file|max:3072',
-            'description' => 'nullable|string|max:255',
+            'catatan_powder' => 'nullable|string|max:255',
+            'photo_powder' => 'image|file|max:3072',
         ];
 
         $validatedData = $request->validate($rules);
