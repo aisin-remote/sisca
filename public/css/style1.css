@@ -67,6 +67,9 @@ a:focus {
     position: fixed;
     height: 100%;
     overflow-y: auto;
+
+    border-top-right-radius: 20px; /* Sudut melengkung ujung kanan atas */
+    border-bottom-right-radius: 20px; /* Sudut melengkung ujung kanan bawah */
 }
 
 #sidebar::-webkit-scrollbar {
@@ -143,9 +146,8 @@ ul.CTAs a {
 ----------------------------------------------------- */
 
 #content {
-    width: 100%;
+    width: calc(100% - 250px);
     padding: 20px;
-    max-width: 100wh;
     min-height: 100vh;
     transition: all 0.3s;
     margin-left: 250px;
@@ -153,6 +155,7 @@ ul.CTAs a {
 
 #content.active{
     margin-left: 0px;
+    width: 100%;
 }
 
 /* ---------------------------------------------------

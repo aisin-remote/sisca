@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->string('tag_number')->unique();
-            $table->string('expired');
+            $table->date('expired');
             $table->string('post')->nullable()->default('-');
             $table->string('type');
             $table->timestamps();

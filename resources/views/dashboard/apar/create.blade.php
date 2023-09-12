@@ -32,25 +32,14 @@
                 @enderror
             </div>
             <div class="mb-3 col-md-6">
-                <label class="form-label" for="expired">Expired </label>
-                <select name="expired" id="expired" class="form-control @error('expired') is-invalid @enderror">
-                    <option selected disabled>Pilih Tahun Expired</option>
-                    @php
-                        $currentYear = date('Y');
-                        $startYear = $currentYear - 10;
-                        $endYear = $currentYear + 10;
-                    @endphp
-                    @for ($year = $startYear; $year <= $endYear; $year++)
-                        <option value="{{ $year }}" {{ old('expired') == $year ? 'selected' : '' }}>
-                            {{ $year }}
-                        </option>
-                    @endfor
-                </select>
-
+                <label class="form-label" for="expired">Expired</label>
+                <input type="date" name="expired" id="expired" class="form-control @error('expired') is-invalid @enderror"
+                    value="{{ old('expired') }}">
                 @error('expired')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3 col-md-6">
                 <label for="post" class="form-label">Post</label>
                 <input type="text" name="post" id="post" placeholder="Masukkan Post"

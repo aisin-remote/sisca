@@ -47,7 +47,7 @@
         <div class="card rounded-bottom-0 mb-0 col-lg-12">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm table-bordered col-lg-12" id="dtBasicExample">
+                    <table class="table table-striped table-sm table-bordered col-lg-12" id="dtBasicExample" style="width: 100%">
                         <thead>
                             <tr class="text-center align-middle">
                                 <th rowspan="2">#</th>
@@ -107,11 +107,11 @@
                         <td scope="col">1. Pressure</td>
                         <td scope="col">= a</td>
                         <td scope="col"></td>
-                        <td scope="col">4. Tabung</td>
-                        <td scope="col">= d</td>
+                        <td scope="col">5. Corong/Nozzle</td>
+                        <td scope="col">= e</td>
                         <td scope="col"></td>
-                        <td scope="col">7. Kadar Konsentrat</td>
-                        <td scope="col">= g</td>
+                        <td scope="col">9. Isi Ulang</td>
+                        <td scope="col">= a+b</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,22 +119,24 @@
                         <td scope="col">2. Lock Pin</td>
                         <td scope="col">= b</td>
                         <td scope="col"></td>
-                        <td scope="col">5. Corong/Nozzle</td>
-                        <td scope="col">= e</td>
+                        <td scope="col">6. Hose</td>
+                        <td scope="col">= f</td>
                         <td scope="col"></td>
-                        <td scope="col">8. Berat APAR</td>
-                        <td scope="col">= H</td>
+                        <td scope="col">10. Expired</td>
+                        <td scope="col">= x</td>
                     </tr>
                     <tr>
                         <td scope="col">3. Regulator</td>
                         <td scope="col">= c</td>
                         <td scope="col"></td>
-                        <td scope="col">6. Hose</td>
-                        <td scope="col">= f</td>
-                        <td scope="col"></td>
-                        <td scope="col">9. Isi Ulang</td>
-                        <td scope="col">= a+b</td>
+                        <td scope="col">7. Kada Konsentrat</td>
+                        <td scope="col">= g</td>
                     </tr>
+                        <td scope="col">4. Tabung</td>
+                        <td scope="col">= d</td>
+                        <td scope="col"></td>
+                        <td scope="col">8. Berat APAR</td>
+                        <td scope="col">= H</td>
                 </tbody>
             </table>
             </div>

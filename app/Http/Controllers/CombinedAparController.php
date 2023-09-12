@@ -70,6 +70,9 @@ class CombinedAparController extends Controller
                     if ($apar['tabung'] === 'NG') $issueCodes[] = 'd';
                     if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
                     if ($apar['powder'] === 'NG') $issueCodes[] = 'g';
+                    if (strtotime($apar['expired']) < strtotime('now')) {
+                        $issueCodes[] = 'x';
+                    }
                 }
 
                 // Map issue codes for co2 type
@@ -81,6 +84,9 @@ class CombinedAparController extends Controller
                     if ($apar['corong'] === 'NG') $issueCodes[] = 'e';
                     if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
                     if ($apar['berat_tabung'] === 'NG') $issueCodes[] = 'h';
+                    if (strtotime($apar['expired']) < strtotime('now')) {
+                        $issueCodes[] = 'x';
+                    }
                 }
 
                 if (empty($issueCodes)) {
@@ -171,6 +177,9 @@ public function exportExcelWithTemplate(Request $request)
                 if ($apar['tabung'] === 'NG') $issueCodes[] = 'd';
                 if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
                 if ($apar['powder'] === 'NG') $issueCodes[] = 'g';
+                if (strtotime($apar['expired']) < strtotime('now')) {
+                    $issueCodes[] = 'x';
+                }
             }
 
             // Map issue codes for co2 type
@@ -182,6 +191,9 @@ public function exportExcelWithTemplate(Request $request)
                 if ($apar['corong'] === 'NG') $issueCodes[] = 'e';
                 if ($apar['hose'] === 'NG') $issueCodes[] = 'f';
                 if ($apar['berat_tabung'] === 'NG') $issueCodes[] = 'h';
+                if (strtotime($apar['expired']) < strtotime('now')) {
+                    $issueCodes[] = 'x';
+                }
             }
 
             if (empty($issueCodes)) {
