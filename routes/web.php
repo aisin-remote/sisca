@@ -92,7 +92,7 @@ Route::get('/dashboard/location/apar/wwt', function () {
 
 
 // Route Hydrant
-Route::resource('/dashboard/master/hydrant', HydrantController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/master/hydrant', HydrantController::class)->middleware('auth');
 Route::put('/dashboard/master/hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('hydrant.update');
 
 //Route Nitrogen
@@ -130,11 +130,12 @@ Route::delete('/dashboard/master/location/{data_location}', [LocationController:
 
 use App\Http\Controllers\CheckSheetController;
 use App\Http\Controllers\CheckSheetHydrantController;
-use App\Http\Controllers\CheckSheetHydrantIndoorController;
-use App\Models\CheckSheetHydrantIndoor;
 
 // checksheet
 Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
+Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
+
+
 Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
 Route::get('/dashboard/check-sheet/apar/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
 
@@ -144,14 +145,18 @@ Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantCo
 
 //lagi fix ini (hapus jika indoor sudah kelar)
 // Menggunakan middleware auth untuk routes terkait checksheetco2
+
+
+use App\Http\Controllers\CheckSheetHydrantIndoorController;
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/hydrant/checksheetindoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'showForm'])->name('checksheetindoor');
-    Route::post('/dashboard/hydrant/process-checksheet-hydrant-indoor/{hydrantNumber}', [CheckSheetHydrantIndoor::class, 'store'])->name('process.checksheet.indoor');
+    Route::post('/dashboard/hydrant/process-checksheet-hydrant-indoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'store'])->name('process.checksheet.indoor');
 
-    Route::delete('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
-    Route::get('/dashboard/check-sheet/aparco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
-    Route::put('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
-    Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
+    Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
+    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/edit', [CheckSheetHydrantIndoorController::class, 'edit'])->name('hydrant.checksheetindoor.edit');
+    Route::put('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'update'])->name('hydrant.checksheetindoor.update');
+    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantIndoorController::class, 'show'])->name('hydrant.checksheetindoor.show');
 
 });
 

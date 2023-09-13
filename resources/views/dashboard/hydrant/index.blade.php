@@ -34,13 +34,14 @@
                         <td>{{ $hydrant->type }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('hydrant.destroy', $hydrant->id) }}" method="POST">
-                                <a href="{{ route('hydrant.edit', $hydrant->id) }}" class="badge bg-warning">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Hydrant?')">Delete</button>
-                            </form>
+                                <a href="{{ route('hydrant.show', $hydrant->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('hydrant.edit', $hydrant->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('hydrant.destroy', $hydrant->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Hydrant?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

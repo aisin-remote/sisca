@@ -39,67 +39,71 @@
             {{ session()->get('success1') }}
         </div>
     @endif
-    <div class="table-responsive col-lg-12">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr class="text-center align-middle">
-                    <th scope="col">#</th>
-                    <th scope="col">Tanggal Pengecekan</th>
-                    <th scope="col">Terakhir Update</th>
-                    <th scope="col">NPK</th>
-                    <th scope="col">Nomor Hydrant</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($combinedLatestCheckSheets as $index => $checkSheet)
-                    <tr class="text-center align-middle">
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $checkSheet->created_at->format('d F Y') }}</td>
-                        <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
-                        <td>{{ $checkSheet->npk }}</td>
-                        <td>{{ $checkSheet->hydrant_number }}</td>
-                        <td>{{ $checkSheet->hydrants->type }}</td>
-                        @if ($checkSheet->hydrants->type === 'Indoor')
-                            <td class="text-center align-middle">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a href="{{ route('hydrant.checksheetindoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                    <a href="{{ route('hydrant.checksheetindoor.edit', $checkSheet->id) }}"
-                                        class="badge bg-warning me-2">Edit</a>
-                                    <form action="{{ route('hydrant.checksheetindoor.destroy', $checkSheet->id) }}" method="POST"
-                                        class="delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="badge bg-danger border-0"
-                                            onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Indoor?')">Delete</button>
-                                    </form>
-                                </div>
-                            </td>
-                        @elseif ($checkSheet->hydrants->type === 'Outdoor')
-                            <td class="text-center align-middle">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a href="{{ route('hydrant.checksheetoutdoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                    <a href="{{ route('hydrant.checksheetoutdoor.edit', $checkSheet->id) }}"
-                                        class="badge bg-warning me-2">Edit</a>
-                                    <form action="{{ route('hydrant.checksheetoutdoor.destroy', $checkSheet->id) }}" method="POST"
-                                        class="delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="badge bg-danger border-0"
-                                            onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Outdoor?')">Delete</button>
-                                    </form>
-                                </div>
-                            </td>
-                        @else
-                            <p>Type dari Hydrant tidak ditemukan</p>
-                        @endif
-                    </tr>
-                @empty
-                    <td colspan="12">Tidak ada data...</td>
-                @endforelse
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive col-lg-12">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr class="text-center align-middle">
+                            <th scope="col">#</th>
+                            <th scope="col">Tanggal Pengecekan</th>
+                            <th scope="col">Terakhir Update</th>
+                            <th scope="col">NPK</th>
+                            <th scope="col">Nomor Hydrant</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($combinedLatestCheckSheets as $index => $checkSheet)
+                            <tr class="text-center align-middle">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $checkSheet->created_at->format('d F Y') }}</td>
+                                <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
+                                <td>{{ $checkSheet->npk }}</td>
+                                <td>{{ $checkSheet->hydrant_number }}</td>
+                                <td>{{ $checkSheet->hydrants->type }}</td>
+                                @if ($checkSheet->hydrants->type === 'Indoor')
+                                    <td class="text-center align-middle">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('hydrant.checksheetindoor.edit', $checkSheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('hydrant.checksheetindoor.destroy', $checkSheet->id) }}" method="POST"
+                                                class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Indoor?')">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                @elseif ($checkSheet->hydrants->type === 'Outdoor')
+                                    <td class="text-center align-middle">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('hydrant.checksheetoutdoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('hydrant.checksheetoutdoor.edit', $checkSheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('hydrant.checksheetoutdoor.destroy', $checkSheet->id) }}" method="POST"
+                                                class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Outdoor?')">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                @else
+                                    <p>Type dari Hydrant tidak ditemukan</p>
+                                @endif
+                            </tr>
+                        @empty
+                            <td colspan="12">Tidak ada data...</td>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 @endsection

@@ -81,6 +81,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/apar*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/apar">Apar</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/hydrant*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/hydrant">Hydrant</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetHydrantIndoor;
+use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\Hydrant;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HydrantController extends Controller
 {
@@ -57,7 +60,46 @@ class HydrantController extends Controller
      */
     public function show($id)
     {
-        //
+        $hydrant = Hydrant::findOrFail($id);
+
+        if (!$hydrant) {
+            return back()->with('error', 'Hydrant tidak ditemukan.');
+        }
+
+        $type = $hydrant->type;
+        $checksheets = null;
+
+        if ($type === 'Indoor') {
+            $checksheets = CheckSheetHydrantIndoor::where('hydrant_number', $hydrant->no_hydrant);
+            $firstYear = CheckSheetHydrantIndoor::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetHydrantIndoor::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
+            return view('dashboard.hydrant.show', compact('hydrant', 'checksheets', 'firstYear', 'lastYear'));
+
+        } elseif ($type === 'Outdoor') {
+            $checksheets = CheckSheetHydrantOutdoor::where('hydrant_number', $hydrant->no_hydrant);
+            $firstYear = CheckSheetHydrantOutdoor::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetHydrantOutdoor::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
+            return view('dashboard.hydrant.show', compact('hydrant', 'checksheets', 'firstYear', 'lastYear'));
+
+        } else {
+            return back()->with('error', 'Hydrant tidak dikenali');
+        }
     }
 
     /**
