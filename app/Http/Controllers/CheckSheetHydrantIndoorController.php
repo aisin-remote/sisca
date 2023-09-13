@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CheckSheetHydrantIndoor;
+use App\Models\Hydrant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -56,7 +57,7 @@ class CheckSheetHydrantIndoorController extends Controller
                 'photo_pintu' => 'required|image|file|max:3072',
                 'lampu' => 'required',
                 'catatan_lampu' => 'nullable|string|max:255',
-                'photo_lampu' => 'required',
+                'photo_lampu' => 'required|image|file|max:3072',
                 'emergency' => 'required',
                 'catatan_emergency' => 'nullable|string|max:255',
                 'photo_emergency' => 'required|image|file|max:3072',
@@ -108,7 +109,7 @@ class CheckSheetHydrantIndoorController extends Controller
                 'photo_pintu' => 'required|image|file|max:3072',
                 'lampu' => 'required',
                 'catatan_lampu' => 'nullable|string|max:255',
-                'photo_lampu' => 'required',
+                'photo_lampu' => 'required|image|file|max:3072',
                 'emergency' => 'required',
                 'catatan_emergency' => 'nullable|string|max:255',
                 'photo_emergency' => 'required|image|file|max:3072',
@@ -159,6 +160,118 @@ class CheckSheetHydrantIndoorController extends Controller
     {
         $checkSheetindoor = CheckSheetHydrantIndoor::findOrFail($id);
         return view('dashboard.hydrant.checksheetindoor.edit', compact('checkSheetindoor'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $checkSheetindoor = CheckSheetHydrantIndoor::findOrFail($id);
+
+        // Validasi data yang diinputkan
+        $rules = [
+            'pintu' => 'required',
+            'catatan_pintu' => 'nullable|string|max:255',
+            'photo_pintu' => 'image|file|max:3072',
+            'lampu' => 'required',
+            'catatan_lampu' => 'nullable|string|max:255',
+            'photo_lampu' => 'image|file|max:3072',
+            'emergency' => 'required',
+            'catatan_emergency' => 'nullable|string|max:255',
+            'photo_emergency' => 'image|file|max:3072',
+            'nozzle' => 'required',
+            'catatan_nozzle' => 'nullable|string|max:255',
+            'photo_nozzle' => 'image|file|max:3072',
+            'selang' => 'required',
+            'catatan_selang' => 'nullable|string|max:255',
+            'photo_selang' => 'image|file|max:3072',
+            'valve' => 'required',
+            'catatan_valve' => 'nullable|string|max:255',
+            'photo_valve' => 'image|file|max:3072',
+            'coupling' => 'required',
+            'catatan_coupling' => 'nullable|string|max:255',
+            'photo_coupling' => 'image|file|max:3072',
+            'pressure' => 'required',
+            'catatan_pressure' => 'nullable|string|max:255',
+            'photo_pressure' => 'image|file|max:3072',
+            'kupla' => 'required',
+            'catatan_kupla' => 'nullable|string|max:255',
+            'photo_kupla' => 'image|file|max:3072',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('photo_pintu')) {
+            if ($request->oldImage_pintu) {
+                Storage::delete($request->oldImage_pintu);
+            }
+            $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_lampu')) {
+            if ($request->oldImage_lampu) {
+                Storage::delete($request->oldImage_lampu);
+            }
+            $validatedData['photo_lampu'] = $request->file('photo_lampu')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_emergency')) {
+            if ($request->oldImage_emergency) {
+                Storage::delete($request->oldImage_emergency);
+            }
+            $validatedData['photo_emergency'] = $request->file('photo_emergency')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_nozzle')) {
+            if ($request->oldImage_nozzle) {
+                Storage::delete($request->oldImage_nozzle);
+            }
+            $validatedData['photo_nozzle'] = $request->file('photo_nozzle')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_selang')) {
+            if ($request->oldImage_selang) {
+                Storage::delete($request->oldImage_selang);
+            }
+            $validatedData['photo_selang'] = $request->file('photo_selang')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_valve')) {
+            if ($request->oldImage_valve) {
+                Storage::delete($request->oldImage_valve);
+            }
+            $validatedData['photo_valve'] = $request->file('photo_valve')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_coupling')) {
+            if ($request->oldImage_coupling) {
+                Storage::delete($request->oldImage_coupling);
+            }
+            $validatedData['photo_coupling'] = $request->file('photo_coupling')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_pressure')) {
+            if ($request->oldImage_pressure) {
+                Storage::delete($request->oldImage_pressure);
+            }
+            $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-hydrant-indoor');
+        }
+
+        if ($request->file('photo_kupla')) {
+            if ($request->oldImage_kupla) {
+                Storage::delete($request->oldImage_kupla);
+            }
+            $validatedData['photo_kupla'] = $request->file('photo_kupla')->store('checksheet-hydrant-indoor');
+        }
+
+        // Update data CheckSheetIndoor dengan data baru dari form
+        $checkSheetindoor->update($validatedData);
+
+        $hydrant = Hydrant::where('no_hydrant', $checkSheetindoor->hydrant_number)->first();
+
+        if (!$hydrant) {
+            return back()->with('error', 'Hydrant tidak ditemukan.');
+        }
+
+        return redirect()->route('hydrant.checksheetindoor.show', $hydrant->id)->with('success1', 'Data Check Sheet Hydrant Indoor berhasil diperbarui.');
     }
 
     public function destroy($id)
