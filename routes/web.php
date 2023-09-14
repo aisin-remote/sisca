@@ -207,8 +207,11 @@ use App\Http\Controllers\AparReportController;
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
 use App\Http\Controllers\CombinedAparController;
+use App\Http\Controllers\CombinedHydrantController;
 
 Route::get('/dashboard/report/apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
+Route::get('/dashboard/report/hydrant', [CombinedHydrantController::class, 'index'])->name('home.checksheet.hydrant')->middleware('auth');
+
 
 // Menggunakan middleware auth untuk routes terkait checksheethydrantindoor
 Route::middleware(['auth'])->group(function () {
