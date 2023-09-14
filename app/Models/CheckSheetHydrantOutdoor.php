@@ -41,5 +41,10 @@ class CheckSheetHydrantOutdoor extends Model
         'photo_kupla',
     ];
 
+    public function hydrants()
+    {
+        return $this->belongsTo(Hydrant::class, 'hydrant_number', 'no_hydrant');
+    }
+
     public $timestamps = true;
 }

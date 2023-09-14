@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form action="{{ route('process.checksheet.hydrantoutdoor') }}" method="POST">
+            <form action="{{ route('process.checksheet.outdoor') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>

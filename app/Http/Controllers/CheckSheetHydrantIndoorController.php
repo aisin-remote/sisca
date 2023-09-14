@@ -271,7 +271,14 @@ class CheckSheetHydrantIndoorController extends Controller
             return back()->with('error', 'Hydrant tidak ditemukan.');
         }
 
-        return redirect()->route('hydrant.checksheetindoor.show', $hydrant->id)->with('success1', 'Data Check Sheet Hydrant Indoor berhasil diperbarui.');
+        return redirect()->route('hydrant.show', $hydrant->id)->with('success1', 'Data Check Sheet Hydrant Indoor berhasil diperbarui.');
+    }
+
+    public function show($id)
+    {
+        $checksheet = CheckSheetHydrantIndoor::findOrFail($id);
+
+        return view('dashboard.hydrant.checksheet.show', compact('checksheet'));
     }
 
     public function destroy($id)

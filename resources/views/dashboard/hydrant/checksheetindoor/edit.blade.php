@@ -304,7 +304,7 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-12">
-        <p><strong>Catatan:</strong> UNTUK APAR TIPE indoor METODE PENGECEKAN BERAT TABUNGNYA DILAKUKAN DENGAN CARA DI TIMBANG JIKA BERAT BERKURANG 10 % MAKA APAR DINYATAKAN NG.</p>
+        <p><strong>Catatan:</strong> Jika ada abnormal yang ditemukan segera laporkan ke atasan</p>
     </div>
 </div>
 <div class="row mt-2 mb-5">

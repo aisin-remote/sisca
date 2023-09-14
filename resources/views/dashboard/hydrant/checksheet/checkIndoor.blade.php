@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_pintu" style="display:none;">
-                    <label for="catatan_pintu" class="form-label">Catatan Pintu</label>
+                    <label for="catatan_pintu" class="form-label">Catatan Pintu Hydrant</label>
                     <textarea class="form-control" name="catatan_pintu" id="catatan_pintu" cols="30" rows="5">{{ old('catatan_pintu') }}</textarea>
                 </div>
                 <div class="mb-3">

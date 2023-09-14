@@ -66,7 +66,7 @@
                                 @if ($checkSheet->hydrants->type === 'Indoor')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('hydrant.checksheetindoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
                                             <a href="{{ route('hydrant.checksheetindoor.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form action="{{ route('hydrant.checksheetindoor.destroy', $checkSheet->id) }}" method="POST"

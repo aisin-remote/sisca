@@ -6,6 +6,8 @@ use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\array_except;
 use App\Models\CheckSheetCo2;
+use App\Models\CheckSheetHydrantIndoor;
+use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetPowder;
 
 class DashboardController extends Controller
@@ -16,8 +18,12 @@ class DashboardController extends Controller
 
         $selectedYear = $request->input('year', date('Y'));
 
-        $notOkData = [];
-        $okData = [];
+
+        // Grafik Apar
+
+
+        $notOkData_Apar = [];
+        $okData_Apar = [];
 
         foreach ($labels as $label) {
             // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
@@ -45,7 +51,7 @@ class DashboardController extends Controller
                         ->orWhere('powder', 'NG');
                 })
                 ->count();
-            $notOkData[] = $notOkCountCo2 + $notOkCountPowder;
+            $notOkData_Apar[] = $notOkCountCo2 + $notOkCountPowder;
 
             // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
             $okCountCo2 = CheckSheetCo2::whereYear('tanggal_pengecekan', $selectedYear)
@@ -73,17 +79,100 @@ class DashboardController extends Controller
                 })
                 ->count();
 
-            $okData[] = $okCountCo2 + $okCountPowder;
+            $okData_Apar[] = $okCountCo2 + $okCountPowder;
         }
 
-        $data = [
+        $data_Apar = [
             'labels' => $labels,
-            'okData' => $okData,
-            'notOkData' => $notOkData,
+            'okData_Apar' => $okData_Apar,
+            'notOkData_Apar' => $notOkData_Apar,
+        ];
+
+
+
+        // Grafik Hydrant
+
+
+        $notOkData_Hydrant = [];
+        $okData_Hydrant = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkCountIndoor = CheckSheetHydrantIndoor::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pintu', 'NG')
+                        ->orWhere('lampu', 'NG')
+                        ->orWhere('emergency', 'NG')
+                        ->orWhere('nozzle', 'NG')
+                        ->orWhere('selang', 'NG')
+                        ->orWhere('valve', 'NG')
+                        ->orWhere('coupling', 'NG')
+                        ->orWhere('pressure', 'NG')
+                        ->orWhere('kupla', 'NG');
+
+
+                })
+                ->count();
+
+            $notOkCountOutdoor = CheckSheetHydrantOutdoor::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pintu', 'NG')
+                        ->orWhere('nozzle', 'NG')
+                        ->orWhere('selang', 'NG')
+                        ->orWhere('tuas', 'NG')
+                        ->orWhere('pilar', 'NG')
+                        ->orWhere('penutup', 'NG')
+                        ->orWhere('rantai', 'NG')
+                        ->orWhere('kupla', 'NG');
+                })
+                ->count();
+            $notOkData_Hydrant[] = $notOkCountIndoor + $notOkCountOutdoor;
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okCountIndoor = CheckSheetHydrantIndoor::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pintu', 'OK')
+                        ->where('lampu', 'OK')
+                        ->where('emergency', 'OK')
+                        ->where('nozzle', 'OK')
+                        ->where('selang', 'OK')
+                        ->where('valve', 'OK')
+                        ->where('coupling', 'OK')
+                        ->where('pressure', 'OK')
+                        ->where('kupla', 'OK');
+                })
+                ->count();
+
+            $okCountOutdoor = CheckSheetHydrantOutdoor::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pintu', 'OK')
+                        ->where('nozzle', 'OK')
+                        ->where('selang', 'OK')
+                        ->where('tuas', 'OK')
+                        ->where('pilar', 'OK')
+                        ->where('penutup', 'OK')
+                        ->where('rantai', 'OK')
+                        ->where('kupla', 'OK');
+
+
+                })
+                ->count();
+
+            $okData_Hydrant[] = $okCountIndoor + $okCountOutdoor;
+        }
+
+        $data_Hydrant = [
+            'labels' => $labels,
+            'okData_Hydrant' => $okData_Hydrant,
+            'notOkData_Hydrant' => $notOkData_Hydrant,
         ];
 
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'availableYears'));
     }
 }

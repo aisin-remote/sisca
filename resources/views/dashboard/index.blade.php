@@ -19,6 +19,8 @@
     </div>
     <div class="row justify-content-center">
         <div class="row">
+
+            <!-- Grafik Hydrant -->
             <div class="col-lg-6 mb-3">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Apar</div>
@@ -29,36 +31,82 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Grafik Hydrant -->
             <div class="col-lg-6 mb-3">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Hydrant</div>
                     <div class="card-body">
                         <div class="chart-container">
-                            <canvas id="barChart" class="img-fluid"></canvas>
+                            <canvas id="hydrantChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
 
 
     <script>
+        // Grafik Apar
+
+
         var ctx = document.getElementById('barChart').getContext('2d');
         var barChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: {!! json_encode($data['labels']) !!},
+                labels: {!! json_encode($data_Apar['labels']) !!},
                 datasets: [{
                     label: 'OK',
-                    data: {!! json_encode($data['okData']) !!},
+                    data: {!! json_encode($data_Apar['okData_Apar']) !!},
                     backgroundColor: 'rgba(0, 204, 68, 1)',
                     borderColor: 'rgba(0, 131, 51, 1)',
                     borderWidth: 1
                 }, {
                     label: 'NG',
-                    data: {!! json_encode($data['notOkData']) !!},
+                    data: {!! json_encode($data_Apar['notOkData_Apar']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
+
+
+
+        // Grafik Hydrant
+
+
+        var ctxHydrant = document.getElementById('hydrantChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var hydrantChart = new Chart(ctxHydrant, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Hydrant['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_Hydrant['okData_Hydrant']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_Hydrant['notOkData_Hydrant']) !!},
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderColor: 'rgba(139, 0, 0, 1)',
                     borderWidth: 1

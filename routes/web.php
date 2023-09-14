@@ -161,6 +161,20 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+use App\Http\Controllers\CheckSheetHydrantOutdoorController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/hydrant/checksheetoutdoor/{hydrantNumber}', [CheckSheetHydrantOutdoorController::class, 'showForm'])->name('checksheetoutdoor');
+    Route::post('/dashboard/hydrant/process-checksheet-hydrant-outdoor/{hydrantNumber}', [CheckSheetHydrantOutdoorController::class, 'store'])->name('process.checksheet.outdoor');
+
+    Route::delete('/dashboard/check-sheet/hydrantoutdoor/{id}', [CheckSheetHydrantOutdoorController::class, 'destroy'])->name('hydrant.checksheetoutdoor.destroy');
+    Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/edit', [CheckSheetHydrantOutdoorController::class, 'edit'])->name('hydrant.checksheetoutdoor.edit');
+    Route::put('/dashboard/check-sheet/hydrantoutdoor/{id}', [CheckSheetHydrantOutdoorController::class, 'update'])->name('hydrant.checksheetoutdoor.update');
+    Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/show', [CheckSheetHydrantOutdoorController::class, 'show'])->name('hydrant.checksheetoutdoor.show');
+
+});
+
+
 use App\Http\Controllers\CheckSheetCo2Controller;
 
 // Menggunakan middleware auth untuk routes terkait checksheetco2
@@ -205,16 +219,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/apar/process-checksheet-hydrantindoor', [CheckSheetHydrantIndoorController::class, 'store'])->name('process.checksheet.hydrantindoor');
 });
 
-use App\Http\Controllers\CheckSheetHydrantOutdoorController;
-
-// Menggunakan middleware auth untuk routes terkait checksheethydrantoutdoor
-Route::middleware(['auth'])->group(function () {
-    Route::get('/checksheethydrantoutdoor', function () {
-        return view('dashboard.checkSheet.checkHydrantOutdoor');
-    })->name('checksheet.hydrantoutdoor');
-
-    Route::post('/dashboard/apar/process-checksheet-hydrantoutdoor', [CheckSheetHydrantOutdoorController::class, 'store'])->name('process.checksheet.hydrantoutdoor');
-});
 
 use App\Http\Controllers\CheckSheetNitrogenServerController;
 
