@@ -57,6 +57,7 @@ class CombinedAparController extends Controller
             $location_name = $aparGroup[0]['location_name'];
             $aparExpired = $aparGroup[0]['expired'];
             $aparPost = $aparGroup[0]['post'];
+            $aparPengecekan = $aparGroup[0]['tanggal_pengecekan'];
             $months = [];
 
             foreach ($aparGroup as $apar) {
@@ -103,6 +104,7 @@ class CombinedAparController extends Controller
                 'location_name' => $location_name,
                 'expired' => $aparExpired,
                 'post' => $aparPost,
+                'tanggal_pengecekan' => $aparPengecekan,
                 'months' => $months,
             ];
         });
