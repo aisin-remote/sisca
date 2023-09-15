@@ -7,6 +7,7 @@ use App\Models\Hydrant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetHydrantIndoorController extends Controller
 {
@@ -300,5 +301,107 @@ class CheckSheetHydrantIndoorController extends Controller
         $checkSheetindoor->delete();
 
         return back()->with('success1', 'Data Check Sheet Hydrant Indoor berhasil dihapus');
+    }
+
+    public function exportExcelWithTemplate(Request $request)
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template-checksheet-indoor.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve tag_number from the form
+        $hydrantNumber = $request->input('hydrant_number');
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
+        $data = CheckSheetCo2::select('tanggal_pengecekan', 'pressure', 'hose', 'corong', 'tabung', 'regulator', 'lock_pin', 'berat_tabung')
+            ->whereYear('tanggal_pengecekan', $selectedYear)
+            ->where('apar_number', $tagNumber) // Gunakan nilai tag_number yang diambil dari form
+            ->get();
+
+        // Start row to populate data in Excel
+        $row = 11;
+
+        foreach ($data as $item) {
+            $worksheet->setCellValue('B' . $row, $item->tanggal_pengecekan);
+            $worksheet->setCellValue('V' . $row, $item->tanggal_pengecekan);
+
+            // Set value based on $item->pressure
+            if ($item->pressure === 'OK') {
+                $worksheet->setCellValue('F' . $row, '√');
+                $worksheet->setCellValue('Z' . $row, '√');
+            } else if ($item->pressure === 'NG') {
+                $worksheet->setCellValue('F' . $row, 'X');
+                $worksheet->setCellValue('Z' . $row, 'X');
+            }
+
+            // Set value based on $item->hose
+            if ($item->hose === 'OK') {
+                $worksheet->setCellValue('H' . $row, '√');
+                $worksheet->setCellValue('AB' . $row, '√');
+            } else if ($item->hose === 'NG') {
+                $worksheet->setCellValue('H' . $row, 'X');
+                $worksheet->setCellValue('AB' . $row, 'X');
+            }
+
+            // Set value based on $item->corong
+            if ($item->corong === 'OK') {
+                $worksheet->setCellValue('J' . $row, '√');
+                $worksheet->setCellValue('AD' . $row, '√');
+            } else if ($item->corong === 'NG') {
+                $worksheet->setCellValue('J' . $row, 'X');
+                $worksheet->setCellValue('AD' . $row, 'X');
+            }
+
+            // Set value based on $item->tabung
+            if ($item->tabung === 'OK') {
+                $worksheet->setCellValue('K' . $row, '√');
+                $worksheet->setCellValue('AE' . $row, '√');
+            } else if ($item->tabung === 'NG') {
+                $worksheet->setCellValue('K' . $row, 'X');
+                $worksheet->setCellValue('AE' . $row, 'X');
+            }
+
+            // Set value based on $item->regulator
+            if ($item->regulator === 'OK') {
+                $worksheet->setCellValue('L' . $row, '√');
+                $worksheet->setCellValue('AF' . $row, '√');
+            } else if ($item->regulator === 'NG') {
+                $worksheet->setCellValue('L' . $row, 'X');
+                $worksheet->setCellValue('AF' . $row, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->lock_pin === 'OK') {
+                $worksheet->setCellValue('N' . $row, '√');
+                $worksheet->setCellValue('AH' . $row, '√');
+            } else if ($item->lock_pin === 'NG') {
+                $worksheet->setCellValue('N' . $row, 'X');
+                $worksheet->setCellValue('AH' . $row, 'X');
+            }
+
+            // Set value based on $item->berat_tabung
+            if ($item->berat_tabung === 'OK') {
+                $worksheet->setCellValue('P' . $row, '√');
+                $worksheet->setCellValue('AJ' . $row, '√');
+            } else if ($item->berat_tabung === 'NG') {
+                $worksheet->setCellValue('P' . $row, 'X');
+                $worksheet->setCellValue('AJ' . $row, 'X');
+            }
+
+            // Increment row for the next data
+            $row++;
+        }
+
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/checksheet-co.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }
