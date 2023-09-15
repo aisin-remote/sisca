@@ -75,7 +75,7 @@
 
     </div>
     @if ($apar->type  === 'co2')
-        <form action="{{ route('export.checksheetsco2') }}" method="POST" class="col-md-6">
+        <form action="{{ route('export.checksheetsco2') }}" method="POST" class="col-md-6 mb-3">
             @method('POST')
             @csrf
             <div class="form-group mb-3">
@@ -107,7 +107,7 @@
             <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
         </form>
     @elseif ($apar->type  === 'powder')
-        <form action="{{ route('export.checksheetspowder') }}" method="POST" class="col-md-6">
+        <form action="{{ route('export.checksheetspowder') }}" method="POST" class="col-md-6 mb-3">
             @method('POST')
             @csrf
             <div class="form-group mb-3">

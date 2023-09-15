@@ -292,54 +292,69 @@ class CheckSheetCo2Controller extends Controller
 
         foreach ($data as $item) {
             $worksheet->setCellValue('B' . $row, $item->tanggal_pengecekan);
+            $worksheet->setCellValue('V' . $row, $item->tanggal_pengecekan);
 
             // Set value based on $item->pressure
             if ($item->pressure === 'OK') {
                 $worksheet->setCellValue('F' . $row, '√');
+                $worksheet->setCellValue('Z' . $row, '√');
             } else if ($item->pressure === 'NG') {
                 $worksheet->setCellValue('F' . $row, 'X');
+                $worksheet->setCellValue('Z' . $row, 'X');
             }
 
             // Set value based on $item->hose
             if ($item->hose === 'OK') {
                 $worksheet->setCellValue('H' . $row, '√');
+                $worksheet->setCellValue('AB' . $row, '√');
             } else if ($item->hose === 'NG') {
                 $worksheet->setCellValue('H' . $row, 'X');
+                $worksheet->setCellValue('AB' . $row, 'X');
             }
 
             // Set value based on $item->corong
             if ($item->corong === 'OK') {
                 $worksheet->setCellValue('J' . $row, '√');
+                $worksheet->setCellValue('AD' . $row, '√');
             } else if ($item->corong === 'NG') {
                 $worksheet->setCellValue('J' . $row, 'X');
+                $worksheet->setCellValue('AD' . $row, 'X');
             }
 
             // Set value based on $item->tabung
             if ($item->tabung === 'OK') {
                 $worksheet->setCellValue('K' . $row, '√');
+                $worksheet->setCellValue('AE' . $row, '√');
             } else if ($item->tabung === 'NG') {
                 $worksheet->setCellValue('K' . $row, 'X');
+                $worksheet->setCellValue('AE' . $row, 'X');
             }
 
             // Set value based on $item->regulator
             if ($item->regulator === 'OK') {
                 $worksheet->setCellValue('L' . $row, '√');
+                $worksheet->setCellValue('AF' . $row, '√');
             } else if ($item->regulator === 'NG') {
                 $worksheet->setCellValue('L' . $row, 'X');
+                $worksheet->setCellValue('AF' . $row, 'X');
             }
 
             // Set value based on $item->lock_pin
             if ($item->lock_pin === 'OK') {
                 $worksheet->setCellValue('N' . $row, '√');
+                $worksheet->setCellValue('AH' . $row, '√');
             } else if ($item->lock_pin === 'NG') {
                 $worksheet->setCellValue('N' . $row, 'X');
+                $worksheet->setCellValue('AH' . $row, 'X');
             }
 
             // Set value based on $item->berat_tabung
             if ($item->berat_tabung === 'OK') {
                 $worksheet->setCellValue('P' . $row, '√');
+                $worksheet->setCellValue('AJ' . $row, '√');
             } else if ($item->berat_tabung === 'NG') {
                 $worksheet->setCellValue('P' . $row, 'X');
+                $worksheet->setCellValue('AJ' . $row, 'X');
             }
 
             // Increment row for the next data
