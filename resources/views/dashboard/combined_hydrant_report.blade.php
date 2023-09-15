@@ -29,13 +29,27 @@
             <form action="{{ route('export.checksheetsapar') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Hydrant</label>
+                <label for="tahun">Download Check Sheet Apar</label>
                 <div class="input-group">
                     <select name="tahun" id="tahun" class="form-control">
                         @php
-                            $currentYear = date('Y');
-                            for ($year = $currentYear - 5; $year <= $currentYear; $year++) {
-                                echo "<option value=\" $year\">$year</option>";
+                            // Inisialisasi array untuk menyimpan tahun-tahun yang tersedia
+                            $years = [];
+
+                            // Loop melalui data checksheet apar untuk mendapatkan tahun-tahun unik
+                            foreach ($hydrantData as $hydrant) {
+                                $year = date('Y', strtotime($hydrant['tanggal_pengecekan']));
+                                if (!in_array($year, $years)) {
+                                    $years[] = $year;
+                                }
+                            }
+
+                            // Urutkan tahun-tahun dalam urutan terbalik (terbaru ke terlama)
+                            rsort($years);
+
+                            // Buat opsi-opsi pada elemen select
+                            foreach ($years as $year) {
+                                echo "<option value=\"$year\">$year</option>";
                             }
                         @endphp
                     </select>

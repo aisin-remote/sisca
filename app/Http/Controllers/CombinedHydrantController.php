@@ -54,6 +54,7 @@ class CombinedHydrantController extends Controller
             $hydrantType = $hydrantGroup[0]['type'];
             $location_name = $hydrantGroup[0]['location_name'];
             $hydrantZona = $hydrantGroup[0]['zona'];
+            $hydrantPengecekan = $hydrantGroup[0]['tanggal_pengecekan'];
             $months = [];
 
             foreach ($hydrantGroup as $hydrant) {
@@ -97,6 +98,7 @@ class CombinedHydrantController extends Controller
                 'type' => $hydrantType,
                 'location_name' => $location_name,
                 'zona' => $hydrantZona,
+                'tanggal_pengecekan' => $hydrantPengecekan,
                 'months' => $months,
             ];
         });
