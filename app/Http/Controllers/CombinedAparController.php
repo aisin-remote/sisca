@@ -10,6 +10,7 @@ use App\Models\Apar;
 use App\Models\Location;
 use App\Models\CheckSheetPowder;
 use App\Models\CheckSheetCo2;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CombinedAparController extends Controller
@@ -56,6 +57,7 @@ class CombinedAparController extends Controller
             $location_name = $aparGroup[0]['location_name'];
             $aparExpired = $aparGroup[0]['expired'];
             $aparPost = $aparGroup[0]['post'];
+            $aparPengecekan = $aparGroup[0]['tanggal_pengecekan'];
             $months = [];
 
             foreach ($aparGroup as $apar) {
@@ -102,6 +104,7 @@ class CombinedAparController extends Controller
                 'location_name' => $location_name,
                 'expired' => $aparExpired,
                 'post' => $aparPost,
+                'tanggal_pengecekan' => $aparPengecekan,
                 'months' => $months,
             ];
         });
@@ -136,7 +139,6 @@ public function exportExcelWithTemplate(Request $request)
             'tm_apars.tag_number as apar_number',
             'tm_apars.type',
             'tm_apars.expired',
-            'tm_apars.post',
             'tm_apars.post',
             'tm_locations.location_name',
             DB::raw('COALESCE(tt_check_sheet_powders.tanggal_pengecekan, tt_check_sheet_co2s.tanggal_pengecekan) AS tanggal_pengecekan'),
@@ -214,32 +216,37 @@ public function exportExcelWithTemplate(Request $request)
     });
 
     // Start row to populate data in Excel
-    $row = 3; // Assuming your data starts from row 2 in Excel
+    $row = 6; // Assuming your data starts from row 2 in Excel
 
     $iteration = 1;
 
     foreach ($mappedAparData as $item) {
-        $worksheet->setCellValue('A' . $row, $iteration);
-        $worksheet->setCellValue('B' . $row, $item['apar_number']);
-        $worksheet->setCellValue('C' . $row, $item['location_name']);
-        $worksheet->setCellValue('D' . $row, $item['expired']);
-        $worksheet->setCellValue('E' . $row, $item['post']);
-        $worksheet->setCellValue('F' . $row, $item['type']);
+        $worksheet->setCellValue('B' . $row, $iteration);
+        $worksheet->setCellValue('C' . $row, $item['apar_number']);
+        $worksheet->setCellValue('D' . $row, $item['location_name']);
+        $worksheet->setCellValue('E' . $row, $item['expired']);
+        $worksheet->setCellValue('F' . $row, $item['post']);
+        $worksheet->setCellValue('G' . $row, $item['type']);
 
         // Loop through months and issue codes
         for ($month = 1; $month <= 12; $month++) {
             $cellValue = '';
 
             if (isset($item['months'][$month])) {
-                if (in_array('OK', $item['months'][$month])) {
-                    $cellValue = 'OK';
+                if (in_array('√', $item['months'][$month])) {
+                    $cellValue = '√';
                 } else {
-                    $cellValue = implode('+', $item['months'][$month]);
+                    $cellValue = 'X';
                 }
             }
 
-            $worksheet->setCellValueByColumnAndRow($month + 6, $row, $cellValue);
+            // Menghitung huruf kolom berdasarkan indeks $month (dari 1 hingga 12)
+            $columnIndex = Coordinate::stringFromColumnIndex($month + 7);
+
+            // Set nilai sel dengan metode setCellValue() dan koordinat kolom dan baris
+            $worksheet->setCellValue($columnIndex . $row, $cellValue);
         }
+
 
         // Increment iterasi setiap kali loop berjalan
         $iteration++;

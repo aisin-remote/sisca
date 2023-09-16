@@ -62,6 +62,40 @@
         </div>
     </div>
 
+    @if ($hydrant->type  === 'Indoor')
+        <form action="{{ route('export.checksheetsindoor') }}" method="POST" class="col-md-6 mb-3">
+            @method('POST')
+            @csrf
+            <div class="form-group mb-3">
+                <label for="tahun">Download Checksheet Hydrant</label>
+                <select name="tahun" id="tahun" class="form-control" required>
+                    @for ($year = $firstYear; $year <= $lastYear; $year++)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
+                <!-- Tambahkan input hidden untuk hydrant_number -->
+            <input type="hidden" name="hydrant_number" value="{{ $hydrant->no_hydrant }}">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
+        </form>
+    @elseif ($hydrant->type  === 'Outdoor')
+        <form action="{{ route('export.checksheetsoutdoor') }}" method="POST" class="col-md-6">
+            @method('POST')
+            @csrf
+            <div class="form-group mb-3">
+                <label for="tahun">Download Checksheet Hydrant</label>
+                <select name="tahun" id="tahun" class="form-control" required>
+                    @for ($year = $firstYear; $year <= $lastYear; $year++)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
+                <!-- Tambahkan input hidden untuk no_hydrant -->
+            <input type="hidden" name="hydrant_number" value="{{ $hydrant->no_hydrant }}">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
+        </form>
+    @endif
+
     @if (session()->has('success1'))
         <div class="mt-2 alert alert-success col-lg-12">
             {{ session()->get('success1') }}

@@ -224,6 +224,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 use App\Http\Controllers\CheckSheetNitrogenServerController;
+use App\Models\CheckSheetHydrantOutdoor;
 
 // Menggunakan middleware auth untuk routes terkait checksheetnitrogenserver
 Route::middleware(['auth'])->group(function () {
@@ -286,10 +287,13 @@ Route::get('/checksheethoistcrane', function () {
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/dashboard/profile', [ProfileController::class, 'changePassword'])->middleware('auth');
 
-// Export Checksheet
+// Export Checksheet Apar
 Route::post('/export-checksheet-co2', [CheckSheetCo2Controller::class, 'exportExcelWithTemplate'])->name('export.checksheetsco2');
 Route::post('/export-checksheet-powder', [CheckSheetPowderController::class, 'exportExcelWithTemplate'])->name('export.checksheetspowder');
 Route::post('/export-checksheet-apar', [CombinedAparController::class, 'exportExcelWithTemplate'])->name('export.checksheetsapar');
 
 
-
+// Export Checksheet Hydrant
+Route::post('/export-checksheet-indoor', [CheckSheetHydrantIndoorController::class, 'exportExcelWithTemplate'])->name('export.checksheetsindoor');
+Route::post('/export-checksheet-outdoor', [CheckSheetHydrantOutdoorController::class, 'exportExcelWithTemplate'])->name('export.checksheetsoutdoor');
+Route::post('/export-checksheet-hydrant', [CombinedHydrantController::class, 'exportExcelWithTemplate'])->name('export.checksheetshydrant');
