@@ -133,10 +133,8 @@
                     <tr>
                         <td scope="col">2. Lock Pin</td>
                         <td scope="col">= b</td>
-                        <td scope="col"></td>
                         <td scope="col">6. Hose</td>
                         <td scope="col">= f</td>
-                        <td scope="col"></td>
                         <td scope="col">10. Expired</td>
                         <td scope="col">= x</td>
                     </tr>
