@@ -121,10 +121,8 @@
                     <tr>
                         <td scope="col">1. Pressure</td>
                         <td scope="col">= a</td>
-                        <td scope="col"></td>
                         <td scope="col">5. Corong/Nozzle</td>
                         <td scope="col">= e</td>
-                        <td scope="col"></td>
                         <td scope="col">9. Isi Ulang</td>
                         <td scope="col">= a+b</td>
                     </tr>
@@ -141,14 +139,12 @@
                     <tr>
                         <td scope="col">3. Regulator</td>
                         <td scope="col">= c</td>
-                        <td scope="col"></td>
                         <td scope="col">7. Kadar Konsentrat</td>
                         <td scope="col">= g</td>
                     </tr>
                     <tr>
                         <td scope="col">4. Tabung</td>
                         <td scope="col">= d</td>
-                        <td scope="col"></td>
                         <td scope="col">8. Berat APAR</td>
                         <td scope="col">= H</td>
                     </tr>

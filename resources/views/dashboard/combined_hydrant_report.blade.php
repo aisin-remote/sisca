@@ -26,7 +26,7 @@
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>All Hydrant Report</h3>
         <div class="form-group">
-            <form action="{{ route('export.checksheetsapar') }}" method="POST">
+            <form action="{{ route('export.checksheetshydrant') }}" method="POST">
                 @method('POST')
                 @csrf
                 <label for="tahun">Download Check Sheet Apar</label>
@@ -116,37 +116,41 @@
             <table class="table table-sm table-borderless">
                 <tbody>
                     <tr>
-                        <td scope="col">1. Pressure</td>
+                        <td scope="col">1. Pintu Hydrant</td>
                         <td scope="col">= a</td>
-                        <td scope="col"></td>
-                        <td scope="col">5. Corong/Nozzle</td>
-                        <td scope="col">= e</td>
-                        <td scope="col"></td>
-                        <td scope="col">9. Isi Ulang</td>
-                        <td scope="col">= a+b</td>
+                        <td scope="col">6. Penutup Pilar</td>
+                        <td scope="col">= f</td>
+                        <td scope="col">11. Coupling</td>
+                        <td scope="col">= k</td>
                     </tr>
                     <tr>
                         <td scope="col">2. Nozzle</td>
                         <td scope="col">= b</td>
-                        <td scope="col"></td>
-                        <td scope="col">6. Hose</td>
-                        <td scope="col">= f</td>
-                        <td scope="col"></td>
+                        <td scope="col">7. Rantai Penutup Pilar</td>
+                        <td scope="col">= g</td>
                         <td scope="col">12. Pressure</td>
                         <td scope="col">= l</td>
                     </tr>
                     <tr>
                         <td scope="col">3. Selang</td>
                         <td scope="col">= c</td>
-                        <td scope="col"></td>
-                        <td scope="col">7. Kadar Konsentrat</td>
-                        <td scope="col">= g</td>
+                        <td scope="col">8. Tuas Pilar</td>
+                        <td scope="col">= h</td>
+                        <td scope="col">13. Lampu</td>
+                        <td scope="col">= m</td>
                     </tr>
-                        <td scope="col">4. Tabung</td>
+                    <tr>
+                        <td scope="col">4. Kupla</td>
                         <td scope="col">= d</td>
-                        <td scope="col"></td>
-                        <td scope="col">8. Berat APAR</td>
-                        <td scope="col">= H</td>
+                        <td scope="col">9. Tombol Emergency</td>
+                        <td scope="col">= i</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">5. Pilar</td>
+                        <td scope="col">= e</td>
+                        <td scope="col">10. Valve</td>
+                        <td scope="col">= j</td>
+                    </tr>
                 </tbody>
             </table>
             </div>
