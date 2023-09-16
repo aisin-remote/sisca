@@ -102,39 +102,51 @@
             <table class="table table-sm table-borderless">
                 <thead>
                     <tr>
-                        <td scope="col">1. Pressure</td>
+                        <td scope="col">1. Pintu Hydrant</td>
                         <td scope="col">= a</td>
                         <td scope="col"></td>
-                        <td scope="col">5. Corong/Nozzle</td>
-                        <td scope="col">= e</td>
+                        <td scope="col">6. Penutup</td>
+                        <td scope="col">= f</td>
                         <td scope="col"></td>
-                        <td scope="col">9. Isi Ulang</td>
-                        <td scope="col">= a+b</td>
+                        <td scope="col">11. Coupling</td>
+                        <td scope="col">= k</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td scope="col">2. Lock Pin</td>
+                        <td scope="col">2. Nozzle</td>
                         <td scope="col">= b</td>
                         <td scope="col"></td>
-                        <td scope="col">6. Hose</td>
-                        <td scope="col">= f</td>
+                        <td scope="col">7. Rantai</td>
+                        <td scope="col">= g</td>
                         <td scope="col"></td>
-                        <td scope="col">10. Expired</td>
-                        <td scope="col">= x</td>
+                        <td scope="col">12. Pressure</td>
+                        <td scope="col">= l</td>
                     </tr>
                     <tr>
-                        <td scope="col">3. Regulator</td>
+                        <td scope="col">3. Selang</td>
                         <td scope="col">= c</td>
                         <td scope="col"></td>
-                        <td scope="col">7. Kadar Konsentrat</td>
-                        <td scope="col">= g</td>
+                        <td scope="col">8. Tuas</td>
+                        <td scope="col">= h</td>
+                        <td scope="col"></td>
+                        <td scope="col">13. Lampu</td>
+                        <td scope="col">= m</td>
                     </tr>
-                        <td scope="col">4. Tabung</td>
+                    <tr>
+                        <td scope="col">4. Kupla</td>
                         <td scope="col">= d</td>
                         <td scope="col"></td>
-                        <td scope="col">8. Berat APAR</td>
-                        <td scope="col">= H</td>
+                        <td scope="col">9. Emergency</td>
+                        <td scope="col">= i</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">5. Pilar</td>
+                        <td scope="col">= e</td>
+                        <td scope="col"></td>
+                        <td scope="col">10. Valve</td>
+                        <td scope="col">= j</td>
+                    </tr>
                 </tbody>
             </table>
             </div>

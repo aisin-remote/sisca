@@ -66,10 +66,10 @@ class CombinedHydrantController extends Controller
                     if ($hydrant['nozzle'] === 'NG') $issueCodes[] = 'b';
                     if ($hydrant['selang'] === 'NG') $issueCodes[] = 'c';
                     if ($hydrant['kupla'] === 'NG') $issueCodes[] = 'd';
-                    if ($hydrant['pilar'] === 'NG') $issueCodes[] = 'f';
-                    if ($hydrant['penutup'] === 'NG') $issueCodes[] = 'g';
-                    if ($hydrant['rantai'] === 'NG') $issueCodes[] = 'h';
-                    if ($hydrant['tuas'] === 'NG') $issueCodes[] = 'i';
+                    if ($hydrant['pilar'] === 'NG') $issueCodes[] = 'e';
+                    if ($hydrant['penutup'] === 'NG') $issueCodes[] = 'f';
+                    if ($hydrant['rantai'] === 'NG') $issueCodes[] = 'g';
+                    if ($hydrant['tuas'] === 'NG') $issueCodes[] = 'h';
                 }
 
                 // Map issue codes for Indoor type
@@ -78,11 +78,11 @@ class CombinedHydrantController extends Controller
                     if ($hydrant['nozzle'] === 'NG') $issueCodes[] = 'b';
                     if ($hydrant['selang'] === 'NG') $issueCodes[] = 'c';
                     if ($hydrant['kupla'] === 'NG') $issueCodes[] = 'd';
-                    if ($hydrant['emergency'] === 'NG') $issueCodes[] = 'e';
-                    if ($hydrant['valve'] === 'NG') $issueCodes[] = 'f';
-                    if ($hydrant['coupling'] === 'NG') $issueCodes[] = 'g';
-                    if ($hydrant['pressure'] === 'NG') $issueCodes[] = 'h';
-                    if ($hydrant['lampu'] === 'NG') $issueCodes[] = 'i';
+                    if ($hydrant['emergency'] === 'NG') $issueCodes[] = 'i';
+                    if ($hydrant['valve'] === 'NG') $issueCodes[] = 'j';
+                    if ($hydrant['coupling'] === 'NG') $issueCodes[] = 'k';
+                    if ($hydrant['pressure'] === 'NG') $issueCodes[] = 'l';
+                    if ($hydrant['lampu'] === 'NG') $issueCodes[] = 'm';
                 }
 
                 if (empty($issueCodes)) {

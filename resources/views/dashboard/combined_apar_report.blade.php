@@ -132,11 +132,13 @@
                         <td scope="col">7. Kadar Konsentrat</td>
                         <td scope="col">= g</td>
                     </tr>
+                    <tr>
                         <td scope="col">4. Tabung</td>
                         <td scope="col">= d</td>
                         <td scope="col"></td>
                         <td scope="col">8. Berat APAR</td>
                         <td scope="col">= H</td>
+                    </tr>
                 </tbody>
             </table>
             </div>
