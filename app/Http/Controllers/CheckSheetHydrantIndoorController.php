@@ -317,89 +317,112 @@ class CheckSheetHydrantIndoorController extends Controller
         $selectedYear = $request->input('tahun');
 
         // Retrieve data from the checksheetsco2 table for the selected year and tag_number
-        $data = CheckSheetCo2::select('tanggal_pengecekan', 'pressure', 'hose', 'corong', 'tabung', 'regulator', 'lock_pin', 'berat_tabung')
+        $data = CheckSheetHydrantIndoor::with('hydrants')
+            ->select('tanggal_pengecekan', 'hydrant_number', 'pintu', 'lampu', 'emergency', 'nozzle', 'selang', 'valve', 'coupling', 'pressure', 'kupla')
             ->whereYear('tanggal_pengecekan', $selectedYear)
-            ->where('apar_number', $tagNumber) // Gunakan nilai tag_number yang diambil dari form
+            ->where('hydrant_number', $hydrantNumber) // Gunakan nilai tag_number yang diambil dari form
             ->get();
 
-        // Start row to populate data in Excel
-        $row = 11;
+        // Array asosiatif untuk mencocokkan nama bulan dengan kolom
+        $bulanKolom = [
+            1 => 'H',  // Januari -> Kolom H
+            2 => 'I',  // Februari -> Kolom I
+            3 => 'J',  // Maret -> Kolom J
+            4 => 'K',  // April -> Kolom K
+            5 => 'L',  // Mei -> Kolom L
+            6 => 'M',  // Juni -> Kolom M
+            7 => 'N',  // Juli -> Kolom N
+            8 => 'O',  // Agustus -> Kolom O
+            9 => 'P',  // September -> Kolom P
+            10 => 'Q', // Oktober -> Kolom Q
+            11 => 'R', // November -> Kolom R
+            12 => 'S', // Desember -> Kolom S
+        ];
+
+        $worksheet->setCellValue('R' . 1, ': ' . $data[0]->hydrant_number);
+        $worksheet->setCellValue('R' . 2, ': ' . $data[0]->hydrants->locations->location_name);
+        $worksheet->setCellValue('R' . 3, ': ' . $data[0]->hydrants->zona);
+
 
         foreach ($data as $item) {
-            $worksheet->setCellValue('B' . $row, $item->tanggal_pengecekan);
-            $worksheet->setCellValue('V' . $row, $item->tanggal_pengecekan);
+
+            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
+            $bulan = Carbon::parse($item->tanggal_pengecekan)->format('n');
+
+            // Tentukan kolom berdasarkan bulan
+            $col = $bulanKolom[$bulan];
 
             // Set value based on $item->pressure
-            if ($item->pressure === 'OK') {
-                $worksheet->setCellValue('F' . $row, '√');
-                $worksheet->setCellValue('Z' . $row, '√');
-            } else if ($item->pressure === 'NG') {
-                $worksheet->setCellValue('F' . $row, 'X');
-                $worksheet->setCellValue('Z' . $row, 'X');
+            if ($item->pintu === 'OK') {
+                $worksheet->setCellValue($col . 8, '√');
+            } else if ($item->pintu === 'NG') {
+                $worksheet->setCellValue($col . 8, 'X');
             }
 
             // Set value based on $item->hose
-            if ($item->hose === 'OK') {
-                $worksheet->setCellValue('H' . $row, '√');
-                $worksheet->setCellValue('AB' . $row, '√');
-            } else if ($item->hose === 'NG') {
-                $worksheet->setCellValue('H' . $row, 'X');
-                $worksheet->setCellValue('AB' . $row, 'X');
+            if ($item->lampu === 'OK') {
+                $worksheet->setCellValue($col . 10, '√');
+            } else if ($item->lampu === 'NG') {
+                $worksheet->setCellValue($col . 10, 'X');
             }
 
             // Set value based on $item->corong
-            if ($item->corong === 'OK') {
-                $worksheet->setCellValue('J' . $row, '√');
-                $worksheet->setCellValue('AD' . $row, '√');
-            } else if ($item->corong === 'NG') {
-                $worksheet->setCellValue('J' . $row, 'X');
-                $worksheet->setCellValue('AD' . $row, 'X');
+            if ($item->emergency === 'OK') {
+                $worksheet->setCellValue($col . 12, '√');
+            } else if ($item->emergency === 'NG') {
+                $worksheet->setCellValue($col . 12, 'X');
             }
 
             // Set value based on $item->tabung
-            if ($item->tabung === 'OK') {
-                $worksheet->setCellValue('K' . $row, '√');
-                $worksheet->setCellValue('AE' . $row, '√');
-            } else if ($item->tabung === 'NG') {
-                $worksheet->setCellValue('K' . $row, 'X');
-                $worksheet->setCellValue('AE' . $row, 'X');
+            if ($item->nozzle === 'OK') {
+                $worksheet->setCellValue($col . 14, '√');
+            } else if ($item->nozzle === 'NG') {
+                $worksheet->setCellValue($col . 14, 'X');
             }
 
             // Set value based on $item->regulator
-            if ($item->regulator === 'OK') {
-                $worksheet->setCellValue('L' . $row, '√');
-                $worksheet->setCellValue('AF' . $row, '√');
-            } else if ($item->regulator === 'NG') {
-                $worksheet->setCellValue('L' . $row, 'X');
-                $worksheet->setCellValue('AF' . $row, 'X');
+            if ($item->selang === 'OK') {
+                $worksheet->setCellValue($col . 16, '√');
+            } else if ($item->selang === 'NG') {
+                $worksheet->setCellValue($col . 16, 'X');
             }
 
             // Set value based on $item->lock_pin
-            if ($item->lock_pin === 'OK') {
-                $worksheet->setCellValue('N' . $row, '√');
-                $worksheet->setCellValue('AH' . $row, '√');
-            } else if ($item->lock_pin === 'NG') {
-                $worksheet->setCellValue('N' . $row, 'X');
-                $worksheet->setCellValue('AH' . $row, 'X');
+            if ($item->valve === 'OK') {
+                $worksheet->setCellValue($col . 18, '√');
+            } else if ($item->valve === 'NG') {
+                $worksheet->setCellValue($col . 18, 'X');
             }
 
             // Set value based on $item->berat_tabung
-            if ($item->berat_tabung === 'OK') {
-                $worksheet->setCellValue('P' . $row, '√');
-                $worksheet->setCellValue('AJ' . $row, '√');
-            } else if ($item->berat_tabung === 'NG') {
-                $worksheet->setCellValue('P' . $row, 'X');
-                $worksheet->setCellValue('AJ' . $row, 'X');
+            if ($item->coupling === 'OK') {
+                $worksheet->setCellValue($col . 20, '√');
+            } else if ($item->coupling === 'NG') {
+                $worksheet->setCellValue($col . 20, 'X');
+            }
+
+            // Set value based on $item->berat_tabung
+            if ($item->pressure === 'OK') {
+                $worksheet->setCellValue($col . 22, '√');
+            } else if ($item->pressure === 'NG') {
+                $worksheet->setCellValue($col . 22, 'X');
+            }
+
+            // Set value based on $item->berat_tabung
+            if ($item->kupla === 'OK') {
+                $worksheet->setCellValue($col . 24, '√');
+            } else if ($item->kupla === 'NG') {
+                $worksheet->setCellValue($col . 24, 'X');
             }
 
             // Increment row for the next data
-            $row++;
+            $col++;
         }
 
 
         // Create a new Excel writer and save the modified spreadsheet
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $outputPath = public_path('templates/checksheet-co.xlsx');
+        $outputPath = public_path('templates/checksheet-indoor.xlsx');
         $writer->save($outputPath);
 
         return response()->download($outputPath)->deleteFileAfterSend(true);
