@@ -150,4 +150,9 @@ class HydrantController extends Controller
 
         return redirect()->route('hydrant.index')->with('success', 'Data Hydrant berhasil dihapus');
     }
+
+    public function location()
+    {
+        return view('dashboard.hydrant.location.index');
+    }
 }

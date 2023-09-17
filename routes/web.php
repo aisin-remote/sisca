@@ -54,7 +54,9 @@ Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('das
 // Route Apar
 Route::resource('/dashboard/master/apar', AparController::class)->middleware('auth');
 Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update');
-// lokasi
+
+
+// lokasi Apar
 Route::get('/dashboard/location/apar', [AparController::class, 'location'])->name('apar.location.index')->middleware('auth');
 Route::get('/dashboard/location/all-equipment', function () {
     return view('dashboard.location.mapping');
@@ -88,6 +90,16 @@ Route::get('/dashboard/location/apar/unit', function () {
 })->middleware('auth');
 Route::get('/dashboard/location/apar/wwt', function () {
     return view('dashboard.apar.location.wwt');
+})->middleware('auth');
+
+
+// lokasi Hydrant
+Route::get('/dashboard/location/hydrant', [HydrantController::class, 'location'])->name('hydrant.location.index')->middleware('auth');
+Route::get('/dashboard/location/hydrant/outdoor', function () {
+    return view('dashboard.hydrant.location.outdoor');
+})->middleware('auth');
+Route::get('/dashboard/location/hydrant/indoor', function () {
+    return view('dashboard.hydrant.location.indoor');
 })->middleware('auth');
 
 
