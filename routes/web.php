@@ -141,11 +141,16 @@ Route::delete('/dashboard/master/location/{data_location}', [LocationController:
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 use App\Http\Controllers\CheckSheetController;
+use App\Http\Controllers\CheckSheetNitrogenServerController;
 use App\Http\Controllers\CheckSheetHydrantController;
+
+use App\Models\CheckSheetNitrogenServer;
 
 // checksheet
 Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
 Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
+Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form');
+
 
 
 Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
@@ -155,8 +160,23 @@ Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class,
 Route::post('/dashboard/hydrant/process-checksheet', [CheckSheetHydrantController::class, 'processForm'])->name('hydrant.process.form');
 Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantController::class, 'index'])->name('hydrant.checksheet.index');
 
+Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerController::class, 'processForm'])->name('nitrogen.process.form');
+
+
 //lagi fix ini (hapus jika indoor sudah kelar)
 // Menggunakan middleware auth untuk routes terkait checksheetco2
+
+// Untuk Checksheet Nitrogen
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/nitrogen/checksheetnitrogen/{nitrogenNumber}', [CheckSheetNitrogenServerController::class, 'createForm'])->name('checksheetnitrogen');
+    Route::post('/dashboard/hydrant/process-checksheet-nitrogen/{nitrogenNumber}', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen');
+
+    Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
+    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/edit', [CheckSheetHydrantIndoorController::class, 'edit'])->name('hydrant.checksheetindoor.edit');
+    Route::put('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'update'])->name('hydrant.checksheetindoor.update');
+    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantIndoorController::class, 'show'])->name('hydrant.checksheetindoor.show');
+
+});
 
 
 use App\Http\Controllers\CheckSheetHydrantIndoorController;
@@ -235,17 +255,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-use App\Http\Controllers\CheckSheetNitrogenServerController;
-use App\Models\CheckSheetHydrantOutdoor;
-
-// Menggunakan middleware auth untuk routes terkait checksheetnitrogenserver
-Route::middleware(['auth'])->group(function () {
-    Route::get('/checksheetnitrogenserver', function () {
-        return view('dashboard.checkSheet.checkNitrogenServer');
-    })->name('checksheet.nitrogen.server');
-
-    Route::post('/dashboard/apar/process-checksheet-nitrogen-server', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen.server');
-});
 
 Route::get('/checksheettabungco2', function () {
     return view('dashboard.checkSheet.checkTabungCo2');
