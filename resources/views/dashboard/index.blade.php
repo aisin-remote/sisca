@@ -20,7 +20,7 @@
     <div class="row justify-content-center">
         <div class="row">
 
-            <!-- Grafik Hydrant -->
+            <!-- Grafik Apar -->
             <div class="col-lg-6 mb-3">
                 <div class="card">
                     <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Apar</div>
@@ -40,6 +40,19 @@
                     <div class="card-body">
                         <div class="chart-container">
                             <canvas id="hydrantChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Grafik Nitrogen -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Nitrogen</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="nitrogenChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
                         </div>
                     </div>
                 </div>

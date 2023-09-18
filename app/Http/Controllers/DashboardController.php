@@ -8,6 +8,7 @@ use App\Http\Controllers\array_except;
 use App\Models\CheckSheetCo2;
 use App\Models\CheckSheetHydrantIndoor;
 use App\Models\CheckSheetHydrantOutdoor;
+use App\Models\CheckSheetNitrogenServer;
 use App\Models\CheckSheetPowder;
 
 class DashboardController extends Controller
@@ -171,8 +172,57 @@ class DashboardController extends Controller
             'notOkData_Hydrant' => $notOkData_Hydrant,
         ];
 
+
+
+        // Grafik Nitrogen
+
+
+        $notOkData_Nitrogen = [];
+        $okData_Nitrogen = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Nitrogen = CheckSheetNitrogenServer::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('operasional', 'NG')
+                        ->orWhere('selector_mode', 'NG')
+                        ->orWhere('pintu_tabung', 'NG')
+                        ->orWhere('pressure_pilot', 'NG')
+                        ->orWhere('pressure_no1', 'NG')
+                        ->orWhere('pressure_no2', 'NG')
+                        ->orWhere('pressure_no3', 'NG')
+                        ->orWhere('pressure_no4', 'NG')
+                        ->orWhere('pressure_no5', 'NG');
+                })
+                ->count();
+
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_Nitrogen = CheckSheetNitrogenServer::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('operasional', 'OK')
+                        ->where('selector_mode', 'OK')
+                        ->where('pintu_tabung', 'OK')
+                        ->where('pressure_pilot', 'OK')
+                        ->where('pressure_no1', 'OK')
+                        ->where('pressure_no2', 'OK')
+                        ->where('pressure_no3', 'OK')
+                        ->where('pressure_no4', 'OK')
+                        ->where('pressure_no5', 'OK');
+                })
+                ->count();
+        }
+
+        $data_Nitrogen = [
+            'labels' => $labels,
+            'okData_Nitrogen' => $okData_Nitrogen,
+            'notOkData_Nitrogen' => $notOkData_Nitrogen,
+        ];
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'availableYears'));
     }
 }
