@@ -108,7 +108,7 @@ Route::resource('/dashboard/master/hydrant', HydrantController::class)->middlewa
 Route::put('/dashboard/master/hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('hydrant.update');
 
 //Route Nitrogen
-Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->middleware('auth');
 Route::put('/dashboard/master/nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('nitrogen.update');
 
 // Route Co2
@@ -160,6 +160,7 @@ Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class,
 Route::post('/dashboard/hydrant/process-checksheet', [CheckSheetHydrantController::class, 'processForm'])->name('hydrant.process.form');
 Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantController::class, 'index'])->name('hydrant.checksheet.index');
 
+Route::get('/dashboard/nitrogen/checksheet/all-check-sheet', [CheckSheetNitrogenServerController::class, 'index'])->name('nitrogen.checksheet.index');
 Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerController::class, 'processForm'])->name('nitrogen.process.form');
 
 
@@ -169,12 +170,12 @@ Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerC
 // Untuk Checksheet Nitrogen
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/nitrogen/checksheetnitrogen/{nitrogenNumber}', [CheckSheetNitrogenServerController::class, 'createForm'])->name('checksheetnitrogen');
-    Route::post('/dashboard/hydrant/process-checksheet-nitrogen/{nitrogenNumber}', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen');
+    Route::post('/dashboard/hydrant/process-checksheet-nitrogen/{tabungNumber}', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen');
 
-    Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
-    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/edit', [CheckSheetHydrantIndoorController::class, 'edit'])->name('hydrant.checksheetindoor.edit');
-    Route::put('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'update'])->name('hydrant.checksheetindoor.update');
-    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantIndoorController::class, 'show'])->name('hydrant.checksheetindoor.show');
+    Route::delete('/dashboard/check-sheet/nitrogen/{id}', [CheckSheetNitrogenServerController::class, 'destroy'])->name('nitrogen.checksheetnitrogen.destroy');
+    Route::get('/dashboard/check-sheet/nitrogen/{id}/edit', [CheckSheetNitrogenServerController::class, 'edit'])->name('nitrogen.checksheetnitrogen.edit');
+    Route::put('/dashboard/check-sheet/nitrogen/{id}', [CheckSheetNitrogenServerController::class, 'update'])->name('nitrogen.checksheetnitrogen.update');
+    Route::get('/dashboard/check-sheet/nitrogen/{id}/show', [CheckSheetNitrogenServerController::class, 'show'])->name('nitrogen.checksheetnitrogen.show');
 
 });
 
@@ -318,3 +319,6 @@ Route::post('/export-checksheet-apar', [CombinedAparController::class, 'exportEx
 Route::post('/export-checksheet-indoor', [CheckSheetHydrantIndoorController::class, 'exportExcelWithTemplate'])->name('export.checksheetsindoor');
 Route::post('/export-checksheet-outdoor', [CheckSheetHydrantOutdoorController::class, 'exportExcelWithTemplate'])->name('export.checksheetsoutdoor');
 Route::post('/export-checksheet-hydrant', [CombinedHydrantController::class, 'exportExcelWithTemplate'])->name('export.checksheetshydrant');
+
+// Export CheckSheet Nitrogen
+Route::post('/export-checksheet-nitrogen', [CheckSheetNitrogenServerController::class, 'exportExcelWithTemplate'])->name('export.checksheetsnitrogen');

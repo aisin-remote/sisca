@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetNitrogenServer;
 use App\Models\Location;
 use App\Models\Nitrogen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NitrogenController extends Controller
 {
@@ -39,9 +41,9 @@ class NitrogenController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_tabung'=>'required|unique:tm_nitrogens',
-            'location_id'=>'required',
-            'plant'=>'nullable',
+            'no_tabung' => 'required|unique:tm_nitrogens',
+            'location_id' => 'required',
+            'plant' => 'nullable',
         ]);
 
         Nitrogen::create($validate);
@@ -56,7 +58,24 @@ class NitrogenController extends Controller
      */
     public function show($id)
     {
-        //
+        $nitrogen = Nitrogen::findOrFail($id);
+
+        if (!$nitrogen) {
+            return back()->with('error', 'Nitrogen tidak ditemukan.');
+        }
+
+        $checksheets = CheckSheetNitrogenServer::where('tabung_number', $nitrogen->no_tabung);
+        $firstYear = CheckSheetNitrogenServer::min(DB::raw('YEAR(tanggal_pengecekan)'));
+        $lastYear = CheckSheetNitrogenServer::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+        if (request()->has('tahun_filter')) {
+            $tahunFilter = request()->input('tahun_filter');
+            $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+        }
+
+        $checksheets = $checksheets->get();
+
+        return view('dashboard.nitrogen.show', compact('nitrogen', 'checksheets', 'firstYear', 'lastYear'));
     }
 
     /**
@@ -84,8 +103,8 @@ class NitrogenController extends Controller
         $nitrogen = Nitrogen::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
-            'plant'=>'nullable',
+            'location_id' => 'required',
+            'plant' => 'nullable',
         ]);
 
         $nitrogen->update($validateData);

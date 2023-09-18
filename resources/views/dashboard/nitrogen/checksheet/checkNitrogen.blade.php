@@ -29,7 +29,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('process.checksheet.nitrogen', ['nitrogenNumber' => $nitrogenNumber]) }}" method="POST"
+                <form action="{{ route('process.checksheet.nitrogen', ['tabungNumber' => $tabungNumber]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
@@ -43,9 +43,9 @@
                             value="{{ auth()->user()->npk }}" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="nitrogen_number" class="form-label">Nomor Tabung Nitrogen</label>
-                        <input type="text" class="form-control" id="nitrogen_number" value="{{ $nitrogenNumber }}"
-                            name="nitrogen_number" required autofocus readonly>
+                        <label for="tabung_number" class="form-label">Nomor Tabung tabung</label>
+                        <input type="text" class="form-control" id="tabung_number" value="{{ $tabungNumber }}"
+                            name="tabung_number" required autofocus readonly>
                     </div>
             </div>
             <div class="col-md-6">
