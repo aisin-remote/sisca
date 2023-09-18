@@ -104,6 +104,9 @@
                 <li class="{{ Request::is('dashboard/report/hydrant*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/hydrant">Hydrant</a>
                 </li>
+                <li class="{{ Request::is('dashboard/report/nitrogen*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/nitrogen">Nitrogen</a>
+                </li>
             </ul>
         </li>
     </ul>

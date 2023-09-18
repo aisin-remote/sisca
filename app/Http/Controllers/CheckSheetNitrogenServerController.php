@@ -459,4 +459,84 @@ class CheckSheetNitrogenServerController extends Controller
 
         return response()->download($outputPath)->deleteFileAfterSend(true);
     }
+
+    public function report(Request $request)
+    {
+        $selectedYear = $request->input('selected_year', date('Y'));
+
+        $nitrogenData = Nitrogen::leftJoin('tm_locations', 'tm_nitrogens.location_id', '=', 'tm_locations.id')
+            ->leftJoin('tt_check_sheet_nitrogen_servers', 'tm_nitrogens.no_tabung', '=', 'tt_check_sheet_nitrogen_servers.tabung_number')
+            ->select(
+                'tm_nitrogens.no_tabung as tabung_number',
+                'tm_nitrogens.plant',
+                'tm_locations.location_name',
+                'tt_check_sheet_nitrogen_servers.tanggal_pengecekan',
+                'tt_check_sheet_nitrogen_servers.operasional',
+                'tt_check_sheet_nitrogen_servers.selector_mode',
+                'tt_check_sheet_nitrogen_servers.pintu_tabung',
+                'tt_check_sheet_nitrogen_servers.pressure_pilot',
+                'tt_check_sheet_nitrogen_servers.pressure_no1',
+                'tt_check_sheet_nitrogen_servers.pressure_no2',
+                'tt_check_sheet_nitrogen_servers.pressure_no3',
+                'tt_check_sheet_nitrogen_servers.pressure_no4',
+                'tt_check_sheet_nitrogen_servers.pressure_no5',
+            )
+            ->get();
+
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredNitrogenData = $nitrogenData->filter(function ($nitrogen) use ($selectedYear) {
+            return $nitrogen->tanggal_pengecekan !== null &&
+                date('Y', strtotime($nitrogen->tanggal_pengecekan)) == $selectedYear;
+        });
+
+        $mappedNitrogenData = $filteredNitrogenData->groupBy('tabung_number')->map(function ($nitrogenGroup) {
+            $nitrogenNumber = $nitrogenGroup[0]['tabung_number'];
+            $location_name = $nitrogenGroup[0]['location_name'];
+            $nitrogenPlant = $nitrogenGroup[0]['plant'];
+            $nitrogenPengecekan = $nitrogenGroup[0]['tanggal_pengecekan'];
+            $months = [];
+
+            foreach ($nitrogenGroup as $nitrogen) {
+                $month = date('n', strtotime($nitrogen['tanggal_pengecekan']));
+                $issueCodes = [];
+
+                // Map issue codes for powder type
+                if ($nitrogen['operasional'] === 'NG') $issueCodes[] = 'a';
+                if ($nitrogen['selector_mode'] === 'NG') $issueCodes[] = 'b';
+                if ($nitrogen['pintu_tabung'] === 'NG') $issueCodes[] = 'c';
+                if ($nitrogen['pressure_pilot'] === 'NG') $issueCodes[] = 'd';
+                if ($nitrogen['pressure_no1'] === 'NG') $issueCodes[] = 'e';
+                if ($nitrogen['pressure_no2'] === 'NG') $issueCodes[] = 'f';
+                if ($nitrogen['pressure_no3'] === 'NG') $issueCodes[] = 'g';
+                if ($nitrogen['pressure_no4'] === 'NG') $issueCodes[] = 'h';
+                if ($nitrogen['pressure_no5'] === 'NG') $issueCodes[] = 'i';
+
+
+                if (empty($issueCodes)) {
+                    $issueCodes[] = 'OK';
+                }
+
+                $months[$month] = $issueCodes;
+            }
+
+            return [
+                'tabung_number' => $nitrogenNumber,
+                'location_name' => $location_name,
+                'plant' => $nitrogenPlant,
+                'tanggal_pengecekan' => $nitrogenPengecekan,
+                'months' => $months,
+            ];
+        });
+
+        // Convert to JSON
+        $jsonString = json_encode($mappedNitrogenData, JSON_PRETTY_PRINT);
+
+        // Save JSON to a file
+        Storage::disk('local')->put('nitrogen_data.json', $jsonString);
+
+        return view('dashboard.nitrogen_report', [
+            'nitrogenData' => $mappedNitrogenData,
+            'selectedYear' => $selectedYear,
+        ]);
+    }
 }
