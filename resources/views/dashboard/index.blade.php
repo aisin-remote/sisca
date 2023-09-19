@@ -139,6 +139,45 @@
                 }
             }
         });
+
+
+
+        // Grafik Nitrogen
+
+
+        var ctxNitrogen = document.getElementById('nitrogenChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var nitrogenChart = new Chart(ctxNitrogen, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Nitrogen['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_Nitrogen['okData_Nitrogen']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_Nitrogen['notOkData_Nitrogen']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
     </script>
 
 @endsection

@@ -111,8 +111,6 @@ class DashboardController extends Controller
                         ->orWhere('coupling', 'NG')
                         ->orWhere('pressure', 'NG')
                         ->orWhere('kupla', 'NG');
-
-
                 })
                 ->count();
 
@@ -158,8 +156,6 @@ class DashboardController extends Controller
                         ->where('penutup', 'OK')
                         ->where('rantai', 'OK')
                         ->where('kupla', 'OK');
-
-
                 })
                 ->count();
 
@@ -182,7 +178,7 @@ class DashboardController extends Controller
 
         foreach ($labels as $label) {
             // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
-            $notOkData_Nitrogen = CheckSheetNitrogenServer::whereYear('tanggal_pengecekan', $selectedYear)
+            $notOkData_Nitrogen[] = CheckSheetNitrogenServer::whereYear('tanggal_pengecekan', $selectedYear)
                 ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
                 ->where(function ($query) {
                     $query->where('operasional', 'NG')
@@ -197,9 +193,8 @@ class DashboardController extends Controller
                 })
                 ->count();
 
-
             // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
-            $okData_Nitrogen = CheckSheetNitrogenServer::whereYear('tanggal_pengecekan', $selectedYear)
+            $okData_Nitrogen[] = CheckSheetNitrogenServer::whereYear('tanggal_pengecekan', $selectedYear)
                 ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
                 ->where(function ($query) {
                     $query->where('operasional', 'OK')
@@ -215,11 +210,13 @@ class DashboardController extends Controller
                 ->count();
         }
 
+
         $data_Nitrogen = [
             'labels' => $labels,
             'okData_Nitrogen' => $okData_Nitrogen,
             'notOkData_Nitrogen' => $notOkData_Nitrogen,
         ];
+
 
         $availableYears = range(date('Y'), date('Y') + 1);
 
