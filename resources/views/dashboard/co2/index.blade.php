@@ -32,13 +32,14 @@
                         <td>{{ $co2->plant }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('co2.destroy', $co2->id) }}" method="POST">
-                                <a href="{{ route('co2.edit', $co2->id) }}" class="badge bg-warning">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Co2?')">Delete</button>
-                            </form>
+                                <a href="{{ route('co2.show', $co2->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('co2.edit', $co2->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('co2.destroy', $co2->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Co2?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

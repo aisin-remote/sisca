@@ -112,7 +112,7 @@ Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->middle
 Route::put('/dashboard/master/nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('nitrogen.update');
 
 // Route Co2
-Route::resource('/dashboard/master/co2', Co2Controller::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/master/co2', Co2Controller::class)->middleware('auth');
 Route::put('/dashboard/master/co2/{data_co2}', [Co2Controller::class, 'update'])->name('co2.update');
 
 // Route Tandu
@@ -143,13 +143,15 @@ Route::delete('/dashboard/master/location/{data_location}', [LocationController:
 use App\Http\Controllers\CheckSheetController;
 use App\Http\Controllers\CheckSheetNitrogenServerController;
 use App\Http\Controllers\CheckSheetHydrantController;
-
+use App\Http\Controllers\CheckSheetTabungCo2Controller;
 use App\Models\CheckSheetNitrogenServer;
 
 // checksheet
 Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
 Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
 Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form');
+Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form');
+
 
 
 
@@ -163,9 +165,26 @@ Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantCo
 Route::get('/dashboard/nitrogen/checksheet/all-check-sheet', [CheckSheetNitrogenServerController::class, 'index'])->name('nitrogen.checksheet.index');
 Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerController::class, 'processForm'])->name('nitrogen.process.form');
 
+Route::post('/dashboard/co2/process-checksheet', [CheckSheetTabungCo2Controller::class, 'processForm'])->name('co2.process.form');
+
+
 
 //lagi fix ini (hapus jika indoor sudah kelar)
 // Menggunakan middleware auth untuk routes terkait checksheetco2
+
+//Checksheet CO2
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/co2/checksheetco2/{co2Number}', [CheckSheetTabungCo2Controller::class, 'createForm'])->name('checksheettabungco2');
+    Route::post('/dashboard/co2/process-checksheet-co2/{tabungNumber}', [CheckSheetTabungCo2Controller::class, 'store'])->name('process.checksheet.tabungco2');
+
+    Route::delete('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'destroy'])->name('co2.checksheetco2.destroy');
+    Route::get('/dashboard/check-sheet/co2/{id}/edit', [CheckSheetTabungCo2Controller::class, 'edit'])->name('co2.checksheetco2.edit');
+    Route::put('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'update'])->name('co2.checksheetco2.update');
+    Route::get('/dashboard/check-sheet/co2/{id}/show', [CheckSheetTabungCo2Controller::class, 'show'])->name('co2.checksheetco2.show');
+
+});
+
 
 // Untuk Checksheet Nitrogen
 Route::middleware(['auth'])->group(function () {

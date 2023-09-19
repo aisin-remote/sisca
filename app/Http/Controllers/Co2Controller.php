@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetTabungCo2;
 use App\Models\Co2;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Co2Controller extends Controller
 {
@@ -56,7 +58,24 @@ class Co2Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $co2 = Co2::findOrFail($id);
+
+        if (!$co2) {
+            return back()->with('error', 'Co2 tidak ditemukan.');
+        }
+
+        $checksheets = CheckSheetTabungCo2::where('tabung_number', $co2->no_tabung);
+        $firstYear = CheckSheetTabungCo2::min(DB::raw('YEAR(tanggal_pengecekan)'));
+        $lastYear = CheckSheetTabungCo2::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+        if (request()->has('tahun_filter')) {
+            $tahunFilter = request()->input('tahun_filter');
+            $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+        }
+
+        $checksheets = $checksheets->get();
+
+        return view('dashboard.co2.show', compact('co2', 'checksheets', 'firstYear', 'lastYear'));
     }
 
     /**

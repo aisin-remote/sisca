@@ -88,6 +88,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/nitrogen*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/nitrogen">Nitrogen</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/co2*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/co2">Co2</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">
