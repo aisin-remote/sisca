@@ -39,9 +39,13 @@ class TanduController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_tandu'=>'required|unique:tm_tandus',
-            'location_id'=>'required',
+            'no_tandu' => 'required|unique:tm_tandus',
+            'location_id' => 'required',
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_tandu'] = strtoupper($validate['no_tandu']);
+
 
         Tandu::create($validate);
         return redirect()->route('tandu.index')->with('success', "Data Tandu {$validate['no_tandu']} berhasil ditambahkan");
@@ -83,7 +87,7 @@ class TanduController extends Controller
         $tandu = Tandu::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
+            'location_id' => 'required',
         ]);
 
         $tandu->update($validateData);

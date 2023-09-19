@@ -42,11 +42,15 @@ class HydrantController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_hydrant'=>'required|unique:tm_hydrants',
-            'location_id'=>'required',
-            'zona'=>'nullable',
-            'type'=>'required'
+            'no_hydrant' => 'required|unique:tm_hydrants',
+            'location_id' => 'required',
+            'zona' => 'nullable',
+            'type' => 'required'
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_hydrant'] = strtoupper($validate['no_hydrant']);
+
 
         Hydrant::create($validate);
         return redirect()->route('hydrant.index')->with('success', "Data Hydrant {$validate['no_hydrant']} berhasil ditambahkan");
@@ -82,7 +86,6 @@ class HydrantController extends Controller
             $checksheets = $checksheets->get();
 
             return view('dashboard.hydrant.show', compact('hydrant', 'checksheets', 'firstYear', 'lastYear'));
-
         } elseif ($type === 'Outdoor') {
             $checksheets = CheckSheetHydrantOutdoor::where('hydrant_number', $hydrant->no_hydrant);
             $firstYear = CheckSheetHydrantOutdoor::min(DB::raw('YEAR(tanggal_pengecekan)'));
@@ -96,7 +99,6 @@ class HydrantController extends Controller
             $checksheets = $checksheets->get();
 
             return view('dashboard.hydrant.show', compact('hydrant', 'checksheets', 'firstYear', 'lastYear'));
-
         } else {
             return back()->with('error', 'Hydrant tidak dikenali');
         }
@@ -127,9 +129,9 @@ class HydrantController extends Controller
         $hydrant = Hydrant::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
-            'zona'=>'nullable',
-            'type'=>'required'
+            'location_id' => 'required',
+            'zona' => 'nullable',
+            'type' => 'required'
         ]);
 
         $hydrant->update($validateData);

@@ -166,6 +166,8 @@ Route::get('/dashboard/nitrogen/checksheet/all-check-sheet', [CheckSheetNitrogen
 Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerController::class, 'processForm'])->name('nitrogen.process.form');
 
 Route::post('/dashboard/co2/process-checksheet', [CheckSheetTabungCo2Controller::class, 'processForm'])->name('co2.process.form');
+Route::get('/dashboard/co2/checksheet/all-check-sheet', [CheckSheetTabungCo2Controller::class, 'index'])->name('co2.checksheet.index');
+
 
 
 
@@ -343,3 +345,6 @@ Route::post('/export-checksheet-hydrant', [CombinedHydrantController::class, 'ex
 
 // Export CheckSheet Nitrogen
 Route::post('/export-checksheet-nitrogen', [CheckSheetNitrogenServerController::class, 'exportExcelWithTemplate'])->name('export.checksheetsnitrogen');
+
+// Export CheckSheet Co2
+Route::post('/export-checksheet-tabung-co2', [CheckSheetTabungCo2Controller::class, 'exportExcelWithTemplate'])->name('export.checksheetstabung.co2');

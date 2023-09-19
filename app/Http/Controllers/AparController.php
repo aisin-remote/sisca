@@ -49,6 +49,8 @@ class AparController extends Controller
             'type' => 'required'
         ]);
 
+        $validate['tag_number'] = strtoupper($validate['tag_number']);
+
         Apar::create($validate);
         return redirect()->route('apar.index')->with('success', "Data Apar {$validate['tag_number']} berhasil ditambahkan");
     }

@@ -38,6 +38,8 @@ class CheckSheetHydrantController extends Controller
     {
         $hydrantNumber = $request->input('hydrant_number');
 
+        $hydrantNumber = strtoupper($hydrantNumber);
+
         $hydrant = Hydrant::where('no_hydrant', $hydrantNumber)->first();
 
         if (!$hydrant) {

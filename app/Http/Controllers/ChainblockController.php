@@ -39,10 +39,14 @@ class ChainblockController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_chainblock'=>'required|unique:tm_chainblocks',
-            'location_id'=>'required',
-            'handling_detail'=>'nullable',
+            'no_chainblock' => 'required|unique:tm_chainblocks',
+            'location_id' => 'required',
+            'handling_detail' => 'nullable',
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_chainblock'] = strtoupper($validate['no_chainblock']);
+
 
         Chainblock::create($validate);
         return redirect()->route('chain-block.index')->with('success', "Data Chain Block {$validate['no_chainblock']} berhasil ditambahkan");
@@ -84,8 +88,8 @@ class ChainblockController extends Controller
         $chainblock = Chainblock::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
-            'handling_detail'=>'nullable',
+            'location_id' => 'required',
+            'handling_detail' => 'nullable',
         ]);
 
         $chainblock->update($validateData);

@@ -23,6 +23,8 @@ class CheckSheetPowderController extends Controller
             ->whereMonth('created_at', $currentMonth)
             ->first();
 
+        $tagNumber = strtoupper($tagNumber);
+
         if ($existingCheckSheet) {
             // Jika sudah ada entri, tampilkan halaman edit
             return redirect()->route('apar.checksheetpowder.edit', $existingCheckSheet->id)
@@ -73,6 +75,8 @@ class CheckSheetPowderController extends Controller
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
+            $validatedData['apar_number'] = strtoupper($validatedData['apar_number']);
+
             if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_powder')) {
                 $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');
                 $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-powder');
@@ -112,6 +116,9 @@ class CheckSheetPowderController extends Controller
                 'photo_powder' => 'required|image|file|max:3072',
                 // tambahkan validasi untuk atribut lainnya
             ]);
+
+            $validatedData['apar_number'] = strtoupper($validatedData['apar_number']);
+
 
             if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_powder')) {
                 $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-powder');

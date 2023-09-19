@@ -41,10 +41,14 @@ class Co2Controller extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_tabung'=>'required|unique:tm_co2s',
-            'location_id'=>'required',
-            'plant'=>'nullable',
+            'no_tabung' => 'required|unique:tm_co2s',
+            'location_id' => 'required',
+            'plant' => 'nullable',
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_tabung'] = strtoupper($validate['no_tabung']);
+
 
         Co2::create($validate);
         return redirect()->route('co2.index')->with('success', "Data Co2 {$validate['no_tabung']} berhasil ditambahkan");
@@ -103,8 +107,8 @@ class Co2Controller extends Controller
         $co2 = Co2::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
-            'plant'=>'nullable',
+            'location_id' => 'required',
+            'plant' => 'nullable',
         ]);
 
         $co2->update($validateData);

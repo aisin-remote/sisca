@@ -46,6 +46,10 @@ class NitrogenController extends Controller
             'plant' => 'nullable',
         ]);
 
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_tabung'] = strtoupper($validate['no_tabung']);
+
+
         Nitrogen::create($validate);
         return redirect()->route('nitrogen.index')->with('success', "Data Nitrogen {$validate['no_tabung']} berhasil ditambahkan");
     }

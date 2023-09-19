@@ -24,6 +24,8 @@ class CheckSheetHydrantIndoorController extends Controller
             ->whereMonth('created_at', $currentMonth)
             ->first();
 
+        $hydrantNumber = strtoupper($hydrantNumber);
+
         if ($existingCheckSheet) {
             // Jika sudah ada entri, tampilkan halaman edit
             return redirect()->route('hydrant.checksheetindoor.edit', $existingCheckSheet->id)
@@ -83,6 +85,8 @@ class CheckSheetHydrantIndoorController extends Controller
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
+            $validatedData['hydrant_number'] = strtoupper($validatedData['hydrant_number']);
+
             if ($request->file('photo_pintu') && $request->file('photo_lampu') && $request->file('photo_emergency') && $request->file('photo_nozzle') && $request->file('photo_selang') && $request->file('photo_valve') && $request->file('photo_coupling') && $request->file('photo_pressure') && $request->file('photo_kupla')) {
                 $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-hydrant-indoor');
                 $validatedData['photo_lampu'] = $request->file('photo_lampu')->store('checksheet-hydrant-indoor');
@@ -134,6 +138,8 @@ class CheckSheetHydrantIndoorController extends Controller
                 'photo_kupla' => 'required|image|file|max:3072',
                 // tambahkan validasi untuk atribut lainnya
             ]);
+
+            $validatedData['hydrant_number'] = strtoupper($validatedData['hydrant_number']);
 
             if ($request->file('photo_pintu') && $request->file('photo_lampu') && $request->file('photo_emergency') && $request->file('photo_nozzle') && $request->file('photo_selang') && $request->file('photo_valve') && $request->file('photo_coupling') && $request->file('photo_pressure') && $request->file('photo_kupla')) {
                 $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-hydrant-indoor');

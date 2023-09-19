@@ -39,9 +39,13 @@ class EyewasherController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_eyewasher'=>'required|unique:tm_eyewashers',
-            'location_id'=>'required',
+            'no_eyewasher' => 'required|unique:tm_eyewashers',
+            'location_id' => 'required',
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_eyewasher'] = strtoupper($validate['no_eyewasher']);
+
 
         Eyewasher::create($validate);
         return redirect()->route('eye-washer.index')->with('success', "Data Eye Washer {$validate['no_eyewasher']} berhasil ditambahkan");
@@ -83,7 +87,7 @@ class EyewasherController extends Controller
         $eyewasher = Eyewasher::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
+            'location_id' => 'required',
         ]);
 
         $eyewasher->update($validateData);

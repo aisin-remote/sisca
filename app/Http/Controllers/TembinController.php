@@ -14,7 +14,7 @@ class TembinController extends Controller
      */
     public function index()
     {
-        return view('dashboard.tembin.index',[
+        return view('dashboard.tembin.index', [
             'tembins' => Tembin::all()
         ]);
     }
@@ -38,8 +38,12 @@ class TembinController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_equip'=>'required|unique:tm_tembins'
+            'no_equip' => 'required|unique:tm_tembins'
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_equip'] = strtoupper($validate['no_equip']);
+
 
         Tembin::create($validate);
         return redirect()->route('tembin.index')->with('success', "Data Tembin {$validate['no_equip']} berhasil ditambahkan");

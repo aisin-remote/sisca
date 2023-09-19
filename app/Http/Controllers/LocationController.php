@@ -41,6 +41,8 @@ class LocationController extends Controller
             'location_name'=>'required|unique:tm_locations'
         ]);
 
+        $validate['location_name'] = strtoupper($validate['location_name']);
+
         Location::create($validate);
         return redirect()->route('location.index')->with('success', "Data Location {$validate['location_name']} berhasil ditambahkan");
     }

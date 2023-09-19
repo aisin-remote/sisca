@@ -39,11 +39,15 @@ class SlingController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_sling'=>'required|unique:tm_slings',
-            'location_id'=>'required',
-            'plant'=>'nullable',
-            'type'=>'required'
+            'no_sling' => 'required|unique:tm_slings',
+            'location_id' => 'required',
+            'plant' => 'nullable',
+            'type' => 'required'
         ]);
+
+        // Mengubah 'no_tabung' menjadi huruf besar
+        $validate['no_sling'] = strtoupper($validate['no_sling']);
+
 
         Sling::create($validate);
         return redirect()->route('sling.index')->with('success', "Data Sling {$validate['no_sling']} berhasil ditambahkan");
@@ -85,9 +89,9 @@ class SlingController extends Controller
         $sling = Sling::findOrFail($id);
 
         $validateData = $request->validate([
-            'location_id'=>'required',
-            'plant'=>'nullable',
-            'type'=>'required'
+            'location_id' => 'required',
+            'plant' => 'nullable',
+            'type' => 'required'
         ]);
 
         $sling->update($validateData);

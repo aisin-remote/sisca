@@ -7,6 +7,7 @@ use App\Models\Co2;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetTabungCo2Controller extends Controller
 {
@@ -263,5 +264,121 @@ class CheckSheetTabungCo2Controller extends Controller
         $checkSheettabungco2->delete();
 
         return back()->with('success1', 'Data Check Sheet Co2 berhasil dihapus');
+    }
+
+    public function index(Request $request)
+    {
+        $tanggal_filter = $request->input('tanggal_filter');
+
+
+        $checksheettabungco2 = CheckSheetTabungCo2::when($tanggal_filter, function ($query) use ($tanggal_filter) {
+            return $query->where('tanggal_pengecekan', $tanggal_filter);
+        })->get();
+
+        return view('dashboard.co2.checksheet.index', compact('checksheettabungco2'));
+    }
+
+    public function exportExcelWithTemplate(Request $request)
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template-checksheet-tabungco2.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve tag_number from the form
+        $tabungNumber = $request->input('tabung_number');
+
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
+        $data = CheckSheetTabungCo2::with('co2s')
+            ->select('tanggal_pengecekan', 'tabung_number', 'cover', 'tabung', 'lock_pin', 'segel_lock_pin', 'kebocoran_regulator_tabung', 'selang')
+            ->whereYear('tanggal_pengecekan', $selectedYear)
+            ->where('tabung_number', $tabungNumber) // Gunakan nilai tag_number yang diambil dari form
+            ->get();
+
+        // Array asosiatif untuk mencocokkan nama bulan dengan kolom
+        $bulanKolom = [
+            1 => 'G',  // Januari -> Kolom H
+            2 => 'H',  // Februari -> Kolom I
+            3 => 'I',  // Maret -> Kolom J
+            4 => 'J',  // April -> Kolom K
+            5 => 'K',  // Mei -> Kolom L
+            6 => 'L',  // Juni -> Kolom M
+            7 => 'M',  // Juli -> Kolom N
+            8 => 'N',  // Agustus -> Kolom O
+            9 => 'O',  // September -> Kolom P
+            10 => 'P', // Oktober -> Kolom Q
+            11 => 'Q', // November -> Kolom R
+            12 => 'R', // Desember -> Kolom S
+        ];
+
+        $worksheet->setCellValue('Q' . 1, ': ' . $data[0]->tabung_number);
+        $worksheet->setCellValue('Q' . 2, ': ' . $data[0]->co2s->locations->location_name);
+        $worksheet->setCellValue('Q' . 3, ': ' . $data[0]->co2s->plant);
+
+        foreach ($data as $item) {
+
+            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
+            $bulan = Carbon::parse($item->tanggal_pengecekan)->format('n');
+
+            // Tentukan kolom berdasarkan bulan
+            $col = $bulanKolom[$bulan];
+
+            // Set value based on $item->pressure
+            if ($item->cover === 'OK') {
+                $worksheet->setCellValue($col . 8, '√');
+            } else if ($item->cover === 'NG') {
+                $worksheet->setCellValue($col . 8, 'X');
+            }
+
+            // Set value based on $item->hose
+            if ($item->tabung === 'OK') {
+                $worksheet->setCellValue($col . 10, '√');
+            } else if ($item->tabung === 'NG') {
+                $worksheet->setCellValue($col . 10, 'X');
+            }
+
+            // Set value based on $item->corong
+            if ($item->lock_pin === 'OK') {
+                $worksheet->setCellValue($col . 12, '√');
+            } else if ($item->lock_pin === 'NG') {
+                $worksheet->setCellValue($col . 12, 'X');
+            }
+
+            // Set value based on $item->tabung
+            if ($item->segel_lock_pin === 'OK') {
+                $worksheet->setCellValue($col . 14, '√');
+            } else if ($item->segel_lock_pin === 'NG') {
+                $worksheet->setCellValue($col . 14, 'X');
+            }
+
+            // Set value based on $item->regulator
+            if ($item->kebocoran_regulator_tabung === 'OK') {
+                $worksheet->setCellValue($col . 16, '√');
+            } else if ($item->kebocoran_regulator_tabung === 'NG') {
+                $worksheet->setCellValue($col . 16, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->selang === 'OK') {
+                $worksheet->setCellValue($col . 18, '√');
+            } else if ($item->selang === 'NG') {
+                $worksheet->setCellValue($col . 18, 'X');
+            }
+
+            // Increment row for the next data
+            $col++;
+        }
+
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/checksheet-tabungco2.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }

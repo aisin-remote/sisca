@@ -43,6 +43,8 @@ class CheckSheetNitrogenServerController extends Controller
             ->whereMonth('created_at', $currentMonth)
             ->first();
 
+        $tabungNumber = strtoupper($tabungNumber);
+
         if ($existingCheckSheet) {
             // Jika sudah ada entri, tampilkan halaman edit
             return redirect()->route('nitrogen.checksheetnitrogen.edit', $existingCheckSheet->id)
@@ -102,6 +104,8 @@ class CheckSheetNitrogenServerController extends Controller
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
+            $validatedData['tabung_number'] = strtoupper($validatedData['tabung_number']);
+
             if ($request->file('photo_operasional') && $request->file('photo_selector_mode') && $request->file('photo_pintu_tabung') && $request->file('photo_pressure_pilot') && $request->file('photo_pressure_no1') && $request->file('photo_pressure_no2') && $request->file('photo_pressure_no3') && $request->file('photo_pressure_no4') && $request->file('photo_pressure_no5')) {
                 $validatedData['photo_operasional'] = $request->file('photo_operasional')->store('checksheet-nitrogen');
                 $validatedData['photo_selector_mode'] = $request->file('photo_selector_mode')->store('checksheet-nitrogen');
@@ -153,6 +157,8 @@ class CheckSheetNitrogenServerController extends Controller
                 'photo_pressure_no5' => 'required|image|file|max:3072',
                 // tambahkan validasi untuk atribut lainnya
             ]);
+
+            $validatedData['tabung_number'] = strtoupper($validatedData['tabung_number']);
 
             if ($request->file('photo_operasional') && $request->file('photo_selector_mode') && $request->file('photo_pintu_tabung') && $request->file('photo_pressure_pilot') && $request->file('photo_pressure_no1') && $request->file('photo_pressure_no2') && $request->file('photo_pressure_no3') && $request->file('photo_pressure_no4') && $request->file('photo_pressure_no5')) {
                 $validatedData['photo_operasional'] = $request->file('photo_operasional')->store('checksheet-nitrogen');

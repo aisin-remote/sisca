@@ -57,7 +57,7 @@
         </div>
 
     </div>
-    <form action="{{ route('export.checksheetsnitrogen') }}" method="POST" class="col-md-6 mb-3">
+    <form action="{{ route('export.checksheetstabung.co2') }}" method="POST" class="col-md-6 mb-3">
         @method('POST')
         @csrf
         <div class="form-group mb-3">
