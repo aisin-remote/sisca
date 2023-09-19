@@ -33,6 +33,14 @@ class CheckSheetTabungCo2Controller extends Controller
 
     public function createForm($tabungNumber)
     {
+        // Mencari entri Co2 berdasarkan no_tabung
+        $co2 = Co2::where('no_tabung', $tabungNumber)->first();
+
+        if (!$co2) {
+            // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
+            return view('dashboard.co2.notfound', compact('tabungNumber'));
+        }
+
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
