@@ -266,6 +266,7 @@ use App\Http\Controllers\CombinedHydrantController;
 Route::get('/dashboard/report/apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
 Route::get('/dashboard/report/hydrant', [CombinedHydrantController::class, 'index'])->name('home.checksheet.hydrant')->middleware('auth');
 Route::get('/dashboard/report/nitrogen', [CheckSheetNitrogenServerController::class, 'report'])->name('home.checksheet.nitrogen')->middleware('auth');
+Route::get('/dashboard/report/co2', [CheckSheetTabungCo2Controller::class, 'report'])->name('home.checksheet.co2')->middleware('auth');
 
 
 

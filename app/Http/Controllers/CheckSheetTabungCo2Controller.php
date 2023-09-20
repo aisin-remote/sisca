@@ -395,4 +395,78 @@ class CheckSheetTabungCo2Controller extends Controller
 
         return response()->download($outputPath)->deleteFileAfterSend(true);
     }
+
+    public function report(Request $request)
+    {
+        $selectedYear = $request->input('selected_year', date('Y'));
+
+        $co2Data = Co2::leftJoin('tm_locations', 'tm_co2s.location_id', '=', 'tm_locations.id')
+            ->leftJoin('tt_check_sheet_tabung_co2s', 'tm_co2s.no_tabung', '=', 'tt_check_sheet_tabung_co2s.tabung_number')
+            ->select(
+                'tm_co2s.no_tabung as tabung_number',
+                'tm_co2s.plant',
+                'tm_locations.location_name',
+                'tt_check_sheet_tabung_co2s.tanggal_pengecekan',
+                'tt_check_sheet_tabung_co2s.cover',
+                'tt_check_sheet_tabung_co2s.tabung',
+                'tt_check_sheet_tabung_co2s.lock_pin',
+                'tt_check_sheet_tabung_co2s.segel_lock_pin',
+                'tt_check_sheet_tabung_co2s.kebocoran_regulator_tabung',
+                'tt_check_sheet_tabung_co2s.selang',
+            )
+            ->get();
+
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredCo2Data = $co2Data->filter(function ($co2) use ($selectedYear) {
+            return $co2->tanggal_pengecekan !== null &&
+                date('Y', strtotime($co2->tanggal_pengecekan)) == $selectedYear;
+        });
+
+        $mappedCo2Data = $filteredCo2Data->groupBy('tabung_number')->map(function ($co2Group) {
+            $co2Number = $co2Group[0]['tabung_number'];
+            $location_name = $co2Group[0]['location_name'];
+            $co2Plant = $co2Group[0]['plant'];
+            $co2Pengecekan = $co2Group[0]['tanggal_pengecekan'];
+            $months = [];
+
+            foreach ($co2Group as $co2) {
+                $month = date('n', strtotime($co2['tanggal_pengecekan']));
+                $issueCodes = [];
+
+                // Map issue codes for powder type
+                if ($co2['cover'] === 'NG') $issueCodes[] = 'a';
+                if ($co2['tabung'] === 'NG') $issueCodes[] = 'b';
+                if ($co2['lock_pin'] === 'NG') $issueCodes[] = 'c';
+                if ($co2['segel_lock_pin'] === 'NG') $issueCodes[] = 'd';
+                if ($co2['kebocoran_regulator_tabung'] === 'NG') $issueCodes[] = 'e';
+                if ($co2['selang'] === 'NG') $issueCodes[] = 'f';
+
+
+                if (empty($issueCodes)) {
+                    $issueCodes[] = 'OK';
+                }
+
+                $months[$month] = $issueCodes;
+            }
+
+            return [
+                'tabung_number' => $co2Number,
+                'location_name' => $location_name,
+                'plant' => $co2Plant,
+                'tanggal_pengecekan' => $co2Pengecekan,
+                'months' => $months,
+            ];
+        });
+
+        // Convert to JSON
+        $jsonString = json_encode($mappedCo2Data, JSON_PRETTY_PRINT);
+
+        // Save JSON to a file
+        Storage::disk('local')->put('co2_data.json', $jsonString);
+
+        return view('dashboard.co2_report', [
+            'co2Data' => $mappedCo2Data,
+            'selectedYear' => $selectedYear,
+        ]);
+    }
 }

@@ -10,6 +10,7 @@ use App\Models\CheckSheetHydrantIndoor;
 use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetNitrogenServer;
 use App\Models\CheckSheetPowder;
+use App\Models\CheckSheetTabungCo2;
 
 class DashboardController extends Controller
 {
@@ -218,8 +219,51 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Tabung Co2
+
+
+        $notOkData_Tabungco2 = [];
+        $okData_Tabungco2 = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Tabungco2[] = CheckSheetTabungCo2::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('cover', 'NG')
+                        ->orWhere('tabung', 'NG')
+                        ->orWhere('lock_pin', 'NG')
+                        ->orWhere('segel_lock_pin', 'NG')
+                        ->orWhere('kebocoran_regulator_tabung', 'NG')
+                        ->orWhere('selang', 'NG');
+                })
+                ->count();
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_Tabungco2[] = CheckSheetTabungCo2::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('cover', 'OK')
+                        ->where('tabung', 'OK')
+                        ->where('lock_pin', 'OK')
+                        ->where('segel_lock_pin', 'OK')
+                        ->where('kebocoran_regulator_tabung', 'OK')
+                        ->where('selang', 'OK');
+                })
+                ->count();
+        }
+
+
+        $data_Tabungco2 = [
+            'labels' => $labels,
+            'okData_Tabungco2' => $okData_Tabungco2,
+            'notOkData_Tabungco2' => $notOkData_Tabungco2,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'availableYears'));
     }
 }
