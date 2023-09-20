@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CheckSheetHydrantIndoor;
+use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\Hydrant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +15,19 @@ class CheckSheetHydrantIndoorController extends Controller
 
     public function showForm($hydrantNumber)
     {
+        $latestCheckSheetOutdoors = CheckSheetHydrantOutdoor::orderBy('updated_at', 'desc')->take(10)->get();
+        $latestCheckSheetIndoor = CheckSheetHydrantIndoor::orderBy('updated_at', 'desc')->take(10)->get();
+
+        $combinedLatestCheckSheets = $latestCheckSheetOutdoors->merge($latestCheckSheetIndoor);
+
+        // Mencari entri Co2 berdasarkan no_tabung
+        $hydrant = Hydrant::where('no_hydrant', $hydrantNumber)->first();
+
+        if (!$hydrant) {
+            // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
+            return redirect()->route('hydrant.show.form', compact('combinedLatestCheckSheets'))->with('error', 'Hydrant Number tidak ditemukan.');
+        }
+
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;

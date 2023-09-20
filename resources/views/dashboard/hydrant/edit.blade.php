@@ -19,6 +19,14 @@
                 @enderror
             </div>
             <div class="mb-3 col-md-6">
+                <label class="form-label" for="type">Type</label>
+                <input type="text" name="type" id="type" placeholder="Masukkan Type Hydrant"
+                    class="form-control @error('type') is-invalid @enderror" value="{{ old('type') ?? $hydrant->type}}" readonly>
+                @error('type')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Location</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
                     <option selected disabled>Pilih Location</option>
@@ -38,14 +46,6 @@
                 @error('zona')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-            </div>
-            <div class="mb-3 col-md-6">
-                <label class="form-label" for="type">Type</label>
-                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
-                    <option selected disabled>Pilih Type</option>
-                    <option value="Indoor" {{ old('type') ?? $hydrant->type == 'Indoor' ? 'selected' : '' }}>Indoor</option>
-                    <option value="Outdoor" {{ old('type') ?? $hydrant->type == 'Outdoor' ? 'selected' : '' }}>Outdoor</option>
-                </select>
             </div>
         </div>
         <button type="submit" class="btn btn-warning">Edit</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Apar;
+use App\Models\CheckSheetCo2;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetPowder;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,18 @@ class CheckSheetPowderController extends Controller
 {
     public function showForm($tagNumber)
     {
+        $latestCheckSheetPowders = CheckSheetPowder::orderBy('updated_at', 'desc')->take(10)->get();
+        $latestCheckSheetCo2 = CheckSheetCo2::orderBy('updated_at', 'desc')->take(10)->get();
+
+        $combinedLatestCheckSheets = $latestCheckSheetPowders->merge($latestCheckSheetCo2);
+        // Mencari entri Co2 berdasarkan no_tabung
+        $apar = Apar::where('tag_number', $tagNumber)->first();
+
+        if (!$apar) {
+            // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
+            return redirect()->route('show.form', compact('combinedLatestCheckSheets'))->with('error', 'Apar Number tidak ditemukan.');
+        }
+
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;

@@ -91,7 +91,6 @@ class SlingController extends Controller
         $validateData = $request->validate([
             'location_id' => 'required',
             'plant' => 'nullable',
-            'type' => 'required'
         ]);
 
         $sling->update($validateData);

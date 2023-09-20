@@ -146,7 +146,6 @@ class AparController extends Controller
             'location_id' => 'required',
             'expired' => 'required',
             'post' => 'nullable',
-            'type' => 'required'
         ]);
 
         $apar->update($validateData);

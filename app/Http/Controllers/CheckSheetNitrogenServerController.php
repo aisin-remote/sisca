@@ -22,6 +22,8 @@ class CheckSheetNitrogenServerController extends Controller
     {
         $nitrogenNumber = $request->input('tabung_number');
 
+        $nitrogenNumber = strtoupper($nitrogenNumber);
+
         $nitrogen = Nitrogen::where('no_tabung', $nitrogenNumber)->first();
 
         if (!$nitrogen) {
@@ -33,6 +35,16 @@ class CheckSheetNitrogenServerController extends Controller
 
     public function createForm($tabungNumber)
     {
+        $latestCheckSheetNitrogens = CheckSheetNitrogenServer::orderBy('updated_at', 'desc')->take(10)->get();
+
+        // Mencari entri Co2 berdasarkan no_tabung
+        $nitrogen = Nitrogen::where('no_tabung', $tabungNumber)->first();
+
+        if (!$nitrogen) {
+            // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
+            return redirect()->route('nitrogen.show.form', compact('latestCheckSheetNitrogens'))->with('error', 'Tabung Number tidak ditemukan.');
+        }
+
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetHydrantIndoor;
 use Illuminate\Http\Request;
 use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\Hydrant;
@@ -13,6 +14,19 @@ class CheckSheetHydrantOutdoorController extends Controller
 {
     public function showForm($hydrantNumber)
     {
+        $latestCheckSheetOutdoors = CheckSheetHydrantOutdoor::orderBy('updated_at', 'desc')->take(10)->get();
+        $latestCheckSheetIndoor = CheckSheetHydrantIndoor::orderBy('updated_at', 'desc')->take(10)->get();
+
+        $combinedLatestCheckSheets = $latestCheckSheetOutdoors->merge($latestCheckSheetIndoor);
+
+        // Mencari entri Co2 berdasarkan no_tabung
+        $hydrant = Hydrant::where('no_hydrant', $hydrantNumber)->first();
+
+        if (!$hydrant) {
+            // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
+            return redirect()->route('hydrant.show.form', compact('combinedLatestCheckSheets'))->with('error', 'Hydrant Number tidak ditemukan.');
+        }
+
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
@@ -79,6 +93,8 @@ class CheckSheetHydrantOutdoorController extends Controller
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
+            $validatedData['hydrant_number'] = strtoupper($validatedData['hydrant_number']);
+
             if ($request->file('photo_pintu') && $request->file('photo_nozzle') && $request->file('photo_selang') && $request->file('photo_tuas') && $request->file('photo_pilar') && $request->file('photo_penutup') && $request->file('photo_rantai') && $request->file('photo_kupla')) {
                 $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-hydrant-outdoor');
                 $validatedData['photo_nozzle'] = $request->file('photo_nozzle')->store('checksheet-hydrant-outdoor');
@@ -126,6 +142,8 @@ class CheckSheetHydrantOutdoorController extends Controller
                 'photo_kupla' => 'required|image|file|max:3072',
                 // tambahkan validasi untuk atribut lainnya
             ]);
+
+            $validatedData['hydrant_number'] = strtoupper($validatedData['hydrant_number']);
 
             if ($request->file('photo_pintu') && $request->file('photo_nozzle') && $request->file('photo_selang') && $request->file('photo_tuas') && $request->file('photo_pilar') && $request->file('photo_penutup') && $request->file('photo_rantai') && $request->file('photo_kupla')) {
                 $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-hydrant-outdoor');

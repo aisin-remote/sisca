@@ -28,18 +28,24 @@ class CheckSheetTabungCo2Controller extends Controller
             return back()->with('error', 'Co2 Number tidak ditemukan.');
         }
 
+        $co2Number = strtoupper($co2Number);
+
         return redirect()->route('checksheettabungco2', compact('co2Number'));
     }
 
     public function createForm($tabungNumber)
     {
+        $latestCheckSheetTabungCo2s = CheckSheetTabungCo2::orderBy('updated_at', 'desc')->take(10)->get();
+
         // Mencari entri Co2 berdasarkan no_tabung
         $co2 = Co2::where('no_tabung', $tabungNumber)->first();
 
         if (!$co2) {
             // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
-            return view('dashboard.co2.notfound', compact('tabungNumber'));
+            return redirect()->route('co2.show.form', compact('latestCheckSheetTabungCo2s'))->with('error', 'Co2 Number tidak ditemukan.');
         }
+
+        $tabungNumber = strtoupper($tabungNumber);
 
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;

@@ -131,7 +131,6 @@ class HydrantController extends Controller
         $validateData = $request->validate([
             'location_id' => 'required',
             'zona' => 'nullable',
-            'type' => 'required'
         ]);
 
         $hydrant->update($validateData);

@@ -19,6 +19,14 @@
                 @enderror
             </div>
             <div class="mb-3 col-md-6">
+                <label class="form-label" for="type">Type</label>
+                <input type="text" name="type" id="type" placeholder="Masukkan Type"
+                    class="form-control @error('type') is-invalid @enderror" value="{{ old('type') ?? $apar->type}}" readonly>
+                @error('type')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Location</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
                     <option selected disabled>Pilih Location</option>
@@ -68,15 +76,6 @@
                 @error('post')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-            </div>
-            <div class="mb-3 col-md-6">
-                <label class="form-label" for="type">Type</label>
-                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
-                    <option selected disabled>Pilih Type</option>
-                    <option value="powder" {{ old('type') ?? $apar->type == 'powder' ? 'selected' : '' }}>Powder</option>
-                    <option value="co2" {{ old('type') ?? $apar->type == 'co2' ? 'selected' : '' }}>CO2</option>
-                    <option value="af11e" {{ old('type') ?? $apar->type == 'af11e' ? 'selected' : '' }}>AF11E</option>
-                </select>
             </div>
         </div>
         <button type="submit" class="btn btn-warning">Edit</button>
