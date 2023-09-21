@@ -107,6 +107,8 @@ class CheckSheetTabungCo2Controller extends Controller
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
+            $validatedData['tabung_number'] = strtoupper($validatedData['tabung_number']);
+
             if ($request->file('photo_cover') && $request->file('photo_tabung') && $request->file('photo_lock_pin') && $request->file('photo_segel_lock_pin') && $request->file('photo_kebocoran_regulator_tabung') && $request->file('photo_selang')) {
                 $validatedData['photo_cover'] = $request->file('photo_cover')->store('checksheet-tabung-co2');
                 $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-tabung-co2');
@@ -146,6 +148,8 @@ class CheckSheetTabungCo2Controller extends Controller
                 'photo_selang' => 'required|image|file|max:3072',
                 // tambahkan validasi untuk atribut lainnya
             ]);
+
+            $validatedData['tabung_number'] = strtoupper($validatedData['tabung_number']);
 
             if ($request->file('photo_cover') && $request->file('photo_tabung') && $request->file('photo_lock_pin') && $request->file('photo_segel_lock_pin') && $request->file('photo_kebocoran_regulator_tabung') && $request->file('photo_selang')) {
                 $validatedData['photo_cover'] = $request->file('photo_cover')->store('checksheet-tabung-co2');
