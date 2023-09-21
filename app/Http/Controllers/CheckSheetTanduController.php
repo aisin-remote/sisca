@@ -6,6 +6,7 @@ use App\Models\CheckSheetTandu;
 use App\Models\Tandu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CheckSheetTanduController extends Controller
 {
@@ -190,5 +191,33 @@ class CheckSheetTanduController extends Controller
 
             return redirect()->route('tandu.show.form')->with('success', 'Data berhasil disimpan.');
         }
+    }
+
+    public function show($id)
+    {
+        $checksheet = CheckSheetTandu::findOrFail($id);
+
+        return view('dashboard.tandu.checksheet.show', compact('checksheet'));
+    }
+
+    public function destroy($id)
+    {
+        $checkSheettandu = CheckSheetTandu::find($id);
+
+        if ($checkSheettandu->photo_kunci_pintu || $checkSheettandu->photo_pintu || $checkSheettandu->photo_sign || $checkSheettandu->photo_hand_grip || $checkSheettandu->photo_body || $checkSheettandu->photo_engsel || $checkSheettandu->photo_kaki || $checkSheettandu->photo_belt || $checkSheettandu->photo_rangka) {
+            Storage::delete($checkSheettandu->photo_kunci_pintu);
+            Storage::delete($checkSheettandu->photo_pintu);
+            Storage::delete($checkSheettandu->photo_sign);
+            Storage::delete($checkSheettandu->photo_hand_grip);
+            Storage::delete($checkSheettandu->photo_body);
+            Storage::delete($checkSheettandu->photo_engsel);
+            Storage::delete($checkSheettandu->photo_kaki);
+            Storage::delete($checkSheettandu->photo_belt);
+            Storage::delete($checkSheettandu->photo_rangka);
+        }
+
+        $checkSheettandu->delete();
+
+        return back()->with('success1', 'Data Check Sheet Tandu berhasil dihapus');
     }
 }

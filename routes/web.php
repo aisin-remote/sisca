@@ -184,10 +184,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu');
     Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu');
 
-    Route::delete('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'destroy'])->name('co2.checksheetco2.destroy');
+    Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy');
     Route::get('/dashboard/check-sheet/co2/{id}/edit', [CheckSheetTabungCo2Controller::class, 'edit'])->name('co2.checksheetco2.edit');
     Route::put('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'update'])->name('co2.checksheetco2.update');
-    Route::get('/dashboard/check-sheet/co2/{id}/show', [CheckSheetTabungCo2Controller::class, 'show'])->name('co2.checksheetco2.show');
+    Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
 
 });
 
