@@ -5,7 +5,7 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Tandu</h1>
-            <a href="{{ route('co2.checksheetco2.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            <a href="{{ route('tandu.checksheettandu.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
         </div>
         <div class="card col-md-12">
             <div class="card-body">

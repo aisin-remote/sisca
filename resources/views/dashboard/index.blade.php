@@ -71,6 +71,19 @@
                 </div>
             </div>
 
+
+            <!-- Grafik Co2 -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Tandu</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="tanduChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -211,6 +224,45 @@
                 }, {
                     label: 'NG',
                     data: {!! json_encode($data_Tabungco2['notOkData_Tabungco2']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
+
+
+
+        // Grafik Tandu
+
+
+        var ctxTandu = document.getElementById('tanduChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var tanduChart = new Chart(ctxTandu, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Tandu['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_Tandu['okData_Tandu']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_Tandu['notOkData_Tandu']) !!},
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderColor: 'rgba(139, 0, 0, 1)',
                     borderWidth: 1
