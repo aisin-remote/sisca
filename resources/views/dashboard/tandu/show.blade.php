@@ -103,7 +103,7 @@
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->tabung_number }}</td>
+                                <td class="text-center align-middle">{{ $checksheet->tandu_number }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->kunci_pintu }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->pintu }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->sign }}</td>

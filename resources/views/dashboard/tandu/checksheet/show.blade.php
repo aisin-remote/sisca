@@ -24,7 +24,7 @@
                             <td>{{ $checksheet->npk }}</td>
                         </tr>
                         <tr>
-                            <th>No Tabung</th>
+                            <th>No Tandu</th>
                             <td>{{ $checksheet->tandu_number }}</td>
                         </tr>
                         <tr>
