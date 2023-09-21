@@ -34,7 +34,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h5>Check Sheet Terbaru</h5>
-        <a href="/dashboard/co2/checksheet/all-check-sheet" class="btn-link text-primary"
+        <a href="/dashboard/tandu/checksheet/all-check-sheet" class="btn-link text-primary"
             style="text-decoration: underline;">
             Semua Check Sheet
         </a>
@@ -68,16 +68,16 @@
                                 <td>{{ $checkSheet->tandu_number }}</td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{ route('co2.checksheetco2.show', $checkSheet->id) }}"
+                                        <a href="{{ route('tandu.checksheettandu.show', $checkSheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('co2.checksheetco2.edit', $checkSheet->id) }}"
+                                        <a href="{{ route('tandu.checksheettandu.edit', $checkSheet->id) }}"
                                             class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('co2.checksheetco2.destroy', $checkSheet->id) }}"
+                                        <form action="{{ route('tandu.checksheettandu.destroy', $checkSheet->id) }}"
                                             method="POST" class="delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Co2?')">Delete</button>
+                                                onclick="return confirm('Ingin menghapus Data Check Sheet Tandu?')">Delete</button>
                                         </form>
                                     </div>
                                 </td>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetTandu;
 use App\Models\Location;
 use App\Models\Tandu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TanduController extends Controller
 {
@@ -59,7 +61,24 @@ class TanduController extends Controller
      */
     public function show($id)
     {
-        //
+        $tandu = Tandu::findOrFail($id);
+
+        if (!$tandu) {
+            return back()->with('error', 'Tandu tidak ditemukan.');
+        }
+
+        $checksheets = CheckSheetTandu::where('tandu_number', $tandu->no_tandu);
+        $firstYear = CheckSheetTandu::min(DB::raw('YEAR(tanggal_pengecekan)'));
+        $lastYear = CheckSheetTandu::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+        if (request()->has('tahun_filter')) {
+            $tahunFilter = request()->input('tahun_filter');
+            $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+        }
+
+        $checksheets = $checksheets->get();
+
+        return view('dashboard.tandu.show', compact('tandu', 'checksheets', 'firstYear', 'lastYear'));
     }
 
     /**

@@ -116,6 +116,9 @@
                 <li class="{{ Request::is('dashboard/report/co2*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/co2">Co2</a>
                 </li>
+                <li class="{{ Request::is('dashboard/report/tandu*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/tandu">Tandu</a>
+                </li>
             </ul>
         </li>
     </ul>

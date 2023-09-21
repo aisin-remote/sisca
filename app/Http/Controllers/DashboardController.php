@@ -11,6 +11,7 @@ use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetNitrogenServer;
 use App\Models\CheckSheetPowder;
 use App\Models\CheckSheetTabungCo2;
+use App\Models\CheckSheetTandu;
 
 class DashboardController extends Controller
 {
@@ -262,8 +263,58 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Tandi
+
+
+        $notOkData_Tandu = [];
+        $okData_Tandu = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Tandu[] = CheckSheetTandu::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('kunci_pintu', 'NG')
+                        ->orWhere('pintu', 'NG')
+                        ->orWhere('sign', 'NG')
+                        ->orWhere('hand_grip', 'NG')
+                        ->orWhere('body', 'NG')
+                        ->orWhere('engsel', 'NG')
+                        ->orWhere('kaki', 'NG')
+                        ->orWhere('belt', 'NG')
+                        ->orWhere('rangka', 'NG');
+
+                })
+                ->count();
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_Tandu[] = CheckSheetTandu::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('kunci_pintu', 'OK')
+                        ->where('pintu', 'OK')
+                        ->where('sign', 'OK')
+                        ->where('hand_grip', 'OK')
+                        ->where('body', 'OK')
+                        ->where('engsel', 'OK')
+                        ->where('kaki', 'OK')
+                        ->where('belt', 'OK')
+                        ->where('rangka', 'OK');
+                })
+                ->count();
+        }
+
+
+        $data_Tandu = [
+            'labels' => $labels,
+            'okData_Tandu' => $okData_Tandu,
+            'notOkData_Tandu' => $notOkData_Tandu,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'availableYears'));
     }
 }

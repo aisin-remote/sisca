@@ -30,13 +30,14 @@
                         <td>{{ $tandu->locations->location_name }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('tandu.destroy', $tandu->id) }}" method="POST">
-                                <a href="{{ route('tandu.edit', $tandu->id) }}" class="badge bg-warning">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Tandu?')">Delete</button>
-                            </form>
+                                <a href="{{ route('tandu.show', $tandu->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('tandu.edit', $tandu->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('tandu.destroy', $tandu->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Tandu?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
