@@ -18,6 +18,16 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3 col-md-6">
+                <label for="type" class="form-label">Type</label>
+                <input type="text" name="type" id="type" placeholder="Masukkan Type Eye Washer"
+                    class="form-control @error('type') is-invalid @enderror" value="{{ old('type') ?? $eyewasher->type}}" readonly>
+                @error('type')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Area</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">

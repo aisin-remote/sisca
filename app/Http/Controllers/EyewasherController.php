@@ -40,6 +40,7 @@ class EyewasherController extends Controller
     {
         $validate = $request->validate([
             'no_eyewasher' => 'required|unique:tm_eyewashers',
+            'type' => 'required',
             'location_id' => 'required',
         ]);
 

@@ -141,6 +141,9 @@ Route::delete('/dashboard/master/location/{data_location}', [LocationController:
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 use App\Http\Controllers\CheckSheetController;
+use App\Http\Controllers\CheckSheetEyewasherController;
+use App\Http\Controllers\CheckSheetEyewasherOnlyController;
+use App\Http\Controllers\CheckSheetEyewasherShowerController;
 use App\Http\Controllers\CheckSheetNitrogenServerController;
 use App\Http\Controllers\CheckSheetHydrantController;
 use App\Http\Controllers\CheckSheetTabungCo2Controller;
@@ -152,6 +155,8 @@ Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class
 Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form');
 Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form');
 Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form');
+Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
+
 
 
 
@@ -171,6 +176,11 @@ Route::get('/dashboard/co2/checksheet/all-check-sheet', [CheckSheetTabungCo2Cont
 Route::post('/dashboard/tandu/process-checksheet', [CheckSheetTanduController::class, 'processForm'])->name('tandu.process.form');
 Route::get('/dashboard/tandu/checksheet/all-check-sheet', [CheckSheetTanduController::class, 'index'])->name('tandu.checksheet.index');
 
+Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
+Route::post('/dashboard/eyewasher/process-checksheet', [CheckSheetEyewasherController::class, 'processForm'])->name('eyewasher.process.form');
+
+
+
 
 
 
@@ -184,7 +194,6 @@ Route::get('/dashboard/tandu/checksheet/all-check-sheet', [CheckSheetTanduContro
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu');
     Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu');
-
     Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy');
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
@@ -192,6 +201,20 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
+
+
+//Checksheet Eyewasher
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/eyewasher/checksheeteyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'showForm'])->name('checksheeteyewasher');
+    Route::post('/dashboard/eyewasher/process-checksheet-eyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'store'])->name('process.checksheet.eyewasher');
+
+    Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
+    Route::get('/dashboard/check-sheet/eyewasher/{id}/edit', [CheckSheetEyewasherOnlyController::class, 'edit'])->name('eyewasher.checksheeteyewasher.edit');
+    Route::put('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'update'])->name('eyewasher.checksheeteyewasher.update');
+    Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show');
+
+});
 
 
 //Checksheet CO2

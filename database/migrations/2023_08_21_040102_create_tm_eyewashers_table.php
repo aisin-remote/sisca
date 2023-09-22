@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->string('no_eyewasher')->unique();
+            $table->string('type');
             $table->timestamps();
 
             $table->foreign('location_id')->references('id')->on('tm_locations')->onDelete('cascade');

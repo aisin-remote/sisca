@@ -18,6 +18,16 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3 col-md-6">
+                <label class="form-label" for="type">Type</label>
+                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                    <option selected disabled>Pilih Type</option>
+                    <option value="Eyewasher" {{ old('type') == 'Eyewasher' ? 'selected' : '' }}>Eyewasher</option>
+                    <option value="Shower" {{ old('type') == 'Shower' ? 'selected' : '' }}>Eyewasher + Shower</option>
+                </select>
+            </div>
+
             <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Area</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
