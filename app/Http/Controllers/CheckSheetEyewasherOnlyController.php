@@ -7,6 +7,7 @@ use App\Models\CheckSheetEyewasherShower;
 use App\Models\Eyewasher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CheckSheetEyewasherOnlyController extends Controller
 {
@@ -94,10 +95,10 @@ class CheckSheetEyewasherOnlyController extends Controller
                 $validatedData['photo_tuas'] = $request->file('photo_tuas')->store('checksheet-eyewasher');
 
 
-            // Perbarui data entri yang sudah ada
-            $existingCheckSheet->update($validatedData);
+                // Perbarui data entri yang sudah ada
+                $existingCheckSheet->update($validatedData);
 
-            return redirect()->route('eyewasher.show.form')->with('success', 'Data berhasil diperbarui.');
+                return redirect()->route('eyewasher.show.form')->with('success', 'Data berhasil diperbarui.');
             }
         } else {
             // Jika sudah ada entri, perbarui entri tersebut
@@ -147,6 +148,79 @@ class CheckSheetEyewasherOnlyController extends Controller
     {
         $checkSheeteyewasher = CheckSheetEyewasher::findOrFail($id);
         return view('dashboard.eyewasher.checksheeteyewasher.edit', compact('checkSheeteyewasher'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $checkSheeteyewasher = CheckSheetEyewasher::findOrFail($id);
+
+        // Validasi data yang diinputkan
+        $rules = [
+            'pijakan' => 'required',
+            'catatan_pijakan' => 'nullable|string|max:255',
+            'photo_pijakan' => 'image|file|max:3072',
+            'pipa_saluran_air' => 'required',
+            'catatan_pipa_saluran_air' => 'nullable|string|max:255',
+            'photo_pipa_saluran_air' => 'image|file|max:3072',
+            'wastafel' => 'required',
+            'catatan_wastafel' => 'nullable|string|max:255',
+            'photo_wastafel' => 'image|file|max:3072',
+            'kran_air' => 'required',
+            'catatan_kran_air' => 'nullable|string|max:255',
+            'photo_kran_air' => 'image|file|max:3072',
+            'tuas' => 'required',
+            'catatan_tuas' => 'nullable|string|max:255',
+            'photo_tuas' => 'image|file|max:3072',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('photo_pijakan')) {
+            if ($request->oldImage_pijakan) {
+                Storage::delete($request->oldImage_pijakan);
+            }
+            $validatedData['photo_pijakan'] = $request->file('photo_pijakan')->store('checksheet-eyewasher');
+        }
+
+        if ($request->file('photo_pipa_saluran_air')) {
+            if ($request->oldImage_pipa_saluran_air) {
+                Storage::delete($request->oldImage_pipa_saluran_air);
+            }
+            $validatedData['photo_pipa_saluran_air'] = $request->file('photo_pipa_saluran_air')->store('checksheet-eyewasher');
+        }
+
+        if ($request->file('photo_wastafel')) {
+            if ($request->oldImage_wastafel) {
+                Storage::delete($request->oldImage_wastafel);
+            }
+            $validatedData['photo_wastafel'] = $request->file('photo_wastafel')->store('checksheet-eyewasher');
+        }
+
+        if ($request->file('photo_kran_air')) {
+            if ($request->oldImage_kran_air) {
+                Storage::delete($request->oldImage_kran_air);
+            }
+            $validatedData['photo_kran_air'] = $request->file('photo_kran_air')->store('checksheet-eyewasher');
+        }
+
+        if ($request->file('photo_tuas')) {
+            if ($request->oldImage_tuas) {
+                Storage::delete($request->oldImage_tuas);
+            }
+            $validatedData['photo_tuas'] = $request->file('photo_tuas')->store('checksheet-eyewasher');
+        }
+
+
+        // Update data CheckSheetIndoor dengan data baru dari form
+        $checkSheeteyewasher->update($validatedData);
+
+        $eyewasher = Eyewasher::where('no_eyewasher', $checkSheeteyewasher->eyewasher_number)->first();
+
+        if (!$eyewasher) {
+            return back()->with('error', 'Hydrant tidak ditemukan.');
+        }
+
+        return redirect()->route('eyewasher.show', $eyewasher->id)->with('success1', 'Data Check Sheet Eyewasher berhasil diperbarui.');
     }
 
     public function show($id)
