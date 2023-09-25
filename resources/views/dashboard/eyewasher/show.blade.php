@@ -195,12 +195,12 @@
                                     <td>{{ $checksheet->shower_head }}</td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('hydrant.checksheetoutdoor.show', $checksheet->id) }}"
+                                            <a href=""
                                                 class="badge bg-info me-2">Info</a>
-                                            <a href="{{ route('hydrant.checksheetoutdoor.edit', $checksheet->id) }}"
+                                            <a href=""
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
-                                                action="{{ route('hydrant.checksheetoutdoor.destroy', $checksheet->id) }}"
+                                                action=""
                                                 method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
