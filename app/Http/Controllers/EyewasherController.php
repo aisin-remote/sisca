@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CheckSheetEyewasher;
+use App\Models\CheckSheetEyewasherShower;
 use App\Models\Eyewasher;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -84,10 +85,10 @@ class EyewasherController extends Controller
             $checksheets = $checksheets->get();
 
             return view('dashboard.eyewasher.show', compact('eyewasher', 'checksheets', 'firstYear', 'lastYear'));
-        } elseif ($type === 'Outdoor') {
-            $checksheets = CheckSheetHydrantOutdoor::where('hydrant_number', $hydrant->no_hydrant);
-            $firstYear = CheckSheetHydrantOutdoor::min(DB::raw('YEAR(tanggal_pengecekan)'));
-            $lastYear = CheckSheetHydrantOutdoor::max(DB::raw('YEAR(tanggal_pengecekan)'));
+        } elseif ($type === 'Shower') {
+            $checksheets = CheckSheetEyewasherShower::where('eyewasher_number', $eyewasher->no_eyewasher);
+            $firstYear = CheckSheetEyewasherShower::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetEyewasherShower::max(DB::raw('YEAR(tanggal_pengecekan)'));
 
             if (request()->has('tahun_filter')) {
                 $tahunFilter = request()->input('tahun_filter');
@@ -96,9 +97,9 @@ class EyewasherController extends Controller
 
             $checksheets = $checksheets->get();
 
-            return view('dashboard.hydrant.show', compact('hydrant', 'checksheets', 'firstYear', 'lastYear'));
+            return view('dashboard.eyewasher.show', compact('eyewasher', 'checksheets', 'firstYear', 'lastYear'));
         } else {
-            return back()->with('error', 'Hydrant tidak dikenali');
+            return back()->with('error', 'Eyewasher tidak dikenali');
         }
     }
 

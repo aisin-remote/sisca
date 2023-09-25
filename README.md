@@ -8,19 +8,19 @@
     ```sh
     composer install
     ```
-3. Konfigurasi .env:
+3. Configuration .env:
     ```sh
     cp .env.example .env
     ```
-4. Generate Key Aplikasi
+4. Generate Application Key:
     ```sh
     php artisan key:generate
     ```
-5. Migrasi Database:
+5. Database Migration:
     ```sh
     php artisan migrate
     ```
-6. Jalankan Aplikasi:
+6. Run the App:
     ```sh
     php artisan serve
     ```
