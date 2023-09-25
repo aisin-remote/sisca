@@ -263,7 +263,7 @@ class CheckSheetEyewasherOnlyController extends Controller
             9 => 'P',  // September -> Kolom P
             10 => 'Q', // Oktober -> Kolom Q
             11 => 'R', // November -> Kolom R
-            12 => 'S', // December -> Kolom Si
+            12 => 'S', // December -> Kolom S
         ];
 
         $worksheet->setCellValue('R' . 1, ': ' . $data[0]->hydrant_number);

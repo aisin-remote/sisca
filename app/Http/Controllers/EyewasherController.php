@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetEyewasher;
 use App\Models\Eyewasher;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EyewasherController extends Controller
 {
@@ -60,7 +62,44 @@ class EyewasherController extends Controller
      */
     public function show($id)
     {
-        //
+        $eyewasher = Eyewasher::findOrFail($id);
+
+        if (!$eyewasher) {
+            return back()->with('error', 'Eyewasher tidak ditemukan.');
+        }
+
+        $type = $eyewasher->type;
+        $checksheets = null;
+
+        if ($type === 'Eyewasher') {
+            $checksheets = CheckSheetEyewasher::where('eyewasher_number', $eyewasher->no_eyewasher);
+            $firstYear = CheckSheetEyewasher::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetEyewasher::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
+            return view('dashboard.eyewasher.show', compact('eyewasher', 'checksheets', 'firstYear', 'lastYear'));
+        } elseif ($type === 'Outdoor') {
+            $checksheets = CheckSheetHydrantOutdoor::where('hydrant_number', $hydrant->no_hydrant);
+            $firstYear = CheckSheetHydrantOutdoor::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetHydrantOutdoor::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
+            return view('dashboard.hydrant.show', compact('hydrant', 'checksheets', 'firstYear', 'lastYear'));
+        } else {
+            return back()->with('error', 'Hydrant tidak dikenali');
+        }
     }
 
     /**
