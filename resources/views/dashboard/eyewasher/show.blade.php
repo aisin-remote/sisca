@@ -5,7 +5,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Info Eyewasher</h1>
-        <a href="{{ route('eyewasher.edit', $eyewasher->id) }}" class="btn btn-warning">Edit</a>
+        <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="btn btn-warning">Edit</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -42,7 +42,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Riwayat Check Sheet Eyewasher</h1>
         <div class="form-group">
-            <form action="{{ route('eyewasher.show', $eyewasher->id) }}" method="GET">
+            <form action="{{ route('eye-washer.show', $eyewasher->id) }}" method="GET">
                 <label for="tahun_filter">Filter Tahun:</label>
                 <div class="input-group">
                     <select name="tahun_filter" id="tahun_filter" class="form-control">
@@ -58,7 +58,7 @@
     </div>
 
     @if ($eyewasher->type === 'Eyewasher')
-        <form action="{{ route('export.checksheetsindoor') }}" method="POST" class="col-md-6 mb-3">
+        <form action="{{ route('export.checksheetseyewasher') }}" method="POST" class="col-md-6 mb-3">
             @method('POST')
             @csrf
             <div class="form-group mb-3">
@@ -205,7 +205,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="badge bg-danger border-0"
-                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Outdoor?')">Delete</button>
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Eyewasher?')">Delete</button>
                                             </form>
                                         </div>
                                     </td>
@@ -219,7 +219,7 @@
             </div>
         </div>
     @else
-        <p>Type dari Hydrant tidak ditemukan</p>
+        <p>Type dari Eyewasher tidak ditemukan</p>
     @endif
 
     <script>

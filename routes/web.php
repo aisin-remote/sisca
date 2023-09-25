@@ -120,7 +120,7 @@ Route::resource('/dashboard/master/tandu', TanduController::class)->middleware('
 Route::put('/dashboard/master/tandu/{data_tandu}', [TanduController::class, 'update'])->name('tandu.update');
 
 // Route Eye Washer
-Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->middleware('auth');
 Route::put('/dashboard/master/eye-washer/{data_eyewasher}', [EyewasherController::class, 'update'])->name('eye-washer.update');
 
 // Route Sling
@@ -209,7 +209,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/eyewasher/checksheeteyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'showForm'])->name('checksheeteyewasher');
     Route::post('/dashboard/eyewasher/process-checksheet-eyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'store'])->name('process.checksheet.eyewasher');
 
-    Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
+    Route::delete('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'destroy'])->name('eyewasher.checksheeteyewasher.destroy');
     Route::get('/dashboard/check-sheet/eyewasher/{id}/edit', [CheckSheetEyewasherOnlyController::class, 'edit'])->name('eyewasher.checksheeteyewasher.edit');
     Route::put('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'update'])->name('eyewasher.checksheeteyewasher.update');
     Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show');
@@ -305,6 +305,7 @@ Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.r
 
 use App\Http\Controllers\CombinedAparController;
 use App\Http\Controllers\CombinedHydrantController;
+use App\Models\CheckSheetEyewasher;
 
 Route::get('/dashboard/report/apar', [CombinedAparController::class, 'index'])->name('home.checksheet.apar')->middleware('auth');
 Route::get('/dashboard/report/hydrant', [CombinedHydrantController::class, 'index'])->name('home.checksheet.hydrant')->middleware('auth');
@@ -397,3 +398,6 @@ Route::post('/export-checksheet-tabung-co2', [CheckSheetTabungCo2Controller::cla
 
 // Export CheckSheet Tandu
 Route::post('/export-checksheet-tandu', [CheckSheetTanduController::class, 'exportExcelWithTemplate'])->name('export.checksheetstandu');
+
+// Export Checksheet Eyewasher
+Route::post('/export-checksheet-eyewasher', [CheckSheetEyewasherOnlyController::class, 'exportExcelWithTemplate'])->name('export.checksheetseyewasher');

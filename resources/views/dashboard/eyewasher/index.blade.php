@@ -30,7 +30,7 @@
                         <td>{{ $eyewasher->no_eyewasher }}</td>
                         <td>{{ $eyewasher->type }}</td>
                         <td>{{ $eyewasher->locations->location_name }}</td>
-                        <td>
+                        {{-- <td>
                             <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('eye-washer.destroy', $eyewasher->id) }}" method="POST">
                                 <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="badge bg-warning">Edit</a>
@@ -39,6 +39,18 @@
                                 <button type="submit" class="badge bg-danger border-0"
                                     onclick="return confirm('Ingin menghapus Data Eye Washer?')">Delete</button>
                             </form>
+                            </div>
+                        </td> --}}
+                        <td>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="{{ route('eye-washer.show', $eyewasher->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('eye-washer.destroy', $eyewasher->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Eyewasher?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

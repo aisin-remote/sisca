@@ -8,6 +8,7 @@ use App\Models\Eyewasher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetEyewasherOnlyController extends Controller
 {
@@ -220,7 +221,7 @@ class CheckSheetEyewasherOnlyController extends Controller
             return back()->with('error', 'Hydrant tidak ditemukan.');
         }
 
-        return redirect()->route('eyewasher.show', $eyewasher->id)->with('success1', 'Data Check Sheet Eyewasher berhasil diperbarui.');
+        return redirect()->route('eye-washer.show', $eyewasher->id)->with('success1', 'Data Check Sheet Eyewasher berhasil diperbarui.');
     }
 
     public function show($id)
@@ -230,45 +231,60 @@ class CheckSheetEyewasherOnlyController extends Controller
         return view('dashboard.eyewasher.checksheet.show', compact('checksheet'));
     }
 
+    public function destroy($id)
+    {
+        $checkSheeteyewasher = CheckSheetEyewasher::find($id);
+
+        if ($checkSheeteyewasher->photo_pijakan || $checkSheeteyewasher->photo_pipa_saluran_air || $checkSheeteyewasher->photo_wastafel || $checkSheeteyewasher->photo_kran_air || $checkSheeteyewasher->photo_tuas) {
+            Storage::delete($checkSheeteyewasher->photo_pijakan);
+            Storage::delete($checkSheeteyewasher->photo_pipa_saluran_air);
+            Storage::delete($checkSheeteyewasher->photo_wastafel);
+            Storage::delete($checkSheeteyewasher->photo_kran_air);
+            Storage::delete($checkSheeteyewasher->photo_tuas);
+        }
+
+        $checkSheeteyewasher->delete();
+
+        return back()->with('success1', 'Data Check Sheet Eyewasher berhasil dihapus');
+    }
+
     public function exportExcelWithTemplate(Request $request)
     {
         // Load the template Excel file
-        $templatePath = public_path('templates/template-checksheet-indoor.xlsx');
+        $templatePath = public_path('templates/template-checksheet-eyewasher.xlsx');
         $spreadsheet = IOFactory::load($templatePath);
         $worksheet = $spreadsheet->getActiveSheet();
 
         // Retrieve tag_number from the form
-        $hydrantNumber = $request->input('hydrant_number');
+        $eyewasherNumber = $request->input('eyewasher_number');
 
         // Retrieve the selected year from the form
         $selectedYear = $request->input('tahun');
 
         // Retrieve data from the checksheetsco2 table for the selected year and tag_number
-        $data = CheckSheetHydrantIndoor::with('hydrants')
-            ->select('tanggal_pengecekan', 'hydrant_number', 'pintu', 'lampu', 'emergency', 'nozzle', 'selang', 'valve', 'coupling', 'pressure', 'kupla')
+        $data = CheckSheetEyewasher::with('eyewashers')
+            ->select('tanggal_pengecekan', 'eyewasher_number', 'pijakan', 'pipa_saluran_air', 'wastafel', 'kran_air', 'tuas')
             ->whereYear('tanggal_pengecekan', $selectedYear)
-            ->where('hydrant_number', $hydrantNumber) // Gunakan nilai tag_number yang diambil dari form
+            ->where('eyewasher_number', $eyewasherNumber) // Gunakan nilai tag_number yang diambil dari form
             ->get();
 
         // Array asosiatif untuk mencocokkan nama bulan dengan kolom
         $bulanKolom = [
-            1 => 'H',  // Januari -> Kolom H
-            2 => 'I',  // Februari -> Kolom I
-            3 => 'J',  // Maret -> Kolom J
-            4 => 'K',  // April -> Kolom K
-            5 => 'L',  // Mei -> Kolom L
-            6 => 'M',  // Juni -> Kolom M
-            7 => 'N',  // Juli -> Kolom N
-            8 => 'O',  // Agustus -> Kolom O
-            9 => 'P',  // September -> Kolom P
-            10 => 'Q', // Oktober -> Kolom Q
-            11 => 'R', // November -> Kolom R
-            12 => 'S', // December -> Kolom S
+            1 => 'F',  // Januari -> Kolom H
+            2 => 'G',  // Februari -> Kolom I
+            3 => 'H',  // Maret -> Kolom J
+            4 => 'I',  // April -> Kolom K
+            5 => 'J',  // Mei -> Kolom L
+            6 => 'K',  // Juni -> Kolom M
+            7 => 'L',  // Juli -> Kolom N
+            8 => 'M',  // Agustus -> Kolom O
+            9 => 'N',  // September -> Kolom P
+            10 => 'O', // Oktober -> Kolom Q
+            11 => 'P', // November -> Kolom R
+            12 => 'Q', // December -> Kolom S
         ];
 
-        $worksheet->setCellValue('R' . 1, ': ' . $data[0]->hydrant_number);
-        $worksheet->setCellValue('R' . 2, ': ' . $data[0]->hydrants->locations->location_name);
-        $worksheet->setCellValue('R' . 3, ': ' . $data[0]->hydrants->zona);
+        $worksheet->setCellValue('M' . 3, 'Area :   ' . $data[0]->eyewashers->locations->location_name);
 
 
         foreach ($data as $item) {
@@ -280,67 +296,40 @@ class CheckSheetEyewasherOnlyController extends Controller
             $col = $bulanKolom[$bulan];
 
             // Set value based on $item->pressure
-            if ($item->pintu === 'OK') {
-                $worksheet->setCellValue($col . 8, '√');
-            } else if ($item->pintu === 'NG') {
-                $worksheet->setCellValue($col . 8, 'X');
+            if ($item->pijakan === 'OK') {
+                $worksheet->setCellValue($col . 7, '√');
+            } else if ($item->pijakan === 'NG') {
+                $worksheet->setCellValue($col . 7, 'X');
             }
 
             // Set value based on $item->hose
-            if ($item->lampu === 'OK') {
+            if ($item->pipa_saluran_air === 'OK') {
                 $worksheet->setCellValue($col . 10, '√');
-            } else if ($item->lampu === 'NG') {
+            } else if ($item->pipa_saluran_air === 'NG') {
                 $worksheet->setCellValue($col . 10, 'X');
             }
 
             // Set value based on $item->corong
-            if ($item->emergency === 'OK') {
-                $worksheet->setCellValue($col . 12, '√');
-            } else if ($item->emergency === 'NG') {
-                $worksheet->setCellValue($col . 12, 'X');
+            if ($item->wastafel === 'OK') {
+                $worksheet->setCellValue($col . 13, '√');
+            } else if ($item->wastafel === 'NG') {
+                $worksheet->setCellValue($col . 13, 'X');
             }
 
             // Set value based on $item->tabung
-            if ($item->nozzle === 'OK') {
-                $worksheet->setCellValue($col . 14, '√');
-            } else if ($item->nozzle === 'NG') {
-                $worksheet->setCellValue($col . 14, 'X');
-            }
-
-            // Set value based on $item->regulator
-            if ($item->selang === 'OK') {
+            if ($item->kran_air === 'OK') {
                 $worksheet->setCellValue($col . 16, '√');
-            } else if ($item->selang === 'NG') {
+            } else if ($item->kran_air === 'NG') {
                 $worksheet->setCellValue($col . 16, 'X');
             }
 
-            // Set value based on $item->lock_pin
-            if ($item->valve === 'OK') {
-                $worksheet->setCellValue($col . 18, '√');
-            } else if ($item->valve === 'NG') {
-                $worksheet->setCellValue($col . 18, 'X');
+            // Set value based on $item->regulator
+            if ($item->tuas === 'OK') {
+                $worksheet->setCellValue($col . 19, '√');
+            } else if ($item->tuas === 'NG') {
+                $worksheet->setCellValue($col . 19, 'X');
             }
 
-            // Set value based on $item->berat_tabung
-            if ($item->coupling === 'OK') {
-                $worksheet->setCellValue($col . 20, '√');
-            } else if ($item->coupling === 'NG') {
-                $worksheet->setCellValue($col . 20, 'X');
-            }
-
-            // Set value based on $item->berat_tabung
-            if ($item->pressure === 'OK') {
-                $worksheet->setCellValue($col . 22, '√');
-            } else if ($item->pressure === 'NG') {
-                $worksheet->setCellValue($col . 22, 'X');
-            }
-
-            // Set value based on $item->berat_tabung
-            if ($item->kupla === 'OK') {
-                $worksheet->setCellValue($col . 24, '√');
-            } else if ($item->kupla === 'NG') {
-                $worksheet->setCellValue($col . 24, 'X');
-            }
 
             // Increment row for the next data
             $col++;
@@ -349,7 +338,7 @@ class CheckSheetEyewasherOnlyController extends Controller
 
         // Create a new Excel writer and save the modified spreadsheet
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $outputPath = public_path('templates/checksheet-indoor.xlsx');
+        $outputPath = public_path('templates/checksheet-eyewasher.xlsx');
         $writer->save($outputPath);
 
         return response()->download($outputPath)->deleteFileAfterSend(true);
