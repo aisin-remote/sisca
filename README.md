@@ -1,9 +1,9 @@
 ## How To Install 
 
-1. 
-```sh
-git clone https://github.com/naufalamr17/quality.git
-```
+1. Clone this GitHub repository:
+    ```sh
+    git clone https://github.com/naufalamr17/quality.git
+    ```
 2. [Powerful dependency injection container](https://laravel.com/docs/container).
 3. Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
 4. Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
