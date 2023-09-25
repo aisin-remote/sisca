@@ -4,7 +4,10 @@
     ```sh
     git clone https://github.com/Johuttt/Apar.git
     ```
-2. [Powerful dependency injection container](https://laravel.com/docs/container).
+2. Install Composer:
+    ```sh
+    composer install
+    ```
 3. Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
 4. Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
 5. Database agnostic [schema migrations](https://laravel.com/docs/migrations).
