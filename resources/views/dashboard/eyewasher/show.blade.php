@@ -169,14 +169,14 @@
                                 <th rowspan="2" class="text-center align-middle" scope="col">Aksi</th>
                             </tr>
                             <tr>
-                                <th class="text-center align-middle" scope="col">Pintu</th>
-                                <th class="text-center align-middle" scope="col">Nozzle</th>
-                                <th class="text-center align-middle" scope="col">Selang</th>
-                                <th class="text-center align-middle" scope="col">Tuas Pilar</th>
-                                <th class="text-center align-middle" scope="col">Pilar</th>
-                                <th class="text-center align-middle" scope="col">Penutup Pilar</th>
-                                <th class="text-center align-middle" scope="col">Rantai Penutup Pilar</th>
-                                <th class="text-center align-middle" scope="col">Kopling/Kupla</th>
+                                <th class="text-center align-middle" scope="col">Instalation Base</th>
+                                <th class="text-center align-middle" scope="col">Pipa Saluran Air</th>
+                                <th class="text-center align-middle" scope="col">Wastafel Eye Wash</th>
+                                <th class="text-center align-middle" scope="col">Kran_Eye_Wash</th>
+                                <th class="text-center align-middle" scope="col">Tuas Eye Wash</th>
+                                <th class="text-center align-middle" scope="col">Tuas Shower</th>
+                                <th class="text-center align-middle" scope="col">Sign</th>
+                                <th class="text-center align-middle" scope="col">Shower Head</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -184,15 +184,15 @@
                                 <tr class="align-middle text-center">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
-                                    <td>{{ $checksheet->hydrant_number }}</td>
-                                    <td>{{ $checksheet->pintu }}</td>
-                                    <td>{{ $checksheet->nozzle }}</td>
-                                    <td>{{ $checksheet->selang }}</td>
-                                    <td>{{ $checksheet->tuas }}</td>
-                                    <td>{{ $checksheet->pilar }}</td>
-                                    <td>{{ $checksheet->penutup }}</td>
-                                    <td>{{ $checksheet->rantai }}</td>
-                                    <td>{{ $checksheet->kupla }}</td>
+                                    <td>{{ $checksheet->eyewasher_number }}</td>
+                                    <td>{{ $checksheet->instalation_base }}</td>
+                                    <td>{{ $checksheet->pipa_saluran_air }}</td>
+                                    <td>{{ $checksheet->wastafel_eye_wash }}</td>
+                                    <td>{{ $checksheet->kran_eye_wash }}</td>
+                                    <td>{{ $checksheet->tuas_eye_wash }}</td>
+                                    <td>{{ $checksheet->tuas_shower }}</td>
+                                    <td>{{ $checksheet->sign }}</td>
+                                    <td>{{ $checksheet->shower_head }}</td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('hydrant.checksheetoutdoor.show', $checksheet->id) }}"
