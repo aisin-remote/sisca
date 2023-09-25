@@ -8,10 +8,22 @@
     ```sh
     composer install
     ```
-3. Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-4. Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-5. Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-6. [Robust background job processing](https://laravel.com/docs/queues).
+3. Konfigurasi .env:
+    ```sh
+    cp .env.example .env
+    ```
+4. Generate Key Aplikasi
+    ```sh
+    php artisan key:generate
+    ```
+5. Migrasi Database:
+    ```sh
+    php artisan migrate
+    ```
+6. Jalankan Aplikasi:
+    ```sh
+    php artisan serve
+    ```
 7. [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
