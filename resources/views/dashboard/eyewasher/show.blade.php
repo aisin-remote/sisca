@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-    @elseif ($hydrant->type === 'Shower')
+    @elseif ($eyewasher->type === 'Shower')
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive col-lg-12 mt-3">
@@ -172,7 +172,7 @@
                                 <th class="text-center align-middle" scope="col">Instalation Base</th>
                                 <th class="text-center align-middle" scope="col">Pipa Saluran Air</th>
                                 <th class="text-center align-middle" scope="col">Wastafel Eye Wash</th>
-                                <th class="text-center align-middle" scope="col">Kran_Eye_Wash</th>
+                                <th class="text-center align-middle" scope="col">Kran Eye Wash</th>
                                 <th class="text-center align-middle" scope="col">Tuas Eye Wash</th>
                                 <th class="text-center align-middle" scope="col">Tuas Shower</th>
                                 <th class="text-center align-middle" scope="col">Sign</th>

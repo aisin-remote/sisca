@@ -24,7 +24,7 @@
                 <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                     <option selected disabled>Pilih Type</option>
                     <option value="Eyewasher" {{ old('type') == 'Eyewasher' ? 'selected' : '' }}>Eyewasher</option>
-                    <option value="Shower" {{ old('type') == 'Shower' ? 'selected' : '' }}>Eyewasher + Shower</option>
+                    <option value="Shower" {{ old('type') == 'Shower' ? 'selected' : '' }}>Shower</option>
                 </select>
             </div>
 

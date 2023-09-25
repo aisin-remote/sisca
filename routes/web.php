@@ -148,6 +148,7 @@ use App\Http\Controllers\CheckSheetNitrogenServerController;
 use App\Http\Controllers\CheckSheetHydrantController;
 use App\Http\Controllers\CheckSheetTabungCo2Controller;
 use App\Http\Controllers\CheckSheetTanduController;
+use App\Models\CheckSheetEyewasherShower;
 
 // checksheet
 Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
@@ -211,6 +212,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'destroy'])->name('eyewasher.checksheeteyewasher.destroy');
     Route::get('/dashboard/check-sheet/eyewasher/{id}/edit', [CheckSheetEyewasherOnlyController::class, 'edit'])->name('eyewasher.checksheeteyewasher.edit');
+    Route::put('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'update'])->name('eyewasher.checksheeteyewasher.update');
+    Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show');
+
+});
+
+//Checksheet Eyewasher Shower
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/eyewasher/checksheetshower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'showForm'])->name('checksheetshower');
+    Route::post('/dashboard/eyewasher/process-checksheet-eyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'store'])->name('process.checksheet.eyewasher');
+
+    Route::delete('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'destroy'])->name('eyewasher.checksheeteyewasher.destroy');
+    Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/edit', [CheckSheetEyewasherShower::class, 'edit'])->name('eyewasher.checksheetshower.edit');
     Route::put('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'update'])->name('eyewasher.checksheeteyewasher.update');
     Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show');
 
