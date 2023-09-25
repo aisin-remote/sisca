@@ -220,7 +220,7 @@ Route::middleware(['auth'])->group(function () {
 //Checksheet Eyewasher Shower
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/eyewasher/checksheetshower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'showForm'])->name('checksheetshower');
-    Route::post('/dashboard/eyewasher/process-checksheet-eyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'store'])->name('process.checksheet.eyewasher');
+    Route::post('/dashboard/eyewasher/process-checksheet-shower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'store'])->name('process.checksheet.shower');
 
     Route::delete('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'destroy'])->name('eyewasher.checksheeteyewasher.destroy');
     Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/edit', [CheckSheetEyewasherShower::class, 'edit'])->name('eyewasher.checksheetshower.edit');

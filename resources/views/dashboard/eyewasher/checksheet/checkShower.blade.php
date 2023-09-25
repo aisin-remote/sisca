@@ -230,33 +230,40 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen-elemen yang dibutuhkan
-            const tambahCatatanButtonPijakan = document.getElementById('tambahCatatan_pijakan');
+            const tambahCatatanButtonInstalation_base = document.getElementById('tambahCatatan_instalation_base');
             const tambahCatatanButtonPipa_saluran_air = document.getElementById('tambahCatatan_pipa_saluran_air');
-            const tambahCatatanButtonWastafel = document.getElementById('tambahCatatan_wastafel');
-            const tambahCatatanButtonKran_air = document.getElementById('tambahCatatan_kran_air');
-            const tambahCatatanButtonTuas = document.getElementById('tambahCatatan_tuas');
+            const tambahCatatanButtonWastafel_eye_wash = document.getElementById('tambahCatatan_wastafel_eye_wash');
+            const tambahCatatanButtonKran_eye_wash = document.getElementById('tambahCatatan_kran_eye_wash');
+            const tambahCatatanButtonTuas_shower = document.getElementById('tambahCatatan_tuas_shower');
+            const tambahCatatanButtonSign = document.getElementById('tambahCatatan_sign');
+            const tambahCatatanButtonShower_head = document.getElementById('tambahCatatan_shower_head');
 
 
-            const catatanFieldPijakan = document.getElementById('catatanField_pijakan');
+
+            const catatanFieldInstalation_base = document.getElementById('catatanField_instalation_base');
             const catatanFieldPipa_saluran_air = document.getElementById('catatanField_pipa_saluran_air');
-            const catatanFieldWastafel = document.getElementById('catatanField_wastafel');
-            const catatanFieldKran_air = document.getElementById('catatanField_kran_air');
-            const catatanFieldTuas = document.getElementById('catatanField_tuas');
+            const catatanFieldWastafel_eye_wash = document.getElementById('catatanField_wastafel_eye_wash');
+            const catatanFieldKran_eye_wash = document.getElementById('catatanField_kran_eye_wash');
+            const catatanFieldTuas_shower = document.getElementById('catatanField_tuas_shower');
+            const catatanFieldSign = document.getElementById('catatanField_sign');
+            const catatanFieldShower_head = document.getElementById('catatanField_shower_head');
 
 
-            // Tambahkan event listener untuk button "Tambah Catatan Pijakan"
-            tambahCatatanButtonPijakan.addEventListener('click', function() {
+
+
+            // Tambahkan event listener untuk button "Tambah Catatan Instalation_base"
+            tambahCatatanButtonInstalation_base.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldPijakan.style.display === 'none') {
-                    catatanFieldPijakan.style.display = 'block';
-                    tambahCatatanButtonPijakan.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonPijakan.classList.remove('btn-success');
-                    tambahCatatanButtonPijakan.classList.add('btn-danger');
+                if (catatanFieldInstalation_base.style.display === 'none') {
+                    catatanFieldInstalation_base.style.display = 'block';
+                    tambahCatatanButtonInstalation_base.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonInstalation_base.classList.remove('btn-success');
+                    tambahCatatanButtonInstalation_base.classList.add('btn-danger');
                 } else {
-                    catatanFieldPijakan.style.display = 'none';
-                    tambahCatatanButtonPijakan.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonPijakan.classList.remove('btn-danger');
-                    tambahCatatanButtonPijakan.classList.add('btn-success');
+                    catatanFieldInstalation_base.style.display = 'none';
+                    tambahCatatanButtonInstalation_base.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonInstalation_base.classList.remove('btn-danger');
+                    tambahCatatanButtonInstalation_base.classList.add('btn-success');
                 }
             });
 
@@ -276,48 +283,78 @@
                 }
             });
 
-            tambahCatatanButtonWastafel.addEventListener('click', function() {
+            tambahCatatanButtonWastafel_eye_wash.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldWastafel.style.display === 'none') {
-                    catatanFieldWastafel.style.display = 'block';
-                    tambahCatatanButtonWastafel.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonWastafel.classList.remove('btn-success');
-                    tambahCatatanButtonWastafel.classList.add('btn-danger');
+                if (catatanFieldWastafel_eye_wash.style.display === 'none') {
+                    catatanFieldWastafel_eye_wash.style.display = 'block';
+                    tambahCatatanButtonWastafel_eye_wash.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonWastafel_eye_wash.classList.remove('btn-success');
+                    tambahCatatanButtonWastafel_eye_wash.classList.add('btn-danger');
                 } else {
-                    catatanFieldWastafel.style.display = 'none';
-                    tambahCatatanButtonWastafel.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonWastafel.classList.remove('btn-danger');
-                    tambahCatatanButtonWastafel.classList.add('btn-success');
+                    catatanFieldWastafel_eye_wash.style.display = 'none';
+                    tambahCatatanButtonWastafel_eye_wash.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonWastafel_eye_wash.classList.remove('btn-danger');
+                    tambahCatatanButtonWastafel_eye_wash.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonKran_air.addEventListener('click', function() {
+            tambahCatatanButtonKran_eye_wash.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldKran_air.style.display === 'none') {
-                    catatanFieldKran_air.style.display = 'block';
-                    tambahCatatanButtonKran_air.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonKran_air.classList.remove('btn-success');
-                    tambahCatatanButtonKran_air.classList.add('btn-danger');
+                if (catatanFieldKran_eye_wash.style.display === 'none') {
+                    catatanFieldKran_eye_wash.style.display = 'block';
+                    tambahCatatanButtonKran_eye_wash.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonKran_eye_wash.classList.remove('btn-success');
+                    tambahCatatanButtonKran_eye_wash.classList.add('btn-danger');
                 } else {
-                    catatanFieldKran_air.style.display = 'none';
-                    tambahCatatanButtonKran_air.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonKran_air.classList.remove('btn-danger');
-                    tambahCatatanButtonKran_air.classList.add('btn-success');
+                    catatanFieldKran_eye_wash.style.display = 'none';
+                    tambahCatatanButtonKran_eye_wash.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonKran_eye_wash.classList.remove('btn-danger');
+                    tambahCatatanButtonKran_eye_wash.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonTuas.addEventListener('click', function() {
+            tambahCatatanButtonTuas_shower.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldTuas.style.display === 'none') {
-                    catatanFieldTuas.style.display = 'block';
-                    tambahCatatanButtonTuas.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonTuas.classList.remove('btn-success');
-                    tambahCatatanButtonTuas.classList.add('btn-danger');
+                if (catatanFieldTuas_shower.style.display === 'none') {
+                    catatanFieldTuas_shower.style.display = 'block';
+                    tambahCatatanButtonTuas_shower.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonTuas_shower.classList.remove('btn-success');
+                    tambahCatatanButtonTuas_shower.classList.add('btn-danger');
                 } else {
-                    catatanFieldTuas.style.display = 'none';
-                    tambahCatatanButtonTuas.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonTuas.classList.remove('btn-danger');
-                    tambahCatatanButtonTuas.classList.add('btn-success');
+                    catatanFieldTuas_shower.style.display = 'none';
+                    tambahCatatanButtonTuas_shower.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonTuas_shower.classList.remove('btn-danger');
+                    tambahCatatanButtonTuas_shower.classList.add('btn-success');
+                }
+            });
+
+            tambahCatatanButtonSign.addEventListener('click', function() {
+                // Toggle tampilan field catatan ketika tombol diklik
+                if (catatanFieldSign.style.display === 'none') {
+                    catatanFieldSign.style.display = 'block';
+                    tambahCatatanButtonSign.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonSign.classList.remove('btn-success');
+                    tambahCatatanButtonSign.classList.add('btn-danger');
+                } else {
+                    catatanFieldSign.style.display = 'none';
+                    tambahCatatanButtonSign.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonSign.classList.remove('btn-danger');
+                    tambahCatatanButtonSign.classList.add('btn-success');
+                }
+            });
+
+            tambahCatatanButtonShower_head.addEventListener('click', function() {
+                // Toggle tampilan field catatan ketika tombol diklik
+                if (catatanFieldShower_head.style.display === 'none') {
+                    catatanFieldShower_head.style.display = 'block';
+                    tambahCatatanButtonShower_head.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonShower_head.classList.remove('btn-success');
+                    tambahCatatanButtonShower_head.classList.add('btn-danger');
+                } else {
+                    catatanFieldShower_head.style.display = 'none';
+                    tambahCatatanButtonShower_head.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonShower_head.classList.remove('btn-danger');
+                    tambahCatatanButtonShower_head.classList.add('btn-success');
                 }
             });
         });
