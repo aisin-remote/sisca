@@ -14,12 +14,12 @@
     <div class="row d-flex flex-wrap">
         <div class="col-md-4 mb-3">
             <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/hydrant/outdoor'">
-                <p class="card-text">Outdoor</p>
+                Outdoor
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="card text-center p-3 card-as-button" onclick="window.location.href='/dashboard/location/hydrant/indoor'">
-                <p class="card-text">Indoor</p>
+                Indoor
             </div>
         </div>
     </div>

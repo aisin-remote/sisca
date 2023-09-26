@@ -122,6 +122,9 @@
                 <li class="{{ Request::is('dashboard/report/tandu*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/tandu">Tandu</a>
                 </li>
+                <li class="{{ Request::is('dashboard/report/eyewasher*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/eyewasher">Eye Washer</a>
+                </li>
             </ul>
         </li>
     </ul>

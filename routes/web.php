@@ -326,6 +326,8 @@ Route::get('/dashboard/report/hydrant', [CombinedHydrantController::class, 'inde
 Route::get('/dashboard/report/nitrogen', [CheckSheetNitrogenServerController::class, 'report'])->name('home.checksheet.nitrogen')->middleware('auth');
 Route::get('/dashboard/report/co2', [CheckSheetTabungCo2Controller::class, 'report'])->name('home.checksheet.co2')->middleware('auth');
 Route::get('/dashboard/report/tandu', [CheckSheetTanduController::class, 'report'])->name('home.checksheet.tandu')->middleware('auth');
+Route::get('/dashboard/report/eyewasher', [CheckSheetEyewasherController::class, 'report'])->name('home.checksheet.eyewasher')->middleware('auth');
+
 
 
 
