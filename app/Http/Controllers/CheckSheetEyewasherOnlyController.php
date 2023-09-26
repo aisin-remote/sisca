@@ -218,7 +218,7 @@ class CheckSheetEyewasherOnlyController extends Controller
         $eyewasher = Eyewasher::where('no_eyewasher', $checkSheeteyewasher->eyewasher_number)->first();
 
         if (!$eyewasher) {
-            return back()->with('error', 'Hydrant tidak ditemukan.');
+            return back()->with('error', 'Eyewasher tidak ditemukan.');
         }
 
         return redirect()->route('eye-washer.show', $eyewasher->id)->with('success1', 'Data Check Sheet Eyewasher berhasil diperbarui.');

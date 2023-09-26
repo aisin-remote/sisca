@@ -415,3 +415,6 @@ Route::post('/export-checksheet-tandu', [CheckSheetTanduController::class, 'expo
 
 // Export Checksheet Eyewasher
 Route::post('/export-checksheet-eyewasher', [CheckSheetEyewasherOnlyController::class, 'exportExcelWithTemplate'])->name('export.checksheetseyewasher');
+
+// Export Checksheet Eyewasher Shower
+Route::post('/export-checksheet-eyewasher-shower', [CheckSheetEyewasherShowerController::class, 'exportExcelWithTemplate'])->name('export.checksheetsshower');

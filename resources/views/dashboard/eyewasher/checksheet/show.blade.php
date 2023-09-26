@@ -2,11 +2,11 @@
 @section('title', 'Data Check Sheet Hydrant')
 
 @section('content')
-    {{-- @if ($checksheet->hydrants->type === 'Outdoor')
+    @if ($checksheet->eyewashers->type === 'Shower')
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-            <h1>Detail Check Sheet Outdoor</h1>
-            <a href="{{ route('hydrant.checksheetoutdoor.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            <h1>Detail Check Sheet Eyewasher</h1>
+            <a href="{{ route('eyewasher.checksheetshower.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -26,137 +26,137 @@
                         </tr>
                         <tr>
                             <th>Hydrant Number</th>
-                            <td>{{ $checksheet->hydrant_number }}</td>
+                            <td>{{ $checksheet->eyewasher_number }}</td>
                         </tr>
                         <tr>
-                            <th>Location Hydrant</th>
-                            <td>{{ $checksheet->hydrants->locations->location_name }}</td>
+                            <th>Location Eyewasher</th>
+                            <td>{{ $checksheet->eyewashers->locations->location_name }}</td>
                         </tr>
                         <tr>
-                            <th>Pintu Hydrant</th>
-                            <td>{{ $checksheet->pintu }}</td>
+                            <th>Instalation Base</th>
+                            <td>{{ $checksheet->instalation_base }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Pintu Hydrant</th>
-                            <td>{{ $checksheet->catatan_pintu }}</td>
+                            <th>Catatan Instalation Base</th>
+                            <td>{{ $checksheet->catatan_instalation_base }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Pintu Hydrant</th>
+                            <th>Photo Instalation Base</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pintu) }}" alt="Photo Pintu Hydrant"
+                                <img src="{{ asset('storage/' . $checksheet->photo_instalation_base) }}" alt="Photo Instalation Base"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Nozzle</th>
-                            <td>{{ $checksheet->nozzle }}</td>
+                            <th>Pipa Saluran Air</th>
+                            <td>{{ $checksheet->pipa_saluran_air }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Nozzle</th>
-                            <td>{{ $checksheet->catatan_nozzle }}</td>
+                            <th>Catatan Pipa Saluran Air</th>
+                            <td>{{ $checksheet->catatan_pipa_saluran_air }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Nozzle</th>
+                            <th>Photo Pipa Saluran Air</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_nozzle) }}" alt="Photo Nozzle"
+                                <img src="{{ asset('storage/' . $checksheet->photo_pipa_saluran_air) }}" alt="Photo Pipa Saluran Air"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Selang</th>
-                            <td>{{ $checksheet->selang }}</td>
+                            <th>Wastafel Eye Wash</th>
+                            <td>{{ $checksheet->wastafel_eye_wash }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Selang</th>
-                            <td>{{ $checksheet->catatan_selang }}</td>
+                            <th>Catatan Wastafel Eye Wash</th>
+                            <td>{{ $checksheet->catatan_wastafel_eye_wash }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Selang</th>
+                            <th>Photo Wastafel Eye Wash</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_selang) }}" alt="Photo Selang"
+                                <img src="{{ asset('storage/' . $checksheet->photo_wastafel_eye_wash) }}" alt="Photo Wastafel Eye Wash"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Tuas Pilar</th>
-                            <td>{{ $checksheet->tuas }}</td>
+                            <th>Kran Eye Wash</th>
+                            <td>{{ $checksheet->kran_eye_wash }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Tuas Pilar</th>
-                            <td>{{ $checksheet->catatan_tuas }}</td>
+                            <th>Catatan Kran Eye Wash</th>
+                            <td>{{ $checksheet->catatan_kran_eye_wash }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Tuas Pilar</th>
+                            <th>Photo Kran Eye Wash</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_tuas) }}" alt="Photo Tuas Pilar"
+                                <img src="{{ asset('storage/' . $checksheet->photo_kran_eye_wash) }}" alt="Photo Kran Eye Wash"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Pilar</th>
-                            <td>{{ $checksheet->pilar }}</td>
+                            <th>Tuas Eye Wash</th>
+                            <td>{{ $checksheet->tuas_eye_wash }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Pilar</th>
-                            <td>{{ $checksheet->catatan_pilar }}</td>
+                            <th>Catatan Tuas Eye Wash</th>
+                            <td>{{ $checksheet->catatan_tuas_eye_wash }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Pilar</th>
+                            <th>Photo Tuas Eye Wash</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pilar) }}" alt="Photo Pilar"
+                                <img src="{{ asset('storage/' . $checksheet->photo_tuas_eye_wash) }}" alt="Photo Tuas Eye Wash"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Penutup Pilar</th>
-                            <td>{{ $checksheet->penutup }}</td>
+                            <th>Tuas Shower</th>
+                            <td>{{ $checksheet->tuas_shower }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Penutup Pilar</th>
-                            <td>{{ $checksheet->catatan_penutup }}</td>
+                            <th>Catatan Tuas Shower</th>
+                            <td>{{ $checksheet->catatan_tuas_shower }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Penutup Pilar</th>
+                            <th>Photo Tuas Shower</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_penutup) }}" alt="Photo Penutup Pilar"
+                                <img src="{{ asset('storage/' . $checksheet->photo_tuas_shower) }}" alt="Photo Tuas Shower"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Rantai Penutup Pilar</th>
-                            <td>{{ $checksheet->rantai }}</td>
+                            <th>Sign</th>
+                            <td>{{ $checksheet->sign }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Rantai Penutup Pilar</th>
-                            <td>{{ $checksheet->catatan_rantai }}</td>
+                            <th>Catatan Sign</th>
+                            <td>{{ $checksheet->catatan_sign }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Rantai Penutup Pilar</th>
+                            <th>Photo Sign</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_rantai) }}" alt="Photo Rantai Penutup Pilar"
+                                <img src="{{ asset('storage/' . $checksheet->photo_sign) }}" alt="Photo Rantai Penutup Pilar"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Kopling/Kupla</th>
-                            <td>{{ $checksheet->kupla }}</td>
+                            <th>Shower Head</th>
+                            <td>{{ $checksheet->shower_head }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Kopling/Kupla</th>
-                            <td>{{ $checksheet->catatan_kupla }}</td>
+                            <th>Catatan Shower Head</th>
+                            <td>{{ $checksheet->catatan_shower_head }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Kopling/Kupla</th>
+                            <th>Photo Shower Head</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_kupla) }}" alt="Photo Kopling/Kupla"
+                                <img src="{{ asset('storage/' . $checksheet->photo_shower_head) }}" alt="Photo Shower Head"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-        </div> --}}
-    @if ($checksheet->eyewashers->type === 'Eyewasher')
+        </div>
+    @elseif ($checksheet->eyewashers->type === 'Eyewasher')
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Eyewasher</h1>

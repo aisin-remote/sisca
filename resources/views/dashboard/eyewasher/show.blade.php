@@ -74,7 +74,7 @@
             <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
         </form>
     @elseif ($eyewasher->type === 'Shower')
-        <form action="{{ route('export.checksheetsoutdoor') }}" method="POST" class="col-md-6 mb-3">
+        <form action="{{ route('export.checksheetsshower') }}" method="POST" class="col-md-6 mb-3">
             @method('POST')
             @csrf
             <div class="form-group mb-3">
