@@ -142,6 +142,27 @@
                         onchange="previewImage('photo_kran_eye_wash', 'photo-kran_eye_wash-preview')">
                 </div>
 
+                <div class="mb-3">
+                    <label for="tuas_eye_wash" class="form-label">Tuas Eye Wash</label>
+                    <div class="input-group">
+                        <select class="form-select" id="tuas_eye_wash" name="tuas_eye_wash" required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="OK" {{ old('tuas_eye_wash') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('tuas_eye_wash') == 'NG' ? 'selected' : '' }}>NG</option>
+                        </select>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_tuas_eye_wash"><i class="bi bi-bookmark-plus"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3" id="catatanField_tuas_eye_wash" style="display:none;">
+                    <label for="catatan_tuas_eye_wash" class="form-label">Catatan Tuas Eye Wash</label>
+                    <textarea class="form-control" name="catatan_tuas_eye_wash" id="catatan_tuas_eye_wash" cols="30" rows="5">{{ old('catatan_tuas_eye_wash') }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="photo_tuas_eye_wash" class="form-label">Foto Tuas Eye Wash</label>
+                    <img class="photo-tuas_eye_wash-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_tuas_eye_wash" name="photo_tuas_eye_wash" required
+                        onchange="previewImage('photo_tuas_eye_wash', 'photo-tuas_eye_wash-preview')">
+                </div>
 
                 <div class="mb-3">
                     <label for="tuas_shower" class="form-label">Tuas Shower</label>
@@ -234,6 +255,7 @@
             const tambahCatatanButtonPipa_saluran_air = document.getElementById('tambahCatatan_pipa_saluran_air');
             const tambahCatatanButtonWastafel_eye_wash = document.getElementById('tambahCatatan_wastafel_eye_wash');
             const tambahCatatanButtonKran_eye_wash = document.getElementById('tambahCatatan_kran_eye_wash');
+            const tambahCatatanButtonTuas_eye_wash = document.getElementById('tambahCatatan_tuas_eye_wash');
             const tambahCatatanButtonTuas_shower = document.getElementById('tambahCatatan_tuas_shower');
             const tambahCatatanButtonSign = document.getElementById('tambahCatatan_sign');
             const tambahCatatanButtonShower_head = document.getElementById('tambahCatatan_shower_head');
@@ -244,6 +266,7 @@
             const catatanFieldPipa_saluran_air = document.getElementById('catatanField_pipa_saluran_air');
             const catatanFieldWastafel_eye_wash = document.getElementById('catatanField_wastafel_eye_wash');
             const catatanFieldKran_eye_wash = document.getElementById('catatanField_kran_eye_wash');
+            const catatanFieldTuas_eye_wash = document.getElementById('catatanField_tuas_eye_wash');
             const catatanFieldTuas_shower = document.getElementById('catatanField_tuas_shower');
             const catatanFieldSign = document.getElementById('catatanField_sign');
             const catatanFieldShower_head = document.getElementById('catatanField_shower_head');
@@ -310,6 +333,21 @@
                     tambahCatatanButtonKran_eye_wash.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
                     tambahCatatanButtonKran_eye_wash.classList.remove('btn-danger');
                     tambahCatatanButtonKran_eye_wash.classList.add('btn-success');
+                }
+            });
+
+            tambahCatatanButtonTuas_eye_wash.addEventListener('click', function() {
+                // Toggle tampilan field catatan ketika tombol diklik
+                if (catatanFieldTuas_eye_wash.style.display === 'none') {
+                    catatanFieldTuas_eye_wash.style.display = 'block';
+                    tambahCatatanButtonTuas_eye_wash.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonTuas_eye_wash.classList.remove('btn-success');
+                    tambahCatatanButtonTuas_eye_wash.classList.add('btn-danger');
+                } else {
+                    catatanFieldTuas_eye_wash.style.display = 'none';
+                    tambahCatatanButtonTuas_eye_wash.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonTuas_eye_wash.classList.remove('btn-danger');
+                    tambahCatatanButtonTuas_eye_wash.classList.add('btn-success');
                 }
             });
 

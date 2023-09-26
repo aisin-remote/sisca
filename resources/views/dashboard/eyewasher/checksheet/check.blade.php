@@ -69,7 +69,7 @@
                                             <a href="{{ route('eyewasher.checksheeteyewasher.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
                                             <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('hydrant.checksheetindoor.destroy', $checkSheet->id) }}" method="POST"
+                                            <form action="{{ route('eyewasher.checksheeteyewasher.destroy', $checkSheet->id) }}" method="POST"
                                                 class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
@@ -78,13 +78,13 @@
                                             </form>
                                         </div>
                                     </td>
-                                @elseif ($checkSheet->hydrants->type === 'Shower')
+                                @elseif ($checkSheet->eyewashers->type === 'Shower')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('hydrant.checksheetoutdoor.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                            <a href="{{ route('hydrant.checksheetoutdoor.edit', $checkSheet->id) }}"
+                                            <a href="{{ route('eyewasher.checksheetshower.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('eyewasher.checksheetshower.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('hydrant.checksheetoutdoor.destroy', $checkSheet->id) }}" method="POST"
+                                            <form action="{{ route('eyewasher.checksheetshower.destroy', $checkSheet->id) }}" method="POST"
                                                 class="delete-form">
                                                 @csrf
                                                 @method('DELETE')

@@ -43,7 +43,7 @@
                         <tr>
                             <th>Photo Pressure</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pressure) }}" alt="Photo Powder"
+                                <img src="{{ asset('storage/app/' . $checksheet->photo_pressure) }}" alt="Photo Powder"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
