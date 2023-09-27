@@ -26,7 +26,7 @@
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>All Eyewasher Report</h3>
         <div class="form-group">
-            <form action="{{ route('export.checksheetseyewasher') }}" method="POST">
+            <form action="{{ route('export.checksheetsreport.eyewasher') }}" method="POST">
                 @method('POST')
                 @csrf
                 <label for="tahun">Download Check Sheet Eyewasher</label>
