@@ -30,6 +30,7 @@
                             <th scope="col">NPK</th>
                             <th scope="col">No Eye Washer</th>
                             <th scope="col">Location Eye Washer</th>
+                            <th scope="col">Plant</th>
                             <th scope="col">Pijakan</th>
                             <th scope="col">Pipa Saluran Air</th>
                             <th scope="col">Wastafel</th>
@@ -47,6 +48,7 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->eyewasher_number }}</td>
                                 <td>{{ $checksheet->eyewashers->locations->location_name }}</td>
+                                <td>{{ $checksheet->eyewashers->plant }}</td>
                                 <td>{{ $checksheet->pijakan }}</td>
                                 <td>{{ $checksheet->pipa_saluran_air }}</td>
                                 <td>{{ $checksheet->wastafel }}</td>
@@ -98,6 +100,7 @@
                             <th scope="col">NPK</th>
                             <th scope="col">No Eye Washer</th>
                             <th scope="col">Location Eye Washer</th>
+                            <th scope="col">Plant</th>
                             <th scope="col">Instalation Base</th>
                             <th scope="col">Pipa Saluran Air</th>
                             <th scope="col">Wastafel Eye Wash</th>
@@ -118,6 +121,7 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->eyewasher_number }}</td>
                                 <td>{{ $checksheet->eyewashers->locations->location_name }}</td>
+                                <td>{{ $checksheet->eyewashers->plant }}</td>
                                 <td>{{ $checksheet->instalation_base }}</td>
                                 <td>{{ $checksheet->pipa_saluran_air }}</td>
                                 <td>{{ $checksheet->wastafel_eye_wash }}</td>

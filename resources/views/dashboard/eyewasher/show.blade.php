@@ -32,6 +32,12 @@
             </div>
             <hr class="mt-2">
             <div class="row">
+                <div class="h6 col-3">Plant</div>
+                <div class="col-2">:</div>
+                <div class="col-6 text-muted">{{ $eyewasher->plant }}</div>
+            </div>
+            <hr class="mt-2">
+            <div class="row">
                 <div class="h6 col-3">Type</div>
                 <div class="col-2">:</div>
                 <div class="col-6 text-muted">{{ $eyewasher->type }}</div>

@@ -29,15 +29,24 @@
             </div>
 
             <div class="mb-3 col-md-6">
-                <label for="location_id" class="form-label">Area</label>
+                <label for="location_id" class="form-label">Location</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
-                    <option selected disabled>Pilih Area</option>
+                    <option selected disabled>Pilih Location</option>
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}" {{ old('location_id') ?? $eyewasher->location_id == $location->id ? 'selected' : '' }}>
                             {{ $location->location_name }}</option>
                     @endforeach
                 </select>
                 @error('location_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3 col-md-6">
+                <label for="plant" class="form-label">Plant</label>
+                <input type="text" name="plant" id="plant" placeholder="Masukkan Plant"
+                    class="form-control @error('plant') is-invalid @enderror" value="{{ old('plant') ?? $eyewasher->plant}}">
+                @error('plant')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

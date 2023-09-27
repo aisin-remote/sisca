@@ -68,6 +68,7 @@
                                 <th rowspan="2">No Eyewasher</th>
                                 <th rowspan="2">Type</th>
                                 <th rowspan="2">Location</th>
+                                <th rowspan="2">Plant</th>
                                 <th colspan="12">Month</th>
                             </tr>
                             <tr>
@@ -83,6 +84,7 @@
                                     <td>{{ $eyewasher['eyewasher_number'] }}</td>
                                     <td>{{ $eyewasher['type'] }}</td>
                                     <td>{{ $eyewasher['location_name'] }}</td>
+                                    <td>{{ $eyewasher['plant'] }}</td>
                                     @for ($month = 1; $month <= 12; $month++)
                                         <td>
                                             @if (isset($eyewasher['months'][$month]))

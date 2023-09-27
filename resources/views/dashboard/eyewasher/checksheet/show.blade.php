@@ -33,6 +33,10 @@
                             <td>{{ $checksheet->eyewashers->locations->location_name }}</td>
                         </tr>
                         <tr>
+                            <th>Plant</th>
+                            <td>{{ $checksheet->eyewashers->plant }}</td>
+                        </tr>
+                        <tr>
                             <th>Instalation Base</th>
                             <td>{{ $checksheet->instalation_base }}</td>
                         </tr>
@@ -183,8 +187,12 @@
                             <td>{{ $checksheet->eyewasher_number }}</td>
                         </tr>
                         <tr>
-                            <th>Eyewasher Apar</th>
+                            <th>Location Eyewasher</th>
                             <td>{{ $checksheet->eyewashers->locations->location_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Plant</th>
+                            <td>{{ $checksheet->eyewashers->plant }}</td>
                         </tr>
                         <tr>
                             <th>Pijakan</th>

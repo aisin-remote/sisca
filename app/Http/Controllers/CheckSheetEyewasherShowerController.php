@@ -341,8 +341,10 @@ class CheckSheetEyewasherShowerController extends Controller
             12 => 'Q', // December -> Kolom S
         ];
 
-        $worksheet->setCellValue('M' . 3, 'Area :   ' . $data[0]->eyewashers->locations->location_name);
-
+        $worksheet->setCellValue('O' . 2, $data[0]->eyewasher_number);
+        $worksheet->setCellValue('O' . 3, $data[0]->eyewashers->plant);
+        $worksheet->setCellValue('O' . 4, $data[0]->eyewashers->locations->location_name);
+        $worksheet->setCellValue('O' . 5, $data[0]->eyewashers->type);
 
         foreach ($data as $item) {
 
@@ -354,55 +356,55 @@ class CheckSheetEyewasherShowerController extends Controller
 
             // Set value based on $item->pressure
             if ($item->instalation_base === 'OK') {
-                $worksheet->setCellValue($col . 7, '√');
+                $worksheet->setCellValue($col . 9, '√');
             } else if ($item->instalation_base === 'NG') {
-                $worksheet->setCellValue($col . 7, 'X');
+                $worksheet->setCellValue($col . 9, 'X');
             }
 
             // Set value based on $item->hose
             if ($item->pipa_saluran_air === 'OK') {
-                $worksheet->setCellValue($col . 10, '√');
+                $worksheet->setCellValue($col . 12, '√');
             } else if ($item->pipa_saluran_air === 'NG') {
-                $worksheet->setCellValue($col . 10, 'X');
+                $worksheet->setCellValue($col . 12, 'X');
             }
 
             // Set value based on $item->corong
             if ($item->wastafel_eye_wash === 'OK') {
-                $worksheet->setCellValue($col . 13, '√');
+                $worksheet->setCellValue($col . 15, '√');
             } else if ($item->wastafel_eye_wash === 'NG') {
-                $worksheet->setCellValue($col . 13, 'X');
+                $worksheet->setCellValue($col . 15, 'X');
             }
 
             // Set value based on $item->tabung
             if ($item->kran_eye_wash === 'OK') {
-                $worksheet->setCellValue($col . 16, '√');
+                $worksheet->setCellValue($col . 18, '√');
             } else if ($item->kran_eye_wash === 'NG') {
-                $worksheet->setCellValue($col . 16, 'X');
+                $worksheet->setCellValue($col . 18, 'X');
             }
 
             // Set value based on $item->regulator
             if ($item->tuas_eye_wash === 'OK') {
-                $worksheet->setCellValue($col . 19, '√');
+                $worksheet->setCellValue($col . 21, '√');
             } else if ($item->tuas_eye_wash === 'NG') {
-                $worksheet->setCellValue($col . 19, 'X');
+                $worksheet->setCellValue($col . 21, 'X');
             }
 
             if ($item->tuas_shower === 'OK') {
-                $worksheet->setCellValue($col . 22, '√');
+                $worksheet->setCellValue($col . 24, '√');
             } else if ($item->tuas_shower === 'NG') {
-                $worksheet->setCellValue($col . 22, 'X');
+                $worksheet->setCellValue($col . 24, 'X');
             }
 
             if ($item->sign === 'OK') {
-                $worksheet->setCellValue($col . 25, '√');
+                $worksheet->setCellValue($col . 27, '√');
             } else if ($item->sign === 'NG') {
-                $worksheet->setCellValue($col . 25, 'X');
+                $worksheet->setCellValue($col . 27, 'X');
             }
 
             if ($item->shower_head === 'OK') {
-                $worksheet->setCellValue($col . 28, '√');
+                $worksheet->setCellValue($col . 30, '√');
             } else if ($item->shower_head === 'NG') {
-                $worksheet->setCellValue($col . 28, 'X');
+                $worksheet->setCellValue($col . 30, 'X');
             }
 
             // Increment row for the next data

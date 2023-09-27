@@ -45,6 +45,7 @@ class EyewasherController extends Controller
             'no_eyewasher' => 'required|unique:tm_eyewashers',
             'type' => 'required',
             'location_id' => 'required',
+            'plant' => 'nullable',
         ]);
 
         // Mengubah 'no_tabung' menjadi huruf besar
@@ -129,6 +130,7 @@ class EyewasherController extends Controller
 
         $validateData = $request->validate([
             'location_id' => 'required',
+            'plant' => 'nullable',
         ]);
 
         $eyewasher->update($validateData);

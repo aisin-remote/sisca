@@ -19,7 +19,8 @@
                     <th scope="col">#</th>
                     <th scope="col">No Eye Washer</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Area</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Plant</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -30,6 +31,7 @@
                         <td>{{ $eyewasher->no_eyewasher }}</td>
                         <td>{{ $eyewasher->type }}</td>
                         <td>{{ $eyewasher->locations->location_name }}</td>
+                        <td>{{ $eyewasher->plant }}</td>
                         {{-- <td>
                             <div class="d-flex align-items-center justify-content-center">
                             <form action="{{ route('eye-washer.destroy', $eyewasher->id) }}" method="POST">

@@ -70,6 +70,7 @@ class CheckSheetEyewasherController extends Controller
             ->select(
                 'tm_eyewashers.no_eyewasher as eyewasher_number',
                 'tm_eyewashers.type',
+                'tm_eyewashers.plant',
                 'tm_locations.location_name',
                 DB::raw('COALESCE(tt_check_sheet_eye_washer_showers.tanggal_pengecekan, tt_check_sheet_eye_washers.tanggal_pengecekan) AS tanggal_pengecekan'),
                 DB::raw('COALESCE(tt_check_sheet_eye_washer_showers.pipa_saluran_air, tt_check_sheet_eye_washers.pipa_saluran_air) AS pipa_saluran_air'),
@@ -94,6 +95,7 @@ class CheckSheetEyewasherController extends Controller
             $eyewasherNumber = $eyewasherGroup[0]['eyewasher_number'];
             $eyewasherType = $eyewasherGroup[0]['type'];
             $location_name = $eyewasherGroup[0]['location_name'];
+            $eyewasherPlant = $eyewasherGroup[0]['plant'];
             $eyewasherPengecekan = $eyewasherGroup[0]['tanggal_pengecekan'];
             $months = [];
 
@@ -133,6 +135,7 @@ class CheckSheetEyewasherController extends Controller
                 'eyewasher_number' => $eyewasherNumber,
                 'type' => $eyewasherType,
                 'location_name' => $location_name,
+                'plant' => $eyewasherPlant,
                 'tanggal_pengecekan' => $eyewasherPengecekan,
                 'months' => $months,
             ];
