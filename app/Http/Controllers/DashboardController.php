@@ -6,6 +6,8 @@ use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\array_except;
 use App\Models\CheckSheetCo2;
+use App\Models\CheckSheetEyewasher;
+use App\Models\CheckSheetEyewasherShower;
 use App\Models\CheckSheetHydrantIndoor;
 use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetNitrogenServer;
@@ -264,7 +266,7 @@ class DashboardController extends Controller
 
 
 
-        // Grafik Tandi
+        // Grafik Tandu
 
 
         $notOkData_Tandu = [];
@@ -313,8 +315,79 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Eyewasher
+
+
+        $notOkData_Eyewasher = [];
+        $okData_Eyewasher = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkCountEyewasher = CheckSheetEyewasher::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pijakan', 'NG')
+                        ->orWhere('pipa_saluran_air', 'NG')
+                        ->orWhere('wastafel', 'NG')
+                        ->orWhere('kran_air', 'NG')
+                        ->orWhere('tuas', 'NG');
+                })
+                ->count();
+
+            $notOkCountShower = CheckSheetEyewasherShower::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('instalation_base', 'NG')
+                        ->orWhere('pipa_saluran_air', 'NG')
+                        ->orWhere('wastafel_eye_wash', 'NG')
+                        ->orWhere('tuas_eye_wash', 'NG')
+                        ->orWhere('kran_eye_wash', 'NG')
+                        ->orWhere('tuas_shower', 'NG')
+                        ->orWhere('sign', 'NG')
+                        ->orWhere('shower_head', 'NG');
+                })
+                ->count();
+            $notOkData_Eyewasher[] = $notOkCountEyewasher + $notOkCountShower;
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okCountEyewasher = CheckSheetEyewasher::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('pijakan', 'OK')
+                        ->where('pipa_saluran_air', 'OK')
+                        ->where('wastafel', 'OK')
+                        ->where('kran_air', 'OK')
+                        ->where('tuas', 'OK');
+                })
+                ->count();
+
+            $okCountShower = CheckSheetEyewasherShower::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('instalation_base', 'OK')
+                        ->where('pipa_saluran_air', 'OK')
+                        ->where('wastafel_eye_wash', 'OK')
+                        ->where('tuas_eye_wash', 'OK')
+                        ->where('kran_eye_wash', 'OK')
+                        ->where('tuas_shower', 'OK')
+                        ->where('sign', 'OK')
+                        ->where('shower_head', 'OK');
+                })
+                ->count();
+
+            $okData_Eyewasher[] = $okCountEyewasher + $okCountShower;
+        }
+
+        $data_Eyewasher = [
+            'labels' => $labels,
+            'okData_Eyewasher' => $okData_Eyewasher,
+            'notOkData_Eyewasher' => $notOkData_Eyewasher,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'availableYears'));
     }
 }

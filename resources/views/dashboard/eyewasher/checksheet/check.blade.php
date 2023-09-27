@@ -30,7 +30,7 @@
     </form>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h5>Check Sheet Terbaru</h5>
-        <a href="/dashboard/hydrant/checksheet/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
+        <a href="/dashboard/eyewasher/checksheet/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
             Semua Check Sheet
         </a>
     </div>

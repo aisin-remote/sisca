@@ -180,6 +180,8 @@ Route::get('/dashboard/tandu/checksheet/all-check-sheet', [CheckSheetTanduContro
 
 Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
 Route::post('/dashboard/eyewasher/process-checksheet', [CheckSheetEyewasherController::class, 'processForm'])->name('eyewasher.process.form');
+Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
+
 
 
 

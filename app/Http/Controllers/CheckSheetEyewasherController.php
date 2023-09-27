@@ -11,6 +11,22 @@ use Illuminate\Support\Facades\Storage;
 
 class CheckSheetEyewasherController extends Controller
 {
+    public function index(Request $request)
+    {
+        $tanggal_filter = $request->input('tanggal_filter');
+
+
+        $checksheeteyewasher = CheckSheetEyewasher::when($tanggal_filter, function ($query) use ($tanggal_filter) {
+            return $query->where('tanggal_pengecekan', $tanggal_filter);
+        })->get();
+
+        $checksheetshower = CheckSheetEyewasherShower::when($tanggal_filter, function ($query) use ($tanggal_filter) {
+            return $query->where('tanggal_pengecekan', $tanggal_filter);
+        })->get();
+
+        return view('dashboard.eyewasher.checksheet.index', compact('checksheeteyewasher', 'checksheetshower'));
+    }
+
     public function showForm()
     {
         $latestCheckSheetEyewashers = CheckSheetEyewasher::orderBy('updated_at', 'desc')->take(10)->get();
