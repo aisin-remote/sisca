@@ -52,7 +52,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // Route Apar
-Route::resource('/dashboard/master/apar', AparController::class)->middleware('auth');
+Route::resource('/dashboard/master/apar', AparController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update');
 
 
@@ -104,31 +104,31 @@ Route::get('/dashboard/location/hydrant/indoor', function () {
 
 
 // Route Hydrant
-Route::resource('/dashboard/master/hydrant', HydrantController::class)->middleware('auth');
+Route::resource('/dashboard/master/hydrant', HydrantController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('hydrant.update');
 
 //Route Nitrogen
-Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->middleware('auth');
+Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('nitrogen.update');
 
 // Route Co2
-Route::resource('/dashboard/master/co2', Co2Controller::class)->middleware('auth');
+Route::resource('/dashboard/master/co2', Co2Controller::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/co2/{data_co2}', [Co2Controller::class, 'update'])->name('co2.update');
 
 // Route Tandu
-Route::resource('/dashboard/master/tandu', TanduController::class)->middleware('auth');
+Route::resource('/dashboard/master/tandu', TanduController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/tandu/{data_tandu}', [TanduController::class, 'update'])->name('tandu.update');
 
 // Route Eye Washer
-Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->middleware('auth');
+Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/eye-washer/{data_eyewasher}', [EyewasherController::class, 'update'])->name('eye-washer.update');
 
 // Route Sling
-Route::resource('/dashboard/master/sling', SlingController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/master/sling', SlingController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/sling/{data_sling}', [SlingController::class, 'update'])->name('sling.update');
 
 // Route Tembin
-Route::resource('/dashboard/master/tembin', TembinController::class)->except('show')->middleware('auth');
+Route::resource('/dashboard/master/tembin', TembinController::class)->except('update')->middleware('auth');
 Route::put('/dashboard/master/tembin/{data_tembin}', [TembinController::class, 'update'])->name('tembin.update');
 
 // Route Chain Block
