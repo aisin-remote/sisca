@@ -18,8 +18,8 @@
                     <h3 class="card-title point-of-view">Mapping Apar Body</h3>
                     <!-- Tambahan informasi lainnya jika perlu -->
                 </div>
-                <figure class="zoom mb-0 mt-0" onmousemove="zoom(event)" style="background-image: url('/foto/lokasi-apar/APAR Body Plant.png');">
-                    <img class="img-fluid" style="max-height: 80vh;" src="/foto/lokasi-apar/APAR Body Plant.png"/>
+                <figure class="zoom mb-0 mt-0" onmousemove="zoom(event)" style="background-image: url('/foto/lokasi-apar/APAR Body Plant.jpg');">
+                    <img class="img-fluid" style="max-height: 80vh;" src="/foto/lokasi-apar/APAR Body Plant.jpg"/>
                   </figure>
             </div>
         </div>
