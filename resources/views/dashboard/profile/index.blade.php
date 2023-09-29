@@ -60,27 +60,75 @@
                     @endif
                     <div class="mb-3">
                         <label for="password" class="form-label">Password Lama</label>
-                        <input type="password" name="password" id="password" placeholder="Masukkan Password Lama" class="form-control @error('password') is-invalid @enderror" required>
-                        @error('password')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password Lama" required>
+                            <span class="input-group-text toggle-password" id="toggle-password">
+                                <i class="bi bi-eye-slash" id="password-icon"></i>
+                            </span>
+                        </div>
+                        <div id="password-error" class="invalid-feedback"></div>
                     </div>
+
                     <div class="mb-3">
                         <label for="passwordBaru" class="form-label">Password Baru</label>
-                        <input type="password" name="passwordBaru" id="passwordBaru" placeholder="Masukkan Password Baru" class="form-control @error('passwordBaru') is-invalid @enderror" required>
-                        @error('passwordBaru')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="passwordBaru" name="passwordBaru" placeholder="Masukkan Password Baru" required>
+                            <span class="input-group-text toggle-password" id="toggle-passwordBaru">
+                                <i class="bi bi-eye-slash" id="passwordBaru-icon"></i>
+                            </span>
+                        </div>
+                        <div id="passwordBaru-error" class="invalid-feedback"></div>
                     </div>
+
                     <div class="mb-3">
                         <label for="ulangiPassword" class="form-label">Ulangi Password Baru</label>
-                        <input type="password" name="ulangiPassword" id="ulangiPassword" placeholder="Masukkan Ulang Password Baru" class="form-control @error('ulangiPassword') is-invalid @enderror" required>
-                        @error('ulangiPassword')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="ulangiPassword" name="ulangiPassword" placeholder="Masukkan Ulang Password Baru" required>
+                            <span class="input-group-text toggle-password" id="toggle-ulangiPassword">
+                                <i class="bi bi-eye-slash" id="ulangiPassword-icon"></i>
+                            </span>
+                        </div>
+                        <div id="ulangiPassword-error" class="invalid-feedback"></div>
                     </div>
+
                     <button type="submit" class="btn btn-warning">Edit</button>
                 </form>
             </div>
         </div>
+
+        <script>
+            function togglePasswordVisibility(inputId, iconId) {
+                const input = document.getElementById(inputId);
+                const icon = document.getElementById(iconId);
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                }
+            }
+
+            // Menambahkan event listener untuk setiap input password
+            document.querySelectorAll('.toggle-password').forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    const inputId = toggle.previousElementSibling.id;
+                    const iconId = toggle.querySelector('i').id;
+                    togglePasswordVisibility(inputId, iconId);
+                });
+            });
+
+            // Jika Anda ingin menghilangkan pesan kesalahan saat pengguna mengklik input
+            ['password', 'passwordBaru', 'ulangiPassword'].forEach(function (inputId) {
+                document.getElementById(inputId).addEventListener('focus', function () {
+                    const errorId = inputId + '-error';
+                    document.getElementById(errorId).textContent = '';
+                    document.getElementById(inputId).classList.remove('is-invalid');
+                });
+            });
+        </script>
+
 @endsection
