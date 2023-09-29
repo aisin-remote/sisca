@@ -41,31 +41,27 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password <span
-                                            class="text-danger">*</span></label>
-                                    <input type="password"
-                                        class="form-control @error('password')
-                                    is-invalid @enderror"
-                                        id="password" name="password">
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="password" name="password">
+                                        <span class="input-group-text" id="toggle-password">
+                                            <i class="bi bi-eye-slash" id="password-icon"></i>
+                                        </span>
+                                    </div>
+                                    <div id="password-error" class="invalid-feedback"></div>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">Password Confirmation <span
-                                            class="text-danger">*</span></label>
-                                    <input type="password"
-                                        class="form-control @error('password_confirmation')
-                                    is-invalid @enderror"
-                                        id="password_confirmation" name="password_confirmation">
-                                    @error('password_confirmation')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <label for="password_confirmation" class="form-label">Password Confirmation <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                        <span class="input-group-text" id="toggle-password-confirmation">
+                                            <i class="bi bi-eye-slash" id="password-confirmation-icon"></i>
+                                        </span>
+                                    </div>
+                                    <div id="password-confirmation-error" class="invalid-feedback"></div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary center-block w-100 mb-3">SIGN UP</button>
                                 <p class="text-muted">
                                     Alredy have an account?
@@ -79,4 +75,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            }
+        }
+
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            togglePasswordVisibility('password', 'password-icon');
+        });
+
+        document.getElementById('toggle-password-confirmation').addEventListener('click', function () {
+            togglePasswordVisibility('password_confirmation', 'password-confirmation-icon');
+        });
+
+        // Jika Anda ingin menghilangkan pesan kesalahan saat pengguna mengklik input
+        ['password', 'password_confirmation'].forEach(function (inputId) {
+            document.getElementById(inputId).addEventListener('focus', function () {
+                const errorId = inputId + '-error';
+                document.getElementById(errorId).textContent = '';
+                document.getElementById(inputId).classList.remove('is-invalid');
+            });
+        });
+    </script>
+
 @endsection

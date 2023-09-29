@@ -99,7 +99,7 @@ class CheckSheetCo2Controller extends Controller
             $validatedData['apar_number'] = strtoupper($validatedData['apar_number']);
 
             if ($request->file('photo_pressure') && $request->file('photo_hose') && $request->file('photo_corong') && $request->file('photo_tabung') && $request->file('photo_regulator') && $request->file('photo_lock_pin') && $request->file('photo_berat_tabung')) {
-                $validatedData['photo_pressure'] = $this->compressAndStoreImage($request->file('photo_pressure'))->store('checksheet-apar-co2-af11e');
+                $validatedData['photo_pressure'] = $request->file('photo_pressure')->store('checksheet-apar-co2-af11e');
                 $validatedData['photo_hose'] = $request->file('photo_hose')->store('checksheet-apar-co2-af11e');
                 $validatedData['photo_corong'] = $request->file('photo_corong')->store('checksheet-apar-co2-af11e');
                 $validatedData['photo_tabung'] = $request->file('photo_tabung')->store('checksheet-apar-co2-af11e');
@@ -391,32 +391,4 @@ class CheckSheetCo2Controller extends Controller
         return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 
-    private function compressAndStoreImage($file)
-    {
-        $maxSize = 3072; // 3MB
-
-        // Simpan gambar ke dalam direktori sementara
-        $tempPath = $file->store('temp');
-
-        // Baca gambar menggunakan Intervention Image
-        $image = Image::make(storage_path("app/{$tempPath}"));
-
-        // Cek ukuran gambar
-        if ($image->filesize() > $maxSize * 1024) {
-            // Kompres gambar sesuai kebutuhan (misalnya, 75% kualitas)
-            $image->encode('jpg', 75);
-
-            // Simpan gambar yang telah dikompres ke dalam direktori yang sesuai
-            $compressedPath = str_replace('temp/', 'checksheet-apar-co2-af11e/', $tempPath);
-            $image->save(storage_path("app/{$compressedPath}"));
-
-            // Hapus gambar dari direktori sementara
-            Storage::delete($tempPath);
-
-            return $compressedPath;
-        } else {
-            // Jika ukuran gambar sudah cukup kecil, gunakan aslinya
-            return $tempPath;
-        }
-    }
 }

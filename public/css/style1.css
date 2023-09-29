@@ -3,6 +3,7 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -77,7 +78,7 @@ a:focus {
     background-color: transparent;
 }
 
-#sidebar.active{
+#sidebar.active {
     margin-left: -250px;
 }
 
@@ -153,7 +154,7 @@ ul.CTAs a {
     margin-left: 250px;
 }
 
-#content.active{
+#content.active {
     margin-left: 0px;
     width: 100%;
 }
@@ -166,9 +167,11 @@ ul.CTAs a {
     #sidebar {
         margin-left: 0px;
     }
+
     #sidebar.active {
         margin-left: -250px;
     }
+
     #sidebarCollapse span {
         display: none;
     }
@@ -195,10 +198,10 @@ ul.CTAs a {
 }
 
 .bg-abu th,
-        .bg-abu td {
-            background-color: #f8f9fa;
-            color: #212529;
-        }
+.bg-abu td {
+    background-color: #f8f9fa;
+    color: #212529;
+}
 
 .point-of-view {
     transform: perspective(800px) rotateX(20deg);
@@ -248,33 +251,40 @@ ul.CTAs a {
 }
 
 .dropdown-toggle::after {
-    content: none; /* Hilangkan panah bawaan dari tombol dropdown */
+    content: none;
+    /* Hilangkan panah bawaan dari tombol dropdown */
 }
 
 .dropdown-toggle {
-    padding-right: 1.5rem; /* Tambahkan sedikit ruang di sebelah kanan teks */
+    padding-right: 1.5rem;
+    /* Tambahkan sedikit ruang di sebelah kanan teks */
 }
 
 .dropdown-toggle .bi {
-    margin-left: 0.5rem; /* Berikan sedikit jarak antara teks dan ikon */
+    margin-left: 0.5rem;
+    /* Berikan sedikit jarak antara teks dan ikon */
 }
 
 .sidebar-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px; /* Sesuaikan dengan ketinggian yang diinginkan */
+    height: 50px;
+    /* Sesuaikan dengan ketinggian yang diinginkan */
     font-size: 1.25rem;
     font-weight: bold;
-    color: #051c74; /* Warna teks sesuai kebutuhan */
-    background-color: #6d7fcc; /* Warna latar belakang sesuai kebutuhan */
+    color: #051c74;
+    /* Warna teks sesuai kebutuhan */
+    background-color: #6d7fcc;
+    /* Warna latar belakang sesuai kebutuhan */
 }
 
 .zoom-container {
     position: relative;
     display: inline-block;
     width: 100%;
-    max-width: 600px; /* Atur lebar maksimum sesuai kebutuhan Anda */
+    max-width: 600px;
+    /* Atur lebar maksimum sesuai kebutuhan Anda */
     overflow: hidden;
 }
 
@@ -285,10 +295,11 @@ ul.CTAs a {
     transform-origin: top left;
 }
 
-.menu{
+.menu {
     border-bottom: 1px solid #d3d3d3;
 }
-.submenu{
+
+.submenu {
     border-top: 1px solid #d3d3d3;
 }
 
@@ -299,33 +310,43 @@ figure.zoom {
     height: auto;
     overflow: hidden;
     cursor: zoom-in;
-  }
-  figure.zoom img:hover {
+}
+
+figure.zoom img:hover {
     opacity: 0;
-  }
-  figure.zoom img {
+}
+
+figure.zoom img {
     transition: opacity .5s;
     display: block;
     width: 100%;
-  }
+}
 
 
-  .containere {
+.containere {
     display: flex;
-  }
+}
 
-  .left {
+.left {
     flex: 30%;
-    padding: 10px; /* Tambahkan padding jika diperlukan */
-  }
+    padding: 10px;
+    /* Tambahkan padding jika diperlukan */
+}
 
-  .right {
+.right {
     flex: 70%;
-    padding: 10px; /* Tambahkan padding jika diperlukan */
-  }
+    padding: 10px;
+    /* Tambahkan padding jika diperlukan */
+}
 
-  .keterangan-img,
-  .mapping-img {
-    width: 100%; /* Pastikan gambar mengisi seluruh lebar divnya */
-    height: auto; /* Biarkan tinggi sesuai dengan proporsinya */
-  }
+.keterangan-img,
+.mapping-img {
+    width: 100%;
+    /* Pastikan gambar mengisi seluruh lebar divnya */
+    height: auto;
+    /* Biarkan tinggi sesuai dengan proporsinya */
+}
+
+.toggle-password {
+    cursor: pointer;
+}

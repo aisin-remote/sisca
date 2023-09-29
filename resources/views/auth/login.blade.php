@@ -45,10 +45,16 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password <span
-                                            class="text-danger">*</span></label>
-                                    <input type="password" class="form-control" id="password" name="password">
+                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="password" name="password">
+                                        <span class="input-group-text" id="toggle-password">
+                                            <i class="bi bi-eye-slash" id="password-icon"></i>
+                                        </span>
+                                    </div>
+                                    <div id="password-error" class="invalid-feedback"></div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary center-block w-100 mb-3">LOG IN</button>
                                 <p class="text-muted">
                                     Dont Have an account yet?
@@ -62,5 +68,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const passwordIcon = document.getElementById('password-icon');
+        const passwordError = document.getElementById('password-error');
+
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('bi-eye-slash');
+                passwordIcon.classList.add('bi-eye');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('bi-eye');
+                passwordIcon.classList.add('bi-eye-slash');
+            }
+        });
+
+        // Jika Anda ingin menghilangkan pesan kesalahan saat pengguna mengklik input
+        passwordInput.addEventListener('focus', function () {
+            passwordError.textContent = '';
+            passwordInput.classList.remove('is-invalid');
+        });
+    </script>
+
 
 @endsection
