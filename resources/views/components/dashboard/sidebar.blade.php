@@ -7,15 +7,17 @@
         </a>
     </div>
     <ul class="list-unstyled components">
-        <li class="{{ Request::is('dashboard') ? 'active show' : '' }} menu">
-            <a class="nav_link" href="/dashboard">Dashboard</a>
+        <li class="{{ Request::is('dashboard') ? 'active show' : '' }} menu" style="text-align: center;">
+            <a class="nav_link" href="/dashboard" style="display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-bar-chart-line-fill" style="margin-right: 10px;"></i>
+                Dashboard
+            </a>
         </li>
-
 
         <li class="{{Request::is('dashboard/location*') ? 'active show' : ''}} menu">
             <a href="#locationSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
-                    Location
+                    <i class="bi bi-pin-map-fill"></i> Location
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
@@ -34,7 +36,7 @@
         <li class="{{Request::is('dashboard/master*') ? 'active show' : ''}} menu">
             <a href="#masterSubmenu" aria-controls="masterSubmenu"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
-                    Master
+                    <i class="bi bi-database-fill-add"></i> Master
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
@@ -74,7 +76,7 @@
         <li class="{{Request::is('dashboard/check-sheet*') ? 'active show' : ''}} menu">
             <a href="#checksheetSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
-                    Check Sheet
+                    <i class="bi bi-clipboard2-check-fill"></i> Check Sheet
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
@@ -102,7 +104,7 @@
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">
             <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
-                    Report
+                    <i class="bi bi-exclamation-triangle-fill"></i> Report
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
