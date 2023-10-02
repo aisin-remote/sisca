@@ -99,6 +99,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/eye-washer*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/eye-washer">Eye Washer</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/sling*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/sling">Sling</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">

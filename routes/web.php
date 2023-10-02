@@ -146,6 +146,8 @@ use App\Http\Controllers\CheckSheetEyewasherOnlyController;
 use App\Http\Controllers\CheckSheetEyewasherShowerController;
 use App\Http\Controllers\CheckSheetNitrogenServerController;
 use App\Http\Controllers\CheckSheetHydrantController;
+use App\Http\Controllers\CheckSheetSlingController;
+use App\Http\Controllers\CheckSheetSlingWireController;
 use App\Http\Controllers\CheckSheetTabungCo2Controller;
 use App\Http\Controllers\CheckSheetTanduController;
 use App\Models\CheckSheetEyewasherShower;
@@ -157,6 +159,7 @@ Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerControlle
 Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form');
 Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form');
 Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
+Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form');
 
 
 
@@ -178,11 +181,11 @@ Route::get('/dashboard/co2/checksheet/all-check-sheet', [CheckSheetTabungCo2Cont
 Route::post('/dashboard/tandu/process-checksheet', [CheckSheetTanduController::class, 'processForm'])->name('tandu.process.form');
 Route::get('/dashboard/tandu/checksheet/all-check-sheet', [CheckSheetTanduController::class, 'index'])->name('tandu.checksheet.index');
 
-Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
 Route::post('/dashboard/eyewasher/process-checksheet', [CheckSheetEyewasherController::class, 'processForm'])->name('eyewasher.process.form');
 Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
 
-
+Route::post('/dashboard/sling/process-checksheet', [CheckSheetSlingController::class, 'processForm'])->name('sling.process.form');
+Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
 
 
 
@@ -202,6 +205,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+
+});
+
+
+
+//Checksheet Sling Wire
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/sling/checksheetwire/{slingNumber}', [CheckSheetSlingWireController::class, 'showForm'])->name('checksheetwire');
+    Route::post('/dashboard/sling/process-checksheet-wire/{slingNumber}', [CheckSheetSlingWireController::class, 'store'])->name('process.checksheet.wire');
+
+    Route::delete('/dashboard/check-sheet/eyewasher-show/{id}', [CheckSheetEyewasherShowerController::class, 'destroy'])->name('eyewasher.checksheetshower.destroy');
+    Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/edit', [CheckSheetEyewasherShowerController::class, 'edit'])->name('eyewasher.checksheetshower.edit');
+    Route::put('/dashboard/check-sheet/eyewasher-shower/{id}', [CheckSheetEyewasherShowerController::class, 'update'])->name('eyewasher.checksheetshower.update');
+    Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/show', [CheckSheetEyewasherShowerController::class, 'show'])->name('eyewasher.checksheetshower.show');
 
 });
 
