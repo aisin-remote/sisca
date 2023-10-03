@@ -58,10 +58,25 @@ class CheckSheetSlingWireController extends Controller
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
-        // Mencari entri CheckSheetIndoor untuk bulan dan tahun saat ini
+        // Menghitung musim berdasarkan bulan saat ini
+        if ($currentMonth >= 12 || $currentMonth <= 2) {
+            // Musim Dingin (Desember, Januari, Februari)
+            $season = 1;
+        } elseif ($currentMonth >= 3 && $currentMonth <= 5) {
+            // Musim Semi (Maret, April, Mei)
+            $season = 2;
+        } elseif ($currentMonth >= 6 && $currentMonth <= 8) {
+            // Musim Panas (Juni, Juli, Agustus)
+            $season = 3;
+        } elseif ($currentMonth >= 9 && $currentMonth <= 11) {
+            // Musim Gugur (September, Oktober, November)
+            $season = 4;
+        }
+
+        // Mencari entri CheckSheetIndoor untuk sling_number tertentu dan musim saat ini
         $existingCheckSheet = CheckSheetSlingWire::where('sling_number', $request->sling_number)
             ->whereYear('created_at', $currentYear)
-            ->whereMonth('created_at', $currentMonth)
+            ->where('season', $season)
             ->first();
 
         if ($existingCheckSheet) {
@@ -158,52 +173,16 @@ class CheckSheetSlingWireController extends Controller
 
             $validatedData['sling_number'] = strtoupper($validatedData['sling_number']);
 
-            // if ($request->file('photo_serabut_wire') && $request->file('photo_bagian_wire_1') && $request->file('photo_bagian_wire_2') && $request->file('photo_kumpulan_wire_1') && $request->file('photo_diameter_wire') && $request->file('photo_kumpulan_wire_2') && $request->file('photo_hook_wire') && $request->file('photo_pengunci_hook') && $request->file('photo_mata_sling')) {
-            //     $validatedData['photo_serabut_wire'] = $request->file('photo_serabut_wire')->store('checksheet-sling-wire');
-            //     $validatedData['photo_bagian_wire_1'] = $request->file('photo_bagian_wire_1')->store('checksheet-sling-wire');
-            //     $validatedData['photo_bagian_wire_2'] = $request->file('photo_bagian_wire_2')->store('checksheet-sling-wire');
-            //     $validatedData['photo_kumpulan_wire_1'] = $request->file('photo_kumpulan_wire_1')->store('checksheet-sling-wire');
-            //     $validatedData['photo_diameter_wire'] = $request->file('photo_diameter_wire')->store('checksheet-sling-wire');
-            //     $validatedData['photo_kumpulan_wire_2'] = $request->file('photo_kumpulan_wire_2')->store('checksheet-sling-wire');
-            //     $validatedData['photo_hook_wire'] = $request->file('photo_hook_wire')->store('checksheet-sling-wire');
-            //     $validatedData['photo_pengunci_hook'] = $request->file('photo_pengunci_hook')->store('checksheet-sling-wire');
-            //     $validatedData['photo_mata_sling'] = $request->file('photo_mata_sling')->store('checksheet-sling-wire');
-            // }
-
-            $imageAttributes = [
-                'photo_serabut_wire',
-                'photo_bagian_wire_1',
-                'photo_bagian_wire_2',
-                'photo_kumpulan_wire_1',
-                'photo_diameter_wire',
-                'photo_kumpulan_wire_2',
-                'photo_hook_wire',
-                'photo_pengunci_hook',
-                'photo_mata_sling',
-                // tambahkan atribut lain yang merupakan foto
-            ];
-
-            $maxFileSize = 3 * 1024;
-
-            foreach ($imageAttributes as $attribute) {
-                if ($request->hasFile($attribute)) {
-                    $image = $request->file($attribute);
-
-                    // Mendapatkan ekstensi asli file
-                    $extension = $image->getClientOriginalExtension();
-
-                    // Buat nama unik untuk file gambar
-                    $fileName = 'checksheet-sling-wire/' . uniqid() . '.' . $extension;
-
-                    // Kompresi gambar dengan kualitas 75% (atau sesuaikan dengan kebutuhan Anda)
-                    $compressedImage = Image::make($image)->encode('jpg', 50);
-
-                    // Simpan gambar yang telah dikompresi ke penyimpanan publik
-                    Storage::disk('public')->put($fileName, $compressedImage->stream());
-
-                    // Simpan nama file gambar yang dikompresi ke dalam database
-                    $validatedData[$attribute] = $fileName;
-                }
+            if ($request->file('photo_serabut_wire') && $request->file('photo_bagian_wire_1') && $request->file('photo_bagian_wire_2') && $request->file('photo_kumpulan_wire_1') && $request->file('photo_diameter_wire') && $request->file('photo_kumpulan_wire_2') && $request->file('photo_hook_wire') && $request->file('photo_pengunci_hook') && $request->file('photo_mata_sling')) {
+                $validatedData['photo_serabut_wire'] = $request->file('photo_serabut_wire')->store('checksheet-sling-wire');
+                $validatedData['photo_bagian_wire_1'] = $request->file('photo_bagian_wire_1')->store('checksheet-sling-wire');
+                $validatedData['photo_bagian_wire_2'] = $request->file('photo_bagian_wire_2')->store('checksheet-sling-wire');
+                $validatedData['photo_kumpulan_wire_1'] = $request->file('photo_kumpulan_wire_1')->store('checksheet-sling-wire');
+                $validatedData['photo_diameter_wire'] = $request->file('photo_diameter_wire')->store('checksheet-sling-wire');
+                $validatedData['photo_kumpulan_wire_2'] = $request->file('photo_kumpulan_wire_2')->store('checksheet-sling-wire');
+                $validatedData['photo_hook_wire'] = $request->file('photo_hook_wire')->store('checksheet-sling-wire');
+                $validatedData['photo_pengunci_hook'] = $request->file('photo_pengunci_hook')->store('checksheet-sling-wire');
+                $validatedData['photo_mata_sling'] = $request->file('photo_mata_sling')->store('checksheet-sling-wire');
             }
 
             // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi

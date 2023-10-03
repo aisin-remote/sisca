@@ -7,10 +7,13 @@
         </a>
     </div>
     <ul class="list-unstyled components">
-        <li class="{{ Request::is('dashboard') ? 'active show' : '' }} menu" style="text-align: center;">
-            <a class="nav_link" href="/dashboard" style="display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-bar-chart-line-fill" style="margin-right: 10px;"></i>
-                Dashboard
+        <li class="{{ Request::is('dashboard') ? 'active show' : '' }} menu">
+            <a class="nav_link" href="/dashboard" style="margin-left: 9px;">
+                <span style="display: flex; justify-content: space-between; align-items: center;">
+                    <i class="bi bi-bar-chart-line-fill"></i>
+                    Dashboard
+                    <i class="fas fa-chevron-down" style="opacity: 0;"></i>
+                </span>
             </a>
         </li>
 
