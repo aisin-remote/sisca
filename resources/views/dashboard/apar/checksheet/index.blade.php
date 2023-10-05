@@ -53,7 +53,9 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->apar_number }}</td>
-                                <td>{{ $checksheet->apars->locations->location_name }}</td>
+                                <td>
+                                    {{ $checksheet->apars->locations->location_name ?? 'Tidak ada lokasi' }}
+                                </td>
                                 <td>{{ $checksheet->pressure }}</td>
                                 <td>{{ $checksheet->hose }}</td>
                                 <td>{{ $checksheet->corong }}</td>
@@ -67,8 +69,8 @@
                                             class="badge bg-info me-2">Info</a>
                                         <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
                                             class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
+                                        <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}"
+                                            method="POST" class="delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="badge bg-danger border-0"
@@ -124,7 +126,9 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->apar_number }}</td>
-                                <td>{{ $checksheet->apars->locations->location_name }}</td>
+                                <td>
+                                    {{ $checksheet->apars->locations->location_name ?? 'Tidak ada lokasi' }}
+                                </td>
                                 <td>{{ $checksheet->pressure }}</td>
                                 <td>{{ $checksheet->hose }}</td>
                                 <td>{{ $checksheet->tabung }}</td>
@@ -137,8 +141,8 @@
                                             class="badge bg-info me-2">Info</a>
                                         <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
                                             class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
+                                        <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}"
+                                            method="POST" class="delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="badge bg-danger border-0"

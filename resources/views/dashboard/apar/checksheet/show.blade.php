@@ -30,7 +30,9 @@
                         </tr>
                         <tr>
                             <th>Location Apar</th>
-                            <td>{{ $checksheet->apars->locations->location_name }}</td>
+                            <td>
+                                {{ $checksheet->apars->locations->location_name ?? 'Tidak ada lokasi' }}
+                            </td>
                         </tr>
                         <tr>
                             <th>Pressure</th>
@@ -154,7 +156,9 @@
                         </tr>
                         <tr>
                             <th>Location Apar</th>
-                            <td>{{ $checksheet->apars->locations->location_name }}</td>
+                            <td>
+                                {{ $checksheet->apars->locations->location_name ?? 'Tidak ada lokasi' }}
+                            </td>
                         </tr>
                         <tr>
                             <th>Pressure</th>

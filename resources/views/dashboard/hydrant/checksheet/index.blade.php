@@ -54,7 +54,9 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->hydrant_number }}</td>
-                                <td>{{ $checksheet->hydrants->locations->location_name }}</td>
+                                <td>
+                                    {{ $checksheet->hydrants->locations->location_name ?? 'Tidak ada lokasi' }}
+                                </td>
                                 <td>{{ $checksheet->pintu }}</td>
                                 <td>{{ $checksheet->emergency }}</td>
                                 <td>{{ $checksheet->nozzle }}</td>
@@ -128,7 +130,9 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->hydrant_number }}</td>
-                                <td>{{ $checksheet->hydrants->locations->location_name }}</td>
+                                <td>
+                                    {{ $checksheet->hydrants->locations->location_name ?? 'Tidak ada lokasi' }}
+                                </td>
                                 <td>{{ $checksheet->pintu }}</td>
                                 <td>{{ $checksheet->nozzle }}</td>
                                 <td>{{ $checksheet->selang }}</td>

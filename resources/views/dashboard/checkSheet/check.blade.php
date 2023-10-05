@@ -2,7 +2,8 @@
 @section('title', 'Check Sheet')
 
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Check Sheet Apar</h1>
     </div>
     @if (session()->has('error'))
@@ -18,19 +19,23 @@
     <form action="{{ route('process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         <div class="row">
-        <div class="mb-3 col-md-6">
-            <label for="tag_number" class="form-label">Tag Number</label>
-            <input type="text" name="tag_number" id="tag_number" placeholder="Masukkan Tag Number" class="form-control @error('tag_number') is-invalid @enderror" value="{{old('tag_number')}}" required autofocus>
-            @error('tag_number')
-                <div class="text-danger">{{$message}}</div>
-            @enderror
+            <div class="mb-3 col-md-6">
+                <label for="tag_number" class="form-label">Tag Number</label>
+                <input type="text" name="tag_number" id="tag_number" placeholder="Masukkan Tag Number"
+                    class="form-control @error('tag_number') is-invalid @enderror" value="{{ old('tag_number') }}" required
+                    autofocus>
+                @error('tag_number')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-success">Check</button>
+        <button type="submit" class="btn btn-success">Check</button>
     </form>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h5>Check Sheet Terbaru</h5>
-        <a href="/dashboard/check-sheet/apar/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
+        <a href="/dashboard/check-sheet/apar/all-check-sheet" class="btn-link text-primary"
+            style="text-decoration: underline;">
             Semua Check Sheet
         </a>
     </div>
@@ -62,15 +67,16 @@
                                 <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
                                 <td>{{ $checkSheet->npk }}</td>
                                 <td>{{ $checkSheet->apar_number }}</td>
-                                <td>{{ $checkSheet->apars->type }}</td>
-                                @if ($checkSheet->apars->type === 'co2' || $checkSheet->apars->type === 'af11e')
+                                <td>{{ $checkSheet->apars->type ?? 'Tidak ada tipe' }}</td>
+                                @if (isset($checkSheet->apars) && ($checkSheet->apars->type === 'co2' || $checkSheet->apars->type === 'af11e'))
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('apar.checksheetco2.show', $checkSheet->id) }}"
+                                                class="badge bg-info me-2">Info</a>
                                             <a href="{{ route('apar.checksheetco2.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('apar.checksheetco2.destroy', $checkSheet->id) }}" method="POST"
-                                                class="delete-form">
+                                            <form action="{{ route('apar.checksheetco2.destroy', $checkSheet->id) }}"
+                                                method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="badge bg-danger border-0"
@@ -78,14 +84,15 @@
                                             </form>
                                         </div>
                                     </td>
-                                @elseif ($checkSheet->apars->type === 'powder')
+                                @elseif (isset($checkSheet->apars) && $checkSheet->apars->type === 'powder')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('apar.checksheetpowder.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('apar.checksheetpowder.show', $checkSheet->id) }}"
+                                                class="badge bg-info me-2">Info</a>
                                             <a href="{{ route('apar.checksheetpowder.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('apar.checksheetpowder.destroy', $checkSheet->id) }}" method="POST"
-                                                class="delete-form">
+                                            <form action="{{ route('apar.checksheetpowder.destroy', $checkSheet->id) }}"
+                                                method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="badge bg-danger border-0"
