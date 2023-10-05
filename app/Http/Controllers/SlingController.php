@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetSlingBelt;
+use App\Models\CheckSheetSlingWire;
 use App\Models\Location;
 use App\Models\Sling;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SlingController extends Controller
 {
@@ -61,7 +64,45 @@ class SlingController extends Controller
      */
     public function show($id)
     {
-        //
+        $sling = Sling::findOrFail($id);
+
+        if (!$sling) {
+            return back()->with('error', 'Sling tidak ditemukan.');
+        }
+
+        $type = $sling->type;
+        $checksheets = null;
+
+        if ($type === 'Sling Wire') {
+            $checksheets = CheckSheetSlingWire::where('sling_number', $sling->no_sling);
+            $firstYear = CheckSheetSlingWire::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetSlingWire::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
+            return view('dashboard.sling.show', compact('sling', 'checksheets', 'firstYear', 'lastYear'));
+
+        } elseif ($type === 'Sling Belt') {
+            $checksheets = CheckSheetSlingBelt::where('sling_number', $sling->no_sling);
+            $firstYear = CheckSheetSlingBelt::min(DB::raw('YEAR(tanggal_pengecekan)'));
+            $lastYear = CheckSheetSlingBelt::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+            if (request()->has('tahun_filter')) {
+                $tahunFilter = request()->input('tahun_filter');
+                $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+            }
+
+            $checksheets = $checksheets->get();
+
+            return view('dashboard.sling.show', compact('sling', 'checksheets', 'firstYear', 'lastYear'));
+        } else {
+            return back()->with('error', 'Sling tidak dikenali');
+        }
     }
 
     /**

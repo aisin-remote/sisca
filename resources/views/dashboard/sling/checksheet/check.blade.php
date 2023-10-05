@@ -66,10 +66,10 @@
                                 @if ($checkSheet->slings->type === 'Sling Wire')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('eyewasher.checksheeteyewasher.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                            <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checkSheet->id) }}"
+                                            <a href="{{ route('sling.checksheetwire.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('sling.checksheetwire.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('eyewasher.checksheeteyewasher.destroy', $checkSheet->id) }}" method="POST"
+                                            <form action="{{ route('sling.checksheetwire.destroy', $checkSheet->id) }}" method="POST"
                                                 class="delete-form">
                                                 @csrf
                                                 @method('DELETE')

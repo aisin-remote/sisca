@@ -215,10 +215,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/sling/checksheetwire/{slingNumber}', [CheckSheetSlingWireController::class, 'showForm'])->name('checksheetwire');
     Route::post('/dashboard/sling/process-checksheet-wire/{slingNumber}', [CheckSheetSlingWireController::class, 'store'])->name('process.checksheet.wire');
 
-    Route::delete('/dashboard/check-sheet/eyewasher-show/{id}', [CheckSheetEyewasherShowerController::class, 'destroy'])->name('eyewasher.checksheetshower.destroy');
-    Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/edit', [CheckSheetEyewasherShowerController::class, 'edit'])->name('eyewasher.checksheetshower.edit');
-    Route::put('/dashboard/check-sheet/eyewasher-shower/{id}', [CheckSheetEyewasherShowerController::class, 'update'])->name('eyewasher.checksheetshower.update');
-    Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/show', [CheckSheetEyewasherShowerController::class, 'show'])->name('eyewasher.checksheetshower.show');
+    Route::delete('/dashboard/check-sheet/sling-wire/{id}', [CheckSheetSlingWireController::class, 'destroy'])->name('sling.checksheetwire.destroy');
+    Route::get('/dashboard/check-sheet/sling-wire/{id}/edit', [CheckSheetSlingWireController::class, 'edit'])->name('sling.checksheetwire.edit');
+    Route::put('/dashboard/check-sheet/sling-wire/{id}', [CheckSheetSlingWireController::class, 'update'])->name('sling.checksheetwire.update');
+    Route::get('/dashboard/check-sheet/sling-wire/{id}/show', [CheckSheetSlingWireController::class, 'show'])->name('sling.checksheetwire.show');
 
 });
 
