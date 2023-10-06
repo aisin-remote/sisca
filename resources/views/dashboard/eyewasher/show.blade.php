@@ -201,9 +201,9 @@
                                     <td>{{ $checksheet->shower_head }}</td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="eyewasher.checksheetshower.show"
+                                            <a href="{{ route('eyewasher.checksheetshower.show', $checksheet->id) }}"
                                                 class="badge bg-info me-2">Info</a>
-                                            <a href="eyewasher.checksheetshower.edit"
+                                            <a href="{{ route('eyewasher.checksheetshower.edit', $checksheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
                                                 action="{{ route('eyewasher.checksheetshower.destroy', $checksheet->id) }}"
