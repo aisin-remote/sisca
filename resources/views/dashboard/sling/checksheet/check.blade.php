@@ -78,13 +78,13 @@
                                             </form>
                                         </div>
                                     </td>
-                                @elseif ($checkSheet->eyewashers->type === 'Sling Belt')
+                                @elseif ($checkSheet->slings->type === 'Sling Belt')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('eyewasher.checksheetshower.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                            <a href="{{ route('eyewasher.checksheetshower.edit', $checkSheet->id) }}"
+                                            <a href="{{ route('sling.checksheetbelt.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
+                                            <a href="{{ route('sling.checksheetbelt.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('eyewasher.checksheetshower.destroy', $checkSheet->id) }}" method="POST"
+                                            <form action="{{ route('sling.checksheetbelt.destroy', $checkSheet->id) }}" method="POST"
                                                 class="delete-form">
                                                 @csrf
                                                 @method('DELETE')

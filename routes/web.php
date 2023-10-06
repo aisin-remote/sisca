@@ -146,6 +146,7 @@ use App\Http\Controllers\CheckSheetEyewasherOnlyController;
 use App\Http\Controllers\CheckSheetEyewasherShowerController;
 use App\Http\Controllers\CheckSheetNitrogenServerController;
 use App\Http\Controllers\CheckSheetHydrantController;
+use App\Http\Controllers\CheckSheetSlingBeltController;
 use App\Http\Controllers\CheckSheetSlingController;
 use App\Http\Controllers\CheckSheetSlingWireController;
 use App\Http\Controllers\CheckSheetTabungCo2Controller;
@@ -205,6 +206,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+
+});
+
+
+
+//Checksheet Sling Belt
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/sling/checksheetbelt/{slingNumber}', [CheckSheetSlingBeltController::class, 'showForm'])->name('checksheetbelt');
+    Route::post('/dashboard/sling/process-checksheet-belt/{slingNumber}', [CheckSheetSlingBeltController::class, 'store'])->name('process.checksheet.belt');
+
+    Route::delete('/dashboard/check-sheet/sling-belt/{id}', [CheckSheetSlingBeltController::class, 'destroy'])->name('sling.checksheetbelt.destroy');
+    Route::get('/dashboard/check-sheet/sling-belt/{id}/edit', [CheckSheetSlingBeltController::class, 'edit'])->name('sling.checksheetbelt.edit');
+    Route::put('/dashboard/check-sheet/sling-belt/{id}', [CheckSheetSlingBeltController::class, 'update'])->name('sling.checksheetbelt.update');
+    Route::get('/dashboard/check-sheet/sling-belt/{id}/show', [CheckSheetSlingBeltController::class, 'show'])->name('sling.checksheetbelt.show');
 
 });
 
