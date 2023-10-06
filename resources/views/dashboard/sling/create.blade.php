@@ -18,6 +18,17 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3 col-md-6">
+                <label for="swl" class="form-label">SWL(Ton)</label>
+                <input type="number" step="0.01" name="swl" id="swl" placeholder="Masukkan SWL"
+                    class="form-control @error('swl') is-invalid @enderror" value="{{ old('swl') }}">
+                @error('swl')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+
             <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Area</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">

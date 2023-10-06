@@ -18,6 +18,7 @@
                 <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Sling</th>
+                    <th scope="col">SWL</th>
                     <th scope="col">Area</th>
                     <th scope="col">Plant</th>
                     <th scope="col">Type</th>
@@ -29,6 +30,7 @@
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $sling->no_sling }}</td>
+                        <td>{{ $sling->swl }} Ton</td>
                         <td>{{ $sling->locations->location_name }}</td>
                         <td>{{ $sling->plant }}</td>
                         <td>{{ $sling->type }}</td>

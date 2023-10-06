@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-
-
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetSlingWireController extends Controller
 {
@@ -406,5 +405,141 @@ class CheckSheetSlingWireController extends Controller
         $checkSheetwire->delete();
 
         return back()->with('success1', 'Data Check Sheet Sling Wire berhasil dihapus');
+    }
+
+    public function exportExcelWithTemplate(Request $request)
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template-checksheet-wire.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve tag_number from the form
+        $slingNumber = $request->input('sling_number');
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
+        $data = CheckSheetSlingWire::with('slings')
+            ->select('tanggal_pengecekan', 'sling_number', 'serabut_wire', 'bagian_wire_1', 'bagian_wire_2', 'kumpulan_wire_1', 'diameter_wire', 'kumpulan_wire_2', 'hook_wire', 'pengunci_hook', 'mata_sling')
+            ->where(function ($query) use ($selectedYear, $slingNumber) {
+                // Kondisi untuk memanggil data berdasarkan tahun dan tag_number
+                $query->whereYear('tanggal_pengecekan', $selectedYear)
+                    ->where('sling_number', $slingNumber);
+            })
+            ->orWhere(function ($query) use ($selectedYear, $slingNumber) {
+                // Kondisi untuk memanggil data bulan Januari tahun selanjutnya
+                $query->whereMonth('tanggal_pengecekan', 1)
+                    ->whereYear('tanggal_pengecekan', $selectedYear + 1)
+                    ->where('sling_number', $slingNumber);
+            })
+            ->get();
+
+
+        // Quartal mapping ke kolom
+        $quartalKolom = [
+            1 => 'Y',  // Quartal 1 -> Kolom Y
+            2 => 'AB', // Quartal 2 -> Kolom AB
+            3 => 'AE', // Quartal 3 -> Kolom AE
+            4 => 'AH', // Quartal 4 -> Kolom AH
+        ];
+
+        $worksheet->setCellValue('X' . 4, $data[0]->slings->plant);
+        $worksheet->setCellValue('AA' . 4, $data[0]->slings->locations->location_name);
+        $worksheet->setCellValue('AD' . 4, $data[0]->sling_number);
+        $worksheet->setCellValue('AG' . 4, $data[0]->slings->swl);
+
+        foreach ($data as $item) {
+
+            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
+            $bulan = Carbon::parse($item->tanggal_pengecekan)->month;
+
+            if ($bulan >= 2 && $bulan <= 4) {
+                $quartal = 1;
+            } elseif ($bulan >= 5 && $bulan <= 7) {
+                $quartal = 2;
+            } elseif ($bulan >= 8 && $bulan <= 10) {
+                $quartal = 3;
+            } else {
+                $quartal = 4;
+            }
+
+
+
+            // Tentukan kolom berdasarkan bulan
+            $col = $quartalKolom[$quartal];
+
+            // Set value based on $item->pressure
+            if ($item->serabut_wire === 'OK') {
+                $worksheet->setCellValue($col . 9, '√');
+            } else if ($item->serabut_wire === 'NG') {
+                $worksheet->setCellValue($col . 9, 'X');
+            }
+
+            // Set value based on $item->hose
+            if ($item->bagian_wire_1 === 'OK') {
+                $worksheet->setCellValue($col . 12, '√');
+            } else if ($item->bagian_wire_1 === 'NG') {
+                $worksheet->setCellValue($col . 12, 'X');
+            }
+
+            // Set value based on $item->corong
+            if ($item->bagian_wire_2 === 'OK') {
+                $worksheet->setCellValue($col . 15, '√');
+            } else if ($item->bagian_wire_2 === 'NG') {
+                $worksheet->setCellValue($col . 15, 'X');
+            }
+
+            // Set value based on $item->tabung
+            if ($item->kumpulan_wire_1 === 'OK') {
+                $worksheet->setCellValue($col . 18, '√');
+            } else if ($item->kumpulan_wire_1 === 'NG') {
+                $worksheet->setCellValue($col . 18, 'X');
+            }
+
+            // Set value based on $item->regulator
+            if ($item->diameter_wire === 'OK') {
+                $worksheet->setCellValue($col . 21, '√');
+            } else if ($item->diameter_wire === 'NG') {
+                $worksheet->setCellValue($col . 21, 'X');
+            }
+
+            if ($item->kumpulan_wire_2 === 'OK') {
+                $worksheet->setCellValue($col . 24, '√');
+            } else if ($item->kumpulan_wire_2 === 'NG') {
+                $worksheet->setCellValue($col . 24, 'X');
+            }
+
+            if ($item->hook_wire === 'OK') {
+                $worksheet->setCellValue($col . 27, '√');
+            } else if ($item->hook_wire === 'NG') {
+                $worksheet->setCellValue($col . 27, 'X');
+            }
+
+            if ($item->pengunci_hook === 'OK') {
+                $worksheet->setCellValue($col . 30, '√');
+            } else if ($item->pengunci_hook === 'NG') {
+                $worksheet->setCellValue($col . 30, 'X');
+            }
+
+            if ($item->mata_sling === 'OK') {
+                $worksheet->setCellValue($col . 33, '√');
+            } else if ($item->mata_sling === 'NG') {
+                $worksheet->setCellValue($col . 33, 'X');
+            }
+
+            // Increment row for the next data
+            $col++;
+        }
+
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/checksheet-sling-wire.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }

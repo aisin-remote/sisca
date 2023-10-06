@@ -439,3 +439,8 @@ Route::post('/export-checksheet-eyewasher', [CheckSheetEyewasherOnlyController::
 Route::post('/export-checksheet-eyewasher-shower', [CheckSheetEyewasherShowerController::class, 'exportExcelWithTemplate'])->name('export.checksheetsshower');
 Route::post('/export-checksheet-report-eyewasher', [CheckSheetEyewasherController::class, 'exportExcelWithTemplate'])->name('export.checksheetsreport.eyewasher');
 
+// Export Checksheet Sling
+Route::post('/export-checksheet-wire', [CheckSheetSlingWireController::class, 'exportExcelWithTemplate'])->name('export.checksheetswire');
+Route::post('/export-checksheet-belt', [CheckSheetEyewasherShowerController::class, 'exportExcelWithTemplate'])->name('export.checksheetsshower');
+Route::post('/export-checksheet-report-eyewasher', [CheckSheetEyewasherController::class, 'exportExcelWithTemplate'])->name('export.checksheetsreport.eyewasher');
+

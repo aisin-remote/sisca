@@ -24,6 +24,14 @@
                 <div class="col-2">:</div>
                 <div class="col-6 text-muted">{{ $sling->no_sling }}</div>
             </div>
+
+            <hr class="mt-2">
+            <div class="row">
+                <div class="h6 col-3">SWL</div>
+                <div class="col-2">:</div>
+                <div class="col-6 text-muted">{{ $sling->swl }} Ton</div>
+            </div>
+
             <hr class="mt-2">
             <div class="row">
                 <div class="h6 col-3">Area</div>
@@ -64,7 +72,7 @@
     </div>
 
     @if ($sling->type === 'Sling Wire')
-        <form action="{{ route('export.checksheetseyewasher') }}" method="POST" class="col-md-6 mb-3">
+        <form action="{{ route('export.checksheetswire') }}" method="POST" class="col-md-6 mb-3">
             @method('POST')
             @csrf
             <div class="form-group mb-3">

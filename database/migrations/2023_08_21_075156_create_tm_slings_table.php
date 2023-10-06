@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->string('no_sling')->unique();
+            $table->string('swl');
             $table->string('plant')->nullable()->default('-');
             $table->string('type');
             $table->timestamps();

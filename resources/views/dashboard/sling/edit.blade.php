@@ -18,6 +18,16 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3 col-md-6">
+                <label for="swl" class="form-label">SWL</label>
+                <input type="number" step="0.01" name="swl" id="swl" placeholder="Masukkan SWL"
+                    class="form-control @error('swl') is-invalid @enderror" value="{{ old('swl') ?? $sling->swl}}">
+                @error('swl')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="mb-3 col-md-6">
                 <label class="form-label" for="type">Type</label>
                 <input type="text" name="type" id="type" placeholder="Masukkan Type Sling"

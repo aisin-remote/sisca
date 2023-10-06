@@ -43,6 +43,7 @@ class SlingController extends Controller
     {
         $validate = $request->validate([
             'no_sling' => 'required|unique:tm_slings',
+            'swl' => 'required',
             'location_id' => 'required',
             'plant' => 'nullable',
             'type' => 'required'
@@ -130,6 +131,7 @@ class SlingController extends Controller
         $sling = Sling::findOrFail($id);
 
         $validateData = $request->validate([
+            'swl' => 'required',
             'location_id' => 'required',
             'plant' => 'nullable',
         ]);
