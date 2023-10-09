@@ -361,6 +361,8 @@ Route::get('/dashboard/report/nitrogen', [CheckSheetNitrogenServerController::cl
 Route::get('/dashboard/report/co2', [CheckSheetTabungCo2Controller::class, 'report'])->name('home.checksheet.co2')->middleware('auth');
 Route::get('/dashboard/report/tandu', [CheckSheetTanduController::class, 'report'])->name('home.checksheet.tandu')->middleware('auth');
 Route::get('/dashboard/report/eyewasher', [CheckSheetEyewasherController::class, 'report'])->name('home.checksheet.eyewasher')->middleware('auth');
+Route::get('/dashboard/report/sling', [CheckSheetSlingController::class, 'report'])->name('home.checksheet.sling')->middleware('auth');
+
 
 
 
@@ -457,5 +459,5 @@ Route::post('/export-checksheet-report-eyewasher', [CheckSheetEyewasherControlle
 // Export Checksheet Sling
 Route::post('/export-checksheet-wire', [CheckSheetSlingWireController::class, 'exportExcelWithTemplate'])->name('export.checksheetswire');
 Route::post('/export-checksheet-belt', [CheckSheetSlingBeltController::class, 'exportExcelWithTemplate'])->name('export.checksheetsbelt');
-Route::post('/export-checksheet-report-eyewasher', [CheckSheetEyewasherController::class, 'exportExcelWithTemplate'])->name('export.checksheetsreport.eyewasher');
+Route::post('/export-checksheet-report-sling', [CheckSheetSlingController::class, 'exportExcelWithTemplate'])->name('export.checksheetsreport.sling');
 

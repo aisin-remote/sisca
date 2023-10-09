@@ -133,6 +133,9 @@
                 <li class="{{ Request::is('dashboard/report/eyewasher*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/eyewasher">Eye Washer</a>
                 </li>
+                <li class="{{ Request::is('dashboard/report/sling*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/sling">Sling</a>
+                </li>
             </ul>
         </li>
     </ul>

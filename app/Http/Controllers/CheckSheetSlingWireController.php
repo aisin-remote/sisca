@@ -239,6 +239,30 @@ class CheckSheetSlingWireController extends Controller
 
             $validatedData['sling_number'] = strtoupper($validatedData['sling_number']);
 
+            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
+            $tanggalPengecekan = Carbon::parse($validatedData['tanggal_pengecekan']);
+            $bulan = $tanggalPengecekan->month;
+
+            // Tentukan tanggal awal kuartal berdasarkan bulan
+            if ($bulan >= 2 && $bulan <= 4) {
+                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 2, 1); // Kuartal 1
+            } elseif ($bulan >= 5 && $bulan <= 7) {
+                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 5, 1); // Kuartal 2
+            } elseif ($bulan >= 8 && $bulan <= 10) {
+                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 8, 1); // Kuartal 3
+            } else {
+                // Jika bulan di luar kuartal, maka masuk ke kuartal 4
+                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 11, 1); // Kuartal 4
+
+                // Jika bulan adalah Januari, kurangi tahun sebelumnya
+                if ($bulan === 1) {
+                    $tanggalAwalKuartal->subYear();
+                }
+            }
+
+            // Set tanggal_pengecekan sesuai dengan tanggal awal kuartal
+            $validatedData['tanggal_pengecekan'] = $tanggalAwalKuartal;
+
             if ($request->file('photo_serabut_wire') && $request->file('photo_bagian_wire_1') && $request->file('photo_bagian_wire_2') && $request->file('photo_kumpulan_wire_1') && $request->file('photo_diameter_wire') && $request->file('photo_kumpulan_wire_2') && $request->file('photo_hook_wire') && $request->file('photo_pengunci_hook') && $request->file('photo_mata_sling')) {
                 $validatedData['photo_serabut_wire'] = $request->file('photo_serabut_wire')->store('checksheet-sling-wire');
                 $validatedData['photo_bagian_wire_1'] = $request->file('photo_bagian_wire_1')->store('checksheet-sling-wire');
