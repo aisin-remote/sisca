@@ -385,8 +385,8 @@
             const tambahCatatanButtonPengecekan_permukaan_belt = document.getElementById('tambahCatatan_pengecekan_permukaan_belt');
             const tambahCatatanButtonPengecekan_lapisan_belt_2 = document.getElementById('tambahCatatan_pengecekan_lapisan_belt_2');
             const tambahCatatanButtonPengecekan_aus = document.getElementById('tambahCatatan_pengecekan_aus');
-            const tambahCatatanButtoHook_wire = document.getElementById('tambahCatatan_hook_wire');
-            const tambahCatatanButtonengunci_hook = document.getElementById('tambahCatatan_mata_sling');
+            const tambahCatatanButtonHook_wire = document.getElementById('tambahCatatan_hook_wire');
+            const tambahCatatanButtonPengunci_hook = document.getElementById('tambahCatatan_pengunci_hook');
 
 
 
@@ -397,9 +397,9 @@
             const catatanFieldPengecekan_jahitan_belt = document.getElementById('catatanField_pengecekan_jahitan_belt');
             const catatanFieldPengecekan_permukaan_belt = document.getElementById('catatanField_pengecekan_permukaan_belt');
             const catatanFieldPengecekan_lapisan_belt_2 = document.getElementById('catatanField_pengecekan_lapisan_belt_2');
-            const catatanFieldPengecekan_aus = document.getElementById('catatanField_hook_wire');
-            const catatanFielHook_wire = document.getElementById('catatanField_hook_wire');
-            const catatanFieldengunci_hook = document.getElementById('catatanField_mata_sling');
+            const catatanFieldPengecekan_aus = document.getElementById('catatanField_pengecekan_aus');
+            const catatanFieldHook_wire = document.getElementById('catatanField_hook_wire');
+            const catatanFieldPengunci_hook = document.getElementById('catatanField_pengunci_hook');
 
 
 
@@ -512,33 +512,33 @@
                 }
             });
 
-            tambahCatatanButtoHook_wire.addEventListener('click', function() {
+            tambahCatatanButtonHook_wire.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFielHook_wire.style.display === 'none') {
-                    catatanFielHook_wire.style.display = 'block';
-                    tambahCatatanButtoHook_wire.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtoHook_wire.classList.remove('btn-success');
-                    tambahCatatanButtoHook_wire.classList.add('btn-danger');
+                if (catatanFieldHook_wire.style.display === 'none') {
+                    catatanFieldHook_wire.style.display = 'block';
+                    tambahCatatanButtonHook_wire.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonHook_wire.classList.remove('btn-success');
+                    tambahCatatanButtonHook_wire.classList.add('btn-danger');
                 } else {
-                    catatanFielHook_wire.style.display = 'none';
-                    tambahCatatanButtoHook_wire.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtoHook_wire.classList.remove('btn-danger');
-                    tambahCatatanButtoHook_wire.classList.add('btn-success');
+                    catatanFieldHook_wire.style.display = 'none';
+                    tambahCatatanButtonHook_wire.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonHook_wire.classList.remove('btn-danger');
+                    tambahCatatanButtonHook_wire.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonengunci_hook.addEventListener('click', function() {
+            tambahCatatanButtonPengunci_hook.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldengunci_hook.style.display === 'none') {
-                    catatanFieldengunci_hook.style.display = 'block';
-                    tambahCatatanButtonengunci_hook.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonengunci_hook.classList.remove('btn-success');
-                    tambahCatatanButtonengunci_hook.classList.add('btn-danger');
+                if (catatanFieldPengunci_hook.style.display === 'none') {
+                    catatanFieldPengunci_hook.style.display = 'block';
+                    tambahCatatanButtonPengunci_hook.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonPengunci_hook.classList.remove('btn-success');
+                    tambahCatatanButtonPengunci_hook.classList.add('btn-danger');
                 } else {
-                    catatanFieldengunci_hook.style.display = 'none';
-                    tambahCatatanButtonengunci_hook.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonengunci_hook.classList.remove('btn-danger');
-                    tambahCatatanButtonengunci_hook.classList.add('btn-success');
+                    catatanFieldPengunci_hook.style.display = 'none';
+                    tambahCatatanButtonPengunci_hook.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonPengunci_hook.classList.remove('btn-danger');
+                    tambahCatatanButtonPengunci_hook.classList.add('btn-success');
                 }
             });
         });

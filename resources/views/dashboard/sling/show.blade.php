@@ -88,7 +88,7 @@
             <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
         </form>
     @elseif ($sling->type === 'Sling Belt')
-        <form action="{{ route('export.checksheetsshower') }}" method="POST" class="col-md-6 mb-3">
+        <form action="{{ route('export.checksheetsbelt') }}" method="POST" class="col-md-6 mb-3">
             @method('POST')
             @csrf
             <div class="form-group mb-3">
@@ -218,17 +218,17 @@
                                     <td>{{ $checksheet->pengunci_hook }}</td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href=""
+                                            <a href="{{ route('sling.checksheetbelt.show', $checksheet->id) }}"
                                                 class="badge bg-info me-2">Info</a>
-                                            <a href=""
+                                            <a href="{{ route('sling.checksheetbelt.edit', $checksheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
-                                                action=""
+                                                action="{{ route('sling.checksheetbelt.destroy', $checksheet->id) }}"
                                                 method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="badge bg-danger border-0"
-                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Eyewasher?')">Delete</button>
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Sling?')">Delete</button>
                                             </form>
                                         </div>
                                     </td>

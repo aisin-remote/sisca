@@ -179,11 +179,11 @@
                 </div>
             </div>
         </div>
-    @elseif ($checksheet->slings->type === 'Eyewasher')
+    @elseif ($checksheet->slings->type === 'Sling Belt')
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-            <h1>Detail Check Sheet Eyewasher</h1>
-            <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            <h1>Detail Check Sheet Sling</h1>
+            <a href="{{ route('sling.checksheetbelt.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -202,89 +202,153 @@
                             <td>{{ $checksheet->npk }}</td>
                         </tr>
                         <tr>
-                            <th>Eyewasher Number</th>
-                            <td>{{ $checksheet->eyewasher_number }}</td>
+                            <th>Sling Number</th>
+                            <td>{{ $checksheet->sling_number }}</td>
                         </tr>
                         <tr>
-                            <th>Location Eyewasher</th>
-                            <td>{{ $checksheet->eyewashers->locations->location_name }}</td>
+                            <th>Location Sling</th>
+                            <td>{{ $checksheet->slings->locations->location_name }}</td>
                         </tr>
                         <tr>
                             <th>Plant</th>
-                            <td>{{ $checksheet->eyewashers->plant }}</td>
+                            <td>{{ $checksheet->slings->plant }}</td>
                         </tr>
                         <tr>
-                            <th>Pijakan</th>
-                            <td>{{ $checksheet->pijakan }}</td>
+                            <th>Kelengkapan TagSling Belt</th>
+                            <td>{{ $checksheet->kelengkapan_tag_sling_belt }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Pijakan</th>
-                            <td>{{ $checksheet->catatan_pijakan }}</td>
+                            <th>Catatan Kelengkapan TagSling Belt</th>
+                            <td>{{ $checksheet->catatan_kelengkapan_tag_sling_belt }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Pijakan</th>
+                            <th>Photo Kelengkapan TagSling Belt</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pijakan) }}" alt="Photo Pijakan"
+                                <img src="{{ asset('storage/' . $checksheet->photo_kelengkapan_tag_sling_belt) }}" alt="Photo Kelengkapan Tag Sling Belt"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Pipa Saluran Air</th>
-                            <td>{{ $checksheet->pipa_saluran_air }}</td>
+                            <th>Bagian Pinggir Belt Robek</th>
+                            <td>{{ $checksheet->bagian_pinggir_belt_robek }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Pipa Saluran Air</th>
-                            <td>{{ $checksheet->catatan_pipa_saluran_air }}</td>
+                            <th>Catatan Bagian Pinggir Belt Robek</th>
+                            <td>{{ $checksheet->catatan_bagian_pinggir_belt_robek }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Pipa Saluran Air</th>
+                            <th>Photo Bagian Pinggir Belt Robek</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pipa_saluran_air) }}" alt="Photo Pipa Saluran Air"
+                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_pinggir_belt_robek) }}" alt="Photo Bagian Pinggir Belt Robek"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Wastafel</th>
-                            <td>{{ $checksheet->wastafel }}</td>
+                            <th>Pengecekan Lapisan Belt 1</th>
+                            <td>{{ $checksheet->pengecekan_lapisan_belt_1 }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Wastafel</th>
-                            <td>{{ $checksheet->catatan_wastafel }}</td>
+                            <th>Catatan Pengecekan Lapisan Belt 1</th>
+                            <td>{{ $checksheet->catatan_pengecekan_lapisan_belt_1 }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Wastafel</th>
+                            <th>Photo Pengecekan Lapisan Belt 1</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_wastafel) }}" alt="Photo Wastafel"
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_1) }}" alt="Photo Pengecekan Lapisan Belt 1"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Kran Air</th>
-                            <td>{{ $checksheet->kran_air }}</td>
+                            <th>Pengecekan Jahitan Belt</th>
+                            <td>{{ $checksheet->pengecekan_jahitan_belt }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Kran Air</th>
-                            <td>{{ $checksheet->catatan_kran_air }}</td>
+                            <th>Catatan Pengecekan Jahitan Belt</th>
+                            <td>{{ $checksheet->catatan_pengecekan_jahitan_belt }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Kran Air</th>
+                            <th>Photo Pengecekan Jahitan Belt</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_kran_air) }}" alt="Photo Kran Air"
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_jahitan_belt) }}" alt="Photo Pengecekan Jahitan Belt"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
-                            <th>Tuas</th>
-                            <td>{{ $checksheet->tuas }}</td>
+                            <th>Pengecekan Permukaan Belt</th>
+                            <td>{{ $checksheet->pengecekan_permukaan_belt }}</td>
                         </tr>
                         <tr>
-                            <th>Catatan Tuas</th>
-                            <td>{{ $checksheet->catatan_tuas }}</td>
+                            <th>Catatan Pengecekan Permukaan Belt</th>
+                            <td>{{ $checksheet->catatan_pengecekan_permukaan_belt }}</td>
                         </tr>
                         <tr>
-                            <th>Photo Tuas</th>
+                            <th>Photo Pengecekan Permukaan Belt</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_tuas) }}" alt="Photo Tuas"
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_permukaan_belt) }}" alt="Photo Pengecekan Permukaan Belt"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Pengecekan Lapisan Belt 2</th>
+                            <td>{{ $checksheet->pengecekan_lapisan_belt_2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Catatan Pengecekan Lapisan Belt 2</th>
+                            <td>{{ $checksheet->catatan_pengecekan_lapisan_belt_2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo Pengecekan Lapisan Belt 2</th>
+                            <td>
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_2) }}" alt="Photo Pengecekan Lapisan Belt 2"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Pengecekan Aus</th>
+                            <td>{{ $checksheet->pengecekan_aus }}</td>
+                        </tr>
+                        <tr>
+                            <th>Catatan Pengecekan Aus</th>
+                            <td>{{ $checksheet->catatan_pengecekan_aus }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo Pengecekan Aus</th>
+                            <td>
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_aus) }}" alt="Photo Pengecekan Aus"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Hook Wire</th>
+                            <td>{{ $checksheet->hook_wire }}</td>
+                        </tr>
+                        <tr>
+                            <th>Catatan Hook Wire</th>
+                            <td>{{ $checksheet->catatan_hook_wire }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo Hook Wire</th>
+                            <td>
+                                <img src="{{ asset('storage/' . $checksheet->photo_hook_wire) }}" alt="Photo Hook Wire"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Pengunci Hook</th>
+                            <td>{{ $checksheet->pengunci_hook }}</td>
+                        </tr>
+                        <tr>
+                            <th>Catatan Pengunci Hook</th>
+                            <td>{{ $checksheet->catatan_pengunci_hook }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo Pengunci Hook</th>
+                            <td>
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengunci_hook) }}" alt="Photo Pengunci Hook"
                                     style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
