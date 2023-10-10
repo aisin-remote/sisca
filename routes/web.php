@@ -186,7 +186,7 @@ Route::post('/dashboard/eyewasher/process-checksheet', [CheckSheetEyewasherContr
 Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
 
 Route::post('/dashboard/sling/process-checksheet', [CheckSheetSlingController::class, 'processForm'])->name('sling.process.form');
-Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
+Route::get('/dashboard/sling/checksheet/all-check-sheet', [CheckSheetSlingController::class, 'index'])->name('sling.checksheet.index');
 
 
 

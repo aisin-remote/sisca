@@ -97,6 +97,19 @@
                 </div>
             </div>
 
+
+            <!-- Grafik Sling -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Sling</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="slingChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -315,6 +328,45 @@
                 }, {
                     label: 'NG',
                     data: {!! json_encode($data_Eyewasher['notOkData_Eyewasher']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
+
+
+
+        // Grafik Sling
+
+
+        var ctxSling = document.getElementById('slingChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var slingChart = new Chart(ctxSling, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Sling['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_Sling['okData_Sling']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_Sling['notOkData_Sling']) !!},
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderColor: 'rgba(139, 0, 0, 1)',
                     borderWidth: 1

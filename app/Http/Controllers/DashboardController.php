@@ -12,6 +12,8 @@ use App\Models\CheckSheetHydrantIndoor;
 use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetNitrogenServer;
 use App\Models\CheckSheetPowder;
+use App\Models\CheckSheetSlingBelt;
+use App\Models\CheckSheetSlingWire;
 use App\Models\CheckSheetTabungCo2;
 use App\Models\CheckSheetTandu;
 
@@ -386,8 +388,89 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Sling
+
+
+        $notOkData_Sling = [];
+        $okData_Sling = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkCountWire = CheckSheetSlingWire::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('serabut_wire', 'NG')
+                        ->orWhere('bagian_wire_1', 'NG')
+                        ->orWhere('bagian_wire_2', 'NG')
+                        ->orWhere('kumpulan_wire_1', 'NG')
+                        ->orWhere('diameter_wire', 'NG')
+                        ->orWhere('kumpulan_wire_2', 'NG')
+                        ->orWhere('hook_wire', 'NG')
+                        ->orWhere('pengunci_hook', 'NG')
+                        ->orWhere('mata_sling', 'NG');
+                })
+                ->count();
+
+            $notOkCountBelt = CheckSheetSlingBelt::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('kelengkapan_tag_sling_belt', 'NG')
+                        ->orWhere('bagian_pinggir_belt_robek', 'NG')
+                        ->orWhere('pengecekan_lapisan_belt_1', 'NG')
+                        ->orWhere('pengecekan_jahitan_belt', 'NG')
+                        ->orWhere('pengecekan_permukaan_belt', 'NG')
+                        ->orWhere('pengecekan_lapisan_belt_2', 'NG')
+                        ->orWhere('pengecekan_aus', 'NG')
+                        ->orWhere('hook_wire', 'NG')
+                        ->orWhere('pengunci_hook', 'NG');
+                })
+                ->count();
+            $notOkData_Sling[] = $notOkCountWire + $notOkCountBelt;
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okCountWire = CheckSheetSlingWire::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('serabut_wire', 'OK')
+                        ->where('bagian_wire_1', 'OK')
+                        ->where('bagian_wire_2', 'OK')
+                        ->where('kumpulan_wire_1', 'OK')
+                        ->where('diameter_wire', 'OK')
+                        ->where('kumpulan_wire_2', 'OK')
+                        ->where('hook_wire', 'OK')
+                        ->where('pengunci_hook', 'OK')
+                        ->where('mata_sling', 'OK');
+                })
+                ->count();
+
+            $okCountBelt = CheckSheetSlingBelt::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('kelengkapan_tag_sling_belt', 'OK')
+                        ->where('bagian_pinggir_belt_robek', 'OK')
+                        ->where('pengecekan_lapisan_belt_1', 'OK')
+                        ->where('pengecekan_jahitan_belt', 'OK')
+                        ->where('pengecekan_permukaan_belt', 'OK')
+                        ->where('pengecekan_lapisan_belt_2', 'OK')
+                        ->where('pengecekan_aus', 'OK')
+                        ->where('hook_wire', 'OK')
+                        ->where('pengunci_hook', 'OK');
+                })
+                ->count();
+
+            $okData_Sling[] = $okCountWire + $okCountBelt;
+        }
+
+        $data_Sling = [
+            'labels' => $labels,
+            'okData_Sling' => $okData_Sling,
+            'notOkData_Sling' => $notOkData_Sling,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'availableYears'));
     }
 }

@@ -14,7 +14,7 @@
                     <table class="table table-striped table-sm">
                         <tr>
                             <th width='40%'>Tanggal Pengecekan</th>
-                            <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                            <td>{{ strftime('%e %B %Y', strtotime($checksheet->created_at)) }}</td>
                         </tr>
                         <tr>
                             <th>Terakhir Diupdate</th>
@@ -27,6 +27,14 @@
                         <tr>
                             <th>Sling Number</th>
                             <td>{{ $checksheet->sling_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ $checksheet->slings->type }}</td>
+                        </tr>
+                        <tr>
+                            <th>SWL</th>
+                            <td>{{ $checksheet->slings->swl }} Ton</td>
                         </tr>
                         <tr>
                             <th>Location Sling</th>
@@ -191,7 +199,7 @@
                     <table class="table table-striped table-sm">
                         <tr>
                             <th width='40%'>Tanggal Pengecekan</th>
-                            <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                            <td>{{ strftime('%e %B %Y', strtotime($checksheet->created_at)) }}</td>
                         </tr>
                         <tr>
                             <th>Terakhir Diupdate</th>
@@ -204,6 +212,14 @@
                         <tr>
                             <th>Sling Number</th>
                             <td>{{ $checksheet->sling_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ $checksheet->slings->type }}</td>
+                        </tr>
+                        <tr>
+                            <th>SWL</th>
+                            <td>{{ $checksheet->slings->swl }} Ton</td>
                         </tr>
                         <tr>
                             <th>Location Sling</th>

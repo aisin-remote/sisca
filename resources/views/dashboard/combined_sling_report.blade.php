@@ -67,6 +67,7 @@
                                 <th rowspan="2">#</th>
                                 <th rowspan="2">No Sling</th>
                                 <th rowspan="2">Type</th>
+                                <th rowspan="2">SWL</th>
                                 <th rowspan="2">Location</th>
                                 <th rowspan="2">Plant</th>
                                 <th colspan="12">Month</th>
@@ -83,6 +84,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $sling['sling_number'] }}</td>
                                     <td>{{ $sling['type'] }}</td>
+                                    <td>{{ $sling['swl'] }} Ton</td>
                                     <td>{{ $sling['location_name'] }}</td>
                                     <td>{{ $sling['plant'] }}</td>
                                     @for ($month = 1; $month <= 12; $month++)

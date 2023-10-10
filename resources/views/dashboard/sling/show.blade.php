@@ -140,7 +140,7 @@
                                 <tr class="align-middle">
                                     <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                     <td class="text-center align-middle">
-                                        {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                                        {{ strftime('%e %B %Y', strtotime($checksheet->created_at)) }}</td>
                                     <td class="text-center align-middle">{{ $checksheet->sling_number }}</td>
                                     <td class="text-center align-middle">{{ $checksheet->serabut_wire }}</td>
                                     <td class="text-center align-middle">{{ $checksheet->bagian_wire_1 }}</td>
@@ -205,7 +205,7 @@
                             @forelse ($checksheets as $checksheet)
                                 <tr class="align-middle text-center">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                                    <td>{{ strftime('%e %B %Y', strtotime($checksheet->created_at)) }}</td>
                                     <td>{{ $checksheet->sling_number }}</td>
                                     <td>{{ $checksheet->kelengkapan_tag_sling_belt }}</td>
                                     <td>{{ $checksheet->bagian_pinggir_belt_robek }}</td>

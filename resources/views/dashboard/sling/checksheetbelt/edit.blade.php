@@ -37,7 +37,7 @@
                     <div class="mb-3">
                         <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
                         <input type="date" class="form-control" id="tanggal_pengecekan"
-                            value="{{ $checkSheetbelt->tanggal_pengecekan }}" name="tanggal_pengecekan" required
+                            value="{{ $checkSheetbelt->created_at }}" name="tanggal_pengecekan" required
                             readonly>
                     </div>
                     <div class="mb-3">
