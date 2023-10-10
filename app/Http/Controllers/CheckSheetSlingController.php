@@ -125,20 +125,20 @@ class CheckSheetSlingController extends Controller
                     if ($sling['pengecekan_jahitan_belt'] === 'NG') $issueCodes[] = 'f';
                     if ($sling['pengecekan_permukaan_belt'] === 'NG') $issueCodes[] = 'g';
                     if ($sling['pengecekan_lapisan_belt_2'] === 'NG') $issueCodes[] = 'h';
-                    if ($sling['pengecekan_aus'] === 'NG') $issueCodes[] = 'h';
+                    if ($sling['pengecekan_aus'] === 'NG') $issueCodes[] = 'i';
                 }
 
                 // Map issue codes for Indoor type
                 if ($sling['type'] === 'Sling Wire') {
                     if ($sling['hook_wire'] === 'NG') $issueCodes[] = 'a';
                     if ($sling['pengunci_hook'] === 'NG') $issueCodes[] = 'b';
-                    if ($sling['serabut_wire'] === 'NG') $issueCodes[] = 'i';
-                    if ($sling['bagian_wire_1'] === 'NG') $issueCodes[] = 'j';
-                    if ($sling['bagian_wire_2'] === 'NG') $issueCodes[] = 'k';
-                    if ($sling['kumpulan_wire_1'] === 'NG') $issueCodes[] = 'l';
-                    if ($sling['diameter_wire'] === 'NG') $issueCodes[] = 'm';
-                    if ($sling['kumpulan_wire_2'] === 'NG') $issueCodes[] = 'n';
-                    if ($sling['mata_sling'] === 'NG') $issueCodes[] = 'o';
+                    if ($sling['serabut_wire'] === 'NG') $issueCodes[] = 'j';
+                    if ($sling['bagian_wire_1'] === 'NG') $issueCodes[] = 'k';
+                    if ($sling['bagian_wire_2'] === 'NG') $issueCodes[] = 'l';
+                    if ($sling['kumpulan_wire_1'] === 'NG') $issueCodes[] = 'm';
+                    if ($sling['diameter_wire'] === 'NG') $issueCodes[] = 'n';
+                    if ($sling['kumpulan_wire_2'] === 'NG') $issueCodes[] = 'o';
+                    if ($sling['mata_sling'] === 'NG') $issueCodes[] = 'p';
                 }
 
                 if (empty($issueCodes)) {

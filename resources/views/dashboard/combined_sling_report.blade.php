@@ -118,28 +118,48 @@
             <table class="table table-sm table-borderless">
                 <tbody>
                     <tr>
-                        <td scope="col">1. Pipa Saluran Air</td>
+                        <td scope="col">1. Hook Wire</td>
                         <td scope="col">= a</td>
-                        <td scope="col">4. Tuas Eye Wash</td>
-                        <td scope="col">= d</td>
-                        <td scope="col">7. Tuas Shower</td>
+                        <td scope="col">7. Pengecekan Permukaan Belt</td>
                         <td scope="col">= g</td>
+                        <td scope="col">13. Kumpulan Wire 1</td>
+                        <td scope="col">= m</td>
                     </tr>
                     <tr>
-                        <td scope="col">2. Wastafel Eye Wash</td>
+                        <td scope="col">2. Pengunci Hook</td>
                         <td scope="col">= b</td>
-                        <td scope="col">5. Pijakan</td>
-                        <td scope="col">= e</td>
-                        <td scope="col">8. Sign</td>
+                        <td scope="col">8. Pengecekan Lapisan Belt 2</td>
                         <td scope="col">= h</td>
+                        <td scope="col">14. Diameter Wire</td>
+                        <td scope="col">= n</td>
                     </tr>
                     <tr>
-                        <td scope="col">3. Kran Eye Wash</td>
+                        <td scope="col">3. Kelengkapan Tag Sling Belt</td>
                         <td scope="col">= c</td>
-                        <td scope="col">6. Instalation Base</td>
-                        <td scope="col">= f</td>
-                        <td scope="col">9. Shower Head</td>
+                        <td scope="col">9. Pengecekan Aus</td>
                         <td scope="col">= i</td>
+                        <td scope="col">15. Kumpulan Wire 2</td>
+                        <td scope="col">= o</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">4. Bagian Pinggir Belt Robek</td>
+                        <td scope="col">= d</td>
+                        <td scope="col">10. Serabut Wire</td>
+                        <td scope="col">= j</td>
+                        <td scope="col">16. Mata Sling</td>
+                        <td scope="col">= p</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">5. Pengecekan Lapisan Belt 1</td>
+                        <td scope="col">= e</td>
+                        <td scope="col">11. Bagian Wire 1</td>
+                        <td scope="col">= k</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">6. Pengecekan Jahitan Belt</td>
+                        <td scope="col">= f</td>
+                        <td scope="col">12. Bagian Wire 2</td>
+                        <td scope="col">= l</td>
                     </tr>
                 </tbody>
             </table>

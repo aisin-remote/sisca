@@ -8,9 +8,9 @@
     </div>
     <ul class="list-unstyled components">
         <li class="{{ Request::is('dashboard') ? 'active show' : '' }} menu">
-            <a class="nav_link" href="/dashboard" style="margin-left: 9px;">
+            <a class="nav_link" href="/dashboard">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
-                    <i class="bi bi-bar-chart-line-fill"></i>
+                    <i class="bi bi-bar-chart-line-fill"  style="margin-left: 9px;"></i>
                     Dashboard
                     <i class="fas fa-chevron-down" style="opacity: 0;"></i>
                 </span>
