@@ -151,6 +151,7 @@ use App\Http\Controllers\CheckSheetSlingController;
 use App\Http\Controllers\CheckSheetSlingWireController;
 use App\Http\Controllers\CheckSheetTabungCo2Controller;
 use App\Http\Controllers\CheckSheetTanduController;
+use App\Http\Controllers\CheckSheetTembinController;
 use App\Models\CheckSheetEyewasherShower;
 
 // checksheet
@@ -161,6 +162,7 @@ Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 
 Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form');
 Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
 Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form');
+Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form');
 
 
 
@@ -188,7 +190,8 @@ Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewash
 Route::post('/dashboard/sling/process-checksheet', [CheckSheetSlingController::class, 'processForm'])->name('sling.process.form');
 Route::get('/dashboard/sling/checksheet/all-check-sheet', [CheckSheetSlingController::class, 'index'])->name('sling.checksheet.index');
 
-
+Route::post('/dashboard/tembin/process-checksheet', [CheckSheetTembinController::class, 'processForm'])->name('tembin.process.form');
+Route::get('/dashboard/tembin/checksheet/all-check-sheet', [CheckSheetTembinController::class, 'index'])->name('tembin.checksheet.index');
 
 
 
@@ -206,6 +209,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+
+});
+
+
+
+//Checksheet Tembin
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/tembin/checksheettembin/{tembinNumber}', [CheckSheetTembinController::class, 'createForm'])->name('checksheettembin');
+    Route::post('/dashboard/tembin/process-checksheet-tembin/{tembinNumber}', [CheckSheetTembinController::class, 'store'])->name('process.checksheet.tembin');
+    Route::delete('/dashboard/check-sheet/tembin/{id}', [CheckSheetTembinController::class, 'destroy'])->name('tembin.checksheettembin.destroy');
+    Route::get('/dashboard/check-sheet/tembin/{id}/edit', [CheckSheetTembinController::class, 'edit'])->name('tembin.checksheettembin.edit');
+    Route::put('/dashboard/check-sheet/tembin/{id}', [CheckSheetTembinController::class, 'update'])->name('tembin.checksheettembin.update');
+    Route::get('/dashboard/check-sheet/tembin/{id}/show', [CheckSheetTembinController::class, 'show'])->name('tembin.checksheettembin.show');
 
 });
 

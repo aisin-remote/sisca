@@ -105,6 +105,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/sling*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/sling">Sling</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/tembin*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/tembin">Tembin</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">
