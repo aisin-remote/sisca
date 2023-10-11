@@ -248,63 +248,63 @@ class CheckSheetTanduController extends Controller
             if ($request->oldImage_kunci_pintu) {
                 Storage::delete($request->oldImage_kunci_pintu);
             }
-            $validatedData['photo_kunci_pintu'] = $request->file('photo_kunci_pintu')->store('checksheet-tabung-co2');
+            $validatedData['photo_kunci_pintu'] = $request->file('photo_kunci_pintu')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_pintu')) {
             if ($request->oldImage_pintu) {
                 Storage::delete($request->oldImage_pintu);
             }
-            $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-tabung-co2');
+            $validatedData['photo_pintu'] = $request->file('photo_pintu')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_sign')) {
             if ($request->oldImage_sign) {
                 Storage::delete($request->oldImage_sign);
             }
-            $validatedData['photo_sign'] = $request->file('photo_sign')->store('checksheet-tabung-co2');
+            $validatedData['photo_sign'] = $request->file('photo_sign')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_hand_grip')) {
             if ($request->oldImage_hand_grip) {
                 Storage::delete($request->oldImage_hand_grip);
             }
-            $validatedData['photo_hand_grip'] = $request->file('photo_hand_grip')->store('checksheet-tabung-co2');
+            $validatedData['photo_hand_grip'] = $request->file('photo_hand_grip')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_body')) {
             if ($request->oldImage_body) {
                 Storage::delete($request->oldImage_body);
             }
-            $validatedData['photo_body'] = $request->file('photo_body')->store('checksheet-tabung-co2');
+            $validatedData['photo_body'] = $request->file('photo_body')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_engsel')) {
             if ($request->oldImage_engsel) {
                 Storage::delete($request->oldImage_engsel);
             }
-            $validatedData['photo_engsel'] = $request->file('photo_engsel')->store('checksheet-tabung-co2');
+            $validatedData['photo_engsel'] = $request->file('photo_engsel')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_kaki')) {
             if ($request->oldImage_kaki) {
                 Storage::delete($request->oldImage_kaki);
             }
-            $validatedData['photo_kaki'] = $request->file('photo_kaki')->store('checksheet-tabung-co2');
+            $validatedData['photo_kaki'] = $request->file('photo_kaki')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_belt')) {
             if ($request->oldImage_belt) {
                 Storage::delete($request->oldImage_belt);
             }
-            $validatedData['photo_belt'] = $request->file('photo_belt')->store('checksheet-tabung-co2');
+            $validatedData['photo_belt'] = $request->file('photo_belt')->store('checksheet-tandu');
         }
 
         if ($request->file('photo_rangka')) {
             if ($request->oldImage_rangka) {
                 Storage::delete($request->oldImage_rangka);
             }
-            $validatedData['photo_rangka'] = $request->file('photo_rangka')->store('checksheet-tabung-co2');
+            $validatedData['photo_rangka'] = $request->file('photo_rangka')->store('checksheet-tandu');
         }
 
 

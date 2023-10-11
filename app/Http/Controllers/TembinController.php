@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckSheetTandu;
+use App\Models\CheckSheetTembin;
 use App\Models\Tembin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TembinController extends Controller
 {
@@ -57,7 +60,24 @@ class TembinController extends Controller
      */
     public function show($id)
     {
-        //
+        $tembin = Tembin::findOrFail($id);
+
+        if (!$tembin) {
+            return back()->with('error', 'Tembin tidak ditemukan.');
+        }
+
+        $checksheets = CheckSheetTembin::where('tembin_number', $tembin->no_equip);
+        $firstYear = CheckSheetTembin::min(DB::raw('YEAR(tanggal_pengecekan)'));
+        $lastYear = CheckSheetTembin::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+        if (request()->has('tahun_filter')) {
+            $tahunFilter = request()->input('tahun_filter');
+            $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+        }
+
+        $checksheets = $checksheets->get();
+
+        return view('dashboard.tembin.show', compact('tembin', 'checksheets', 'firstYear', 'lastYear'));
     }
 
     /**

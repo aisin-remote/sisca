@@ -213,6 +213,29 @@
 
 
                 <div class="mb-3">
+                    <label for="chain" class="form-label">Chain</label>
+                    <div class="input-group">
+                        <select class="form-select" id="chain" name="chain" required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="OK" {{ old('chain') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('chain') == 'NG' ? 'selected' : '' }}>NG</option>
+                        </select>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_chain"><i class="bi bi-bookmark-plus"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3" id="catatanField_chain" style="display:none;">
+                    <label for="catatan_chain" class="form-label">Catatan Chain</label>
+                    <textarea class="form-control" name="catatan_chain" id="catatan_chain" cols="30" rows="5">{{ old('catatan_chain') }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="photo_chain" class="form-label">Foto Chain</label>
+                    <img class="photo-chain-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_chain" name="photo_chain" required
+                        onchange="previewImage('photo_chain', 'photo-chain-preview')">
+                </div>
+
+
+                <div class="mb-3">
                     <label for="hook_bawah" class="form-label">Hook Bawah</label>
                     <div class="input-group">
                         <select class="form-select" id="hook_bawah" name="hook_bawah" required>
@@ -283,6 +306,7 @@
             const tambahCatatanButtonHook_atas = document.getElementById('tambahCatatan_hook_atas');
             const tambahCatatanButtonPengunci_hook_atas = document.getElementById('tambahCatatan_pengunci_hook_atas');
             const tambahCatatanButtonMata_chain = document.getElementById('tambahCatatan_mata_chain');
+            const tambahCatatanButtonChain = document.getElementById('tambahCatatan_chain');
             const tambahCatatanButtonHook_bawah = document.getElementById('tambahCatatan_hook_bawah');
             const tambahCatatanButtonPengunci_hook_bawah = document.getElementById('tambahCatatan_pengunci_hook_bawah');
 
@@ -295,6 +319,7 @@
             const catatanFieldHook_atas = document.getElementById('catatanField_hook_atas');
             const catatanFieldPengunci_hook_atas = document.getElementById('catatanField_pengunci_hook_atas');
             const catatanFieldMata_chain = document.getElementById('catatanField_mata_chain');
+            const catatanFieldChain = document.getElementById('catatanField_chain');
             const catatanFieldHook_bawah = document.getElementById('catatanField_hook_bawah');
             const catatanFieldPengunci_hook_bawah = document.getElementById('catatanField_pengunci_hook_bawah');
 
@@ -404,6 +429,21 @@
                     tambahCatatanButtonMata_chain.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
                     tambahCatatanButtonMata_chain.classList.remove('btn-danger');
                     tambahCatatanButtonMata_chain.classList.add('btn-success');
+                }
+            });
+
+            tambahCatatanButtonChain.addEventListener('click', function() {
+                // Toggle tampilan field catatan ketika tombol diklik
+                if (catatanFieldChain.style.display === 'none') {
+                    catatanFieldChain.style.display = 'block';
+                    tambahCatatanButtonChain.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonChain.classList.remove('btn-success');
+                    tambahCatatanButtonChain.classList.add('btn-danger');
+                } else {
+                    catatanFieldChain.style.display = 'none';
+                    tambahCatatanButtonChain.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonChain.classList.remove('btn-danger');
+                    tambahCatatanButtonChain.classList.add('btn-success');
                 }
             });
 

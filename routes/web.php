@@ -478,3 +478,5 @@ Route::post('/export-checksheet-wire', [CheckSheetSlingWireController::class, 'e
 Route::post('/export-checksheet-belt', [CheckSheetSlingBeltController::class, 'exportExcelWithTemplate'])->name('export.checksheetsbelt');
 Route::post('/export-checksheet-report-sling', [CheckSheetSlingController::class, 'exportExcelWithTemplate'])->name('export.checksheetsreport.sling');
 
+// Export CheckSheet Tembin
+Route::post('/export-checksheet-tembin', [CheckSheetTembinController::class, 'exportExcelWithTemplate'])->name('export.checksheetstembin');

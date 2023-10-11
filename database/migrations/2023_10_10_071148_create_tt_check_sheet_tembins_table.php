@@ -39,6 +39,9 @@ return new class extends Migration
             $table->string('mata_chain');
             $table->text('catatan_mata_chain')->nullable();
             $table->string('photo_mata_chain');
+            $table->string('chain');
+            $table->text('catatan_chain')->nullable();
+            $table->string('photo_chain');
             $table->string('hook_bawah');
             $table->text('catatan_hook_bawah')->nullable();
             $table->string('photo_hook_bawah');
