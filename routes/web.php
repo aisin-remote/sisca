@@ -379,6 +379,8 @@ Route::get('/dashboard/report/co2', [CheckSheetTabungCo2Controller::class, 'repo
 Route::get('/dashboard/report/tandu', [CheckSheetTanduController::class, 'report'])->name('home.checksheet.tandu')->middleware('auth');
 Route::get('/dashboard/report/eyewasher', [CheckSheetEyewasherController::class, 'report'])->name('home.checksheet.eyewasher')->middleware('auth');
 Route::get('/dashboard/report/sling', [CheckSheetSlingController::class, 'report'])->name('home.checksheet.sling')->middleware('auth');
+Route::get('/dashboard/report/tembin', [CheckSheetTembinController::class, 'report'])->name('home.checksheet.tembin')->middleware('auth');
+
 
 
 

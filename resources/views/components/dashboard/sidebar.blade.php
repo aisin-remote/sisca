@@ -139,6 +139,9 @@
                 <li class="{{ Request::is('dashboard/report/sling*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/sling">Sling</a>
                 </li>
+                <li class="{{ Request::is('dashboard/report/tembin*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/tembin">Tembin</a>
+                </li>
             </ul>
         </li>
     </ul>

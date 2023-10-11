@@ -110,6 +110,19 @@
                 </div>
             </div>
 
+
+            <!-- Grafik Tembin -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Tembin</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="tembinChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -367,6 +380,45 @@
                 }, {
                     label: 'NG',
                     data: {!! json_encode($data_Sling['notOkData_Sling']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
+
+
+
+        // Grafik Tembin
+
+
+        var ctxTembin = document.getElementById('tembinChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var tembinChart = new Chart(ctxTembin, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Tembin['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_Tembin['okData_Tembin']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_Tembin['notOkData_Tembin']) !!},
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderColor: 'rgba(139, 0, 0, 1)',
                     borderWidth: 1

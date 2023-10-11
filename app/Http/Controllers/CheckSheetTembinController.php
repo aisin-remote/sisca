@@ -488,4 +488,74 @@ class CheckSheetTembinController extends Controller
 
         return response()->download($outputPath)->deleteFileAfterSend(true);
     }
+
+    public function report(Request $request)
+    {
+        $selectedYear = $request->input('selected_year', date('Y'));
+
+        $tembinData = Tembin::leftJoin('tt_check_sheet_tembins', 'tm_tembins.no_equip', '=', 'tt_check_sheet_tembins.tembin_number')
+            ->select(
+                'tm_tembins.no_equip as tembin_number',
+                'tt_check_sheet_tembins.tanggal_pengecekan',
+                'tt_check_sheet_tembins.master_link',
+                'tt_check_sheet_tembins.body_tembin',
+                'tt_check_sheet_tembins.mur_baut',
+                'tt_check_sheet_tembins.shackle',
+                'tt_check_sheet_tembins.hook_atas',
+                'tt_check_sheet_tembins.pengunci_hook_atas',
+                'tt_check_sheet_tembins.mata_chain',
+                'tt_check_sheet_tembins.chain',
+                'tt_check_sheet_tembins.hook_bawah',
+                'tt_check_sheet_tembins.pengunci_hook_bawah',
+            )
+            ->get();
+
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredTembinData = $tembinData->filter(function ($tembin) use ($selectedYear) {
+            return $tembin->tanggal_pengecekan !== null &&
+                date('Y', strtotime($tembin->tanggal_pengecekan)) == $selectedYear;
+        });
+
+        $mappedTembinData = $filteredTembinData->groupBy('tembin_number')->map(function ($tembinGroup) {
+            $tembinNumber = $tembinGroup[0]['tembin_number'];
+            $tembinPengecekan = $tembinGroup[0]['tanggal_pengecekan'];
+            $months = [];
+
+            foreach ($tembinGroup as $tembin) {
+                $month = date('n', strtotime($tembin['tanggal_pengecekan']));
+                $issueCodes = [];
+
+                // Map issue codes for powder type
+                if ($tembin['master_link'] === 'NG') $issueCodes[] = 'a';
+                if ($tembin['body_tembin'] === 'NG') $issueCodes[] = 'b';
+                if ($tembin['mur_baut'] === 'NG') $issueCodes[] = 'c';
+                if ($tembin['shackle'] === 'NG') $issueCodes[] = 'd';
+                if ($tembin['hook_atas'] === 'NG') $issueCodes[] = 'e';
+                if ($tembin['pengunci_hook_atas'] === 'NG') $issueCodes[] = 'f';
+                if ($tembin['mata_chain'] === 'NG') $issueCodes[] = 'g';
+                if ($tembin['chain'] === 'NG') $issueCodes[] = 'h';
+                if ($tembin['hook_bawah'] === 'NG') $issueCodes[] = 'i';
+                if ($tembin['pengunci_hook_bawah'] === 'NG') $issueCodes[] = 'j';
+
+                $months[$month] = $issueCodes;
+            }
+
+            return [
+                'tembin_number' => $tembinNumber,
+                'tanggal_pengecekan' => $tembinPengecekan,
+                'months' => $months,
+            ];
+        });
+
+        // Convert to JSON
+        $jsonString = json_encode($mappedTembinData, JSON_PRETTY_PRINT);
+
+        // Save JSON to a file
+        Storage::disk('local')->put('tembin_data.json', $jsonString);
+
+        return view('dashboard.tembin_report', [
+            'tembinData' => $mappedTembinData,
+            'selectedYear' => $selectedYear,
+        ]);
+    }
 }

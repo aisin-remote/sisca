@@ -86,6 +86,7 @@
                             <th class="text-center align-middle">Hook Atas</th>
                             <th class="text-center align-middle">Pengunci Hook Atas</th>
                             <th class="text-center align-middle">Mata Chain</th>
+                            <th class="text-center align-middle">Chain</th>
                             <th class="text-center align-middle">Hook Bawah</th>
                             <th class="text-center align-middle">Pengunci Hook Bawah</th>
 

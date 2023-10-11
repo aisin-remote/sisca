@@ -35,6 +35,7 @@
                             <th scope="col">Hook Atas</th>
                             <th scope="col">Pengunci Hook Atas</th>
                             <th scope="col">Mata Chain</th>
+                            <th scope="col">Chain</th>
                             <th scope="col">Hook Bawah</th>
                             <th scope="col">Pengunci Hook Bawah</th>
                             <th scope="col">Aksi</th>

@@ -16,6 +16,7 @@ use App\Models\CheckSheetSlingBelt;
 use App\Models\CheckSheetSlingWire;
 use App\Models\CheckSheetTabungCo2;
 use App\Models\CheckSheetTandu;
+use App\Models\CheckSheetTembin;
 
 class DashboardController extends Controller
 {
@@ -469,8 +470,59 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Tembin
+
+
+        $notOkData_Tembin = [];
+        $okData_Tembin = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Tembin[] = CheckSheetTembin::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('master_link', 'NG')
+                        ->orWhere('body_tembin', 'NG')
+                        ->orWhere('mur_baut', 'NG')
+                        ->orWhere('shackle', 'NG')
+                        ->orWhere('hook_atas', 'NG')
+                        ->orWhere('pengunci_hook_atas', 'NG')
+                        ->orWhere('mata_chain', 'NG')
+                        ->orWhere('chain', 'NG')
+                        ->orWhere('hook_bawah', 'NG')
+                        ->orWhere('pengunci_hook_bawah', 'NG');
+                })
+                ->count();
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_Tembin[] = CheckSheetTembin::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('master_link', 'OK')
+                        ->where('body_tembin', 'OK')
+                        ->where('mur_baut', 'OK')
+                        ->where('shackle', 'OK')
+                        ->where('hook_atas', 'OK')
+                        ->where('pengunci_hook_atas', 'OK')
+                        ->where('mata_chain', 'OK')
+                        ->where('chain', 'OK')
+                        ->where('hook_bawah', 'OK')
+                        ->where('pengunci_hook_bawah', 'OK');
+                })
+                ->count();
+        }
+
+
+        $data_Tembin = [
+            'labels' => $labels,
+            'okData_Tembin' => $okData_Tembin,
+            'notOkData_Tembin' => $notOkData_Tembin,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'availableYears'));
     }
 }
