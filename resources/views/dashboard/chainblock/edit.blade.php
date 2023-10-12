@@ -34,7 +34,7 @@
             <div class="mb-3 col-md-6">
                 <label for="handling_detail" class="form-label">Handling Detail</label>
                 <input type="text" name="handling_detail" id="handling_detail" placeholder="Masukkan Handling Detail"
-                    class="form-control @error('handling_detail') is-invalid @enderror" value="{{ old('handling_detail') ?? $chainblock->handling_detail}}">
+                    class="form-control @error('handling_detail') is-invalid @enderror" value="{{ old('handling_detail') ?? $chainblock->handling_detail}}" required>
                 @error('handling_detail')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

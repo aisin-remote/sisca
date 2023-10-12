@@ -12,8 +12,8 @@
             <div class="mb-3 col-md-6">
                 <label for="no_chainblock" class="form-label">No Chain Block</label>
                 <input type="text" name="no_chainblock" id="no_chainblock" placeholder="Masukkan No Chain Block"
-                    class="form-control @error('no_chainblock') is-invalid @enderror" value="{{ old('no_chainblock') }}" required
-                    autofocus>
+                    class="form-control @error('no_chainblock') is-invalid @enderror" value="{{ old('no_chainblock') }}"
+                    required autofocus>
                 @error('no_chainblock')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -34,7 +34,8 @@
             <div class="mb-3 col-md-6">
                 <label for="handling_detail" class="form-label">Handling Detail</label>
                 <input type="text" name="handling_detail" id="handling_detail" placeholder="Masukkan Handling Detail"
-                    class="form-control @error('handling_detail') is-invalid @enderror" value="{{ old('handling_detail') }}">
+                    class="form-control @error('handling_detail') is-invalid @enderror" value="{{ old('handling_detail') }}"
+                    required>
                 @error('handling_detail')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

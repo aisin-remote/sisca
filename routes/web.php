@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AparController;
 use App\Http\Controllers\ChainblockController;
+use App\Http\Controllers\CheckSheetChainblockController;
 use App\Http\Controllers\Co2Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EyewasherController;
@@ -163,6 +164,7 @@ Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 's
 Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
 Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form');
 Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form');
+Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form');
 
 
 
@@ -193,6 +195,9 @@ Route::get('/dashboard/sling/checksheet/all-check-sheet', [CheckSheetSlingContro
 Route::post('/dashboard/tembin/process-checksheet', [CheckSheetTembinController::class, 'processForm'])->name('tembin.process.form');
 Route::get('/dashboard/tembin/checksheet/all-check-sheet', [CheckSheetTembinController::class, 'index'])->name('tembin.checksheet.index');
 
+Route::post('/dashboard/chainblock/process-checksheet', [CheckSheetChainblockController::class, 'processForm'])->name('chainblock.process.form');
+Route::get('/dashboard/chainblock/checksheet/all-check-sheet', [CheckSheetChainblockController::class, 'index'])->name('chainblock.checksheet.index');
+
 
 
 
@@ -209,6 +214,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+
+});
+
+
+
+//Checksheet Chain Block
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/chainblock/checksheetchainblock/{chainblockNumber}', [CheckSheetChainblockController::class, 'createForm'])->name('checksheetchainblock');
+    Route::post('/dashboard/chainblock/process-checksheet-chainblock/{chainblockNumber}', [CheckSheetChainblockController::class, 'store'])->name('process.checksheet.chainblock');
+    Route::delete('/dashboard/check-sheet/chainblock/{id}', [CheckSheetChainblockController::class, 'destroy'])->name('chainblock.checksheetchainblock.destroy');
+    Route::get('/dashboard/check-sheet/chainblock/{id}/edit', [CheckSheetChainblockController::class, 'edit'])->name('chainblock.checksheetchainblock.edit');
+    Route::put('/dashboard/check-sheet/chainblock/{id}', [CheckSheetChainblockController::class, 'update'])->name('chainblock.checksheetchainblock.update');
+    Route::get('/dashboard/check-sheet/chainblock/{id}/show', [CheckSheetChainblockController::class, 'show'])->name('chainblock.checksheetchainblock.show');
 
 });
 

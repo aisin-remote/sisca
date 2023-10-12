@@ -41,7 +41,7 @@ class ChainblockController extends Controller
         $validate = $request->validate([
             'no_chainblock' => 'required|unique:tm_chainblocks',
             'location_id' => 'required',
-            'handling_detail' => 'nullable',
+            'handling_detail' => 'required',
         ]);
 
         // Mengubah 'no_tabung' menjadi huruf besar
@@ -89,7 +89,7 @@ class ChainblockController extends Controller
 
         $validateData = $request->validate([
             'location_id' => 'required',
-            'handling_detail' => 'nullable',
+            'handling_detail' => 'required',
         ]);
 
         $chainblock->update($validateData);
