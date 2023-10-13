@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\BodyharnestController;
 use App\Http\Controllers\ChainblockController;
 use App\Http\Controllers\CheckSheetChainblockController;
 use App\Http\Controllers\Co2Controller;
@@ -135,6 +136,10 @@ Route::put('/dashboard/master/tembin/{data_tembin}', [TembinController::class, '
 // Route Chain Block
 Route::resource('/dashboard/master/chain-block', ChainblockController::class)->middleware('auth');
 Route::put('/dashboard/master/chain-block/{data_chainblock}', [ChainblockController::class, 'update'])->name('data-chainblock.update');
+
+// Route Body Harnest
+Route::resource('/dashboard/master/body-harnest', BodyharnestController::class)->middleware('auth');
+Route::put('/dashboard/master/body-harnest/{data_bodyharnest}', [BodyharnestController::class, 'update'])->name('data-bodyharnest.update');
 
 // Route Location
 Route::resource('/dashboard/master/location', LocationController::class)->except('show', 'destroy')->middleware('auth');

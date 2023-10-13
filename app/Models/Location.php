@@ -47,4 +47,8 @@ class Location extends Model
     public function chainblocks(){
         return $this->hasMany(Chainblock::class);
     }
+
+    public function bodyharnests(){
+        return $this->hasMany(Bodyharnest::class);
+    }
 }
