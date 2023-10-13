@@ -12,15 +12,23 @@
     ```sh
     cp .env.example .env
     ```
-4. Generate Application Key:
+4. change FILESYSTEM_DISK from 'local' to 'public' in the .env file:
+   ```sh
+    FILESYSTEM_DISK=public
+    ```
+5. To create the symbolic link, you may use the storage:link Artisan command:
+   ```sh
+    php artisan storage:link
+    ```
+6. Generate Application Key:
     ```sh
     php artisan key:generate
-    ```
-5. Database Migration:
+   ```
+7. Database Migration:
     ```sh
     php artisan migrate
     ```
-6. Run the App:
+8. Run the App:
     ```sh
     php artisan serve
     ```
