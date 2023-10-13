@@ -47,9 +47,9 @@ class CheckSheetChainblock extends Model
         'photo_hook_bawah',
     ];
 
-    public function tembins()
+    public function chainblocks()
     {
-        return $this->belongsTo(Tandu::class, 'tembin_number', 'no_equip');
+        return $this->belongsTo(Chainblock::class, 'chainblock_number', 'no_chainblock');
     }
 
     public $timestamps = true;

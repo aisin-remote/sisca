@@ -537,6 +537,11 @@ class CheckSheetTembinController extends Controller
                 if ($tembin['hook_bawah'] === 'NG') $issueCodes[] = 'i';
                 if ($tembin['pengunci_hook_bawah'] === 'NG') $issueCodes[] = 'j';
 
+                if (empty($issueCodes)) {
+                    $issueCodes[] = 'OK';
+                }
+
+
                 $months[$month] = $issueCodes;
             }
 

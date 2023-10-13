@@ -399,6 +399,8 @@ Route::get('/dashboard/report/tandu', [CheckSheetTanduController::class, 'report
 Route::get('/dashboard/report/eyewasher', [CheckSheetEyewasherController::class, 'report'])->name('home.checksheet.eyewasher')->middleware('auth');
 Route::get('/dashboard/report/sling', [CheckSheetSlingController::class, 'report'])->name('home.checksheet.sling')->middleware('auth');
 Route::get('/dashboard/report/tembin', [CheckSheetTembinController::class, 'report'])->name('home.checksheet.tembin')->middleware('auth');
+Route::get('/dashboard/report/chainblock', [CheckSheetChainblockController::class, 'report'])->name('home.checksheet.chainblock')->middleware('auth');
+
 
 
 
@@ -501,3 +503,6 @@ Route::post('/export-checksheet-report-sling', [CheckSheetSlingController::class
 
 // Export CheckSheet Tembin
 Route::post('/export-checksheet-tembin', [CheckSheetTembinController::class, 'exportExcelWithTemplate'])->name('export.checksheetstembin');
+
+// Export CheckSheet Chain Block
+Route::post('/export-checksheet-chainblock', [CheckSheetChainblockController::class, 'exportExcelWithTemplate'])->name('export.checksheetschainblock');

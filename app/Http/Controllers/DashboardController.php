@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\array_except;
+use App\Models\CheckSheetChainblock;
 use App\Models\CheckSheetCo2;
 use App\Models\CheckSheetEyewasher;
 use App\Models\CheckSheetEyewasherShower;
@@ -521,8 +522,60 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Chain Block
+
+
+        $notOkData_Chainblock = [];
+        $okData_Chainblock = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Chainblock[] = CheckSheetChainblock::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('geared_trolley', 'NG')
+                        ->orWhere('chain_geared_trolley_1', 'NG')
+                        ->orWhere('chain_geared_trolley_2', 'NG')
+                        ->orWhere('hooking_geared_trolly', 'NG')
+                        ->orWhere('latch_hook_atas', 'NG')
+                        ->orWhere('hook_atas', 'NG')
+                        ->orWhere('hand_chain', 'NG')
+                        ->orWhere('load_chain', 'NG')
+                        ->orWhere('latch_hook_bawah', 'NG')
+                        ->orWhere('hook_bawah', 'NG');
+
+                })
+                ->count();
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_Chainblock[] = CheckSheetChainblock::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('geared_trolley', 'OK')
+                        ->where('chain_geared_trolley_1', 'OK')
+                        ->where('chain_geared_trolley_2', 'OK')
+                        ->where('hooking_geared_trolly', 'OK')
+                        ->where('latch_hook_atas', 'OK')
+                        ->where('hook_atas', 'OK')
+                        ->where('hand_chain', 'OK')
+                        ->where('load_chain', 'OK')
+                        ->where('latch_hook_bawah', 'OK')
+                        ->where('hook_bawah', 'OK');
+                })
+                ->count();
+        }
+
+
+        $data_Chainblock = [
+            'labels' => $labels,
+            'okData_Chainblock' => $okData_Chainblock,
+            'notOkData_Chainblock' => $notOkData_Chainblock,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'availableYears'));
     }
 }

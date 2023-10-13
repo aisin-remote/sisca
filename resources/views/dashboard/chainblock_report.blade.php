@@ -1,8 +1,8 @@
 @extends('dashboard.app')
-@section('title', 'All Tembin Report')
+@section('title', 'All Chain Block Report')
 
 @section('content')
-    <form class="form-inline mb-5 col-lg-12" method="GET" action="{{ route('home.checksheet.tembin') }}">
+    <form class="form-inline mb-5 col-lg-12" method="GET" action="{{ route('home.checksheet.chainblock') }}">
         <div class="input-group mb-3">
             <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
             <select class="form-select" name="selected_year" id="selected_year">
@@ -24,7 +24,7 @@
 
     <div
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h3>All Tembin Report</h3>
+        <h3>All Chain Block Report</h3>
         <div class="form-group">
             {{-- <form action="{{ route('export.checksheetshydrant') }}" method="POST">
                 @method('POST')
@@ -65,7 +65,7 @@
                     <thead>
                         <tr class="text-center align-middle">
                             <th rowspan="2">#</th>
-                            <th rowspan="2">No Equip</th>
+                            <th rowspan="2">No Chain Block</th>
                             <th colspan="12">Month</th>
                         </tr>
                         <tr>
@@ -75,18 +75,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tembinData as $tembin)
+                        @foreach ($chainblockData as $chainblock)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $tembin['tembin_number'] }}</td>
+                                <td>{{ $chainblock['chainblock_number'] }}</td>
                                 @for ($month = 1; $month <= 12; $month++)
                                     <td>
-                                        @if (isset($tembin['months'][$month]))
-                                            @if (in_array('OK', $tembin['months'][$month]))
+                                        @if (isset($chainblock['months'][$month]))
+                                            @if (in_array('OK', $chainblock['months'][$month]))
                                                 <span class="badge bg-success">OK</span>
                                             @else
                                                 @php
-                                                    $issueCodes = implode('+', $tembin['months'][$month]);
+                                                    $issueCodes = implode('+', $chainblock['months'][$month]);
                                                 @endphp
                                                 <span class="badge bg-danger">{{ $issueCodes }}</span>
                                             @endif

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chainblock;
+use App\Models\CheckSheetChainblock;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChainblockController extends Controller
 {
@@ -60,7 +62,24 @@ class ChainblockController extends Controller
      */
     public function show($id)
     {
-        //
+        $chainblock = Chainblock::findOrFail($id);
+
+        if (!$chainblock) {
+            return back()->with('error', 'Chain Block tidak ditemukan.');
+        }
+
+        $checksheets = CheckSheetChainblock::where('chainblock_number', $chainblock->no_chainblock);
+        $firstYear = CheckSheetChainblock::min(DB::raw('YEAR(tanggal_pengecekan)'));
+        $lastYear = CheckSheetChainblock::max(DB::raw('YEAR(tanggal_pengecekan)'));
+
+        if (request()->has('tahun_filter')) {
+            $tahunFilter = request()->input('tahun_filter');
+            $checksheets->whereYear('tanggal_pengecekan', $tahunFilter);
+        }
+
+        $checksheets = $checksheets->get();
+
+        return view('dashboard.chainblock.show', compact('chainblock', 'checksheets', 'firstYear', 'lastYear'));
     }
 
     /**

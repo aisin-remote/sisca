@@ -525,6 +525,10 @@ class CheckSheetTanduController extends Controller
                 if ($tandu['belt'] === 'NG') $issueCodes[] = 'h';
                 if ($tandu['rangka'] === 'NG') $issueCodes[] = 'i';
 
+                if (empty($issueCodes)) {
+                    $issueCodes[] = 'OK';
+                }
+
                 $months[$month] = $issueCodes;
             }
 
