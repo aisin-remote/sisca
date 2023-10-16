@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('tm_tembins', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('location_id');
             $table->string('no_equip')->unique();
             $table->timestamps();
+
+            $table->foreign('location_id')->references('id')->on('tm_locations')->onDelete('cascade');
         });
     }
 

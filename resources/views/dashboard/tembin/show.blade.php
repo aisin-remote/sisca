@@ -24,6 +24,12 @@
                 <div class="col-2">:</div>
                 <div class="col-6 text-muted">{{ $tembin->no_equip }}</div>
             </div>
+            <hr class="mt-2">
+            <div class="row">
+                <div class="h6 col-3">Location</div>
+                <div class="col-2">:</div>
+                <div class="col-6 text-muted">{{ $tembin->locations->location_name }}</div>
+            </div>
         </div>
     </div>
     <div
@@ -45,7 +51,7 @@
         </div>
 
     </div>
-    <form action="{{ route('export.checksheetstembin') }}" method="POST" class="col-md-6 mb-3">
+    {{-- <form action="{{ route('export.checksheetstembin') }}" method="POST" class="col-md-6 mb-3">
         @method('POST')
         @csrf
         <div class="form-group mb-3">
@@ -59,7 +65,7 @@
             <input type="hidden" name="tembin_number" value="{{ $tembin->no_equip }}">
         </div>
         <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
-    </form>
+    </form> --}}
 
     @if (session()->has('success1'))
         <div class="mt-2 alert alert-success col-lg-12">

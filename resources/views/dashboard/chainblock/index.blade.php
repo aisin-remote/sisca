@@ -32,13 +32,14 @@
                         <td>{{ $chainblock->handling_detail }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('chain-block.destroy', $chainblock->id) }}" method="POST">
-                                <a href="{{ route('chain-block.edit', $chainblock->id) }}" class="badge bg-warning">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Chain Block?')">Delete</button>
-                            </form>
+                                <a href="{{ route('chain-block.show', $chainblock->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('chain-block.edit', $chainblock->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('chain-block.destroy', $chainblock->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Chain Block?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

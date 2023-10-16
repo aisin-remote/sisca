@@ -19,6 +19,7 @@
                 <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Equip</th>
+                    <th scope="col">Location</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -27,14 +28,17 @@
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $tembin->no_equip }}</td>
+                        <td>{{ $tembin->locations->location_name }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('tembin.destroy',$tembin->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Tembin?')">Delete</button>
-                            </form>
+                                <a href="{{ route('tembin.show', $tembin->id) }}" class="badge bg-info me-2">Info</a>
+                                <a href="{{ route('tembin.edit', $tembin->id) }}" class="badge bg-warning me-2">Edit</a>
+                                <form action="{{ route('tembin.destroy', $tembin->id) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge bg-danger border-0"
+                                        onclick="return confirm('Ingin menghapus Data Tembin?')">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

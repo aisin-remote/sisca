@@ -8,6 +8,7 @@ use App\Models\Tembin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetTembinController extends Controller
@@ -373,117 +374,111 @@ class CheckSheetTembinController extends Controller
         $spreadsheet = IOFactory::load($templatePath);
         $worksheet = $spreadsheet->getActiveSheet();
 
-        // Retrieve tag_number from the form
-        $tembinNumber = $request->input('tembin_number');
-
-
         // Retrieve the selected year from the form
         $selectedYear = $request->input('tahun');
 
         // Retrieve data from the checksheetsco2 table for the selected year and tag_number
-        $data = CheckSheetTembin::with('tembins')
-            ->select('tanggal_pengecekan', 'tembin_number', 'master_link', 'body_tembin', 'mur_baut', 'shackle', 'hook_atas', 'pengunci_hook_atas', 'mata_chain', 'hook_bawah', 'pengunci_hook_bawah')
-            ->whereYear('tanggal_pengecekan', $selectedYear)
-            ->where('tembin_number', $tembinNumber) // Gunakan nilai tag_number yang diambil dari form
+        $data = Tembin::leftJoin('tm_locations', 'tm_tembins.location_id', '=', 'tm_locations.id')
+            ->leftJoin('tt_check_sheet_tembins', 'tm_tembins.no_equip', '=', 'tt_check_sheet_tembins.tembin_number')
+            ->select(
+                'tm_tembins.no_equip as tembin_number',
+                'tm_locations.location_name',
+                'tt_check_sheet_tembins.tanggal_pengecekan',
+                'tt_check_sheet_tembins.master_link',
+                'tt_check_sheet_tembins.body_tembin',
+                'tt_check_sheet_tembins.mur_baut',
+                'tt_check_sheet_tembins.shackle',
+                'tt_check_sheet_tembins.hook_atas',
+                'tt_check_sheet_tembins.pengunci_hook_atas',
+                'tt_check_sheet_tembins.mata_chain',
+                'tt_check_sheet_tembins.chain',
+                'tt_check_sheet_tembins.hook_bawah',
+                'tt_check_sheet_tembins.pengunci_hook_bawah',
+            )
             ->get();
 
-        // Array asosiatif untuk mencocokkan nama bulan dengan kolom
-        $bulanKolom = [
-            1 => 'AK',  // Januari -> Kolom H
-            2 => 'AM',  // Februari -> Kolom I
-            3 => 'AO',  // Maret -> Kolom J
-            4 => 'AQ',  // April -> Kolom K
-            5 => 'AS',  // Mei -> Kolom L
-            6 => 'AU',  // Juni -> Kolom M
-            7 => 'AW',  // Juli -> Kolom N
-            8 => 'AY',  // Agustus -> Kolom O
-            9 => 'BA',  // September -> Kolom P
-            10 => 'BC', // Oktober -> Kolom Q
-            11 => 'BE', // November -> Kolom R
-            12 => 'BG', // Desember -> Kolom S
-        ];
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredTembinData = $data->filter(function ($tembin) use ($selectedYear) {
+            return $tembin->tanggal_pengecekan !== null &&
+                date('Y', strtotime($tembin->tanggal_pengecekan)) == $selectedYear;
+        });
 
-        $worksheet->setCellValue('BF' . 4, $data[0]->tandus->locations->location_name);
+        $mappedTembinData = $filteredTembinData->groupBy('tembin_number')->map(function ($tembinGroup) {
+            $tembinNumber = $tembinGroup[0]['tembin_number'];
+            $location_name = $tembinGroup[0]['location_name'];
+            $months = [];
 
-        foreach ($data as $item) {
+            foreach ($tembinGroup as $tembin) {
+                $month = date('n', strtotime($tembin['tanggal_pengecekan']));
+                $issueCodes = [];
 
-            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
-            $bulan = Carbon::parse($item->tanggal_pengecekan)->format('n');
+                // Map issue codes for powder type
+                if ($tembin['master_link'] === 'NG') $issueCodes[] = 'a';
+                if ($tembin['body_tembin'] === 'NG') $issueCodes[] = 'b';
+                if ($tembin['mur_baut'] === 'NG') $issueCodes[] = 'c';
+                if ($tembin['shackle'] === 'NG') $issueCodes[] = 'd';
+                if ($tembin['hook_atas'] === 'NG') $issueCodes[] = 'e';
+                if ($tembin['pengunci_hook_atas'] === 'NG') $issueCodes[] = 'f';
+                if ($tembin['mata_chain'] === 'NG') $issueCodes[] = 'g';
+                if ($tembin['chain'] === 'NG') $issueCodes[] = 'h';
+                if ($tembin['hook_bawah'] === 'NG') $issueCodes[] = 'i';
+                if ($tembin['pengunci_hook_bawah'] === 'NG') $issueCodes[] = 'j';
 
-            // Tentukan kolom berdasarkan bulan
-            $col = $bulanKolom[$bulan];
 
-            // Set value based on $item->pressure
-            if ($item->kunci_pintu === 'OK') {
-                $worksheet->setCellValue($col . 8, '√');
-            } else if ($item->kunci_pintu === 'NG') {
-                $worksheet->setCellValue($col . 8, 'X');
+                if (empty($issueCodes)) {
+                    $issueCodes[] = '√';
+                }
+
+                $months[$month] = $issueCodes;
             }
 
-            // Set value based on $item->hose
-            if ($item->pintu === 'OK') {
-                $worksheet->setCellValue($col . 11, '√');
-            } else if ($item->pintu === 'NG') {
-                $worksheet->setCellValue($col . 11, 'X');
+            return [
+                'tembin_number' => $tembinNumber,
+                'location_name' => $location_name,
+                'months' => $months,
+            ];
+        });
+
+        // Start row to populate data in Excel
+        $row = 6; // Assuming your data starts from row 2 in Excel
+
+        $iteration = 1;
+
+        foreach ($mappedTembinData as $item) {
+            $worksheet->setCellValue('B' . $row, $iteration);
+            $worksheet->setCellValue('C' . $row, $item['tembin_number']);
+            $worksheet->setCellValue('D' . $row, $item['location_name']);
+
+            // Loop through months and issue codes
+            for ($month = 1; $month <= 12; $month++) {
+                $cellValue = '';
+
+                if (isset($item['months'][$month])) {
+                    if (in_array('√', $item['months'][$month])) {
+                        $cellValue = '√';
+                    } else {
+                        $cellValue = 'X';
+                    }
+                }
+
+                // Menghitung huruf kolom berdasarkan indeks $month (dari 1 hingga 12)
+                $columnIndex = Coordinate::stringFromColumnIndex($month + 4);
+
+                // Set nilai sel dengan metode setCellValue() dan koordinat kolom dan baris
+                $worksheet->setCellValue($columnIndex . $row, $cellValue);
             }
 
-            // Set value based on $item->corong
-            if ($item->sign === 'OK') {
-                $worksheet->setCellValue($col . 14, '√');
-            } else if ($item->sign === 'NG') {
-                $worksheet->setCellValue($col . 14, 'X');
-            }
 
-            // Set value based on $item->tabung
-            if ($item->hand_grip === 'OK') {
-                $worksheet->setCellValue($col . 17, '√');
-            } else if ($item->hand_grip === 'NG') {
-                $worksheet->setCellValue($col . 17, 'X');
-            }
-
-            // Set value based on $item->regulator
-            if ($item->body === 'OK') {
-                $worksheet->setCellValue($col . 20, '√');
-            } else if ($item->body === 'NG') {
-                $worksheet->setCellValue($col . 20, 'X');
-            }
-
-            // Set value based on $item->lock_pin
-            if ($item->engsel === 'OK') {
-                $worksheet->setCellValue($col . 23, '√');
-            } else if ($item->engsel === 'NG') {
-                $worksheet->setCellValue($col . 23, 'X');
-            }
-
-            // Set value based on $item->lock_pin
-            if ($item->kaki === 'OK') {
-                $worksheet->setCellValue($col . 26, '√');
-            } else if ($item->kaki === 'NG') {
-                $worksheet->setCellValue($col . 26, 'X');
-            }
-
-            // Set value based on $item->lock_pin
-            if ($item->belt === 'OK') {
-                $worksheet->setCellValue($col . 29, '√');
-            } else if ($item->belt === 'NG') {
-                $worksheet->setCellValue($col . 29, 'X');
-            }
-
-            // Set value based on $item->lock_pin
-            if ($item->rangka === 'OK') {
-                $worksheet->setCellValue($col . 32, '√');
-            } else if ($item->rangka === 'NG') {
-                $worksheet->setCellValue($col . 32, 'X');
-            }
+            // Increment iterasi setiap kali loop berjalan
+            $iteration++;
 
             // Increment row for the next data
-            $col++;
+            $row++;
         }
-
 
         // Create a new Excel writer and save the modified spreadsheet
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $outputPath = public_path('templates/checksheet-tandu.xlsx');
+        $outputPath = public_path('templates/checksheet-tembin.xlsx');
         $writer->save($outputPath);
 
         return response()->download($outputPath)->deleteFileAfterSend(true);

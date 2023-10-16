@@ -114,6 +114,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/chainblock*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/chainblock">Chain Block</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/bodyharnest*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/bodyharnest">Body Harnest</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckSheetTandu;
 use App\Models\CheckSheetTembin;
+use App\Models\Location;
 use App\Models\Tembin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,8 @@ class TembinController extends Controller
      */
     public function create()
     {
-        return view('dashboard.tembin.create');
+        $locations = Location::all();
+        return view('dashboard.tembin.create',  compact('locations'));
     }
 
     /**
@@ -41,7 +43,8 @@ class TembinController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'no_equip' => 'required|unique:tm_tembins'
+            'no_equip' => 'required|unique:tm_tembins',
+            'location_id' => 'required'
         ]);
 
         // Mengubah 'no_tabung' menjadi huruf besar
@@ -86,11 +89,12 @@ class TembinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     $location = Location::findOrFail($id);
-    //     return view('dashboard.location.edit', compact('location'));
-    // }
+    public function edit($id)
+    {
+        $tembin = Tembin::findOrFail($id);
+        $locations = Location::all();
+        return view('dashboard.tembin.edit', compact('tembin', 'locations'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -99,18 +103,18 @@ class TembinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     $location = Location::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $tembin = Tembin::findOrFail($id);
 
-    //     $validateData = $request->validate([
-    //         'location_name' => 'required'
-    //     ]);
+        $validateData = $request->validate([
+            'location_id' => 'required',
+        ]);
 
-    //     $location->update($validateData);
+        $tembin->update($validateData);
 
-    //     return redirect()->route('data_location.index')->with('success', 'Data berhasil di update.');
-    // }
+        return redirect()->route('tembin.index')->with('success', 'Data berhasil di update.');
+    }
 
     /**
      * Remove the specified resource from storage.
