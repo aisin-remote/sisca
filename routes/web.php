@@ -389,6 +389,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 use App\Http\Controllers\AparReportController;
+use App\Http\Controllers\CheckSheetBodyHarnestController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
@@ -511,3 +512,6 @@ Route::post('/export-checksheet-tembin', [CheckSheetTembinController::class, 'ex
 
 // Export CheckSheet Chain Block
 Route::post('/export-checksheet-chainblock', [CheckSheetChainblockController::class, 'exportExcelWithTemplate'])->name('export.checksheetschainblock');
+
+// Export CheckSheet Body Harnest
+Route::post('/export-checksheet-bodyharnest', [CheckSheetBodyHarnestController::class, 'exportExcelWithTemplate'])->name('export.checksheetsbodyharnest');
