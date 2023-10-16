@@ -26,10 +26,10 @@
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>All Chain Block Report</h3>
         <div class="form-group">
-            {{-- <form action="{{ route('export.checksheetshydrant') }}" method="POST">
+            <form action="{{ route('export.checksheetschainblock') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Apar</label>
+                <label for="tahun">Download Check Sheet Chain Block</label>
                 <div class="input-group">
                     <select name="tahun" id="tahun" class="form-control">
                         @php
@@ -37,8 +37,8 @@
                             $years = [];
 
                             // Loop melalui data checksheet apar untuk mendapatkan tahun-tahun unik
-                            foreach ($hydrantData as $hydrant) {
-                                $year = date('Y', strtotime($hydrant['tanggal_pengecekan']));
+                            foreach ($chainblockData as $chainblock) {
+                                $year = date('Y', strtotime($chainblock['tanggal_pengecekan']));
                                 if (!in_array($year, $years)) {
                                     $years[] = $year;
                                 }
@@ -55,7 +55,7 @@
                     </select>
                     <button class="btn btn-primary" id="filterButton">Download</button>
                 </div>
-            </form> --}}
+            </form>
         </div>
     </div>
     <div class="card rounded-bottom-0 mb-0 col-lg-12">

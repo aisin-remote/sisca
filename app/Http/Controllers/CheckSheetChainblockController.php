@@ -8,6 +8,8 @@ use App\Models\CheckSheetTembin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetChainblockController extends Controller
 {
@@ -370,6 +372,123 @@ class CheckSheetChainblockController extends Controller
         })->get();
 
         return view('dashboard.chainblock.checksheet.index', compact('checksheetchainblock'));
+    }
+
+    public function exportExcelWithTemplate(Request $request)
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template-checksheet-chainblock.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
+        $data = Chainblock::leftJoin('tm_locations', 'tm_chainblocks.location_id', '=', 'tm_locations.id')
+            ->leftJoin('tt_check_sheet_chainblocks', 'tm_chainblocks.no_chainblock', '=', 'tt_check_sheet_chainblocks.chainblock_number')
+            ->select(
+                'tm_chainblocks.no_chainblock as chainblock_number',
+                'tm_locations.location_name',
+                'tt_check_sheet_chainblocks.tanggal_pengecekan',
+                'tt_check_sheet_chainblocks.geared_trolley',
+                'tt_check_sheet_chainblocks.chain_geared_trolley_1',
+                'tt_check_sheet_chainblocks.chain_geared_trolley_2',
+                'tt_check_sheet_chainblocks.hooking_geared_trolly',
+                'tt_check_sheet_chainblocks.latch_hook_atas',
+                'tt_check_sheet_chainblocks.hook_atas',
+                'tt_check_sheet_chainblocks.hand_chain',
+                'tt_check_sheet_chainblocks.load_chain',
+                'tt_check_sheet_chainblocks.latch_hook_bawah',
+                'tt_check_sheet_chainblocks.hook_bawah',
+            )
+            ->get();
+
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredChainblockData = $data->filter(function ($chainblock) use ($selectedYear) {
+            return $chainblock->tanggal_pengecekan !== null &&
+                date('Y', strtotime($chainblock->tanggal_pengecekan)) == $selectedYear;
+        });
+
+        $mappedChainblockData = $filteredChainblockData->groupBy('chainblock_number')->map(function ($chainblockGroup) {
+            $chainblockNumber = $chainblockGroup[0]['chainblock_number'];
+            $location_name = $chainblockGroup[0]['location_name'];
+            $months = [];
+
+            foreach ($chainblockGroup as $chainblock) {
+                $month = date('n', strtotime($chainblock['tanggal_pengecekan']));
+                $issueCodes = [];
+
+                // Map issue codes for powder type
+                if ($chainblock['geared_trolley'] === 'NG') $issueCodes[] = 'a';
+                if ($chainblock['chain_geared_trolley_1'] === 'NG') $issueCodes[] = 'b';
+                if ($chainblock['chain_geared_trolley_2'] === 'NG') $issueCodes[] = 'c';
+                if ($chainblock['hooking_geared_trolly'] === 'NG') $issueCodes[] = 'd';
+                if ($chainblock['latch_hook_atas'] === 'NG') $issueCodes[] = 'e';
+                if ($chainblock['hook_atas'] === 'NG') $issueCodes[] = 'f';
+                if ($chainblock['hand_chain'] === 'NG') $issueCodes[] = 'g';
+                if ($chainblock['load_chain'] === 'NG') $issueCodes[] = 'h';
+                if ($chainblock['latch_hook_bawah'] === 'NG') $issueCodes[] = 'i';
+                if ($chainblock['hook_bawah'] === 'NG') $issueCodes[] = 'j';
+
+
+                if (empty($issueCodes)) {
+                    $issueCodes[] = '√';
+                }
+
+                $months[$month] = $issueCodes;
+            }
+
+            return [
+                'chainblock_number' => $chainblockNumber,
+                'location_name' => $location_name,
+                'months' => $months,
+            ];
+        });
+
+        // Start row to populate data in Excel
+        $row = 6; // Assuming your data starts from row 2 in Excel
+
+        $iteration = 1;
+
+        foreach ($mappedChainblockData as $item) {
+            $worksheet->setCellValue('B' . $row, $iteration);
+            $worksheet->setCellValue('C' . $row, $item['chainblock_number']);
+            $worksheet->setCellValue('D' . $row, $item['location_name']);
+
+            // Loop through months and issue codes
+            for ($month = 1; $month <= 12; $month++) {
+                $cellValue = '';
+
+                if (isset($item['months'][$month])) {
+                    if (in_array('√', $item['months'][$month])) {
+                        $cellValue = '√';
+                    } else {
+                        $cellValue = 'X';
+                    }
+                }
+
+                // Menghitung huruf kolom berdasarkan indeks $month (dari 1 hingga 12)
+                $columnIndex = Coordinate::stringFromColumnIndex($month + 4);
+
+                // Set nilai sel dengan metode setCellValue() dan koordinat kolom dan baris
+                $worksheet->setCellValue($columnIndex . $row, $cellValue);
+            }
+
+
+            // Increment iterasi setiap kali loop berjalan
+            $iteration++;
+
+            // Increment row for the next data
+            $row++;
+        }
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/checksheet-chainblock.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 
     public function report(Request $request)
