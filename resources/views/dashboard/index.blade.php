@@ -136,6 +136,19 @@
                 </div>
             </div>
 
+
+            <!-- Grafik Body Harnest -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Body Harnest</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="bodyharnestChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -471,6 +484,45 @@
                 }, {
                     label: 'NG',
                     data: {!! json_encode($data_Chainblock['notOkData_Chainblock']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
+
+
+
+        // Grafik Body Harnest
+
+
+        var ctxBodyharnest = document.getElementById('bodyharnestChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var bodyharnestChart = new Chart(ctxBodyharnest, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Bodyharnest['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_Bodyharnest['okData_Bodyharnest']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_Bodyharnest['notOkData_Bodyharnest']) !!},
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderColor: 'rgba(139, 0, 0, 1)',
                     borderWidth: 1

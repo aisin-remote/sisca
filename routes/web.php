@@ -158,6 +158,7 @@ use App\Http\Controllers\CheckSheetSlingWireController;
 use App\Http\Controllers\CheckSheetTabungCo2Controller;
 use App\Http\Controllers\CheckSheetTanduController;
 use App\Http\Controllers\CheckSheetTembinController;
+use App\Http\Controllers\CheckSheetBodyHarnestController;
 use App\Models\CheckSheetEyewasherShower;
 
 // checksheet
@@ -205,6 +206,9 @@ Route::get('/dashboard/tembin/checksheet/all-check-sheet', [CheckSheetTembinCont
 Route::post('/dashboard/chainblock/process-checksheet', [CheckSheetChainblockController::class, 'processForm'])->name('chainblock.process.form');
 Route::get('/dashboard/chainblock/checksheet/all-check-sheet', [CheckSheetChainblockController::class, 'index'])->name('chainblock.checksheet.index');
 
+Route::post('/dashboard/bodyharnest/process-checksheet', [CheckSheetBodyHarnestController::class, 'processForm'])->name('bodyharnest.process.form');
+Route::get('/dashboard/bodyharnest/checksheet/all-check-sheet', [CheckSheetBodyHarnestController::class, 'index'])->name('bodyharnest.checksheet.index');
+
 
 
 
@@ -221,6 +225,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+
+});
+
+
+
+//Checksheet Body Harnest
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/bodyharnest/checksheetbodyharnest/{bodyharnestNumber}', [CheckSheetBodyHarnestController::class, 'createForm'])->name('checksheetbodyharnest');
+    Route::post('/dashboard/bodyharnest/process-checksheet-bodyharnest/{bodyharnestNumber}', [CheckSheetBodyHarnestController::class, 'store'])->name('process.checksheet.bodyharnest');
+    Route::delete('/dashboard/check-sheet/bodyharnest/{id}', [CheckSheetBodyHarnestController::class, 'destroy'])->name('bodyharnest.checksheetbodyharnest.destroy');
+    Route::get('/dashboard/check-sheet/bodyharnest/{id}/edit', [CheckSheetBodyHarnestController::class, 'edit'])->name('bodyharnest.checksheetbodyharnest.edit');
+    Route::put('/dashboard/check-sheet/bodyharnest/{id}', [CheckSheetBodyHarnestController::class, 'update'])->name('bodyharnest.checksheetbodyharnest.update');
+    Route::get('/dashboard/check-sheet/bodyharnest/{id}/show', [CheckSheetBodyHarnestController::class, 'show'])->name('bodyharnest.checksheetbodyharnest.show');
 
 });
 
@@ -391,7 +409,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 use App\Http\Controllers\AparReportController;
-use App\Http\Controllers\CheckSheetBodyHarnestController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
@@ -408,6 +425,8 @@ Route::get('/dashboard/report/eyewasher', [CheckSheetEyewasherController::class,
 Route::get('/dashboard/report/sling', [CheckSheetSlingController::class, 'report'])->name('home.checksheet.sling')->middleware('auth');
 Route::get('/dashboard/report/tembin', [CheckSheetTembinController::class, 'report'])->name('home.checksheet.tembin')->middleware('auth');
 Route::get('/dashboard/report/chainblock', [CheckSheetChainblockController::class, 'report'])->name('home.checksheet.chainblock')->middleware('auth');
+Route::get('/dashboard/report/bodyharnest', [CheckSheetBodyHarnestController::class, 'report'])->name('home.checksheet.bodyharnest')->middleware('auth');
+
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\array_except;
+use App\Models\CheckSheetBodyHarnest;
 use App\Models\CheckSheetChainblock;
 use App\Models\CheckSheetCo2;
 use App\Models\CheckSheetEyewasher;
@@ -574,8 +575,60 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Body Harnest
+
+
+        $notOkData_Bodyharnest = [];
+        $okData_Bodyharnest = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Bodyharnest[] = CheckSheetBodyHarnest::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('shoulder_straps', 'NG')
+                        ->orWhere('hook', 'NG')
+                        ->orWhere('buckles_waist', 'NG')
+                        ->orWhere('buckles_chest', 'NG')
+                        ->orWhere('leg_straps', 'NG')
+                        ->orWhere('buckles_leg', 'NG')
+                        ->orWhere('back_d_ring', 'NG')
+                        ->orWhere('carabiner', 'NG')
+                        ->orWhere('straps_rope', 'NG')
+                        ->orWhere('shock_absorber', 'NG');
+
+                })
+                ->count();
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_BodyHarnest[] = CheckSheetBodyHarnest::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('shoulder_straps', 'OK')
+                        ->where('hook', 'OK')
+                        ->where('buckles_waist', 'OK')
+                        ->where('buckles_chest', 'OK')
+                        ->where('leg_straps', 'OK')
+                        ->where('buckles_leg', 'OK')
+                        ->where('back_d_ring', 'OK')
+                        ->where('carabiner', 'OK')
+                        ->where('straps_rope', 'OK')
+                        ->where('shock_absorber', 'OK');
+                })
+                ->count();
+        }
+
+
+        $data_Bodyharnest = [
+            'labels' => $labels,
+            'okData_Bodyharnest' => $okData_Bodyharnest,
+            'notOkData_Bodyharnest' => $notOkData_Bodyharnest,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'availableYears'));
     }
 }
