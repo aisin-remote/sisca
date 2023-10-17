@@ -291,7 +291,6 @@ class DashboardController extends Controller
                         ->orWhere('kaki', 'NG')
                         ->orWhere('belt', 'NG')
                         ->orWhere('rangka', 'NG');
-
                 })
                 ->count();
 
@@ -545,7 +544,6 @@ class DashboardController extends Controller
                         ->orWhere('load_chain', 'NG')
                         ->orWhere('latch_hook_bawah', 'NG')
                         ->orWhere('hook_bawah', 'NG');
-
                 })
                 ->count();
 
@@ -597,12 +595,11 @@ class DashboardController extends Controller
                         ->orWhere('carabiner', 'NG')
                         ->orWhere('straps_rope', 'NG')
                         ->orWhere('shock_absorber', 'NG');
-
                 })
                 ->count();
 
             // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
-            $okData_BodyHarnest[] = CheckSheetBodyHarnest::whereYear('tanggal_pengecekan', $selectedYear)
+            $okData_Bodyharnest[] = CheckSheetBodyHarnest::whereYear('tanggal_pengecekan', $selectedYear)
                 ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
                 ->where(function ($query) {
                     $query->where('shoulder_straps', 'OK')
