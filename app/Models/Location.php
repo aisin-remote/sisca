@@ -51,4 +51,8 @@ class Location extends Model
     public function bodyharnests(){
         return $this->hasMany(Bodyharnest::class);
     }
+
+    public function safetybelts(){
+        return $this->hasMany(Safetybelt::class);
+    }
 }
