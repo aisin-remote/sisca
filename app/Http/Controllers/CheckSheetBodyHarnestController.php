@@ -47,7 +47,7 @@ class CheckSheetBodyHarnestController extends Controller
         $bodyharnestNumber = strtoupper($bodyharnestNumber);
 
         // Mendapatkan bulan dan tahun saat ini
-        $currentMonth = Carbon::now()->month;; // Mengatur $currentMonth menjadi Januari
+        $currentMonth = Carbon::now()->month; // Mengatur $currentMonth menjadi Januari
         $currentYear = Carbon::now()->year; // Mengatur $currentYear menjadi 2024
 
 

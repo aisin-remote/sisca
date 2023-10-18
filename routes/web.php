@@ -13,6 +13,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NitrogenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SafetybeltController;
 use App\Http\Controllers\SlingController;
 use App\Http\Controllers\TanduController;
 use App\Http\Controllers\TembinController;
@@ -140,6 +141,9 @@ Route::put('/dashboard/master/chain-block/{data_chainblock}', [ChainblockControl
 // Route Body Harnest
 Route::resource('/dashboard/master/body-harnest', BodyharnestController::class)->middleware('auth');
 Route::put('/dashboard/master/body-harnest/{data_bodyharnest}', [BodyharnestController::class, 'update'])->name('data-bodyharnest.update');
+
+Route::resource('/dashboard/master/safety-belt', SafetybeltController::class)->middleware('auth');
+Route::put('/dashboard/master/safety-belt/{data_safetybelt}', [SafetybeltController::class, 'update'])->name('data-safetybelt.update');
 
 // Route Location
 Route::resource('/dashboard/master/location', LocationController::class)->except('show', 'destroy')->middleware('auth');
@@ -409,6 +413,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 use App\Http\Controllers\AparReportController;
+use App\Http\Controllers\CheckSheetSafetyBeltController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
@@ -536,3 +541,6 @@ Route::post('/export-checksheet-chainblock', [CheckSheetChainblockController::cl
 
 // Export CheckSheet Body Harnest
 Route::post('/export-checksheet-bodyharnest', [CheckSheetBodyHarnestController::class, 'exportExcelWithTemplate'])->name('export.checksheetsbodyharnest');
+
+// Export CheckSheet Safety Belt
+Route::post('/export-checksheet-safetybelt', [CheckSheetSafetyBeltController::class, 'exportExcelWithTemplate'])->name('export.checksheetssafetybelt');

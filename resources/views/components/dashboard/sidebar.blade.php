@@ -77,6 +77,9 @@
                 <li class="{{ Request::is('dashboard/master/body-harnest*') ? 'active' : '' }} submenu">
                     <a href="/dashboard/master/body-harnest">Body Harnest</a>
                 </li>
+                <li class="{{ Request::is('dashboard/master/safety-belt*') ? 'active' : '' }} submenu">
+                    <a href="/dashboard/master/safety-belt">Safety Belt</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/check-sheet*') ? 'active show' : ''}} menu">
