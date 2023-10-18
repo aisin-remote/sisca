@@ -1,8 +1,8 @@
 @extends('dashboard.app')
-@section('title', 'All Body Harnest Report')
+@section('title', 'All Safety Belt Report')
 
 @section('content')
-    <form class="form-inline mb-5 col-lg-12" method="GET" action="{{ route('home.checksheet.bodyharnest') }}">
+    <form class="form-inline mb-5 col-lg-12" method="GET" action="{{ route('home.checksheet.safetybelt') }}">
         <div class="input-group mb-3">
             <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
             <select class="form-select" name="selected_year" id="selected_year">
@@ -24,12 +24,12 @@
 
     <div
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h3>All Body Harnest Report</h3>
+        <h3>All Safety Belt Report</h3>
         <div class="form-group">
-            <form action="{{ route('export.checksheetsbodyharnest') }}" method="POST">
+            <form action="{{ route('export.checksheetssafetybelt') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Body Harnest</label>
+                <label for="tahun">Download Check Sheet Safety Belt</label>
                 <div class="input-group">
                     <select name="tahun" id="tahun" class="form-control">
                         @php
@@ -37,8 +37,8 @@
                             $years = [];
 
                             // Loop melalui data checksheet apar untuk mendapatkan tahun-tahun unik
-                            foreach ($bodyharnestData as $bodyharnest) {
-                                $year = date('Y', strtotime($bodyharnest['tanggal_pengecekan']));
+                            foreach ($safetybeltData as $safetybelt) {
+                                $year = date('Y', strtotime($safetybelt['tanggal_pengecekan']));
                                 if (!in_array($year, $years)) {
                                     $years[] = $year;
                                 }
@@ -65,7 +65,7 @@
                     <thead>
                         <tr class="text-center align-middle">
                             <th rowspan="2">#</th>
-                            <th rowspan="2">No Body Harnest</th>
+                            <th rowspan="2">No Safety Belt</th>
                             <th colspan="12">Month</th>
                         </tr>
                         <tr>
@@ -75,18 +75,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($bodyharnestData as $bodyharnest)
+                        @foreach ($safetybeltData as $safetybelt)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $bodyharnest['bodyharnest_number'] }}</td>
+                                <td>{{ $safetybelt['safetybelt_number'] }}</td>
                                 @for ($month = 1; $month <= 12; $month++)
                                     <td>
-                                        @if (isset($bodyharnest['months'][$month]))
-                                            @if (in_array('OK', $bodyharnest['months'][$month]))
+                                        @if (isset($safetybelt['months'][$month]))
+                                            @if (in_array('OK', $safetybelt['months'][$month]))
                                                 <span class="badge bg-success">OK</span>
                                             @else
                                                 @php
-                                                    $issueCodes = implode('+', $bodyharnest['months'][$month]);
+                                                    $issueCodes = implode('+', $safetybelt['months'][$month]);
                                                 @endphp
                                                 <span class="badge bg-danger">{{ $issueCodes }}</span>
                                             @endif
@@ -110,31 +110,31 @@
                 <table class="table table-sm table-borderless">
                     <tbody>
                         <tr>
-                            <td scope="col">1. Shoulder Straps</td>
+                            <td scope="col">1. Buckle</td>
                             <td scope="col">= a</td>
-                            <td scope="col">5. Leg Straps</td>
+                            <td scope="col">5. Ring</td>
                             <td scope="col">= e</td>
-                            <td scope="col">9. Straps / Rope</td>
+                            <td scope="col">9. Seam Protection Tube</td>
                             <td scope="col">= i</td>
                         </tr>
                         <tr>
-                            <td scope="col">2. Hook</td>
+                            <td scope="col">2. Seams</td>
                             <td scope="col">= b</td>
-                            <td scope="col">6. Buckles Leg</td>
+                            <td scope="col">6. Torso Belt</td>
                             <td scope="col">= f</td>
-                            <td scope="col">10. Shock Absorber</td>
+                            <td scope="col">10. Hook</td>
                             <td scope="col">= j</td>
                         </tr>
                         <tr>
-                            <td scope="col">3. Buckles Waist</td>
+                            <td scope="col">3. Reel</td>
                             <td scope="col">= c</td>
-                            <td scope="col">7. Back D-Ring</td>
+                            <td scope="col">7. Strap</td>
                             <td scope="col">= g</td>
                         </tr>
                         <tr>
-                            <td scope="col">4. Leg Straps</td>
+                            <td scope="col">4. Shock Absorber</td>
                             <td scope="col">= d</td>
-                            <td scope="col">8. Carabiner</td>
+                            <td scope="col">8. Rope</td>
                             <td scope="col">= h</td>
                         </tr>
                     </tbody>

@@ -163,6 +163,8 @@ use App\Http\Controllers\CheckSheetTabungCo2Controller;
 use App\Http\Controllers\CheckSheetTanduController;
 use App\Http\Controllers\CheckSheetTembinController;
 use App\Http\Controllers\CheckSheetBodyHarnestController;
+use App\Http\Controllers\CheckSheetSafetyBeltController;
+
 use App\Models\CheckSheetEyewasherShower;
 
 // checksheet
@@ -176,6 +178,8 @@ Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 's
 Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form');
 Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form');
 Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form');
+Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form');
+
 
 
 
@@ -213,6 +217,9 @@ Route::get('/dashboard/chainblock/checksheet/all-check-sheet', [CheckSheetChainb
 Route::post('/dashboard/bodyharnest/process-checksheet', [CheckSheetBodyHarnestController::class, 'processForm'])->name('bodyharnest.process.form');
 Route::get('/dashboard/bodyharnest/checksheet/all-check-sheet', [CheckSheetBodyHarnestController::class, 'index'])->name('bodyharnest.checksheet.index');
 
+Route::post('/dashboard/safetybelt/process-checksheet', [CheckSheetSafetyBeltController::class, 'processForm'])->name('safetybelt.process.form');
+Route::get('/dashboard/safetybelt/checksheet/all-check-sheet', [CheckSheetSafetyBeltController::class, 'index'])->name('safetybelt.checksheet.index');
+
 
 
 
@@ -229,6 +236,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+
+});
+
+
+
+//Checksheet Safety Belt
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/safetybelt/checksheetsafetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'createForm'])->name('checksheetsafetybelt');
+    Route::post('/dashboard/safetybelt/process-checksheet-safetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'store'])->name('process.checksheet.safetybelt');
+    Route::delete('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'destroy'])->name('safetybelt.checksheetsafetybelt.destroy');
+    Route::get('/dashboard/check-sheet/safetybelt/{id}/edit', [CheckSheetSafetyBeltController::class, 'edit'])->name('safetybelt.checksheetsafetybelt.edit');
+    Route::put('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'update'])->name('safetybelt.checksheetsafetybelt.update');
+    Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show');
 
 });
 
@@ -413,7 +434,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 use App\Http\Controllers\AparReportController;
-use App\Http\Controllers\CheckSheetSafetyBeltController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
@@ -431,6 +451,8 @@ Route::get('/dashboard/report/sling', [CheckSheetSlingController::class, 'report
 Route::get('/dashboard/report/tembin', [CheckSheetTembinController::class, 'report'])->name('home.checksheet.tembin')->middleware('auth');
 Route::get('/dashboard/report/chainblock', [CheckSheetChainblockController::class, 'report'])->name('home.checksheet.chainblock')->middleware('auth');
 Route::get('/dashboard/report/bodyharnest', [CheckSheetBodyHarnestController::class, 'report'])->name('home.checksheet.bodyharnest')->middleware('auth');
+Route::get('/dashboard/report/safetybelt', [CheckSheetSafetyBeltController::class, 'report'])->name('home.checksheet.safetybelt')->middleware('auth');
+
 
 
 

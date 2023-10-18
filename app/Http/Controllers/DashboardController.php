@@ -14,6 +14,7 @@ use App\Models\CheckSheetHydrantIndoor;
 use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetNitrogenServer;
 use App\Models\CheckSheetPowder;
+use App\Models\CheckSheetSafetyBelt;
 use App\Models\CheckSheetSlingBelt;
 use App\Models\CheckSheetSlingWire;
 use App\Models\CheckSheetTabungCo2;
@@ -624,8 +625,59 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik Safety Belt
+
+
+        $notOkData_Safetybelt = [];
+        $okData_Safetybelt = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Safetybelt[] = CheckSheetSafetyBelt::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('buckle', 'NG')
+                        ->orWhere('seams', 'NG')
+                        ->orWhere('reel', 'NG')
+                        ->orWhere('shock_absorber', 'NG')
+                        ->orWhere('ring', 'NG')
+                        ->orWhere('torso_belt', 'NG')
+                        ->orWhere('strap', 'NG')
+                        ->orWhere('rope', 'NG')
+                        ->orWhere('seam_protection_tube', 'NG')
+                        ->orWhere('hook', 'NG');
+                })
+                ->count();
+
+            // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
+            $okData_Safetybelt[] = CheckSheetSafetyBelt::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->where(function ($query) {
+                    $query->where('buckle', 'OK')
+                        ->where('seams', 'OK')
+                        ->where('reel', 'OK')
+                        ->where('shock_absorber', 'OK')
+                        ->where('ring', 'OK')
+                        ->where('torso_belt', 'OK')
+                        ->where('strap', 'OK')
+                        ->where('rope', 'OK')
+                        ->where('seam_protection_tube', 'OK')
+                        ->where('hook', 'OK');
+                })
+                ->count();
+        }
+
+
+        $data_Safetybelt = [
+            'labels' => $labels,
+            'okData_Safetybelt' => $okData_Safetybelt,
+            'notOkData_Safetybelt' => $notOkData_Safetybelt,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'availableYears'));
     }
 }

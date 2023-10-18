@@ -120,6 +120,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/bodyharnest*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/bodyharnest">Body Harnest</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/safetybelt*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/safetybelt">Safety Belt</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">
@@ -159,6 +162,9 @@
                 </li>
                 <li class="{{ Request::is('dashboard/report/bodyharnest*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/bodyharnest">Body Harnest</a>
+                </li>
+                <li class="{{ Request::is('dashboard/report/safetybelt*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/safetybelt">Safety Belt</a>
                 </li>
             </ul>
         </li>
