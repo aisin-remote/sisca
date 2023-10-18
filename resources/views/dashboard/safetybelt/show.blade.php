@@ -80,7 +80,7 @@
     @endif
     <div class="card">
         <div class="card-table">
-            <div class="table-responsive px-3 py-3">
+            <div class="table-responsive col-md-12 px-3 py-3">
                 <table class="table table-striped table-sm" id="dtBasicExample">
                     <thead>
                         <tr>
