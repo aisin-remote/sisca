@@ -168,6 +168,8 @@ use App\Http\Controllers\CheckSheetTanduController;
 use App\Http\Controllers\CheckSheetTembinController;
 use App\Http\Controllers\CheckSheetBodyHarnestController;
 use App\Http\Controllers\CheckSheetSafetyBeltController;
+use App\Http\Controllers\CheckSheetFacpController;
+
 
 use App\Models\CheckSheetEyewasherShower;
 
@@ -183,6 +185,7 @@ Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 
 Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form');
 Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form');
 Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form');
+Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form');
 
 
 
@@ -223,6 +226,9 @@ Route::get('/dashboard/bodyharnest/checksheet/all-check-sheet', [CheckSheetBodyH
 
 Route::post('/dashboard/safetybelt/process-checksheet', [CheckSheetSafetyBeltController::class, 'processForm'])->name('safetybelt.process.form');
 Route::get('/dashboard/safetybelt/checksheet/all-check-sheet', [CheckSheetSafetyBeltController::class, 'index'])->name('safetybelt.checksheet.index');
+
+Route::post('/dashboard/facp/process-checksheet', [CheckSheetFacpController::class, 'processForm'])->name('facp.process.form');
+Route::get('/dashboard/facp/checksheet/all-check-sheet', [CheckSheetFacpController::class, 'index'])->name('facp.checksheet.index');
 
 
 
@@ -438,7 +444,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 use App\Http\Controllers\AparReportController;
-use App\Http\Controllers\CheckSheetFacpController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 

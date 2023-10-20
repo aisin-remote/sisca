@@ -126,6 +126,9 @@
                 <li class="{{ Request::is('dashboard/check-sheet/safetybelt*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/safetybelt">Safety Belt</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/facp*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/facp">FACP</a>
+                </li>
             </ul>
         </li>
         <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">
