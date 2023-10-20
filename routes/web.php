@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckSheetChainblockController;
 use App\Http\Controllers\Co2Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EyewasherController;
+use App\Http\Controllers\FacpController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
@@ -144,6 +145,9 @@ Route::put('/dashboard/master/body-harnest/{data_bodyharnest}', [BodyharnestCont
 
 Route::resource('/dashboard/master/safety-belt', SafetybeltController::class)->middleware('auth');
 Route::put('/dashboard/master/safety-belt/{data_safetybelt}', [SafetybeltController::class, 'update'])->name('data-safetybelt.update');
+
+Route::resource('/dashboard/master/facp', FacpController::class)->middleware('auth');
+Route::put('/dashboard/master/facp/{data_facp}', [FacpController::class, 'update'])->name('data-facp.update');
 
 // Route Location
 Route::resource('/dashboard/master/location', LocationController::class)->except('show', 'destroy')->middleware('auth');

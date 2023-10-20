@@ -47,7 +47,7 @@ class BodyharnestController extends Controller
             return back()->with('error', 'Body Harnest tidak ditemukan.');
         }
 
-        $checksheets = CheckSheetBodyHarnest::where('bodyharnest_number', $bodyharnest->no_equip);
+        $checksheets = CheckSheetBodyHarnest::where('bodyharnest_number', $bodyharnest->no_bodyharnest);
         $firstYear = CheckSheetBodyHarnest::min(DB::raw('YEAR(tanggal_pengecekan)'));
         $lastYear = CheckSheetBodyHarnest::max(DB::raw('YEAR(tanggal_pengecekan)'));
 

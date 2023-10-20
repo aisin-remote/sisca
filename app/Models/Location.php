@@ -55,4 +55,8 @@ class Location extends Model
     public function safetybelts(){
         return $this->hasMany(Safetybelt::class);
     }
+
+    public function facps(){
+        return $this->hasMany(Facp::class);
+    }
 }

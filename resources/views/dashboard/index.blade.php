@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Hydrant</div>
                     <div class="card-body">
-                        <div class="chart-container">
+                        <div class="">
                             <canvas id="hydrantChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
                         </div>
                     </div>

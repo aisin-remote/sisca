@@ -25,7 +25,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>All Body Harnest Report</h3>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <form action="{{ route('export.checksheetsbodyharnest') }}" method="POST">
                 @method('POST')
                 @csrf
@@ -56,7 +56,7 @@
                     <button class="btn btn-primary" id="filterButton">Download</button>
                 </div>
             </form>
-        </div>
+        </div> --}}
     </div>
     <div class="card rounded-bottom-0 mb-0 col-lg-12">
         <div class="card-body">

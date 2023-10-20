@@ -3,7 +3,7 @@
 <nav id="sidebar">
     <div class="sidebar-header">
         <a class="navbar-brand d-flex justify-content-center" href="/">
-            <img src="/foto/logo-aiia.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;">
+            <img src="/foto/logo-sisca.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;">
         </a>
     </div>
     <ul class="list-unstyled components">
@@ -79,6 +79,9 @@
                 </li>
                 <li class="{{ Request::is('dashboard/master/safety-belt*') ? 'active' : '' }} submenu">
                     <a href="/dashboard/master/safety-belt">Safety Belt</a>
+                </li>
+                <li class="{{ Request::is('dashboard/master/facp*') ? 'active' : '' }} submenu">
+                    <a href="/dashboard/master/facp">FACP</a>
                 </li>
             </ul>
         </li>
