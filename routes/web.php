@@ -438,6 +438,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 use App\Http\Controllers\AparReportController;
+use App\Http\Controllers\CheckSheetFacpController;
 
 Route::get('/apar-report', [AparReportController::class, 'index'])->name('apar.report')->middleware('auth');
 
@@ -570,3 +571,6 @@ Route::post('/export-checksheet-bodyharnest', [CheckSheetBodyHarnestController::
 
 // Export CheckSheet Safety Belt
 Route::post('/export-checksheet-safetybelt', [CheckSheetSafetyBeltController::class, 'exportExcelWithTemplate'])->name('export.checksheetssafetybelt');
+
+// Export CheckSheet FACP
+Route::post('/export-checksheet-facp', [CheckSheetFacpController::class, 'exportExcelWithTemplate'])->name('export.checksheetsfacp');
