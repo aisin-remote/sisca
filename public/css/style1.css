@@ -347,3 +347,6 @@ figure.zoom img {
     cursor: pointer;
 }
 
+.custom-rounded-left {
+    border-radius: 0 5px 5px 0; /* Sudut kiri atas dan kiri bawah 0, sudut kanan atas dan kanan bawah 5px */
+}

@@ -65,7 +65,7 @@
                                 <td>{{ $checkSheet->created_at->format('d F Y') }}</td>
                                 <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
                                 <td>{{ $checkSheet->npk }}</td>
-                                <td>{{ $checkSheet->zona }}</td>
+                                <td>{{ $checkSheet->zona_number }}</td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('facp.checksheetfacp.show', $checkSheet->id) }}"

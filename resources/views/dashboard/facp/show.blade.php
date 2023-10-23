@@ -117,6 +117,7 @@
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
+                                <td class="text-center align-middle">{{ $checksheet->zona_number }}</td>
                                 <td class="text-center align-middle">
                                     {{ intval($checksheet->ok_smoke_detector) + intval($checksheet->ng_smoke_detector) }}
                                 </td>

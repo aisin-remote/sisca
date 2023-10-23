@@ -251,6 +251,20 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+//Checksheet FACP
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/facp/checksheetfacp/{facpNumber}', [CheckSheetFacpController::class, 'createForm'])->name('checksheetfacp');
+    Route::post('/dashboard/facp/process-checksheet-facp/{facpNumber}', [CheckSheetFacpController::class, 'store'])->name('process.checksheet.facp');
+    Route::delete('/dashboard/check-sheet/facp/{id}', [CheckSheetFacpController::class, 'destroy'])->name('facp.checksheetfacp.destroy');
+    Route::get('/dashboard/check-sheet/facp/{id}/edit', [CheckSheetFacpController::class, 'edit'])->name('facp.checksheetfacp.edit');
+    Route::put('/dashboard/check-sheet/facp/{id}', [CheckSheetFacpController::class, 'update'])->name('facp.checksheetfacp.update');
+    Route::get('/dashboard/check-sheet/facp/{id}/show', [CheckSheetFacpController::class, 'show'])->name('facp.checksheetfacp.show');
+
+});
+
+
+
 //Checksheet Safety Belt
 
 Route::middleware(['auth'])->group(function () {
