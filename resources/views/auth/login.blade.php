@@ -33,7 +33,7 @@
                                 @csrf
                                 <div class="mb-3 mt-3">
                                     <label for="npk" class="form-label">NPK <span class="text-danger">*</span></label>
-                                    <input type="npk"
+                                    <input type="number" step="1" min="0"
                                         class="form-control @error('npk')
                                     is-invalid @enderror"
                                         name="npk" id="npk" aria-describedby="npk" autofocus required

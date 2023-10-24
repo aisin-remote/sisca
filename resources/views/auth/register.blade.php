@@ -20,7 +20,8 @@
                                     <input type="name"
                                         class="form-control @error('name')
                                     is-invalid @enderror"
-                                        id="name" name="name" aria-describedby="name" required value="{{ old('name') }}" autofocus>
+                                        id="name" name="name" aria-describedby="name" required
+                                        value="{{ old('name') }}" autofocus>
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -30,10 +31,11 @@
                                 <div class="mb-3 mt-3">
                                     <label for="npk" class="form-label">NPK
                                         <span class="text-danger">*</span></label>
-                                    <input type="npk"
+                                    <input type="number" step="1" min="0"
                                         class="form-control @error('npk')
                                     is-invalid @enderror"
-                                        id="npk" name="npk" aria-describedby="npk" required value="{{ old('npk') }}" autofocus>
+                                        id="npk" name="npk" aria-describedby="npk" required
+                                        value="{{ old('npk') }}" autofocus>
                                     @error('npk')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -41,7 +43,8 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <label for="password" class="form-label">Password <span
+                                            class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="password" name="password">
                                         <span class="input-group-text" id="toggle-password">
@@ -52,9 +55,11 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">Password Confirmation <span class="text-danger">*</span></label>
+                                    <label for="password_confirmation" class="form-label">Password Confirmation <span
+                                            class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                        <input type="password" class="form-control" id="password_confirmation"
+                                            name="password_confirmation">
                                         <span class="input-group-text" id="toggle-password-confirmation">
                                             <i class="bi bi-eye-slash" id="password-confirmation-icon"></i>
                                         </span>
@@ -92,17 +97,17 @@
             }
         }
 
-        document.getElementById('toggle-password').addEventListener('click', function () {
+        document.getElementById('toggle-password').addEventListener('click', function() {
             togglePasswordVisibility('password', 'password-icon');
         });
 
-        document.getElementById('toggle-password-confirmation').addEventListener('click', function () {
+        document.getElementById('toggle-password-confirmation').addEventListener('click', function() {
             togglePasswordVisibility('password_confirmation', 'password-confirmation-icon');
         });
 
         // Jika Anda ingin menghilangkan pesan kesalahan saat pengguna mengklik input
-        ['password', 'password_confirmation'].forEach(function (inputId) {
-            document.getElementById(inputId).addEventListener('focus', function () {
+        ['password', 'password_confirmation'].forEach(function(inputId) {
+            document.getElementById(inputId).addEventListener('focus', function() {
                 const errorId = inputId + '-error';
                 document.getElementById(errorId).textContent = '';
                 document.getElementById(inputId).classList.remove('is-invalid');

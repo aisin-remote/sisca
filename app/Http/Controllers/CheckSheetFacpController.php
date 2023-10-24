@@ -7,6 +7,8 @@ use App\Models\Facp;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CheckSheetFacpController extends Controller
 {
@@ -412,10 +414,10 @@ class CheckSheetFacpController extends Controller
                 $issueCodes = [];
 
                 // Map issue codes for powder type
-                if ($facp['ng_smoke_detector'] !== '0') $issueCodes[] = 'a';
-                if ($facp['ng_heat_detector'] !== '0') $issueCodes[] = 'b';
-                if ($facp['ng_beam_detector'] !== '0') $issueCodes[] = 'c';
-                if ($facp['ng_push_button'] !== '0') $issueCodes[] = 'd';
+                if ($facp['ng_smoke_detector'] != '0') $issueCodes[] = 'a';
+                if ($facp['ng_heat_detector'] != '0') $issueCodes[] = 'b';
+                if ($facp['ng_beam_detector'] != '0') $issueCodes[] = 'c';
+                if ($facp['ng_push_button'] != '0') $issueCodes[] = 'd';
 
                 if (empty($issueCodes)) {
                     $issueCodes[] = 'OK';
@@ -441,5 +443,130 @@ class CheckSheetFacpController extends Controller
             'facpData' => $mappedFacpData,
             'selectedYear' => $selectedYear,
         ]);
+    }
+
+    public function exportExcelWithTemplate(Request $request)
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template-checksheet-facp.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
+        $data = Facp::leftJoin('tm_locations', 'tm_facps.location_id', '=', 'tm_locations.id')
+            ->leftJoin('tt_check_sheet_facps', 'tm_facps.zona', '=', 'tt_check_sheet_facps.zona_number')
+            ->select(
+                'tm_facps.zona as zona_number',
+                'tm_facps.nomor_adress as nomor_adress',
+                'tm_locations.location_name',
+                'tt_check_sheet_facps.tanggal_pengecekan',
+                'tt_check_sheet_facps.ok_smoke_detector',
+                'tt_check_sheet_facps.ng_smoke_detector',
+                'tt_check_sheet_facps.ok_heat_detector',
+                'tt_check_sheet_facps.ng_heat_detector',
+                'tt_check_sheet_facps.ok_beam_detector',
+                'tt_check_sheet_facps.ng_beam_detector',
+                'tt_check_sheet_facps.ok_push_button',
+                'tt_check_sheet_facps.ng_push_button',
+            )
+            ->get();
+
+        // Filter out entries with tanggal_pengecekan = null and matching selected year
+        $filteredFacpData = $data->filter(function ($facp) use ($selectedYear) {
+            return $facp->tanggal_pengecekan !== null &&
+                date('Y', strtotime($facp->tanggal_pengecekan)) == $selectedYear;
+        });
+
+        $mappedFacpData = $filteredFacpData->groupBy('zona_number')->map(function ($facpGroup) {
+            $facpNumber = $facpGroup[0]['zona_number'];
+            $ok_smoke_detector = $facpGroup[0]['ok_smoke_detector'];
+            $ng_smoke_detector = $facpGroup[0]['ng_smoke_detector'];
+            $ok_heat_detector = $facpGroup[0]['ok_heat_detector'];
+            $ng_heat_detector = $facpGroup[0]['ng_heat_detector'];
+            $ok_beam_detector = $facpGroup[0]['ok_beam_detector'];
+            $ng_beam_detector = $facpGroup[0]['ng_beam_detector'];
+            $ok_push_button = $facpGroup[0]['ok_push_button'];
+            $ng_push_button = $facpGroup[0]['ng_push_button'];
+            $nomor_adress = $facpGroup[0]['nomor_adress'];
+            $location_name = $facpGroup[0]['location_name'];
+            $months = [];
+
+            foreach ($facpGroup as $facp) {
+                $month = date('n', strtotime($facp['tanggal_pengecekan']));
+                $issueCodes = [];
+
+                // Map issue codes for powder type
+                if ($facp['ng_smoke_detector'] !== '0') $issueCodes[] = 'a';
+                if ($facp['ng_heat_detector'] !== '0') $issueCodes[] = 'b';
+                if ($facp['ng_beam_detector'] !== '0') $issueCodes[] = 'c';
+                if ($facp['ng_push_button'] !== '0') $issueCodes[] = 'd';
+
+
+                if (empty($issueCodes)) {
+                    $issueCodes[] = '√';
+                }
+
+                $months[$month] = $issueCodes;
+            }
+
+            return [
+                'zona_number' => $facpNumber,
+                'location_name' => $location_name,
+                'nomor_adress' => $nomor_adress,
+                'ok_smoke_detector' => $ok_smoke_detector,
+                'ng_smoke_detector' => $ng_smoke_detector,
+                'ok_heat_detector' => $ok_heat_detector,
+                'ng_heat_detector' => $ng_heat_detector,
+                'ok_beam_detector' => $ok_beam_detector,
+                'ng_beam_detector' => $ng_beam_detector,
+                'ok_push_button' => $ok_push_button,
+                'ng_push_button' => $ng_push_button,
+                'months' => $months,
+            ];
+        });
+
+        // Start row to populate data in Excel
+        $row = 12; // Assuming your data starts from row 2 in Excel
+
+        $iteration = 1;
+
+        foreach ($mappedFacpData as $item) {
+            $worksheet->setCellValue('A' . $row, $iteration);
+            $worksheet->setCellValue('B' . $row, $item['location_name']);
+            $worksheet->setCellValue('C' . $row, $item['zona_number']);
+            $worksheet->setCellValue('D' . $row, $item['nomor_adress']);
+            $worksheet->setCellValue('E' . $row, $item['ok_smoke_detector'] + $item['ng_smoke_detector']);
+            $worksheet->setCellValue('F' . $row, $item['ok_smoke_detector']);
+            $worksheet->setCellValue('G' . $row, $item['ng_smoke_detector']);
+            $worksheet->setCellValue('H' . $row, $item['ok_heat_detector'] + $item['ng_heat_detector']);
+            $worksheet->setCellValue('I' . $row, $item['ok_heat_detector']);
+            $worksheet->setCellValue('J' . $row, $item['ng_heat_detector']);
+            $worksheet->setCellValue('K' . $row, $item['ok_beam_detector'] + $item['ng_beam_detector']);
+            $worksheet->setCellValue('L' . $row, $item['ok_beam_detector']);
+            $worksheet->setCellValue('M' . $row, $item['ng_beam_detector']);
+            $worksheet->setCellValue('N' . $row, $item['ok_push_button'] + $item['ng_push_button']);
+            $worksheet->setCellValue('O' . $row, $item['ok_push_button']);
+            $worksheet->setCellValue('P' . $row, $item['ng_push_button']);
+
+            if ($item['ng_smoke_detector'] != 0 || $item['ng_heat_detector'] != 0 || $item['ng_beam_detector'] != 0 || $item['ng_push_button'] != 0) {
+                $worksheet->setCellValue('Q' . $row, 'X');
+            } else {
+                $worksheet->setCellValue('Q' . $row, '√');
+            }
+
+
+            // Increment row for the next data
+            $row++;
+        }
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/checksheet-facp.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }
