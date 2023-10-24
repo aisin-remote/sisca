@@ -26,6 +26,11 @@ class RegisterController extends Controller
             'password_confirmation' => 'required|same:password'
         ]);
 
+        // cek password baru dan ulangi
+        if($request->password != $request->password_confirmationd) {
+            return back()->with('error', 'Password lama dan Ulangi Password tidak cocok');
+        }
+
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);
