@@ -19,7 +19,7 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'npk' => 'required|unique:users',
-            'password' => ['required', Password::min(8)->mixedCase()->letters()->numbers()->symbols()->uncompromised()]
+            'password' => ['required', Password::min(8)]
         ]);
 
         $request->validate([

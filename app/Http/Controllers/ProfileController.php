@@ -28,7 +28,7 @@ class ProfileController extends Controller
         }
 
         $request->validate([
-            'passwordBaru' => ['required', Password::min(8)->mixedCase()->letters()->numbers()->symbols()->uncompromised()],
+            'passwordBaru' => ['required', Password::min(8)],
             'ulangiPassword' => ['required']
         ]);
 
