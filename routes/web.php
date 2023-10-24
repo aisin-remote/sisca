@@ -476,6 +476,8 @@ Route::get('/dashboard/report/tembin', [CheckSheetTembinController::class, 'repo
 Route::get('/dashboard/report/chainblock', [CheckSheetChainblockController::class, 'report'])->name('home.checksheet.chainblock')->middleware('auth');
 Route::get('/dashboard/report/bodyharnest', [CheckSheetBodyHarnestController::class, 'report'])->name('home.checksheet.bodyharnest')->middleware('auth');
 Route::get('/dashboard/report/safetybelt', [CheckSheetSafetyBeltController::class, 'report'])->name('home.checksheet.safetybelt')->middleware('auth');
+Route::get('/dashboard/report/facp', [CheckSheetFacpController::class, 'report'])->name('home.checksheet.facp')->middleware('auth');
+
 
 
 

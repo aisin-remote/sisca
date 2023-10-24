@@ -15,8 +15,9 @@
                 </ul>
             </div>
         @endif
+
         @if (session()->has('error'))
-            <div class="alert alert-success col-lg-12">
+            <div class="alert alert-danger col-lg-12">
                 {{ session()->get('error') }}
             </div>
         @endif
@@ -29,25 +30,28 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('process.checksheet.facp', ['facpNumber' => $facpNumber]) }}" method="POST"
+                <form action="{{ route('facp.checksheetfacp.update', $checkSheetfacp->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    <div class="mb-3" style="margin-top: 32px">
+                    @method('PUT')
+                    <div class="mb-3" style="margin-top: 32px;">
                         <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
-                        <input type="date" class="form-control" id="tanggal_pengecekan" name="tanggal_pengecekan"
-                            required readonly>
+                        <input type="date" class="form-control" id="tanggal_pengecekan"
+                            value="{{ $checkSheetfacp->created_at }}" name="tanggal_pengecekan" required readonly>
                     </div>
                     <div class="mb-3">
                         <label for="npk" class="form-label">NPK</label>
                         <input type="text" class="form-control" id="npk" name="npk"
-                            value="{{ auth()->user()->npk }}" readonly>
+                            value="{{ $checkSheetfacp->npk }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="zona_number" class="form-label">Nomor Zona</label>
-                        <input type="text" class="form-control" id="zona_number" value="{{ $facpNumber }}"
-                            name="zona_number" required autofocus readonly>
+                        <input type="text" class="form-control" id="zona_number"
+                            value="{{ $checkSheetfacp->zona_number }}" name="zona_number" required autofocus readonly>
                     </div>
             </div>
+
+
             <div class="col-md-6">
                 <span>
                     <h5 class="text-center">Smoke Detector</h5>
@@ -55,13 +59,15 @@
                 <div class="mb-3">
                     <label for="ok_smoke_detector" class="form-label">OK</label>
                     <input type="number" min="0" step="1" class="form-control" id="ok_smoke_detector"
-                        value="{{ old('ok_smoke_detector') }}" name="ok_smoke_detector" required autofocus>
+                        value="{{ old('ok_smoke_detector') ?? $checkSheetfacp->ok_smoke_detector }}"
+                        name="ok_smoke_detector" required autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="ng_smoke_detector" class="form-label">NG</label>
                     <div class="input-group">
                         <input type="number" min="0" step="1" class="form-control" id="ng_smoke_detector"
-                            value="{{ old('ng_smoke_detector') }}" name="ng_smoke_detector">
+                            value="{{ old('ng_smoke_detector') ?? $checkSheetfacp->ng_smoke_detector }}"
+                            name="ng_smoke_detector">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-success custom-rounded-left"
                                 id="tambahCatatan_smoke_detector"><i class="bi bi-bookmark-plus"></i></button>
@@ -72,11 +78,18 @@
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_smoke_detector" style="display:none;">
                     <label for="catatan_smoke_detector" class="form-label">Catatan Smoke Detector</label>
-                    <textarea class="form-control" name="catatan_smoke_detector" id="catatan_smoke_detector" cols="30" rows="5">{{ old('catatan_smoke_detector') }}</textarea>
+                    <textarea class="form-control" name="catatan_smoke_detector" id="catatan_smoke_detector" cols="30" rows="5">{{ old('catatan_smoke_detector') ?? $checkSheetfacp->catatan_smoke_detector }}</textarea>
                 </div>
-                <div class="mb-3" id="fotoField_smoke_detector" style="display:none;">
+                <div class="mb-3" id="fotoField_smoke_detector" style="display: none;">
                     <label for="photo_smoke_detector" class="form-label">Foto Smoke Detector</label>
-                    <img class="photo-smoke_detector-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="hidden" name="oldImage_smoke_detector"
+                        value="{{ $checkSheetfacp->photo_smoke_detector }}">
+                    @if ($checkSheetfacp->photo_smoke_detector)
+                        <img src="{{ asset('storage/' . $checkSheetfacp->photo_smoke_detector) }}"
+                            class="photo-smoke_detector-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                    @else
+                        <img class="photo-smoke_detector-preview img-fluid mb-3" style="max-height: 300px">
+                    @endif
                     <input type="file" class="form-control" id="photo_smoke_detector" name="photo_smoke_detector"
                         onchange="previewImage('photo_smoke_detector', 'photo-smoke_detector-preview')">
                 </div>
@@ -89,13 +102,15 @@
                 <div class="mb-3">
                     <label for="ok_heat_detector" class="form-label">OK</label>
                     <input type="number" min="0" step="1" class="form-control" id="ok_heat_detector"
-                        value="{{ old('ok_heat_detector') }}" name="ok_heat_detector" required autofocus>
+                        value="{{ old('ok_heat_detector') ?? $checkSheetfacp->ok_heat_detector }}"
+                        name="ok_heat_detector" required autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="ng_heat_detector" class="form-label">NG</label>
                     <div class="input-group">
                         <input type="number" min="0" step="1" class="form-control" id="ng_heat_detector"
-                            value="{{ old('ng_heat_detector') }}" name="ng_heat_detector">
+                            value="{{ old('ng_heat_detector') ?? $checkSheetfacp->ng_heat_detector }}"
+                            name="ng_heat_detector">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-success custom-rounded-left"
                                 id="tambahCatatan_heat_detector"><i class="bi bi-bookmark-plus"></i></button>
@@ -106,12 +121,18 @@
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_heat_detector" style="display:none;">
                     <label for="catatan_heat_detector" class="form-label">Catatan Heat Detector</label>
-                    <textarea class="form-control" name="catatan_heat_detector" id="catatan_heat_detector" cols="30"
-                        rows="5">{{ old('catatan_heat_detector') }}</textarea>
+                    <textarea class="form-control" name="catatan_heat_detector" id="catatan_heat_detector" cols="30" rows="5">{{ old('catatan_heat_detector') ?? $checkSheetfacp->catatan_heat_detector }}</textarea>
                 </div>
-                <div class="mb-3" id="fotoField_heat_detector" style="display:none;">
+                <div class="mb-3" id="fotoField_heat_detector" style="display: none;">
                     <label for="photo_heat_detector" class="form-label">Foto Heat Detector</label>
-                    <img class="photo-heat_detector-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="hidden" name="oldImage_heat_detector"
+                        value="{{ $checkSheetfacp->photo_heat_detector }}">
+                    @if ($checkSheetfacp->photo_heat_detector)
+                        <img src="{{ asset('storage/' . $checkSheetfacp->photo_heat_detector) }}"
+                            class="photo-heat_detector-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                    @else
+                        <img class="photo-heat_detector-preview img-fluid mb-3" style="max-height: 300px">
+                    @endif
                     <input type="file" class="form-control" id="photo_heat_detector" name="photo_heat_detector"
                         onchange="previewImage('photo_heat_detector', 'photo-heat_detector-preview')">
                 </div>
@@ -124,13 +145,15 @@
                 <div class="mb-3">
                     <label for="ok_beam_detector" class="form-label">OK</label>
                     <input type="number" min="0" step="1" class="form-control" id="ok_beam_detector"
-                        value="{{ old('ok_beam_detector') }}" name="ok_beam_detector" required autofocus>
+                        value="{{ old('ok_beam_detector') ?? $checkSheetfacp->ok_beam_detector }}"
+                        name="ok_beam_detector" required autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="ng_beam_detector" class="form-label">NG</label>
                     <div class="input-group">
                         <input type="number" min="0" step="1" class="form-control" id="ng_beam_detector"
-                            value="{{ old('ng_beam_detector') }}" name="ng_beam_detector">
+                            value="{{ old('ng_beam_detector') ?? $checkSheetfacp->ng_beam_detector }}"
+                            name="ng_beam_detector">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-success custom-rounded-left"
                                 id="tambahCatatan_beam_detector"><i class="bi bi-bookmark-plus"></i></button>
@@ -141,12 +164,18 @@
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_beam_detector" style="display:none;">
                     <label for="catatan_beam_detector" class="form-label">Catatan Beam Detector</label>
-                    <textarea class="form-control" name="catatan_beam_detector" id="catatan_beam_detector" cols="30"
-                        rows="5">{{ old('catatan_beam_detector') }}</textarea>
+                    <textarea class="form-control" name="catatan_beam_detector" id="catatan_beam_detector" cols="30" rows="5">{{ old('catatan_beam_detector') ?? $checkSheetfacp->catatan_beam_detector }}</textarea>
                 </div>
-                <div class="mb-3" id="fotoField_beam_detector" style="display:none;">
+                <div class="mb-3" id="fotoField_beam_detector" style="display: none;">
                     <label for="photo_beam_detector" class="form-label">Foto Beam Detector</label>
-                    <img class="photo-beam_detector-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="hidden" name="oldImage_beam_detector"
+                        value="{{ $checkSheetfacp->photo_beam_detector }}">
+                    @if ($checkSheetfacp->photo_beam_detector)
+                        <img src="{{ asset('storage/' . $checkSheetfacp->photo_beam_detector) }}"
+                            class="photo-beam_detector-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                    @else
+                        <img class="photo-beam_detector-preview img-fluid mb-3" style="max-height: 300px">
+                    @endif
                     <input type="file" class="form-control" id="photo_beam_detector" name="photo_beam_detector"
                         onchange="previewImage('photo_beam_detector', 'photo-beam_detector-preview')">
                 </div>
@@ -159,13 +188,15 @@
                 <div class="mb-3">
                     <label for="ok_push_button" class="form-label">OK</label>
                     <input type="number" min="0" step="1" class="form-control" id="ok_push_button"
-                        value="{{ old('ok_push_button') }}" name="ok_push_button" required autofocus>
+                        value="{{ old('ok_push_button') ?? $checkSheetfacp->ok_push_button }}"
+                        name="ok_push_button" required autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="ng_push_button" class="form-label">NG</label>
                     <div class="input-group">
                         <input type="number" min="0" step="1" class="form-control" id="ng_push_button"
-                            value="{{ old('ng_push_button') }}" name="ng_push_button">
+                            value="{{ old('ng_push_button') ?? $checkSheetfacp->ng_push_button }}"
+                            name="ng_push_button">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-success custom-rounded-left"
                                 id="tambahCatatan_push_button"><i class="bi bi-bookmark-plus"></i></button>
@@ -176,14 +207,23 @@
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_push_button" style="display:none;">
                     <label for="catatan_push_button" class="form-label">Catatan Push Button</label>
-                    <textarea class="form-control" name="catatan_push_button" id="catatan_push_button" cols="30" rows="5">{{ old('catatan_push_button') }}</textarea>
+                    <textarea class="form-control" name="catatan_push_button" id="catatan_push_button" cols="30" rows="5">{{ old('catatan_push_button') ?? $checkSheetfacp->catatan_push_button }}</textarea>
                 </div>
-                <div class="mb-3" id="fotoField_push_button" style="display:none;">
+                <div class="mb-3" id="fotoField_push_button" style="display: none;">
                     <label for="photo_push_button" class="form-label">Foto Push Button</label>
-                    <img class="photo-push_button-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="hidden" name="oldImage_push_button"
+                        value="{{ $checkSheetfacp->photo_push_button }}">
+                    @if ($checkSheetfacp->photo_push_button)
+                        <img src="{{ asset('storage/' . $checkSheetfacp->photo_push_button) }}"
+                            class="photo-push_button-preview img-fluid mb-3 d-block" style="max-height: 300px">
+                    @else
+                        <img class="photo-push_button-preview img-fluid mb-3" style="max-height: 300px">
+                    @endif
                     <input type="file" class="form-control" id="photo_push_button" name="photo_push_button"
                         onchange="previewImage('photo_push_button', 'photo-push_button-preview')">
                 </div>
+
+
 
 
             </div>
@@ -196,11 +236,12 @@
     </div>
     <div class="row mt-2 mb-5">
         <div class="col-md-12 text-end">
-            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="submit" class="btn btn-warning">Edit</button>
         </div>
     </div>
     </form>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen-elemen yang dibutuhkan
@@ -363,7 +404,5 @@
             });
         });
     </script>
-
-
 
 @endsection

@@ -162,6 +162,19 @@
                 </div>
             </div>
 
+
+            <!-- Grafik FACP -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">FACP</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="facpChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -590,6 +603,112 @@
                 plugins: {
                     legend: {
                         position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
+
+
+
+        // Grafik FACP
+
+
+        var ctxFacp = document.getElementById('facpChart').getContext('2d');
+        var facpChart = new Chart(ctxFacp, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_Facp['labels']) !!},
+                datasets: [{
+                        label: 'OK Smoke Detector',
+                        data: {!! json_encode($data_Facp['okData_Smoke_detector']) !!},
+                        backgroundColor: 'rgba(0, 204, 68, 1)',
+                        borderColor: 'rgba(0, 131, 51, 1)',
+                        stack: 'Stack 0',
+                    },
+                    {
+                        label: 'NG Smoke Detector',
+                        data: {!! json_encode($data_Facp['notOkData_Smoke_detector']) !!},
+                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                        borderColor: 'rgba(139, 0, 0, 1)',
+                        stack: 'Stack 0',
+                    },
+                    {
+                        label: 'OK Heat Detector',
+                        data: {!! json_encode($data_Facp['okData_Heat_detector']) !!},
+                        backgroundColor: 'rgba(0, 204, 68, 1)',
+                        borderColor: 'rgba(0, 131, 51, 1)',
+                        stack: 'Stack 1',
+                    },
+                    {
+                        label: 'NG Heat Detector',
+                        data: {!! json_encode($data_Facp['notOkData_Heat_detector']) !!},
+                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                        borderColor: 'rgba(139, 0, 0, 1)',
+                        stack: 'Stack 1',
+                    },
+                    {
+                        label: 'OK Beam Detector',
+                        data: {!! json_encode($data_Facp['okData_Beam_detector']) !!},
+                        backgroundColor: 'rgba(0, 204, 68, 1)',
+                        borderColor: 'rgba(0, 131, 51, 1)',
+                        stack: 'Stack 2',
+                    },
+                    {
+                        label: 'NG Beam Detector',
+                        data: {!! json_encode($data_Facp['notOkData_Beam_detector']) !!},
+                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                        borderColor: 'rgba(139, 0, 0, 1)',
+                        stack: 'Stack 2',
+                    },
+                    {
+                        label: 'OK Push Button',
+                        data: {!! json_encode($data_Facp['okData_Push_button']) !!},
+                        backgroundColor: 'rgba(0, 204, 68, 1)',
+                        borderColor: 'rgba(0, 131, 51, 1)',
+                        stack: 'Stack 3',
+                    },
+                    {
+                        label: 'NG Push Button',
+                        data: {!! json_encode($data_Facp['notOkData_Push_button']) !!},
+                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                        borderColor: 'rgba(139, 0, 0, 1)',
+                        stack: 'Stack 3',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true, // Matikan tampilan otomatis legenda
+                        position: 'top',
+                        labels: {
+                            // Fungsi callback untuk menampilkan legenda sesuai kebutuhan
+                            generateLabels: function(chart) {
+                                return [{
+                                        text: 'OK',
+                                        fillStyle: 'rgba(0, 204, 68, 1)',
+                                        strokeStyle: 'rgba(0, 131, 51, 1)'
+                                    },
+                                    {
+                                        text: 'NG',
+                                        fillStyle: 'rgba(255, 0, 0, 0.5)',
+                                        strokeStyle: 'rgba(139, 0, 0, 1)'
+                                    }
+                                ];
+                            }
+                        }
                     }
                 }
             }

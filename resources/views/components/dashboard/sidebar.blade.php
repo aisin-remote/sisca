@@ -172,6 +172,9 @@
                 <li class="{{ Request::is('dashboard/report/safetybelt*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/safetybelt">Safety Belt</a>
                 </li>
+                <li class="{{ Request::is('dashboard/report/facp*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/facp">FACP</a>
+                </li>
             </ul>
         </li>
     </ul>

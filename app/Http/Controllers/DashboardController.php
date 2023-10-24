@@ -10,6 +10,7 @@ use App\Models\CheckSheetChainblock;
 use App\Models\CheckSheetCo2;
 use App\Models\CheckSheetEyewasher;
 use App\Models\CheckSheetEyewasherShower;
+use App\Models\CheckSheetFacp;
 use App\Models\CheckSheetHydrantIndoor;
 use App\Models\CheckSheetHydrantOutdoor;
 use App\Models\CheckSheetNitrogenServer;
@@ -676,8 +677,68 @@ class DashboardController extends Controller
         ];
 
 
+
+        // Grafik FACP
+
+        $notOkData_Smoke_detector = [];
+        $okData_Smoke_detector = [];
+
+        $notOkData_Heat_detector = [];
+        $okData_Heat_detector = [];
+
+        $notOkData_Beam_detector = [];
+        $okData_Beam_detector = [];
+
+        $notOkData_Push_button = [];
+        $okData_Push_button = [];
+
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
+            $notOkData_Smoke_detector[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ng_smoke_detector');
+            $okData_Smoke_detector[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ok_smoke_detector');
+
+            $notOkData_Heat_detector[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ng_heat_detector');
+            $okData_Heat_detector[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ok_heat_detector');
+
+            $notOkData_Beam_detector[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ng_beam_detector');
+            $okData_Beam_detector[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ok_beam_detector');
+
+            $notOkData_Push_button[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ng_push_button');
+            $okData_Push_button[] = CheckSheetFacp::whereYear('tanggal_pengecekan', $selectedYear)
+                ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
+                ->sum('ok_push_button');
+        }
+
+
+        $data_Facp = [
+            'labels' => $labels,
+            'okData_Smoke_detector' => $okData_Smoke_detector,
+            'notOkData_Smoke_detector' => $notOkData_Smoke_detector,
+            'okData_Heat_detector' => $okData_Heat_detector,
+            'notOkData_Heat_detector' => $notOkData_Heat_detector,
+            'okData_Beam_detector' => $okData_Beam_detector,
+            'notOkData_Beam_detector' => $notOkData_Beam_detector,
+            'okData_Push_button' => $okData_Push_button,
+            'notOkData_Push_button' => $notOkData_Push_button,
+        ];
+
+
         $availableYears = range(date('Y'), date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'data_Facp', 'availableYears'));
     }
 }
