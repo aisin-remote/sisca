@@ -47,7 +47,7 @@ class CheckSheetHydrantIndoorController extends Controller
         } else {
             // Jika belum ada entri, tampilkan halaman create
             $checkSheetIndoors = CheckSheetHydrantIndoor::all();
-            return view('dashboard.hydrant.checkSheet.checkIndoor', compact('checkSheetIndoors', 'hydrantNumber'));
+            return view('dashboard.hydrant.checksheet.checkIndoor', compact('checkSheetIndoors', 'hydrantNumber'));
         }
     }
 
