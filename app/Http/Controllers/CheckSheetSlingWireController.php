@@ -127,7 +127,7 @@ class CheckSheetSlingWireController extends Controller
         // Mencari entri CheckSheetSlingWire untuk sling_number tertentu dan 3 bulan musim tersebut
         $existingCheckSheet = CheckSheetSlingWire::where('sling_number', $request->sling_number)
             ->where(function ($query) use ($currentYear, $currentMonth, $startMonth, $season) {
-                if ($season == 4) {
+                if ($season == 4 ) {
                     // Jika musim 4, mencari data pada tahun sebelumnya
                     $query->where(function ($q) use ($currentYear, $startMonth) {
                         $q->whereYear('created_at', $currentYear - 1)
