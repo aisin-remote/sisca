@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use Intervention\Image\Facades\Image;
 
 class CheckSheetCo2Controller extends Controller
 {
