@@ -44,7 +44,7 @@ class CheckSheetHydrantOutdoorController extends Controller
         } else {
             // Jika belum ada entri, tampilkan halaman create
             $checkSheetOutdoors = CheckSheetHydrantOutdoor::all();
-            return view('dashboard.hydrant.checkSheet.checkOutdoor', compact('checkSheetOutdoors', 'hydrantNumber'));
+            return view('dashboard.hydrant.checksheet.checkOutdoor', compact('checkSheetOutdoors', 'hydrantNumber'));
         }
     }
 
