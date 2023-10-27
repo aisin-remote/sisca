@@ -18,9 +18,6 @@ use App\Http\Controllers\SafetybeltController;
 use App\Http\Controllers\SlingController;
 use App\Http\Controllers\TanduController;
 use App\Http\Controllers\TembinController;
-use App\Models\Apar;
-use App\Models\Eyewasher;
-use App\Models\Hydrant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,8 +53,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // Route Apar
-Route::resource('/dashboard/master/apar', AparController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update');
+Route::resource('/dashboard/master/apar', AparController::class)->only(['create', 'store', 'edit', 'destroy'])
+    ->middleware('admin');
+Route::resource('/dashboard/master/apar', AparController::class)->only(['index', 'show'])
+    ->middleware('auth');
+Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update')->middleware('admin');
 
 
 // lokasi Apar
@@ -108,50 +108,63 @@ Route::get('/dashboard/location/hydrant/indoor', function () {
 
 
 // Route Hydrant
-Route::resource('/dashboard/master/hydrant', HydrantController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('hydrant.update');
+Route::resource('/dashboard/master/hydrant', HydrantController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/hydrant', HydrantController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/hydrant/{data_hydrant}', [HydrantController::class, 'update'])->name('hydrant.update')->middleware('admin');
 
 //Route Nitrogen
-Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('nitrogen.update');
+Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/nitrogen', NitrogenController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/nitrogen/{data_nitrogen}', [NitrogenController::class, 'update'])->name('nitrogen.update')->middleware('admin');
 
 // Route Co2
-Route::resource('/dashboard/master/co2', Co2Controller::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/co2/{data_co2}', [Co2Controller::class, 'update'])->name('co2.update');
+Route::resource('/dashboard/master/co2', Co2Controller::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/co2', Co2Controller::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/co2/{data_co2}', [Co2Controller::class, 'update'])->name('co2.update')->middleware('admin');
 
 // Route Tandu
-Route::resource('/dashboard/master/tandu', TanduController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/tandu/{data_tandu}', [TanduController::class, 'update'])->name('tandu.update');
+Route::resource('/dashboard/master/tandu', TanduController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/tandu', TanduController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/tandu/{data_tandu}', [TanduController::class, 'update'])->name('tandu.update')->middleware('admin');
 
 // Route Eye Washer
-Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/eye-washer/{data_eyewasher}', [EyewasherController::class, 'update'])->name('eye-washer.update');
+Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/eye-washer', EyewasherController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/eye-washer/{data_eyewasher}', [EyewasherController::class, 'update'])->name('eye-washer.update')->middleware('admin');
 
 // Route Sling
-Route::resource('/dashboard/master/sling', SlingController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/sling/{data_sling}', [SlingController::class, 'update'])->name('sling.update');
+Route::resource('/dashboard/master/sling', SlingController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/sling', SlingController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/sling/{data_sling}', [SlingController::class, 'update'])->name('sling.update')->middleware('admin');
 
 // Route Tembin
-Route::resource('/dashboard/master/tembin', TembinController::class)->except('update')->middleware('auth');
-Route::put('/dashboard/master/tembin/{data_tembin}', [TembinController::class, 'update'])->name('tembin.update');
+Route::resource('/dashboard/master/tembin', TembinController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/tembin', TembinController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/tembin/{data_tembin}', [TembinController::class, 'update'])->name('tembin.update')->middleware('admin');
 
 // Route Chain Block
-Route::resource('/dashboard/master/chain-block', ChainblockController::class)->middleware('auth');
-Route::put('/dashboard/master/chain-block/{data_chainblock}', [ChainblockController::class, 'update'])->name('data-chainblock.update');
+Route::resource('/dashboard/master/chain-block', ChainblockController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/chain-block', ChainblockController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/chain-block/{data_chainblock}', [ChainblockController::class, 'update'])->name('data-chainblock.update')->middleware('admin');
 
 // Route Body Harnest
-Route::resource('/dashboard/master/body-harnest', BodyharnestController::class)->middleware('auth');
-Route::put('/dashboard/master/body-harnest/{data_bodyharnest}', [BodyharnestController::class, 'update'])->name('data-bodyharnest.update');
+Route::resource('/dashboard/master/body-harnest', BodyharnestController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/body-harnest', BodyharnestController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/body-harnest/{data_bodyharnest}', [BodyharnestController::class, 'update'])->name('data-bodyharnest.update')->middleware('admin');
 
-Route::resource('/dashboard/master/safety-belt', SafetybeltController::class)->middleware('auth');
-Route::put('/dashboard/master/safety-belt/{data_safetybelt}', [SafetybeltController::class, 'update'])->name('data-safetybelt.update');
+//Route Safety Belt
+Route::resource('/dashboard/master/safety-belt', SafetybeltController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/safety-belt', SafetybeltController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/safety-belt/{data_safetybelt}', [SafetybeltController::class, 'update'])->name('data-safetybelt.update')->middleware('admin');
 
-Route::resource('/dashboard/master/facp', FacpController::class)->middleware('auth');
-Route::put('/dashboard/master/facp/{data_facp}', [FacpController::class, 'update'])->name('data-facp.update');
+//Route FACP
+Route::resource('/dashboard/master/facp', FacpController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
+Route::resource('/dashboard/master/facp', FacpController::class)->only(['index', 'show'])->middleware('auth');
+Route::put('/dashboard/master/facp/{data_facp}', [FacpController::class, 'update'])->name('data-facp.update')->middleware('admin');
 
 // Route Location
-Route::resource('/dashboard/master/location', LocationController::class)->except('show', 'destroy')->middleware('auth');
-Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy');
+Route::resource('/dashboard/master/location', LocationController::class)->only('index')->middleware('auth');
+Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy')->middleware('admin');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 use App\Http\Controllers\CheckSheetController;
@@ -174,18 +187,18 @@ use App\Http\Controllers\CheckSheetFacpController;
 use App\Models\CheckSheetEyewasherShower;
 
 // checksheet
-Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
-Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
-Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form');
-Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form');
-Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form');
-Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
-Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form');
-Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form');
-Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form');
-Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form');
-Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form');
-Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form');
+Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form')->middleware('auth');
+Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form')->middleware('auth');
 
 
 
@@ -193,7 +206,7 @@ Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'sho
 
 
 
-Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
+Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form')->middleware('admin');
 Route::get('/dashboard/check-sheet/apar/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
 
 Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
@@ -246,7 +259,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
     Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
     Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
-
 });
 
 
@@ -260,7 +272,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/facp/{id}/edit', [CheckSheetFacpController::class, 'edit'])->name('facp.checksheetfacp.edit');
     Route::put('/dashboard/check-sheet/facp/{id}', [CheckSheetFacpController::class, 'update'])->name('facp.checksheetfacp.update');
     Route::get('/dashboard/check-sheet/facp/{id}/show', [CheckSheetFacpController::class, 'show'])->name('facp.checksheetfacp.show');
-
 });
 
 
@@ -274,7 +285,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/safetybelt/{id}/edit', [CheckSheetSafetyBeltController::class, 'edit'])->name('safetybelt.checksheetsafetybelt.edit');
     Route::put('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'update'])->name('safetybelt.checksheetsafetybelt.update');
     Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show');
-
 });
 
 
@@ -288,7 +298,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/bodyharnest/{id}/edit', [CheckSheetBodyHarnestController::class, 'edit'])->name('bodyharnest.checksheetbodyharnest.edit');
     Route::put('/dashboard/check-sheet/bodyharnest/{id}', [CheckSheetBodyHarnestController::class, 'update'])->name('bodyharnest.checksheetbodyharnest.update');
     Route::get('/dashboard/check-sheet/bodyharnest/{id}/show', [CheckSheetBodyHarnestController::class, 'show'])->name('bodyharnest.checksheetbodyharnest.show');
-
 });
 
 
@@ -302,7 +311,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/chainblock/{id}/edit', [CheckSheetChainblockController::class, 'edit'])->name('chainblock.checksheetchainblock.edit');
     Route::put('/dashboard/check-sheet/chainblock/{id}', [CheckSheetChainblockController::class, 'update'])->name('chainblock.checksheetchainblock.update');
     Route::get('/dashboard/check-sheet/chainblock/{id}/show', [CheckSheetChainblockController::class, 'show'])->name('chainblock.checksheetchainblock.show');
-
 });
 
 
@@ -316,7 +324,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/tembin/{id}/edit', [CheckSheetTembinController::class, 'edit'])->name('tembin.checksheettembin.edit');
     Route::put('/dashboard/check-sheet/tembin/{id}', [CheckSheetTembinController::class, 'update'])->name('tembin.checksheettembin.update');
     Route::get('/dashboard/check-sheet/tembin/{id}/show', [CheckSheetTembinController::class, 'show'])->name('tembin.checksheettembin.show');
-
 });
 
 
@@ -330,7 +337,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/sling-belt/{id}/edit', [CheckSheetSlingBeltController::class, 'edit'])->name('sling.checksheetbelt.edit');
     Route::put('/dashboard/check-sheet/sling-belt/{id}', [CheckSheetSlingBeltController::class, 'update'])->name('sling.checksheetbelt.update');
     Route::get('/dashboard/check-sheet/sling-belt/{id}/show', [CheckSheetSlingBeltController::class, 'show'])->name('sling.checksheetbelt.show');
-
 });
 
 
@@ -344,7 +350,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/sling-wire/{id}/edit', [CheckSheetSlingWireController::class, 'edit'])->name('sling.checksheetwire.edit');
     Route::put('/dashboard/check-sheet/sling-wire/{id}', [CheckSheetSlingWireController::class, 'update'])->name('sling.checksheetwire.update');
     Route::get('/dashboard/check-sheet/sling-wire/{id}/show', [CheckSheetSlingWireController::class, 'show'])->name('sling.checksheetwire.show');
-
 });
 
 
@@ -359,7 +364,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/eyewasher/{id}/edit', [CheckSheetEyewasherOnlyController::class, 'edit'])->name('eyewasher.checksheeteyewasher.edit');
     Route::put('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'update'])->name('eyewasher.checksheeteyewasher.update');
     Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show');
-
 });
 
 //Checksheet Eyewasher Shower
@@ -371,7 +375,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/edit', [CheckSheetEyewasherShowerController::class, 'edit'])->name('eyewasher.checksheetshower.edit');
     Route::put('/dashboard/check-sheet/eyewasher-shower/{id}', [CheckSheetEyewasherShowerController::class, 'update'])->name('eyewasher.checksheetshower.update');
     Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/show', [CheckSheetEyewasherShowerController::class, 'show'])->name('eyewasher.checksheetshower.show');
-
 });
 
 
@@ -385,7 +388,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/co2/{id}/edit', [CheckSheetTabungCo2Controller::class, 'edit'])->name('co2.checksheetco2.edit');
     Route::put('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'update'])->name('co2.checksheetco2.update');
     Route::get('/dashboard/check-sheet/co2/{id}/show', [CheckSheetTabungCo2Controller::class, 'show'])->name('co2.checksheetco2.show');
-
 });
 
 
@@ -398,7 +400,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/nitrogen/{id}/edit', [CheckSheetNitrogenServerController::class, 'edit'])->name('nitrogen.checksheetnitrogen.edit');
     Route::put('/dashboard/check-sheet/nitrogen/{id}', [CheckSheetNitrogenServerController::class, 'update'])->name('nitrogen.checksheetnitrogen.update');
     Route::get('/dashboard/check-sheet/nitrogen/{id}/show', [CheckSheetNitrogenServerController::class, 'show'])->name('nitrogen.checksheetnitrogen.show');
-
 });
 
 
@@ -412,7 +413,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/hydrantindoor/{id}/edit', [CheckSheetHydrantIndoorController::class, 'edit'])->name('hydrant.checksheetindoor.edit');
     Route::put('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'update'])->name('hydrant.checksheetindoor.update');
     Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantIndoorController::class, 'show'])->name('hydrant.checksheetindoor.show');
-
 });
 
 
@@ -426,7 +426,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/edit', [CheckSheetHydrantOutdoorController::class, 'edit'])->name('hydrant.checksheetoutdoor.edit');
     Route::put('/dashboard/check-sheet/hydrantoutdoor/{id}', [CheckSheetHydrantOutdoorController::class, 'update'])->name('hydrant.checksheetoutdoor.update');
     Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/show', [CheckSheetHydrantOutdoorController::class, 'show'])->name('hydrant.checksheetoutdoor.show');
-
 });
 
 
@@ -441,7 +440,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/aparco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
     Route::put('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
     Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
-
 });
 
 use App\Http\Controllers\CheckSheetPowderController;
