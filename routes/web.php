@@ -183,67 +183,59 @@ use App\Http\Controllers\CheckSheetBodyHarnestController;
 use App\Http\Controllers\CheckSheetSafetyBeltController;
 use App\Http\Controllers\CheckSheetFacpController;
 
-
-use App\Models\CheckSheetEyewasherShower;
-
-// checksheet
-Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form')->middleware('auth');
-Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    // checksheet
+    Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
+    Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
+    Route::get('/dashboard/check-sheet/nitrogen', [CheckSheetNitrogenServerController::class, 'showForm'])->name('nitrogen.show.form');
+    Route::get('/dashboard/check-sheet/co2', [CheckSheetTabungCo2Controller::class, 'showForm'])->name('co2.show.form');
+    Route::get('/dashboard/check-sheet/tandu', [CheckSheetTanduController::class, 'showForm'])->name('tandu.show.form');
+    Route::get('/dashboard/check-sheet/eye-washer', [CheckSheetEyewasherController::class, 'showForm'])->name('eyewasher.show.form');
+    Route::get('/dashboard/check-sheet/sling', [CheckSheetSlingController::class, 'showForm'])->name('sling.show.form');
+    Route::get('/dashboard/check-sheet/tembin', [CheckSheetTembinController::class, 'showForm'])->name('tembin.show.form');
+    Route::get('/dashboard/check-sheet/chainblock', [CheckSheetChainblockController::class, 'showForm'])->name('chainblock.show.form');
+    Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form');
+    Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form');
+    Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form');
 
 
+    Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
+    Route::get('/dashboard/check-sheet/apar/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
 
+    Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
+    Route::post('/dashboard/hydrant/process-checksheet', [CheckSheetHydrantController::class, 'processForm'])->name('hydrant.process.form');
+    Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantController::class, 'index'])->name('hydrant.checksheet.index');
 
+    Route::get('/dashboard/nitrogen/checksheet/all-check-sheet', [CheckSheetNitrogenServerController::class, 'index'])->name('nitrogen.checksheet.index');
+    Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerController::class, 'processForm'])->name('nitrogen.process.form');
 
+    Route::post('/dashboard/co2/process-checksheet', [CheckSheetTabungCo2Controller::class, 'processForm'])->name('co2.process.form');
+    Route::get('/dashboard/co2/checksheet/all-check-sheet', [CheckSheetTabungCo2Controller::class, 'index'])->name('co2.checksheet.index');
 
+    Route::post('/dashboard/tandu/process-checksheet', [CheckSheetTanduController::class, 'processForm'])->name('tandu.process.form');
+    Route::get('/dashboard/tandu/checksheet/all-check-sheet', [CheckSheetTanduController::class, 'index'])->name('tandu.checksheet.index');
 
-Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form')->middleware('admin');
-Route::get('/dashboard/check-sheet/apar/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
+    Route::post('/dashboard/eyewasher/process-checksheet', [CheckSheetEyewasherController::class, 'processForm'])->name('eyewasher.process.form');
+    Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
 
-Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
-Route::post('/dashboard/hydrant/process-checksheet', [CheckSheetHydrantController::class, 'processForm'])->name('hydrant.process.form');
-Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantController::class, 'index'])->name('hydrant.checksheet.index');
+    Route::post('/dashboard/sling/process-checksheet', [CheckSheetSlingController::class, 'processForm'])->name('sling.process.form');
+    Route::get('/dashboard/sling/checksheet/all-check-sheet', [CheckSheetSlingController::class, 'index'])->name('sling.checksheet.index');
 
-Route::get('/dashboard/nitrogen/checksheet/all-check-sheet', [CheckSheetNitrogenServerController::class, 'index'])->name('nitrogen.checksheet.index');
-Route::post('/dashboard/nitrogen/process-checksheet', [CheckSheetNitrogenServerController::class, 'processForm'])->name('nitrogen.process.form');
+    Route::post('/dashboard/tembin/process-checksheet', [CheckSheetTembinController::class, 'processForm'])->name('tembin.process.form');
+    Route::get('/dashboard/tembin/checksheet/all-check-sheet', [CheckSheetTembinController::class, 'index'])->name('tembin.checksheet.index');
 
-Route::post('/dashboard/co2/process-checksheet', [CheckSheetTabungCo2Controller::class, 'processForm'])->name('co2.process.form');
-Route::get('/dashboard/co2/checksheet/all-check-sheet', [CheckSheetTabungCo2Controller::class, 'index'])->name('co2.checksheet.index');
+    Route::post('/dashboard/chainblock/process-checksheet', [CheckSheetChainblockController::class, 'processForm'])->name('chainblock.process.form');
+    Route::get('/dashboard/chainblock/checksheet/all-check-sheet', [CheckSheetChainblockController::class, 'index'])->name('chainblock.checksheet.index');
 
-Route::post('/dashboard/tandu/process-checksheet', [CheckSheetTanduController::class, 'processForm'])->name('tandu.process.form');
-Route::get('/dashboard/tandu/checksheet/all-check-sheet', [CheckSheetTanduController::class, 'index'])->name('tandu.checksheet.index');
+    Route::post('/dashboard/bodyharnest/process-checksheet', [CheckSheetBodyHarnestController::class, 'processForm'])->name('bodyharnest.process.form');
+    Route::get('/dashboard/bodyharnest/checksheet/all-check-sheet', [CheckSheetBodyHarnestController::class, 'index'])->name('bodyharnest.checksheet.index');
 
-Route::post('/dashboard/eyewasher/process-checksheet', [CheckSheetEyewasherController::class, 'processForm'])->name('eyewasher.process.form');
-Route::get('/dashboard/eyewasher/checksheet/all-check-sheet', [CheckSheetEyewasherController::class, 'index'])->name('eyewasher.checksheet.index');
+    Route::post('/dashboard/safetybelt/process-checksheet', [CheckSheetSafetyBeltController::class, 'processForm'])->name('safetybelt.process.form');
+    Route::get('/dashboard/safetybelt/checksheet/all-check-sheet', [CheckSheetSafetyBeltController::class, 'index'])->name('safetybelt.checksheet.index');
 
-Route::post('/dashboard/sling/process-checksheet', [CheckSheetSlingController::class, 'processForm'])->name('sling.process.form');
-Route::get('/dashboard/sling/checksheet/all-check-sheet', [CheckSheetSlingController::class, 'index'])->name('sling.checksheet.index');
-
-Route::post('/dashboard/tembin/process-checksheet', [CheckSheetTembinController::class, 'processForm'])->name('tembin.process.form');
-Route::get('/dashboard/tembin/checksheet/all-check-sheet', [CheckSheetTembinController::class, 'index'])->name('tembin.checksheet.index');
-
-Route::post('/dashboard/chainblock/process-checksheet', [CheckSheetChainblockController::class, 'processForm'])->name('chainblock.process.form');
-Route::get('/dashboard/chainblock/checksheet/all-check-sheet', [CheckSheetChainblockController::class, 'index'])->name('chainblock.checksheet.index');
-
-Route::post('/dashboard/bodyharnest/process-checksheet', [CheckSheetBodyHarnestController::class, 'processForm'])->name('bodyharnest.process.form');
-Route::get('/dashboard/bodyharnest/checksheet/all-check-sheet', [CheckSheetBodyHarnestController::class, 'index'])->name('bodyharnest.checksheet.index');
-
-Route::post('/dashboard/safetybelt/process-checksheet', [CheckSheetSafetyBeltController::class, 'processForm'])->name('safetybelt.process.form');
-Route::get('/dashboard/safetybelt/checksheet/all-check-sheet', [CheckSheetSafetyBeltController::class, 'index'])->name('safetybelt.checksheet.index');
-
-Route::post('/dashboard/facp/process-checksheet', [CheckSheetFacpController::class, 'processForm'])->name('facp.process.form');
-Route::get('/dashboard/facp/checksheet/all-check-sheet', [CheckSheetFacpController::class, 'index'])->name('facp.checksheet.index');
-
-
+    Route::post('/dashboard/facp/process-checksheet', [CheckSheetFacpController::class, 'processForm'])->name('facp.process.form');
+    Route::get('/dashboard/facp/checksheet/all-check-sheet', [CheckSheetFacpController::class, 'index'])->name('facp.checksheet.index');
+});
 
 
 //lagi fix ini (hapus jika indoor sudah kelar)
@@ -253,12 +245,12 @@ Route::get('/dashboard/facp/checksheet/all-check-sheet', [CheckSheetFacpControll
 //Checksheet Tandu
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu');
-    Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu');
-    Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy');
-    Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
-    Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
-    Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show');
+    Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu')->middleware('admin');
+    Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu')->middleware('admin');
+    Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy')->middleware('admin');
+    Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit')->middleware('admin');
+    Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update')->middleware('admin');
+    Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show')->middleware('auth');
 });
 
 
