@@ -5,7 +5,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Info Eyewasher</h1>
-        <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="btn btn-warning">Edit</a>
+        @can('admin')
+            <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="btn btn-warning">Edit</a>
+        @endcan
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
