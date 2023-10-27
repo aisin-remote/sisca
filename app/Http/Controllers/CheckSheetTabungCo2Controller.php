@@ -20,6 +20,10 @@ class CheckSheetTabungCo2Controller extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $co2Number = $request->input('tabung_number');
 
         $co2 = Co2::where('no_tabung', $co2Number)->first();

@@ -5,8 +5,10 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Tembin</h1>
-        <a href="/dashboard/master/tembin/create" class="btn btn-success"><span data-feather="file-plus"></span>
-            Tambah</a>
+        @can('admin')
+            <a href="/dashboard/master/tembin/create" class="btn btn-success"><span data-feather="file-plus"></span>
+                Tambah</a>
+        @endcan
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -32,6 +34,7 @@
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
                                 <a href="{{ route('tembin.show', $tembin->id) }}" class="badge bg-info me-2">Info</a>
+                                @can('admin')
                                 <a href="{{ route('tembin.edit', $tembin->id) }}" class="badge bg-warning me-2">Edit</a>
                                 <form action="{{ route('tembin.destroy', $tembin->id) }}" method="POST" class="delete-form">
                                     @csrf
@@ -39,6 +42,7 @@
                                     <button type="submit" class="badge bg-danger border-0"
                                         onclick="return confirm('Ingin menghapus Data Tembin?')">Delete</button>
                                 </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>

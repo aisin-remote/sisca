@@ -20,6 +20,10 @@ class CheckSheetNitrogenServerController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $nitrogenNumber = $request->input('tabung_number');
 
         $nitrogenNumber = strtoupper($nitrogenNumber);

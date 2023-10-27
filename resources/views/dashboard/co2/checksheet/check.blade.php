@@ -7,7 +7,7 @@
         <h1>Check Sheet Co2</h1>
     </div>
     @if (session()->has('error'))
-        <div class="alert alert-success col-lg-6">
+        <div class="alert alert-danger col-lg-6">
             {{ session()->get('error') }}
         </div>
     @endif

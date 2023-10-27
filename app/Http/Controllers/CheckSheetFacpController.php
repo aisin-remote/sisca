@@ -21,6 +21,10 @@ class CheckSheetFacpController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $facpNumber = $request->input('zona_number');
 
         $facp = Facp::where('zona', $facpNumber)->first();

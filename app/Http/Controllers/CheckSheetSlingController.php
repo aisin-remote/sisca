@@ -42,6 +42,10 @@ class CheckSheetSlingController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $slingNumber = $request->input('sling_number');
 
         $slingNumber = strtoupper($slingNumber);

@@ -41,6 +41,10 @@ class CheckSheetEyewasherController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $eyewasherNumber = $request->input('eyewasher_number');
 
         $eyewasherNumber = strtoupper($eyewasherNumber);

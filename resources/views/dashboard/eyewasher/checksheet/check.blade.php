@@ -6,7 +6,7 @@
         <h1>Check Sheet Eyewasher</h1>
     </div>
     @if (session()->has('error'))
-        <div class="alert alert-success col-lg-6">
+        <div class="alert alert-danger col-lg-6">
             {{ session()->get('error') }}
         </div>
     @endif

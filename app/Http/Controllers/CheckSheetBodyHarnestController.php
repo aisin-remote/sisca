@@ -20,6 +20,10 @@ class CheckSheetBodyHarnestController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $bodyharnestNumber = $request->input('bodyharnest_number');
 
         $bodyharnest = Bodyharnest::where('no_bodyharnest', $bodyharnestNumber)->first();

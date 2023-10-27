@@ -36,6 +36,10 @@ class CheckSheetHydrantController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $hydrantNumber = $request->input('hydrant_number');
 
         $hydrantNumber = strtoupper($hydrantNumber);

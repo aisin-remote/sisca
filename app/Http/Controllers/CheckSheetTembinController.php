@@ -22,6 +22,10 @@ class CheckSheetTembinController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $tembinNumber = $request->input('tembin_number');
 
         $tembin = Tembin::where('no_equip', $tembinNumber)->first();

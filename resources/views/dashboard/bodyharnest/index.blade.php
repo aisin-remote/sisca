@@ -5,7 +5,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Body Harnest</h1>
-        <a href="/dashboard/master/body-harnest/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        @can('admin')
+            <a href="/dashboard/master/body-harnest/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        @endcan
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -35,13 +37,15 @@
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
                                 <a href="{{ route('body-harnest.show', $bodyharnest->id) }}" class="badge bg-info me-2">Info</a>
-                                <a href="{{ route('body-harnest.edit', $bodyharnest->id) }}" class="badge bg-warning me-2">Edit</a>
-                                <form action="{{ route('body-harnest.destroy', $bodyharnest->id) }}" method="POST" class="delete-form">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="badge bg-danger border-0"
-                                        onclick="return confirm('Ingin menghapus Data Body Harnest?')">Delete</button>
-                                </form>
+                                @can('admin')
+                                    <a href="{{ route('body-harnest.edit', $bodyharnest->id) }}" class="badge bg-warning me-2">Edit</a>
+                                    <form action="{{ route('body-harnest.destroy', $bodyharnest->id) }}" method="POST" class="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="badge bg-danger border-0"
+                                            onclick="return confirm('Ingin menghapus Data Body Harnest?')">Delete</button>
+                                    </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>

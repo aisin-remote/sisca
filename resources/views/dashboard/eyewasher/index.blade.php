@@ -5,7 +5,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Data Eye Washers</h1>
-        <a href="/dashboard/master/eye-washer/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        @can('admin')
+            <a href="/dashboard/master/eye-washer/create" class="btn btn-success"><span data-feather="file-plus"></span> Tambah</a>
+        @endcan
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -32,27 +34,20 @@
                         <td>{{ $eyewasher->type }}</td>
                         <td>{{ $eyewasher->locations->location_name }}</td>
                         <td>{{ $eyewasher->plant }}</td>
-                        {{-- <td>
-                            <div class="d-flex align-items-center justify-content-center">
-                            <form action="{{ route('eye-washer.destroy', $eyewasher->id) }}" method="POST">
-                                <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="badge bg-warning">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge bg-danger border-0"
-                                    onclick="return confirm('Ingin menghapus Data Eye Washer?')">Delete</button>
-                            </form>
-                            </div>
-                        </td> --}}
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
                                 <a href="{{ route('eye-washer.show', $eyewasher->id) }}" class="badge bg-info me-2">Info</a>
-                                <a href="{{ route('eye-washer.edit', $eyewasher->id) }}" class="badge bg-warning me-2">Edit</a>
-                                <form action="{{ route('eye-washer.destroy', $eyewasher->id) }}" method="POST" class="delete-form">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="badge bg-danger border-0"
-                                        onclick="return confirm('Ingin menghapus Data Eyewasher?')">Delete</button>
-                                </form>
+                                @can('admin')
+                                    <a href="{{ route('eye-washer.edit', $eyewasher->id) }}"
+                                        class="badge bg-warning me-2">Edit</a>
+                                    <form action="{{ route('eye-washer.destroy', $eyewasher->id) }}" method="POST"
+                                        class="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="badge bg-danger border-0"
+                                            onclick="return confirm('Ingin menghapus Data Eyewasher?')">Delete</button>
+                                    </form>
+                                @endcan
                             </div>
                         </td>
                     </tr>

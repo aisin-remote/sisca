@@ -22,6 +22,10 @@ class CheckSheetChainblockController extends Controller
 
     public function processForm(Request $request)
     {
+        if (auth()->user()->role != 'Admin') {
+            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        }
+
         $chainblockNumber = $request->input('chainblock_number');
 
         $chainblock = Chainblock::where('no_chainblock', $chainblockNumber)->first();
