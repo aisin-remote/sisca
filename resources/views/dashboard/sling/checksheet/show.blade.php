@@ -6,7 +6,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Sling</h1>
-            <a href="{{ route('sling.checksheetwire.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('sling.checksheetwire.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -70,8 +72,9 @@
                         <tr>
                             <th>Photo Bagian Wire 1</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_wire_1) }}" alt="Photo Bagian Wire 1"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_wire_1) }}"
+                                    alt="Photo Bagian Wire 1" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -85,8 +88,9 @@
                         <tr>
                             <th>Photo Bagian Wire 2</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_wire_2) }}" alt="Photo Bagian Wire 2"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_wire_2) }}"
+                                    alt="Photo Bagian Wire 2" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -100,8 +104,9 @@
                         <tr>
                             <th>Photo Kumpulan Wire 1</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_kumpulan_wire_1) }}" alt="Photo Kumpulan Wire 1"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_kumpulan_wire_1) }}"
+                                    alt="Photo Kumpulan Wire 1" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -115,8 +120,9 @@
                         <tr>
                             <th>Photo Diameter Wire</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_diameter_wire) }}" alt="Photo Diameter Wire"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_diameter_wire) }}"
+                                    alt="Photo Diameter Wire" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -130,8 +136,9 @@
                         <tr>
                             <th>Photo Kumpulan Wire 2</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_kumpulan_wire_2) }}" alt="Photo Kumpulan Wire 2"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_kumpulan_wire_2) }}"
+                                    alt="Photo Kumpulan Wire 2" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
 
@@ -162,8 +169,9 @@
                         <tr>
                             <th>Photo Pengunci Hook</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengunci_hook) }}" alt="Photo Pengunci Hook"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengunci_hook) }}"
+                                    alt="Photo Pengunci Hook" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
 
@@ -191,7 +199,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Sling</h1>
-            <a href="{{ route('sling.checksheetbelt.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('sling.checksheetbelt.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -240,8 +250,9 @@
                         <tr>
                             <th>Photo Kelengkapan TagSling Belt</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_kelengkapan_tag_sling_belt) }}" alt="Photo Kelengkapan Tag Sling Belt"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_kelengkapan_tag_sling_belt) }}"
+                                    alt="Photo Kelengkapan Tag Sling Belt" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -255,8 +266,9 @@
                         <tr>
                             <th>Photo Bagian Pinggir Belt Robek</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_pinggir_belt_robek) }}" alt="Photo Bagian Pinggir Belt Robek"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_pinggir_belt_robek) }}"
+                                    alt="Photo Bagian Pinggir Belt Robek" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -270,8 +282,9 @@
                         <tr>
                             <th>Photo Pengecekan Lapisan Belt 1</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_1) }}" alt="Photo Pengecekan Lapisan Belt 1"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_1) }}"
+                                    alt="Photo Pengecekan Lapisan Belt 1" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -285,8 +298,9 @@
                         <tr>
                             <th>Photo Pengecekan Jahitan Belt</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_jahitan_belt) }}" alt="Photo Pengecekan Jahitan Belt"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_jahitan_belt) }}"
+                                    alt="Photo Pengecekan Jahitan Belt" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -300,8 +314,9 @@
                         <tr>
                             <th>Photo Pengecekan Permukaan Belt</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_permukaan_belt) }}" alt="Photo Pengecekan Permukaan Belt"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_permukaan_belt) }}"
+                                    alt="Photo Pengecekan Permukaan Belt" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
 
@@ -316,8 +331,9 @@
                         <tr>
                             <th>Photo Pengecekan Lapisan Belt 2</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_2) }}" alt="Photo Pengecekan Lapisan Belt 2"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_2) }}"
+                                    alt="Photo Pengecekan Lapisan Belt 2" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
 
@@ -332,8 +348,9 @@
                         <tr>
                             <th>Photo Pengecekan Aus</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_aus) }}" alt="Photo Pengecekan Aus"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_aus) }}"
+                                    alt="Photo Pengecekan Aus" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
 
@@ -364,8 +381,9 @@
                         <tr>
                             <th>Photo Pengunci Hook</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengunci_hook) }}" alt="Photo Pengunci Hook"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengunci_hook) }}"
+                                    alt="Photo Pengunci Hook" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                     </table>

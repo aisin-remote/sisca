@@ -6,7 +6,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Powder</h1>
-            <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -132,7 +134,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Co2/AF11E</h1>
-            <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">

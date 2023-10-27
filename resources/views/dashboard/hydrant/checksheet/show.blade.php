@@ -6,7 +6,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Outdoor</h1>
-            <a href="{{ route('hydrant.checksheetoutdoor.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('hydrant.checksheetoutdoor.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -133,8 +135,9 @@
                         <tr>
                             <th>Photo Rantai Penutup Pilar</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_rantai) }}" alt="Photo Rantai Penutup Pilar"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_rantai) }}"
+                                    alt="Photo Rantai Penutup Pilar" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -160,7 +163,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Hydrant Indoor</h1>
-            <a href="{{ route('hydrant.checksheetindoor.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('hydrant.checksheetindoor.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -227,8 +232,9 @@
                         <tr>
                             <th>Photo Tombol Emergency</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_emergency) }}" alt="Photo Tombol Emergency"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_emergency) }}"
+                                    alt="Photo Tombol Emergency" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -287,8 +293,9 @@
                         <tr>
                             <th>Photo Coupling/Sambungan</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_coupling) }}" alt="Photo Coupling/Sambungan"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_coupling) }}"
+                                    alt="Photo Coupling/Sambungan" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>

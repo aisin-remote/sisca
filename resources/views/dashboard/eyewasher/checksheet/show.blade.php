@@ -6,7 +6,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Eyewasher</h1>
-            <a href="{{ route('eyewasher.checksheetshower.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('eyewasher.checksheetshower.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -47,8 +49,9 @@
                         <tr>
                             <th>Photo Instalation Base</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_instalation_base) }}" alt="Photo Instalation Base"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_instalation_base) }}"
+                                    alt="Photo Instalation Base" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -62,8 +65,9 @@
                         <tr>
                             <th>Photo Pipa Saluran Air</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pipa_saluran_air) }}" alt="Photo Pipa Saluran Air"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pipa_saluran_air) }}"
+                                    alt="Photo Pipa Saluran Air" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -77,8 +81,9 @@
                         <tr>
                             <th>Photo Wastafel Eye Wash</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_wastafel_eye_wash) }}" alt="Photo Wastafel Eye Wash"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_wastafel_eye_wash) }}"
+                                    alt="Photo Wastafel Eye Wash" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -92,8 +97,9 @@
                         <tr>
                             <th>Photo Kran Eye Wash</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_kran_eye_wash) }}" alt="Photo Kran Eye Wash"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_kran_eye_wash) }}"
+                                    alt="Photo Kran Eye Wash" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -107,8 +113,9 @@
                         <tr>
                             <th>Photo Tuas Eye Wash</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_tuas_eye_wash) }}" alt="Photo Tuas Eye Wash"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_tuas_eye_wash) }}"
+                                    alt="Photo Tuas Eye Wash" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -137,8 +144,9 @@
                         <tr>
                             <th>Photo Sign</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_sign) }}" alt="Photo Rantai Penutup Pilar"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_sign) }}"
+                                    alt="Photo Rantai Penutup Pilar" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>
@@ -164,7 +172,9 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
             <h1>Detail Check Sheet Eyewasher</h1>
-            <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @can('admin')
+                <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            @endcan
         </div>
         <div class="card col-md-12">
             <div class="card-body">
@@ -220,8 +230,9 @@
                         <tr>
                             <th>Photo Pipa Saluran Air</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pipa_saluran_air) }}" alt="Photo Pipa Saluran Air"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pipa_saluran_air) }}"
+                                    alt="Photo Pipa Saluran Air" style="max-width: 250px; max-height: 300px;"
+                                    class="img-fluid">
                             </td>
                         </tr>
                         <tr>

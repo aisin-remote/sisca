@@ -5,7 +5,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Detail Check Sheet FACP</h1>
-        <a href="{{ route('facp.checksheetfacp.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+        @can('admin')
+            <a href="{{ route('facp.checksheetfacp.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+        @endcan
     </div>
     <div class="card col-md-12">
         <div class="card-body">
@@ -133,9 +135,8 @@
                         <tr>
                             <th>Photo Push Button</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_push_button) }}"
-                                    alt="Photo Push Button" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_push_button) }}" alt="Photo Push Button"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                     @endif
