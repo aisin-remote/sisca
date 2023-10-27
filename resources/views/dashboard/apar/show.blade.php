@@ -170,15 +170,17 @@
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Apar Co2?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('apar.checksheetco2.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('apar.checksheetco2.destroy', $checksheet->id) }}" method="POST"
+                                                class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Apar Co2?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -227,15 +229,17 @@
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Apar Powder?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('apar.checksheetpowder.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('apar.checksheetpowder.destroy', $checksheet->id) }}" method="POST"
+                                                class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Apar Powder?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -107,7 +107,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive col-lg-12 mt-3">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-sm" id="dtBasicExample">
                     <thead>
                         <tr>
                             <th rowspan="2" scope="col" class="text-center align-middle">#</th>
@@ -147,15 +147,17 @@
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('hydrant.checksheetindoor.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('hydrant.checksheetindoor.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('hydrant.checksheetindoor.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Indoor?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('hydrant.checksheetindoor.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('hydrant.checksheetindoor.destroy', $checksheet->id) }}" method="POST"
+                                                class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Indoor?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -171,7 +173,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive col-lg-12 mt-3">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-sm" id="dtBasicExample">
                     <thead>
                         <tr>
                             <th rowspan="2" class="text-center align-middle" scope="col">#</th>
@@ -208,15 +210,17 @@
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('hydrant.checksheetoutdoor.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('hydrant.checksheetoutdoor.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('hydrant.checksheetoutdoor.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Outdoor?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('hydrant.checksheetoutdoor.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('hydrant.checksheetoutdoor.destroy', $checksheet->id) }}" method="POST"
+                                                class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Hydrant Outdoor?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

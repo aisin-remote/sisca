@@ -119,15 +119,17 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('tandu.checksheettandu.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('tandu.checksheettandu.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('tandu.checksheettandu.destroy', $checksheet->id) }}"
-                                            method="POST" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Tandu?')">Delete</button>
-                                        </form>
+                                            @can('admin')
+                                                <a href="{{ route('tandu.checksheettandu.edit', $checksheet->id) }}"
+                                                    class="badge bg-warning me-2">Edit</a>
+                                                <form action="{{ route('tandu.checksheettandu.destroy', $checksheet->id) }}"
+                                                    method="POST" class="delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="badge bg-danger border-0"
+                                                        onclick="return confirm('Ingin menghapus Data Check Sheet Tandu?')">Delete</button>
+                                                </form>
+                                            @endcan
                                     </div>
                                 </td>
                             </tr>
