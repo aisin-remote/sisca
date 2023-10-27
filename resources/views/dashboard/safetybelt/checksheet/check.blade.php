@@ -22,8 +22,8 @@
             <div class="mb-3 col-md-6">
                 <label for="safetybelt_number" class="form-label">No Safety Belt</label>
                 <input type="text" name="safetybelt_number" id="safetybelt_number" placeholder="Masukkan No safetybelt"
-                    class="form-control @error('safetybelt_number') is-invalid @enderror" value="{{ old('safetybelt_number') }}"
-                    required autofocus>
+                    class="form-control @error('safetybelt_number') is-invalid @enderror"
+                    value="{{ old('safetybelt_number') }}" required autofocus>
                 @error('safetybelt_number')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -70,15 +70,18 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('safetybelt.checksheetsafetybelt.show', $checkSheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('safetybelt.checksheetsafetybelt.edit', $checkSheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('safetybelt.checksheetsafetybelt.destroy', $checkSheet->id) }}"
-                                            method="POST" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Safety Belt?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('safetybelt.checksheetsafetybelt.edit', $checkSheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form
+                                                action="{{ route('safetybelt.checksheetsafetybelt.destroy', $checkSheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Safety Belt?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

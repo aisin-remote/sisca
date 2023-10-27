@@ -70,15 +70,17 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('sling.checksheetwire.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('sling.checksheetwire.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('sling.checksheetwire.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Sling Wire?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('sling.checksheetwire.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('sling.checksheetwire.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Sling Wire?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -152,15 +154,17 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('sling.checksheetbelt.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('sling.checksheetbelt.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('sling.checksheetbelt.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Sling Beltr?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('sling.checksheetbelt.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('sling.checksheetbelt.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Sling Beltr?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

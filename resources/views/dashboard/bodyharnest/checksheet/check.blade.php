@@ -21,9 +21,10 @@
         <div class="row">
             <div class="mb-3 col-md-6">
                 <label for="bodyharnest_number" class="form-label">No Body Harnest</label>
-                <input type="text" name="bodyharnest_number" id="bodyharnest_number" placeholder="Masukkan No bodyharnest"
-                    class="form-control @error('bodyharnest_number') is-invalid @enderror" value="{{ old('bodyharnest_number') }}"
-                    required autofocus>
+                <input type="text" name="bodyharnest_number" id="bodyharnest_number"
+                    placeholder="Masukkan No bodyharnest"
+                    class="form-control @error('bodyharnest_number') is-invalid @enderror"
+                    value="{{ old('bodyharnest_number') }}" required autofocus>
                 @error('bodyharnest_number')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -70,15 +71,18 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('bodyharnest.checksheetbodyharnest.show', $checkSheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('bodyharnest.checksheetbodyharnest.edit', $checkSheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('bodyharnest.checksheetbodyharnest.destroy', $checkSheet->id) }}"
-                                            method="POST" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Body Harnest?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('bodyharnest.checksheetbodyharnest.edit', $checkSheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form
+                                                action="{{ route('bodyharnest.checksheetbodyharnest.destroy', $checkSheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Body Harnest?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -2,7 +2,8 @@
 @section('title', 'Check Sheet')
 
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Check Sheet Sling</h1>
     </div>
     @if (session()->has('error'))
@@ -18,19 +19,23 @@
     <form action="{{ route('sling.process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         <div class="row">
-        <div class="mb-3 col-md-6">
-            <label for="sling_number" class="form-label">No Sling</label>
-            <input type="text" name="sling_number" id="sling_number" placeholder="Masukkan No sling" class="form-control @error('sling_number') is-invalid @enderror" value="{{old('sling_number')}}" required autofocus>
-            @error('sling_number')
-                <div class="text-danger">{{$message}}</div>
-            @enderror
+            <div class="mb-3 col-md-6">
+                <label for="sling_number" class="form-label">No Sling</label>
+                <input type="text" name="sling_number" id="sling_number" placeholder="Masukkan No sling"
+                    class="form-control @error('sling_number') is-invalid @enderror" value="{{ old('sling_number') }}"
+                    required autofocus>
+                @error('sling_number')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-success">Check</button>
+        <button type="submit" class="btn btn-success">Check</button>
     </form>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h5>Check Sheet Terbaru</h5>
-        <a href="/dashboard/sling/checksheet/all-check-sheet" class="btn-link text-primary" style="text-decoration: underline;">
+        <a href="/dashboard/sling/checksheet/all-check-sheet" class="btn-link text-primary"
+            style="text-decoration: underline;">
             Semua Check Sheet
         </a>
     </div>
@@ -66,31 +71,37 @@
                                 @if ($checkSheet->slings->type === 'Sling Wire')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('sling.checksheetwire.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                            <a href="{{ route('sling.checksheetwire.edit', $checkSheet->id) }}"
-                                                class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('sling.checksheetwire.destroy', $checkSheet->id) }}" method="POST"
-                                                class="delete-form">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="badge bg-danger border-0"
-                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Sling?')">Delete</button>
-                                            </form>
+                                            <a href="{{ route('sling.checksheetwire.show', $checkSheet->id) }}"
+                                                class="badge bg-info me-2">Info</a>
+                                            @can('admin')
+                                                <a href="{{ route('sling.checksheetwire.edit', $checkSheet->id) }}"
+                                                    class="badge bg-warning me-2">Edit</a>
+                                                <form action="{{ route('sling.checksheetwire.destroy', $checkSheet->id) }}"
+                                                    method="POST" class="delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="badge bg-danger border-0"
+                                                        onclick="return confirm('Ingin menghapus Data Check Sheet Sling?')">Delete</button>
+                                                </form>
+                                            @endcan
                                         </div>
                                     </td>
                                 @elseif ($checkSheet->slings->type === 'Sling Belt')
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('sling.checksheetbelt.show', $checkSheet->id) }}" class="badge bg-info me-2">Info</a>
-                                            <a href="{{ route('sling.checksheetbelt.edit', $checkSheet->id) }}"
-                                                class="badge bg-warning me-2">Edit</a>
-                                            <form action="{{ route('sling.checksheetbelt.destroy', $checkSheet->id) }}" method="POST"
-                                                class="delete-form">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="badge bg-danger border-0"
-                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Sling?')">Delete</button>
-                                            </form>
+                                            <a href="{{ route('sling.checksheetbelt.show', $checkSheet->id) }}"
+                                                class="badge bg-info me-2">Info</a>
+                                            @can('admin')
+                                                <a href="{{ route('sling.checksheetbelt.edit', $checkSheet->id) }}"
+                                                    class="badge bg-warning me-2">Edit</a>
+                                                <form action="{{ route('sling.checksheetbelt.destroy', $checkSheet->id) }}"
+                                                    method="POST" class="delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="badge bg-danger border-0"
+                                                        onclick="return confirm('Ingin menghapus Data Check Sheet Sling?')">Delete</button>
+                                                </form>
+                                            @endcan
                                         </div>
                                     </td>
                                 @else

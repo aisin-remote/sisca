@@ -4,7 +4,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h3>Data Check Sheet Safety Bet</h3>
+        <h3>Data Check Sheet Safety Belt</h3>
         <form action="{{ route('safetybelt.checksheet.index') }}" method="GET">
             <label for="tanggal_filter">Filter Tanggal:</label>
             <div class="input-group">
@@ -63,15 +63,18 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('safetybelt.checksheetsafetybelt.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('safetybelt.checksheetsafetybelt.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('safetybelt.checksheetsafetybelt.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Data Harnest?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('safetybelt.checksheetsafetybelt.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form
+                                                action="{{ route('safetybelt.checksheetsafetybelt.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Data Harnest?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

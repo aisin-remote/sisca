@@ -58,15 +58,18 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('eyewasher.checksheeteyewasher.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('eyewasher.checksheeteyewasher.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Eye Washer?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('eyewasher.checksheeteyewasher.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form
+                                                action="{{ route('eyewasher.checksheeteyewasher.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Eye Washer?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -134,15 +137,17 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('eyewasher.checksheetshower.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('eyewasher.checksheetshower.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('eyewasher.checksheetshower.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Eyewasher + Shower?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('eyewasher.checksheetshower.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('eyewasher.checksheetshower.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Eyewasher + Shower?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

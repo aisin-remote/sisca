@@ -53,7 +53,7 @@
                                 <td>{{ $checksheet->body_tembin }}</td>
                                 <td>{{ $checksheet->mur_baut }}</td>
                                 <td>{{ $checksheet->shackle }}</td>
-                                <td>{{ $checksheet->hook_atas}}</td>
+                                <td>{{ $checksheet->hook_atas }}</td>
                                 <td>{{ $checksheet->pengunci_hook_atas }}</td>
                                 <td>{{ $checksheet->mata_chain }}</td>
                                 <td>{{ $checksheet->chain }}</td>
@@ -63,15 +63,17 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('tembin.checksheettembin.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('tembin.checksheettembin.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('tembin.checksheettembin.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Tembin?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('tembin.checksheettembin.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('tembin.checksheettembin.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Tembin?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

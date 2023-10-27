@@ -44,28 +44,28 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->zona_number }}</td>
                                 <td>
-                                    @if($checksheet->ng_smoke_detector === '0')
+                                    @if ($checksheet->ng_smoke_detector === '0')
                                         OK
                                     @else
                                         NG
                                     @endif
                                 </td>
                                 <td>
-                                    @if($checksheet->ng_heat_detector === '0')
+                                    @if ($checksheet->ng_heat_detector === '0')
                                         OK
                                     @else
                                         NG
                                     @endif
                                 </td>
                                 <td>
-                                    @if($checksheet->ng_beam_detector === '0')
+                                    @if ($checksheet->ng_beam_detector === '0')
                                         OK
                                     @else
                                         NG
                                     @endif
                                 </td>
                                 <td>
-                                    @if($checksheet->ng_push_button === '0')
+                                    @if ($checksheet->ng_push_button === '0')
                                         OK
                                     @else
                                         NG
@@ -75,15 +75,17 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('facp.checksheetfacp.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('facp.checksheetfacp.edit', $checksheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('facp.checksheetfacp.destroy', $checksheet->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet FACP?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('facp.checksheetfacp.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('facp.checksheetfacp.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet FACP?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

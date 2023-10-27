@@ -22,8 +22,8 @@
             <div class="mb-3 col-md-6">
                 <label for="chainblock_number" class="form-label">No Chain Block</label>
                 <input type="text" name="chainblock_number" id="chainblock_number" placeholder="Masukkan No Chain Block"
-                    class="form-control @error('chainblock_number') is-invalid @enderror" value="{{ old('chainblock_number') }}"
-                    required autofocus>
+                    class="form-control @error('chainblock_number') is-invalid @enderror"
+                    value="{{ old('chainblock_number') }}" required autofocus>
                 @error('chainblock_number')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -70,15 +70,18 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('chainblock.checksheetchainblock.show', $checkSheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        <a href="{{ route('chainblock.checksheetchainblock.edit', $checkSheet->id) }}"
-                                            class="badge bg-warning me-2">Edit</a>
-                                        <form action="{{ route('chainblock.checksheetchainblock.destroy', $checkSheet->id) }}"
-                                            method="POST" class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="badge bg-danger border-0"
-                                                onclick="return confirm('Ingin menghapus Data Check Sheet Chain Block?')">Delete</button>
-                                        </form>
+                                        @can('admin')
+                                            <a href="{{ route('chainblock.checksheetchainblock.edit', $checkSheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form
+                                                action="{{ route('chainblock.checksheetchainblock.destroy', $checkSheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Chain Block?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
