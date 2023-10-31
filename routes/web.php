@@ -244,20 +244,21 @@ Route::middleware(['auth'])->group(function () {
 
 //Checksheet Tandu
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu')->middleware('admin');
-    Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu')->middleware('admin');
-    Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy')->middleware('admin');
-    Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit')->middleware('admin');
-    Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update')->middleware('admin');
-    Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show')->middleware('auth');
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu');
+    Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu');
+    Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy');
+    Route::get('/dashboard/check-sheet/tandu/{id}/edit', [CheckSheetTanduController::class, 'edit'])->name('tandu.checksheettandu.edit');
+    Route::put('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'update'])->name('tandu.checksheettandu.update');
 });
+Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController::class, 'show'])->name('tandu.checksheettandu.show')->middleware('auth');
+
 
 
 
 //Checksheet FACP
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/facp/checksheetfacp/{facpNumber}', [CheckSheetFacpController::class, 'createForm'])->name('checksheetfacp');
     Route::post('/dashboard/facp/process-checksheet-facp/{facpNumber}', [CheckSheetFacpController::class, 'store'])->name('process.checksheet.facp');
     Route::delete('/dashboard/check-sheet/facp/{id}', [CheckSheetFacpController::class, 'destroy'])->name('facp.checksheetfacp.destroy');
@@ -265,19 +266,21 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/dashboard/check-sheet/facp/{id}', [CheckSheetFacpController::class, 'update'])->name('facp.checksheetfacp.update');
     Route::get('/dashboard/check-sheet/facp/{id}/show', [CheckSheetFacpController::class, 'show'])->name('facp.checksheetfacp.show');
 });
+Route::get('/dashboard/check-sheet/facp/{id}/show', [CheckSheetFacpController::class, 'show'])->name('facp.checksheetfacp.show')->middleware('auth');
 
 
 
 //Checksheet Safety Belt
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/safetybelt/checksheetsafetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'createForm'])->name('checksheetsafetybelt');
     Route::post('/dashboard/safetybelt/process-checksheet-safetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'store'])->name('process.checksheet.safetybelt');
     Route::delete('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'destroy'])->name('safetybelt.checksheetsafetybelt.destroy');
     Route::get('/dashboard/check-sheet/safetybelt/{id}/edit', [CheckSheetSafetyBeltController::class, 'edit'])->name('safetybelt.checksheetsafetybelt.edit');
     Route::put('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'update'])->name('safetybelt.checksheetsafetybelt.update');
-    Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show');
 });
+Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show')->middleware('auth');
+
 
 
 
@@ -289,163 +292,166 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/dashboard/check-sheet/bodyharnest/{id}', [CheckSheetBodyHarnestController::class, 'destroy'])->name('bodyharnest.checksheetbodyharnest.destroy');
     Route::get('/dashboard/check-sheet/bodyharnest/{id}/edit', [CheckSheetBodyHarnestController::class, 'edit'])->name('bodyharnest.checksheetbodyharnest.edit');
     Route::put('/dashboard/check-sheet/bodyharnest/{id}', [CheckSheetBodyHarnestController::class, 'update'])->name('bodyharnest.checksheetbodyharnest.update');
-    Route::get('/dashboard/check-sheet/bodyharnest/{id}/show', [CheckSheetBodyHarnestController::class, 'show'])->name('bodyharnest.checksheetbodyharnest.show');
 });
+Route::get('/dashboard/check-sheet/bodyharnest/{id}/show', [CheckSheetBodyHarnestController::class, 'show'])->name('bodyharnest.checksheetbodyharnest.show')->middleware('auth');
+
 
 
 
 //Checksheet Chain Block
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/chainblock/checksheetchainblock/{chainblockNumber}', [CheckSheetChainblockController::class, 'createForm'])->name('checksheetchainblock');
     Route::post('/dashboard/chainblock/process-checksheet-chainblock/{chainblockNumber}', [CheckSheetChainblockController::class, 'store'])->name('process.checksheet.chainblock');
     Route::delete('/dashboard/check-sheet/chainblock/{id}', [CheckSheetChainblockController::class, 'destroy'])->name('chainblock.checksheetchainblock.destroy');
     Route::get('/dashboard/check-sheet/chainblock/{id}/edit', [CheckSheetChainblockController::class, 'edit'])->name('chainblock.checksheetchainblock.edit');
     Route::put('/dashboard/check-sheet/chainblock/{id}', [CheckSheetChainblockController::class, 'update'])->name('chainblock.checksheetchainblock.update');
-    Route::get('/dashboard/check-sheet/chainblock/{id}/show', [CheckSheetChainblockController::class, 'show'])->name('chainblock.checksheetchainblock.show');
 });
+Route::get('/dashboard/check-sheet/chainblock/{id}/show', [CheckSheetChainblockController::class, 'show'])->name('chainblock.checksheetchainblock.show')->middleware('auth');
+
 
 
 
 //Checksheet Tembin
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/tembin/checksheettembin/{tembinNumber}', [CheckSheetTembinController::class, 'createForm'])->name('checksheettembin');
     Route::post('/dashboard/tembin/process-checksheet-tembin/{tembinNumber}', [CheckSheetTembinController::class, 'store'])->name('process.checksheet.tembin');
     Route::delete('/dashboard/check-sheet/tembin/{id}', [CheckSheetTembinController::class, 'destroy'])->name('tembin.checksheettembin.destroy');
     Route::get('/dashboard/check-sheet/tembin/{id}/edit', [CheckSheetTembinController::class, 'edit'])->name('tembin.checksheettembin.edit');
     Route::put('/dashboard/check-sheet/tembin/{id}', [CheckSheetTembinController::class, 'update'])->name('tembin.checksheettembin.update');
-    Route::get('/dashboard/check-sheet/tembin/{id}/show', [CheckSheetTembinController::class, 'show'])->name('tembin.checksheettembin.show');
 });
+Route::get('/dashboard/check-sheet/tembin/{id}/show', [CheckSheetTembinController::class, 'show'])->name('tembin.checksheettembin.show')->middleware('auth');
+
 
 
 
 //Checksheet Sling Belt
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/sling/checksheetbelt/{slingNumber}', [CheckSheetSlingBeltController::class, 'showForm'])->name('checksheetbelt');
     Route::post('/dashboard/sling/process-checksheet-belt/{slingNumber}', [CheckSheetSlingBeltController::class, 'store'])->name('process.checksheet.belt');
-
     Route::delete('/dashboard/check-sheet/sling-belt/{id}', [CheckSheetSlingBeltController::class, 'destroy'])->name('sling.checksheetbelt.destroy');
     Route::get('/dashboard/check-sheet/sling-belt/{id}/edit', [CheckSheetSlingBeltController::class, 'edit'])->name('sling.checksheetbelt.edit');
     Route::put('/dashboard/check-sheet/sling-belt/{id}', [CheckSheetSlingBeltController::class, 'update'])->name('sling.checksheetbelt.update');
-    Route::get('/dashboard/check-sheet/sling-belt/{id}/show', [CheckSheetSlingBeltController::class, 'show'])->name('sling.checksheetbelt.show');
 });
+Route::get('/dashboard/check-sheet/sling-belt/{id}/show', [CheckSheetSlingBeltController::class, 'show'])->name('sling.checksheetbelt.show')->middleware('auth');
+
 
 
 
 //Checksheet Sling Wire
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/sling/checksheetwire/{slingNumber}', [CheckSheetSlingWireController::class, 'showForm'])->name('checksheetwire');
     Route::post('/dashboard/sling/process-checksheet-wire/{slingNumber}', [CheckSheetSlingWireController::class, 'store'])->name('process.checksheet.wire');
-
     Route::delete('/dashboard/check-sheet/sling-wire/{id}', [CheckSheetSlingWireController::class, 'destroy'])->name('sling.checksheetwire.destroy');
     Route::get('/dashboard/check-sheet/sling-wire/{id}/edit', [CheckSheetSlingWireController::class, 'edit'])->name('sling.checksheetwire.edit');
     Route::put('/dashboard/check-sheet/sling-wire/{id}', [CheckSheetSlingWireController::class, 'update'])->name('sling.checksheetwire.update');
-    Route::get('/dashboard/check-sheet/sling-wire/{id}/show', [CheckSheetSlingWireController::class, 'show'])->name('sling.checksheetwire.show');
 });
+Route::get('/dashboard/check-sheet/sling-wire/{id}/show', [CheckSheetSlingWireController::class, 'show'])->name('sling.checksheetwire.show')->middleware('auth');
+
 
 
 
 
 //Checksheet Eyewasher
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/eyewasher/checksheeteyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'showForm'])->name('checksheeteyewasher');
     Route::post('/dashboard/eyewasher/process-checksheet-eyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'store'])->name('process.checksheet.eyewasher');
-
     Route::delete('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'destroy'])->name('eyewasher.checksheeteyewasher.destroy');
     Route::get('/dashboard/check-sheet/eyewasher/{id}/edit', [CheckSheetEyewasherOnlyController::class, 'edit'])->name('eyewasher.checksheeteyewasher.edit');
     Route::put('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'update'])->name('eyewasher.checksheeteyewasher.update');
-    Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show');
 });
+Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnlyController::class, 'show'])->name('eyewasher.checksheeteyewasher.show')->middleware('auth');
+
 
 //Checksheet Eyewasher Shower
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/eyewasher/checksheetshower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'showForm'])->name('checksheetshower');
     Route::post('/dashboard/eyewasher/process-checksheet-shower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'store'])->name('process.checksheet.shower');
-
     Route::delete('/dashboard/check-sheet/eyewasher-show/{id}', [CheckSheetEyewasherShowerController::class, 'destroy'])->name('eyewasher.checksheetshower.destroy');
     Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/edit', [CheckSheetEyewasherShowerController::class, 'edit'])->name('eyewasher.checksheetshower.edit');
     Route::put('/dashboard/check-sheet/eyewasher-shower/{id}', [CheckSheetEyewasherShowerController::class, 'update'])->name('eyewasher.checksheetshower.update');
-    Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/show', [CheckSheetEyewasherShowerController::class, 'show'])->name('eyewasher.checksheetshower.show');
 });
+Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/show', [CheckSheetEyewasherShowerController::class, 'show'])->name('eyewasher.checksheetshower.show')->middleware('auth');
+
 
 
 //Checksheet CO2
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/co2/checksheetco2/{co2Number}', [CheckSheetTabungCo2Controller::class, 'createForm'])->name('checksheettabungco2');
     Route::post('/dashboard/co2/process-checksheet-co2/{tabungNumber}', [CheckSheetTabungCo2Controller::class, 'store'])->name('process.checksheet.tabungco2');
-
     Route::delete('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'destroy'])->name('co2.checksheetco2.destroy');
     Route::get('/dashboard/check-sheet/co2/{id}/edit', [CheckSheetTabungCo2Controller::class, 'edit'])->name('co2.checksheetco2.edit');
     Route::put('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'update'])->name('co2.checksheetco2.update');
-    Route::get('/dashboard/check-sheet/co2/{id}/show', [CheckSheetTabungCo2Controller::class, 'show'])->name('co2.checksheetco2.show');
 });
+Route::get('/dashboard/check-sheet/co2/{id}/show', [CheckSheetTabungCo2Controller::class, 'show'])->name('co2.checksheetco2.show')->middleware('auth');
+
 
 
 // Untuk Checksheet Nitrogen
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/nitrogen/checksheetnitrogen/{nitrogenNumber}', [CheckSheetNitrogenServerController::class, 'createForm'])->name('checksheetnitrogen');
     Route::post('/dashboard/hydrant/process-checksheet-nitrogen/{tabungNumber}', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen');
-
     Route::delete('/dashboard/check-sheet/nitrogen/{id}', [CheckSheetNitrogenServerController::class, 'destroy'])->name('nitrogen.checksheetnitrogen.destroy');
     Route::get('/dashboard/check-sheet/nitrogen/{id}/edit', [CheckSheetNitrogenServerController::class, 'edit'])->name('nitrogen.checksheetnitrogen.edit');
     Route::put('/dashboard/check-sheet/nitrogen/{id}', [CheckSheetNitrogenServerController::class, 'update'])->name('nitrogen.checksheetnitrogen.update');
-    Route::get('/dashboard/check-sheet/nitrogen/{id}/show', [CheckSheetNitrogenServerController::class, 'show'])->name('nitrogen.checksheetnitrogen.show');
 });
+Route::get('/dashboard/check-sheet/nitrogen/{id}/show', [CheckSheetNitrogenServerController::class, 'show'])->name('nitrogen.checksheetnitrogen.show')->middleware('auth');
+
 
 
 use App\Http\Controllers\CheckSheetHydrantIndoorController;
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/hydrant/checksheetindoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'showForm'])->name('checksheetindoor');
     Route::post('/dashboard/hydrant/process-checksheet-hydrant-indoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'store'])->name('process.checksheet.indoor');
-
     Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
     Route::get('/dashboard/check-sheet/hydrantindoor/{id}/edit', [CheckSheetHydrantIndoorController::class, 'edit'])->name('hydrant.checksheetindoor.edit');
     Route::put('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'update'])->name('hydrant.checksheetindoor.update');
-    Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantIndoorController::class, 'show'])->name('hydrant.checksheetindoor.show');
 });
+Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantIndoorController::class, 'show'])->name('hydrant.checksheetindoor.show')->middleware('auth');
+
 
 
 use App\Http\Controllers\CheckSheetHydrantOutdoorController;
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/hydrant/checksheetoutdoor/{hydrantNumber}', [CheckSheetHydrantOutdoorController::class, 'showForm'])->name('checksheetoutdoor');
     Route::post('/dashboard/hydrant/process-checksheet-hydrant-outdoor/{hydrantNumber}', [CheckSheetHydrantOutdoorController::class, 'store'])->name('process.checksheet.outdoor');
-
     Route::delete('/dashboard/check-sheet/hydrantoutdoor/{id}', [CheckSheetHydrantOutdoorController::class, 'destroy'])->name('hydrant.checksheetoutdoor.destroy');
     Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/edit', [CheckSheetHydrantOutdoorController::class, 'edit'])->name('hydrant.checksheetoutdoor.edit');
     Route::put('/dashboard/check-sheet/hydrantoutdoor/{id}', [CheckSheetHydrantOutdoorController::class, 'update'])->name('hydrant.checksheetoutdoor.update');
-    Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/show', [CheckSheetHydrantOutdoorController::class, 'show'])->name('hydrant.checksheetoutdoor.show');
 });
+Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/show', [CheckSheetHydrantOutdoorController::class, 'show'])->name('hydrant.checksheetoutdoor.show')->middleware('auth');
+
 
 
 use App\Http\Controllers\CheckSheetCo2Controller;
 
 // Menggunakan middleware auth untuk routes terkait checksheetco2
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/check-sheet/aparco2/{tagNumber}', [CheckSheetCo2Controller::class, 'showForm'])->name('checksheetco2');
     Route::post('/dashboard/apar/process-checksheet-co2-af11e/{tagNumber}', [CheckSheetCo2Controller::class, 'store'])->name('process.checksheet.co2');
-
     Route::delete('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
     Route::get('/dashboard/check-sheet/aparco2/{id}/edit', [CheckSheetCo2Controller::class, 'edit'])->name('apar.checksheetco2.edit');
     Route::put('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'update'])->name('apar.checksheetco2.update');
-    Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show');
 });
+Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller::class, 'show'])->name('apar.checksheetco2.show')->middleware('auth');
+
 
 use App\Http\Controllers\CheckSheetPowderController;
 
 // Menggunakan middleware auth untuk routes terkait checksheetpowder
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/check-sheet/aparpowder/{tagNumber}', [CheckSheetPowderController::class, 'showForm'])->name('checksheetpowder');
     Route::post('/dashboard/apar/process-checksheet-powder/{tagNumber}', [CheckSheetPowderController::class, 'store'])->name('process.checksheet.powder');
-
     Route::delete('/dashboard/check-sheet/aparpowder/{id}', [CheckSheetPowderController::class, 'destroy'])->name('apar.checksheetpowder.destroy');
     Route::get('/dashboard/check-sheet/aparpowder/{id}/edit', [CheckSheetPowderController::class, 'edit'])->name('apar.checksheetpowder.edit');
     Route::put('/dashboard/check-sheet/aparpowder/{id}', [CheckSheetPowderController::class, 'update'])->name('apar.checksheetpowder.update');
-    Route::get('/dashboard/check-sheet/aparpowder/{id}/show', [CheckSheetPowderController::class, 'show'])->name('apar.checksheetpowder.show');
 });
+Route::get('/dashboard/check-sheet/aparpowder/{id}/show', [CheckSheetPowderController::class, 'show'])->name('apar.checksheetpowder.show')->middleware('auth');
+
 
 use App\Http\Controllers\AparReportController;
 
