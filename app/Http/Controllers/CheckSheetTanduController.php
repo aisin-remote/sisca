@@ -499,8 +499,7 @@ class CheckSheetTanduController extends Controller
                 'tt_check_sheet_tandus.kaki',
                 'tt_check_sheet_tandus.belt',
                 'tt_check_sheet_tandus.rangka',
-            )
-            ->get();
+            )->get();
 
         // Filter out entries with tanggal_pengecekan = null and matching selected year
         $filteredTanduData = $tanduData->filter(function ($tandu) use ($selectedYear) {

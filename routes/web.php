@@ -163,6 +163,7 @@ Route::resource('/dashboard/master/facp', FacpController::class)->only(['index',
 Route::put('/dashboard/master/facp/{data_facp}', [FacpController::class, 'update'])->name('data-facp.update')->middleware('admin');
 
 // Route Location
+Route::resource('/dashboard/master/location', LocationController::class)->only('create', 'store')->middleware('admin');
 Route::resource('/dashboard/master/location', LocationController::class)->only('index')->middleware('auth');
 Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy')->middleware('admin');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
