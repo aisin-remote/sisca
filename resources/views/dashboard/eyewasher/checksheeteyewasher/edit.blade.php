@@ -87,6 +87,7 @@
                         onchange="previewImage('photo_pijakan', 'photo-pijakan-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pipa_saluran_air" class="form-label">Pipa Saluran Air</label>
@@ -124,6 +125,7 @@
                         onchange="previewImage('photo_pipa_saluran_air', 'photo-pipa_saluran_air-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="wastafel" class="form-label">Wastafel</label>
@@ -159,6 +161,7 @@
                         onchange="previewImage('photo_wastafel', 'photo-wastafel-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="kran_air" class="form-label">Kran Air</label>
@@ -194,6 +197,7 @@
                         onchange="previewImage('photo_kran_air', 'photo-kran_air-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="tuas" class="form-label">Tuas</label>

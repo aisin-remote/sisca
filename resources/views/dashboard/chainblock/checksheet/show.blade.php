@@ -45,18 +45,18 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Chain Geared Trolley 1</th>
+                        <th>Gerakan Halus</th>
                         <td>{{ $checksheet->chain_geared_trolley_1 }}</td>
                     </tr>
                     <tr>
-                        <th>Catatan Chain Geared Trolley 1</th>
+                        <th>Catatan Gerakan Halus</th>
                         <td>{{ $checksheet->catatan_chain_geared_trolley_1 }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Chain Geared Trolley 1</th>
+                        <th>Photo Gerakan Halus</th>
                         <td>
                             <img src="{{ asset('storage/' . $checksheet->photo_chain_geared_trolley_1) }}"
-                                alt="Photo Chain Geared Trolley 1" style="max-width: 250px; max-height: 300px;"
+                                alt="Photo Gerakan Halus" style="max-width: 250px; max-height: 300px;"
                                 class="img-fluid">
                         </td>
                     </tr>

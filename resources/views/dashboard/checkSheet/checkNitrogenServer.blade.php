@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="operasional" class="form-label">Sistem Operasional</label>
+                <label for="operasional" class="form-label">Indikator System Power</label>
                 <small class="form-text text-muted">Lampu Led menyala pada posisi "System Power"</small>
                 <select class="form-select" id="operasional" name="operasional">
                     <option value="" selected disabled>Select</option>
@@ -50,7 +50,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="selector_mode" class="form-label">Selector Mode</label>
+                <label for="selector_mode" class="form-label">Selector Mode Automatic</label>
                 <small class="form-text text-muted">Kunci dalam posisi "Automatic"</small>
                 <select class="form-select" id="selector_mode" name="selector_mode">
                     <option value="" selected disabled>Select</option>

@@ -73,6 +73,7 @@
                         onchange="previewImage('photo_buckle', 'photo-buckle-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="seams" class="form-label">Seams</label>
@@ -96,6 +97,7 @@
                         onchange="previewImage('photo_seams', 'photo-seams-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="reel" class="form-label">Reel</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_reel', 'photo-reel-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="shock_absorber" class="form-label">Shock Absorber</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_shock_absorber', 'photo-shock_absorber-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="ring" class="form-label">Ring</label>
@@ -165,6 +169,7 @@
                         onchange="previewImage('photo_ring', 'photo-ring-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="torso_belt" class="form-label">Torso Belt</label>
@@ -188,6 +193,7 @@
                         onchange="previewImage('photo_torso_belt', 'photo-torso_belt-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="strap" class="form-label">Strap</label>
@@ -211,6 +217,7 @@
                         onchange="previewImage('photo_strap', 'photo-strap-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="rope" class="form-label">Rope</label>
@@ -234,6 +241,7 @@
                         onchange="previewImage('photo_rope', 'photo-rope-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="seam_protection_tube" class="form-label">Seam Protection Tube</label>
@@ -257,6 +265,7 @@
                         onchange="previewImage('photo_seam_protection_tube', 'photo-seam_protection_tube-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hook" class="form-label">Hook</label>

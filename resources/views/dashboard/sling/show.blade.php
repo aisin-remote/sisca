@@ -127,11 +127,11 @@
                             </tr>
                             <tr>
                                 <th class="text-center align-middle">Serabut Wire</th>
-                                <th class="text-center align-middle">Bagian Wire 1</th>
-                                <th class="text-center align-middle">Bagian Wire 2</th>
-                                <th class="text-center align-middle">Kumpulan Wire 1</th>
+                                <th class="text-center align-middle">Sling Terlilit</th>
+                                <th class="text-center align-middle">Karat</th>
+                                <th class="text-center align-middle">Serabut Keluar</th>
                                 <th class="text-center align-middle">Diameter Wire</th>
-                                <th class="text-center align-middle">Kumpulan Wire 2</th>
+                                <th class="text-center align-middle">Wire Longgar</th>
                                 <th class="text-center align-middle">Hook Wire</th>
                                 <th class="text-center align-middle">Pengunci Hook</th>
                                 <th class="text-center align-middle">Mata Sling</th>
@@ -193,13 +193,13 @@
                                 <th rowspan="2" class="text-center align-middle" scope="col">Aksi</th>
                             </tr>
                             <tr>
-                                <th class="text-center align-middle" scope="col">Kelengkapan Tag Sling Belt</th>
-                                <th class="text-center align-middle" scope="col">Bagian Pinggir Belt Robek</th>
-                                <th class="text-center align-middle" scope="col">Pengecekan Lapisan Belt 1</th>
-                                <th class="text-center align-middle" scope="col">Pengecekan Jahitan Belt</th>
-                                <th class="text-center align-middle" scope="col">Pengecekan Permukaan Belt</th>
-                                <th class="text-center align-middle" scope="col">Pengecekan Lapisan Belt 2</th>
-                                <th class="text-center align-middle" scope="col">Pengecekan Aus</th>
+                                <th class="text-center align-middle" scope="col">Tag Sling Belt</th>
+                                <th class="text-center align-middle" scope="col">Belt Robek</th>
+                                <th class="text-center align-middle" scope="col">Belt Kusut</th>
+                                <th class="text-center align-middle" scope="col">Jahitan Belt</th>
+                                <th class="text-center align-middle" scope="col">Belt Menipis</th>
+                                <th class="text-center align-middle" scope="col">Belt Scratch</th>
+                                <th class="text-center align-middle" scope="col">Belt Aus</th>
                                 <th class="text-center align-middle" scope="col">Hook Wire</th>
                                 <th class="text-center align-middle" scope="col">Pengunci Hook</th>
                             </tr>

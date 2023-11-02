@@ -73,6 +73,7 @@
                         onchange="previewImage('photo_pressure', 'photo-pressure-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hose" class="form-label">Hose</label>
@@ -96,6 +97,7 @@
                         onchange="previewImage('photo_hose', 'photo-hose-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="corong" class="form-label">Corong/Nozzle</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_corong', 'photo-corong-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="tabung" class="form-label">Tabung</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_tabung', 'photo-tabung-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="regulator" class="form-label">Regulator</label>
@@ -165,6 +169,7 @@
                         onchange="previewImage('photo_regulator', 'photo-regulator-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="lock_pin" class="form-label">Lock Pin</label>
@@ -188,6 +193,7 @@
                         onchange="previewImage('photo_lock_pin', 'photo-lock_pin-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="berat_tabung" class="form-label">Berat Tabung</label>

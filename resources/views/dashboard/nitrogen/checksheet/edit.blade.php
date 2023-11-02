@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="operasional" class="form-label">Sistem Operasional</label>
+                <label for="operasional" class="form-label">Indikator System Power</label>
                 <div class="input-group">
                     <select class="form-select" id="operasional" name="operasional">
                         <option value="" selected disabled>Select</option>
@@ -59,11 +59,11 @@
                 </div>
             </div>
             <div class="mb-3 mt-3" id="catatanField_operasional" style="display:none;">
-                <label for="catatan_operasional" class="form-label">Catatan Sistem Operasional</label>
+                <label for="catatan_operasional" class="form-label">Catatan Indikator System Power</label>
                 <textarea class="form-control" name="catatan_operasional" id="catatan_operasional" cols="30" rows="5">{{ old('catatan_operasional') ?? $checkSheetnitrogen->catatan_operasional}}</textarea>
             </div>
             <div class="mb-3">
-                <label for="photo_operasional" class="form-label">Foto Sistem Operasional</label>
+                <label for="photo_operasional" class="form-label">Foto Indikator System Power</label>
                 <input type="hidden" name="oldImage_operasional" value="{{ $checkSheetnitrogen->photo_operasional }}">
                 @if ($checkSheetnitrogen->photo_operasional)
                     <img src="{{ asset('storage/' . $checkSheetnitrogen->photo_operasional) }}" class="photo-operasional-preview img-fluid mb-3 d-block" style="max-height: 300px">
@@ -74,9 +74,10 @@
                 <input type="file" class="form-control" id="photo_operasional" name="photo_operasional" onchange="previewImage('photo_operasional', 'photo-operasional-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
-                <label for="selector_mode" class="form-label">Selector Mode</label>
+                <label for="selector_mode" class="form-label">Selector Mode Automatic</label>
                 <div class="input-group">
                     <select class="form-select" id="selector_mode" name="selector_mode">
                         <option value="" selected disabled>Select</option>
@@ -87,11 +88,11 @@
                 </div>
             </div>
             <div class="mb-3 mt-3" id="catatanField_selector_mode" style="display:none;">
-                <label for="catatan_selector_mode" class="form-label">Catatan Selector Mode</label>
+                <label for="catatan_selector_mode" class="form-label">Catatan Selector Mode Automatic</label>
                 <textarea class="form-control" name="catatan_selector_mode" id="catatan_selector_mode" cols="30" rows="5">{{ old('catatan_selector_mode') ?? $checkSheetnitrogen->catatan_selector_mode}}</textarea>
             </div>
             <div class="mb-3">
-                <label for="photo_selector_mode" class="form-label">Foto Selector Mode</label>
+                <label for="photo_selector_mode" class="form-label">Foto Selector Mode Automatic</label>
                 <input type="hidden" name="oldImage_selector_mode" value="{{ $checkSheetnitrogen->photo_selector_mode }}">
                 @if ($checkSheetnitrogen->photo_selector_mode)
                     <img src="{{ asset('storage/' . $checkSheetnitrogen->photo_selector_mode) }}" class="photo-selector_mode-preview img-fluid mb-3 d-block" style="max-height: 300px">
@@ -102,6 +103,7 @@
                 <input type="file" class="form-control" id="photo_selector_mode" name="photo_selector_mode" onchange="previewImage('photo_selector_mode', 'photo-selector_mode-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pintu_tabung" class="form-label">Pintu Tabung</label>
@@ -130,6 +132,7 @@
                 <input type="file" class="form-control" id="photo_pintu_tabung" name="photo_pintu_tabung" onchange="previewImage('photo_pintu_tabung', 'photo-pintu_tabung-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure_pilot" class="form-label">Pressure Tabung Pilot Nitrogen</label>
@@ -158,6 +161,7 @@
                 <input type="file" class="form-control" id="photo_pressure_pilot" name="photo_pressure_pilot" onchange="previewImage('photo_pressure_pilot', 'photo-pressure_pilot-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure_no1" class="form-label">Pressure Tabung Nitrogen No 1</label>
@@ -186,6 +190,7 @@
                 <input type="file" class="form-control" id="photo_pressure_no1" name="photo_pressure_no1" onchange="previewImage('photo_pressure_no1', 'photo-pressure_no1-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure_no2" class="form-label">Pressure Tabung Nitrogen No 2</label>
@@ -214,6 +219,7 @@
                 <input type="file" class="form-control" id="photo_pressure_no2" name="photo_pressure_no2" onchange="previewImage('photo_pressure_no2', 'photo-pressure_no2-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure_no3" class="form-label">Pressure Tabung Nitrogen No 3</label>
@@ -242,6 +248,7 @@
                 <input type="file" class="form-control" id="photo_pressure_no3" name="photo_pressure_no3" onchange="previewImage('photo_pressure_no3', 'photo-pressure_no3-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure_no4" class="form-label">Pressure Tabung Nitrogen No 4</label>
@@ -270,6 +277,7 @@
                 <input type="file" class="form-control" id="photo_pressure_no4" name="photo_pressure_no4" onchange="previewImage('photo_pressure_no4', 'photo-pressure_no4-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure_no5" class="form-label">Pressure Tabung Nitrogen No 5</label>

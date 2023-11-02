@@ -56,7 +56,7 @@
 
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="kelengkapan_tag_sling_belt" class="form-label">Kelengkapan Tag Sling Belt</label>
+                    <label for="kelengkapan_tag_sling_belt" class="form-label">Tag Sling Belt</label>
                     <div class="input-group">
                         <select class="form-select" id="kelengkapan_tag_sling_belt" name="kelengkapan_tag_sling_belt">
                             <option value="" selected disabled>Select</option>
@@ -70,11 +70,11 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_kelengkapan_tag_sling_belt" style="display:none;">
-                    <label for="catatan_kelengkapan_tag_sling_belt" class="form-label">Catatan Kelengkapan Tag Sling Belt</label>
+                    <label for="catatan_kelengkapan_tag_sling_belt" class="form-label">Catatan Tag Sling Belt</label>
                     <textarea class="form-control" name="catatan_kelengkapan_tag_sling_belt" id="catatan_kelengkapan_tag_sling_belt" cols="30" rows="5">{{ old('catatan_kelengkapan_tag_sling_belt') ?? $checkSheetbelt->catatan_kelengkapan_tag_sling_belt }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_kelengkapan_tag_sling_belt" class="form-label">Foto Kelengkapan Tag Sling Belt</label>
+                    <label for="photo_kelengkapan_tag_sling_belt" class="form-label">Foto Tag Sling Belt</label>
                     <input type="hidden" name="oldImage_kelengkapan_tag_sling_belt" value="{{ $checkSheetbelt->photo_kelengkapan_tag_sling_belt }}">
                     @if ($checkSheetbelt->photo_kelengkapan_tag_sling_belt)
                         <img src="{{ asset('storage/' . $checkSheetbelt->photo_kelengkapan_tag_sling_belt) }}"
@@ -87,9 +87,10 @@
                         onchange="previewImage('photo_kelengkapan_tag_sling_belt', 'photo-kelengkapan_tag_sling_belt-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="bagian_pinggir_belt_robek" class="form-label">Bagian Pinggir Belt Robek</label>
+                    <label for="bagian_pinggir_belt_robek" class="form-label">Belt Robek</label>
                     <div class="input-group">
                         <select class="form-select" id="bagian_pinggir_belt_robek" name="bagian_pinggir_belt_robek">
                             <option value="" selected disabled>Select</option>
@@ -105,12 +106,12 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_bagian_pinggir_belt_robek" style="display:none;">
-                    <label for="catatan_bagian_pinggir_belt_robek" class="form-label">Catatan Bagian Pinggir Belt Robek</label>
+                    <label for="catatan_bagian_pinggir_belt_robek" class="form-label">Catatan Belt Robek</label>
                     <textarea class="form-control" name="catatan_bagian_pinggir_belt_robek" id="catatan_bagian_pinggir_belt_robek" cols="30"
                         rows="5">{{ old('catatan_bagian_pinggir_belt_robek') ?? $checkSheetbelt->catatan_bagian_pinggir_belt_robek }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_bagian_pinggir_belt_robek" class="form-label">Foto Bagian Pinggir Belt Robek</label>
+                    <label for="photo_bagian_pinggir_belt_robek" class="form-label">Foto Belt Robek</label>
                     <input type="hidden" name="oldImage_bagian_pinggir_belt_robek"
                         value="{{ $checkSheetbelt->photo_bagian_pinggir_belt_robek }}">
                     @if ($checkSheetbelt->photo_bagian_pinggir_belt_robek)
@@ -124,9 +125,10 @@
                         onchange="previewImage('photo_bagian_pinggir_belt_robek', 'photo-bagian_pinggir_belt_robek-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="pengecekan_lapisan_belt_1" class="form-label">Pengecekan Lapisan Belt 1</label>
+                    <label for="pengecekan_lapisan_belt_1" class="form-label">Belt Kusut</label>
                     <div class="input-group">
                         <select class="form-select" id="pengecekan_lapisan_belt_1" name="pengecekan_lapisan_belt_1">
                             <option value="" selected disabled>Select</option>
@@ -142,11 +144,11 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_pengecekan_lapisan_belt_1" style="display:none;">
-                    <label for="catatan_pengecekan_lapisan_belt_1" class="form-label">Catatan Pengecekan Lapisan Belt 1</label>
+                    <label for="catatan_pengecekan_lapisan_belt_1" class="form-label">Catatan Belt Kusut</label>
                     <textarea class="form-control" name="catatan_pengecekan_lapisan_belt_1" id="catatan_pengecekan_lapisan_belt_1" cols="30" rows="5">{{ old('catatan_pengecekan_lapisan_belt_1') ?? $checkSheetbelt->catatan_pengecekan_lapisan_belt_1 }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_pengecekan_lapisan_belt_1" class="form-label">Foto Pengecekan Lapisan Belt 1</label>
+                    <label for="photo_pengecekan_lapisan_belt_1" class="form-label">Foto Belt Kusut</label>
                     <input type="hidden" name="oldImage_pengecekan_lapisan_belt_1" value="{{ $checkSheetbelt->photo_pengecekan_lapisan_belt_1 }}">
                     @if ($checkSheetbelt->photo_pengecekan_lapisan_belt_1)
                         <img src="{{ asset('storage/' . $checkSheetbelt->photo_pengecekan_lapisan_belt_1) }}"
@@ -159,9 +161,10 @@
                         onchange="previewImage('photo_pengecekan_lapisan_belt_1', 'photo-pengecekan_lapisan_belt_1-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="pengecekan_jahitan_belt" class="form-label">Pengecekan Jahitan Belt</label>
+                    <label for="pengecekan_jahitan_belt" class="form-label">Jahitan Belt</label>
                     <div class="input-group">
                         <select class="form-select" id="pengecekan_jahitan_belt" name="pengecekan_jahitan_belt">
                             <option value="" selected disabled>Select</option>
@@ -177,11 +180,11 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_pengecekan_jahitan_belt" style="display:none;">
-                    <label for="catatan_pengecekan_jahitan_belt" class="form-label">Catatan Pengecekan Jahitan Belt</label>
+                    <label for="catatan_pengecekan_jahitan_belt" class="form-label">Catatan Jahitan Belt</label>
                     <textarea class="form-control" name="catatan_pengecekan_jahitan_belt" id="catatan_pengecekan_jahitan_belt" cols="30" rows="5">{{ old('catatan_pengecekan_jahitan_belt') ?? $checkSheetbelt->catatan_pengecekan_jahitan_belt }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_pengecekan_jahitan_belt" class="form-label">Foto Pengecekan Jahitan Belt</label>
+                    <label for="photo_pengecekan_jahitan_belt" class="form-label">Foto Jahitan Belt</label>
                     <input type="hidden" name="oldImage_pengecekan_jahitan_belt" value="{{ $checkSheetbelt->photo_pengecekan_jahitan_belt }}">
                     @if ($checkSheetbelt->photo_pengecekan_jahitan_belt)
                         <img src="{{ asset('storage/' . $checkSheetbelt->photo_pengecekan_jahitan_belt) }}"
@@ -194,9 +197,10 @@
                         onchange="previewImage('photo_pengecekan_jahitan_belt', 'photo-pengecekan_jahitan_belt-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="pengecekan_permukaan_belt" class="form-label">Pengecekan Permukaan Belt</label>
+                    <label for="pengecekan_permukaan_belt" class="form-label">Belt Menipis</label>
                     <div class="input-group">
                         <select class="form-select" id="pengecekan_permukaan_belt" name="pengecekan_permukaan_belt">
                             <option value="" selected disabled>Select</option>
@@ -210,11 +214,11 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_pengecekan_permukaan_belt" style="display:none;">
-                    <label for="catatan_pengecekan_permukaan_belt" class="form-label">Catatan Pengecekan Permukaan Belt</label>
+                    <label for="catatan_pengecekan_permukaan_belt" class="form-label">Catatan Belt Menipis</label>
                     <textarea class="form-control" name="catatan_pengecekan_permukaan_belt" id="catatan_pengecekan_permukaan_belt" cols="30" rows="5">{{ old('catatan_pengecekan_permukaan_belt') ?? $checkSheetbelt->catatan_pengecekan_permukaan_belt }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_pengecekan_permukaan_belt" class="form-label">Foto Pengecekan Permukaan Belt</label>
+                    <label for="photo_pengecekan_permukaan_belt" class="form-label">Foto Belt Menipis</label>
                     <input type="hidden" name="oldImage_pengecekan_permukaan_belt" value="{{ $checkSheetbelt->photo_pengecekan_permukaan_belt }}">
                     @if ($checkSheetbelt->photo_pengecekan_permukaan_belt)
                         <img src="{{ asset('storage/' . $checkSheetbelt->photo_pengecekan_permukaan_belt) }}"
@@ -227,9 +231,10 @@
                         onchange="previewImage('photo_pengecekan_permukaan_belt', 'photo-pengecekan_permukaan_belt-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="pengecekan_lapisan_belt_2" class="form-label">Pengecekan Lapisan Belt 2</label>
+                    <label for="pengecekan_lapisan_belt_2" class="form-label">Belt Scratch</label>
                     <div class="input-group">
                         <select class="form-select" id="pengecekan_lapisan_belt_2" name="pengecekan_lapisan_belt_2">
                             <option value="" selected disabled>Select</option>
@@ -243,11 +248,11 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_pengecekan_lapisan_belt_2" style="display:none;">
-                    <label for="catatan_pengecekan_lapisan_belt_2" class="form-label">Catatan Pengecekan Lapisan Belt 2</label>
+                    <label for="catatan_pengecekan_lapisan_belt_2" class="form-label">Catatan Belt Scratch</label>
                     <textarea class="form-control" name="catatan_pengecekan_lapisan_belt_2" id="catatan_pengecekan_lapisan_belt_2" cols="30" rows="5">{{ old('catatan_pengecekan_lapisan_belt_2') ?? $checkSheetbelt->catatan_pengecekan_lapisan_belt_2 }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_pengecekan_lapisan_belt_2" class="form-label">Foto Pengecekan Lapisan Belt 2</label>
+                    <label for="photo_pengecekan_lapisan_belt_2" class="form-label">Foto Belt Scratch</label>
                     <input type="hidden" name="oldImage_pengecekan_lapisan_belt_2" value="{{ $checkSheetbelt->photo_pengecekan_lapisan_belt_2 }}">
                     @if ($checkSheetbelt->photo_pengecekan_lapisan_belt_2)
                         <img src="{{ asset('storage/' . $checkSheetbelt->photo_pengecekan_lapisan_belt_2) }}"
@@ -260,9 +265,10 @@
                         onchange="previewImage('photo_pengecekan_lapisan_belt_2', 'photo-pengecekan_lapisan_belt_2-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="pengecekan_aus" class="form-label">Pengecekan Aus</label>
+                    <label for="pengecekan_aus" class="form-label">Belt Aus</label>
                     <div class="input-group">
                         <select class="form-select" id="pengecekan_aus" name="pengecekan_aus">
                             <option value="" selected disabled>Select</option>
@@ -276,11 +282,11 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_pengecekan_aus" style="display:none;">
-                    <label for="catatan_pengecekan_aus" class="form-label">Catatan Pengecekan Aus</label>
+                    <label for="catatan_pengecekan_aus" class="form-label">Catatan Belt Aus</label>
                     <textarea class="form-control" name="catatan_pengecekan_aus" id="catatan_pengecekan_aus" cols="30" rows="5">{{ old('catatan_pengecekan_aus') ?? $checkSheetbelt->catatan_pengecekan_aus }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_pengecekan_aus" class="form-label">Foto Pengecekan Aus</label>
+                    <label for="photo_pengecekan_aus" class="form-label">Foto Belt Aus</label>
                     <input type="hidden" name="oldImage_pengecekan_aus" value="{{ $checkSheetbelt->photo_pengecekan_aus }}">
                     @if ($checkSheetbelt->photo_pengecekan_aus)
                         <img src="{{ asset('storage/' . $checkSheetbelt->photo_pengecekan_aus) }}"
@@ -293,6 +299,7 @@
                         onchange="previewImage('photo_pengecekan_aus', 'photo-pengecekan_aus-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hook_wire" class="form-label">Hook Wire</label>
@@ -326,6 +333,7 @@
                         onchange="previewImage('photo_hook_wire', 'photo-hook_wire-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pengunci_hook" class="form-label">Pengunci Hook</label>

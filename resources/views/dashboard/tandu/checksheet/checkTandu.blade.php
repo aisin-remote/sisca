@@ -73,6 +73,7 @@
                         onchange="previewImage('photo_kunci_pintu', 'photo-kunci_pintu-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pintu" class="form-label">Pintu</label>
@@ -96,6 +97,7 @@
                         onchange="previewImage('photo_pintu', 'photo-pintu-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="sign" class="form-label">Sign</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_sign', 'photo-sign-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hand_grip" class="form-label">Hand Grip</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_hand_grip', 'photo-hand_grip-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="body" class="form-label">Body</label>
@@ -165,6 +169,7 @@
                         onchange="previewImage('photo_body', 'photo-body-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="engsel" class="form-label">Engsel</label>
@@ -188,6 +193,7 @@
                         onchange="previewImage('photo_engsel', 'photo-engsel-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="kaki" class="form-label">Kaki</label>
@@ -211,6 +217,7 @@
                         onchange="previewImage('photo_kaki', 'photo-kaki-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="belt" class="form-label">Belt</label>
@@ -234,6 +241,7 @@
                         onchange="previewImage('photo_belt', 'photo-belt-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="rangka" class="form-label">Rangka</label>

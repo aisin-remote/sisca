@@ -50,7 +50,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="bagian_wire_1" class="form-label">Bagian Wire</label>
+                    <label for="bagian_wire_1" class="form-label">Sling Terlilit</label>
                     <small class="form-text text-muted">Tidak ada wire yang terlilit</small>
                     <select class="form-select" id="bagian_wire_1" name="bagian_wire_1">
                         <option value="" selected disabled>Select</option>

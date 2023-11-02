@@ -69,6 +69,7 @@
                 <input type="file" class="form-control" id="photo_pressure" name="photo_pressure" required onchange="previewImage('photo_pressure', 'photo-pressure-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hose" class="form-label">Hose</label>
@@ -91,6 +92,7 @@
                 <input type="file" class="form-control" id="photo_hose" name="photo_hose" required onchange="previewImage('photo_hose', 'photo-hose-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="tabung" class="form-label">Tabung</label>
@@ -113,6 +115,7 @@
                 <input type="file" class="form-control" id="photo_tabung" name="photo_tabung" required onchange="previewImage('photo_tabung', 'photo-tabung-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="regulator" class="form-label">Regulator</label>
@@ -135,6 +138,7 @@
                 <input type="file" class="form-control" id="photo_regulator" name="photo_regulator" required onchange="previewImage('photo_regulator', 'photo-regulator-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="lock_pin" class="form-label">Lock Pin</label>
@@ -157,6 +161,7 @@
                 <input type="file" class="form-control" id="photo_lock_pin" name="photo_lock_pin" required onchange="previewImage('photo_lock_pin', 'photo-lock_pin-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="powder" class="form-label">Kadar Konsentrat (Powder)</label>

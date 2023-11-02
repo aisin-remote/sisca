@@ -76,9 +76,10 @@
                 <input type="file" class="form-control" id="photo_geared_trolley" name="photo_geared_trolley" onchange="previewImage('photo_geared_trolley', 'photo-geared_trolley-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
-                <label for="chain_geared_trolley_1" class="form-label">Chain Geared Trolley 1</label>
+                <label for="chain_geared_trolley_1" class="form-label">Gerakan Halus</label>
                 <div class="input-group">
                     <select class="form-select" id="chain_geared_trolley_1" name="chain_geared_trolley_1">
                         <option value="" selected disabled>Select</option>
@@ -89,11 +90,11 @@
                 </div>
             </div>
             <div class="mb-3 mt-3" id="catatanField_chain_geared_trolley_1" style="display:none;">
-                <label for="catatan_chain_geared_trolley_1" class="form-label">Catatan Chain Geared Trolley 1</label>
+                <label for="catatan_chain_geared_trolley_1" class="form-label">Catatan Gerakan Halus</label>
                 <textarea class="form-control" name="catatan_chain_geared_trolley_1" id="catatan_chain_geared_trolley_1" cols="30" rows="5">{{ old('catatan_chain_geared_trolley_1') ?? $checkSheetchainblock->catatan_chain_geared_trolley_1}}</textarea>
             </div>
             <div class="mb-3">
-                <label for="photo_chain_geared_trolley_1" class="form-label">Foto Chain Geared Trolley 1</label>
+                <label for="photo_chain_geared_trolley_1" class="form-label">Foto Gerakan Halus</label>
                 <input type="hidden" name="oldImage_chain_geared_trolley_1" value="{{ $checkSheetchainblock->photo_chain_geared_trolley_1 }}">
                 @if ($checkSheetchainblock->photo_chain_geared_trolley_1)
                     <img src="{{ asset('storage/' . $checkSheetchainblock->photo_chain_geared_trolley_1) }}" class="photo-chain_geared_trolley_1-preview img-fluid mb-3 d-block" style="max-height: 300px">
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_chain_geared_trolley_1" name="photo_chain_geared_trolley_1" onchange="previewImage('photo_chain_geared_trolley_1', 'photo-chain_geared_trolley_1-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="chain_geared_trolley_2" class="form-label">Chain Geared Trolley 2</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_chain_geared_trolley_2" name="photo_chain_geared_trolley_2" onchange="previewImage('photo_chain_geared_trolley_2', 'photo-chain_geared_trolley_2-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hooking_geared_trolly" class="form-label">Hooking Geared Trolly</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_hooking_geared_trolly" name="photo_hooking_geared_trolly" onchange="previewImage('photo_hooking_geared_trolly', 'photo-hooking_geared_trolly-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="latch_hook_atas" class="form-label">Latch Hook Atas</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_latch_hook_atas" name="photo_latch_hook_atas" onchange="previewImage('photo_latch_hook_atas', 'photo-latch_hook_atas-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hook_atas" class="form-label">Hook Atas</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_hook_atas" name="photo_hook_atas" onchange="previewImage('photo_hook_atas', 'photo-hook_atas-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hand_chain" class="form-label">Hand Chain</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_hand_chain" name="photo_hand_chain" onchange="previewImage('photo_hand_chain', 'photo-hand_chain-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="load_chain" class="form-label">Load Chain</label>
@@ -272,6 +279,7 @@
                 <input type="file" class="form-control" id="photo_load_chain" name="photo_load_chain" onchange="previewImage('photo_load_chain', 'photo-load_chain-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="latch_hook_bawah" class="form-label">Latch Hook Bawah</label>
@@ -300,6 +308,7 @@
                 <input type="file" class="form-control" id="photo_latch_hook_bawah" name="photo_latch_hook_bawah" onchange="previewImage('photo_latch_hook_bawah', 'photo-latch_hook_bawah-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hook_bawah" class="form-label">Hook Bawah</label>

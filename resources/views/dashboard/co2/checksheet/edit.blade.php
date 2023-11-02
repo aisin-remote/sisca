@@ -74,6 +74,7 @@
                 <input type="file" class="form-control" id="photo_cover" name="photo_cover" onchange="previewImage('photo_cover', 'photo-cover-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="tabung" class="form-label">Tabung</label>
@@ -102,6 +103,7 @@
                 <input type="file" class="form-control" id="photo_tabung" name="photo_tabung" onchange="previewImage('photo_tabung', 'photo-tabung-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="lock_pin" class="form-label">Lock Pin</label>
@@ -130,6 +132,7 @@
                 <input type="file" class="form-control" id="photo_lock_pin" name="photo_lock_pin" onchange="previewImage('photo_lock_pin', 'photo-lock_pin-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="segel_lock_pin" class="form-label">Segel Lock Pin</label>
@@ -158,6 +161,7 @@
                 <input type="file" class="form-control" id="photo_segel_lock_pin" name="photo_segel_lock_pin" onchange="previewImage('photo_segel_lock_pin', 'photo-segel_lock_pin-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="kebocoran_regulator_tabung" class="form-label">Kebocoran Regulator Tabung</label>
@@ -186,6 +190,7 @@
                 <input type="file" class="form-control" id="photo_kebocoran_regulator_tabung" name="photo_kebocoran_regulator_tabung" onchange="previewImage('photo_kebocoran_regulator_tabung', 'photo-kebocoran_regulator_tabung-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="selang" class="form-label">Selang</label>

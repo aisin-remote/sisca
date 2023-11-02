@@ -74,6 +74,7 @@
                 <input type="file" class="form-control" id="photo_pressure" name="photo_pressure" onchange="previewImage('photo_pressure', 'photo-pressure-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hose" class="form-label">Hose</label>
@@ -102,6 +103,7 @@
                 <input type="file" class="form-control" id="photo_hose" name="photo_hose" onchange="previewImage('photo_hose', 'photo-hose-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="corong" class="form-label">Corong/Nozzle</label>
@@ -130,6 +132,7 @@
                 <input type="file" class="form-control" id="photo_corong" name="photo_corong" onchange="previewImage('photo_corong', 'photo-corong-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="tabung" class="form-label">Tabung</label>
@@ -158,6 +161,7 @@
                 <input type="file" class="form-control" id="photo_tabung" name="photo_tabung" onchange="previewImage('photo_tabung', 'photo-tabung-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="regulator" class="form-label">Regulator</label>
@@ -186,6 +190,7 @@
                 <input type="file" class="form-control" id="photo_regulator" name="photo_regulator" onchange="previewImage('photo_regulator', 'photo-regulator-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="lock_pin" class="form-label">Lock Pin</label>
@@ -214,6 +219,7 @@
                 <input type="file" class="form-control" id="photo_lock_pin" name="photo_lock_pin" onchange="previewImage('photo_lock_pin', 'photo-lock_pin-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="berat_tabung" class="form-label">Berat Tabung</label>

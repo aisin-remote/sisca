@@ -29,8 +29,8 @@
                             <th scope="col">NPK</th>
                             <th scope="col">No Tabung</th>
                             <th scope="col">Location Nitrogen</th>
-                            <th scope="col">Sistem Operasional</th>
-                            <th scope="col">Selector Mode</th>
+                            <th scope="col">Indikator System Power</th>
+                            <th scope="col">Selector Mode Automatic</th>
                             <th scope="col">Pintu Tabung</th>
                             <th scope="col">Pressure Tabung Pilot Nitrogen</th>
                             <th scope="col">Pressure Tabung Nitrogen No 1</th>

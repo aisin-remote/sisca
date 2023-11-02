@@ -73,6 +73,7 @@
                         onchange="previewImage('photo_pintu', 'photo-pintu-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="nozzle" class="form-label">Nozzle</label>
@@ -96,6 +97,7 @@
                         onchange="previewImage('photo_nozzle', 'photo-nozzle-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="selang" class="form-label">Selang</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_selang', 'photo-selang-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="tuas" class="form-label">Tuas Pilar</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_tuas', 'photo-tuas-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pilar" class="form-label">Pilar</label>
@@ -165,6 +169,7 @@
                         required onchange="previewImage('photo_pilar', 'photo-pilar-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="penutup" class="form-label">Penutup Pilar</label>
@@ -188,6 +193,7 @@
                         required onchange="previewImage('photo_penutup', 'photo-penutup-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="rantai" class="form-label">Rantai Penutup Pilar</label>
@@ -211,6 +217,7 @@
                         required onchange="previewImage('photo_rantai', 'photo-rantai-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="kupla" class="form-label">Kopling/Kupla</label>

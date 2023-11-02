@@ -76,6 +76,7 @@
                 <input type="file" class="form-control" id="photo_pintu" name="photo_pintu" onchange="previewImage('photo_pintu', 'photo-pintu-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="nozzle" class="form-label">Nozzle</label>
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_nozzle" name="photo_nozzle" onchange="previewImage('photo_nozzle', 'photo-nozzle-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="selang" class="form-label">Selang</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_selang" name="photo_selang" onchange="previewImage('photo_selang', 'photo-selang-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="tuas" class="form-label">Tuas Pilar</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_tuas" name="photo_tuas" onchange="previewImage('photo_tuas', 'photo-tuas-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pilar" class="form-label">Pilar</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_pilar" name="photo_pilar" onchange="previewImage('photo_pilar', 'photo-pilar-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="penutup" class="form-label">Penutup Pilar</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_penutup" name="photo_penutup" onchange="previewImage('photo_penutup', 'photo-penutup-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="rantai" class="form-label">Rantai Penutup Pilar</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_rantai" name="photo_rantai" onchange="previewImage('photo_rantai', 'photo-rantai-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="kupla" class="form-label">Kopling/Kupla</label>

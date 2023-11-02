@@ -73,9 +73,10 @@
                         onchange="previewImage('photo_geared_trolley', 'photo-geared_trolley-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="chain_geared_trolley_1" class="form-label">Chain Geared Trolley 1</label>
+                    <label for="chain_geared_trolley_1" class="form-label">Gerakan Halus</label>
                     <div class="input-group">
                         <select class="form-select" id="chain_geared_trolley_1" name="chain_geared_trolley_1" required>
                             <option value="" selected disabled>Select</option>
@@ -86,16 +87,17 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_chain_geared_trolley_1" style="display:none;">
-                    <label for="catatan_chain_geared_trolley_1" class="form-label">Catatan Chain Geared Trolley 1</label>
+                    <label for="catatan_chain_geared_trolley_1" class="form-label">Catatan Gerakan Halus</label>
                     <textarea class="form-control" name="catatan_chain_geared_trolley_1" id="catatan_chain_geared_trolley_1" cols="30" rows="5">{{ old('catatan_chain_geared_trolley_1') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_chain_geared_trolley_1" class="form-label">Foto Chain Geared Trolley 1</label>
+                    <label for="photo_chain_geared_trolley_1" class="form-label">Foto Gerakan Halus</label>
                     <img class="photo-chain_geared_trolley_1-preview img-fluid mb-3" style="max-height: 300px">
                     <input type="file" class="form-control" id="photo_chain_geared_trolley_1" name="photo_chain_geared_trolley_1" required
                         onchange="previewImage('photo_chain_geared_trolley_1', 'photo-chain_geared_trolley_1-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="chain_geared_trolley_2" class="form-label">Chain Geared Trolley 2</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_chain_geared_trolley_2', 'photo-chain_geared_trolley_2-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hooking_geared_trolly" class="form-label">Hooking Geared Trolly</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_hooking_geared_trolly', 'photo-hooking_geared_trolly-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="latch_hook_atas" class="form-label">Latch Hook Atas</label>
@@ -165,6 +169,7 @@
                         onchange="previewImage('photo_latch_hook_atas', 'photo-latch_hook_atas-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hook_atas" class="form-label">Hook Atas</label>
@@ -188,6 +193,7 @@
                         onchange="previewImage('photo_hook_atas', 'photo-hook_atas-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hand_chain" class="form-label">Hand Chain</label>
@@ -211,6 +217,7 @@
                         onchange="previewImage('photo_hand_chain', 'photo-hand_chain-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="load_chain" class="form-label">Load Chain</label>
@@ -234,6 +241,7 @@
                         onchange="previewImage('photo_load_chain', 'photo-load_chain-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="latch_hook_bawah" class="form-label">Latch Hook Bawah</label>
@@ -257,6 +265,7 @@
                         onchange="previewImage('photo_latch_hook_bawah', 'photo-latch_hook_bawah-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hook_bawah" class="form-label">Hook Bawah</label>

@@ -52,7 +52,7 @@
 
 
                 <div class="mb-3">
-                    <label for="operasional" class="form-label">Sistem Operasional</label>
+                    <label for="operasional" class="form-label">Indikator System Power</label>
                     <div class="input-group">
                         <select class="form-select" id="operasional" name="operasional" required>
                             <option value="" selected disabled>Select</option>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_operasional" style="display:none;">
-                    <label for="catatan_operasional" class="form-label">Catatan Sistem Operasional</label>
+                    <label for="catatan_operasional" class="form-label">Catatan Indikator System Power</label>
                     <textarea class="form-control" name="catatan_operasional" id="catatan_operasional" cols="30" rows="5">{{ old('catatan_operasional') }}</textarea>
                 </div>
                 <div class="mb-3">
@@ -73,9 +73,10 @@
                         onchange="previewImage('photo_operasional', 'photo-operasional-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="selector_mode" class="form-label">Selector Mode</label>
+                    <label for="selector_mode" class="form-label">Selector Mode Automatic</label>
                     <div class="input-group">
                         <select class="form-select" id="selector_mode" name="selector_mode" required>
                             <option value="" selected disabled>Select</option>
@@ -86,16 +87,17 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_selector_mode" style="display:none;">
-                    <label for="catatan_selector_mode" class="form-label">Catatan Selector Mode</label>
+                    <label for="catatan_selector_mode" class="form-label">Catatan Selector Mode Automatic</label>
                     <textarea class="form-control" name="catatan_selector_mode" id="catatan_selector_mode" cols="30" rows="5">{{ old('catatan_selector_mode') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_selector_mode" class="form-label">Foto Selector Mode</label>
+                    <label for="photo_selector_mode" class="form-label">Foto Selector Mode Automatic</label>
                     <img class="photo-selector_mode-preview img-fluid mb-3" style="max-height: 300px">
                     <input type="file" class="form-control" id="photo_selector_mode" name="photo_selector_mode" required
                         onchange="previewImage('photo_selector_mode', 'photo-selector_mode-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pintu_tabung" class="form-label">Pintu Tabung</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_pintu_tabung', 'photo-pintu_tabung-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pressure_pilot" class="form-label">Pressure Tabung Pilot Nitrogen</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_pressure_pilot', 'photo-pressure_pilot-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pressure_no1" class="form-label">Pressure Tabung Nitrogen No 1</label>
@@ -165,6 +169,7 @@
                         onchange="previewImage('photo_pressure_no1', 'photo-pressure_no1-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pressure_no2" class="form-label">Pressure Tabung Nitrogen No 2</label>
@@ -188,6 +193,7 @@
                         onchange="previewImage('photo_pressure_no2', 'photo-pressure_no2-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pressure_no3" class="form-label">Pressure Tabung Nitrogen No 3</label>
@@ -211,6 +217,7 @@
                         required onchange="previewImage('photo_pressure_no3', 'photo-pressure_no3-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pressure_no4" class="form-label">Pressure Tabung Nitrogen No 4</label>
@@ -234,6 +241,7 @@
                         required onchange="previewImage('photo_pressure_no4', 'photo-pressure_no4-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pressure_no5" class="form-label">Pressure Tabung Nitrogen No 5</label>

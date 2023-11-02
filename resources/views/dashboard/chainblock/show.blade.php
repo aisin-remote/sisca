@@ -88,7 +88,7 @@
                         </tr>
                         <tr>
                             <th class="text-center align-middle">Geared Trolley</th>
-                            <th class="text-center align-middle">Chain Geared Trolley 1</th>
+                            <th class="text-center align-middle">Gerakan Halus</th>
                             <th class="text-center align-middle">Chain Geared Trolley 2</th>
                             <th class="text-center align-middle">Hooking Geared Trolly</th>
                             <th class="text-center align-middle">Latch Hook Atas</th>

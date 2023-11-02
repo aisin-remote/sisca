@@ -73,6 +73,7 @@
                         onchange="previewImage('photo_instalation_base', 'photo-instalation_base-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pipa_saluran_air" class="form-label">Pipa Saluran Air</label>
@@ -96,6 +97,7 @@
                         onchange="previewImage('photo_pipa_saluran_air', 'photo-pipa_saluran_air-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="wastafel_eye_wash" class="form-label">Wastafel Eye Wash</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_wastafel_eye_wash', 'photo-wastafel_eye_wash-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="kran_eye_wash" class="form-label">Kran Eye Wash</label>
@@ -142,6 +145,8 @@
                         onchange="previewImage('photo_kran_eye_wash', 'photo-kran_eye_wash-preview')">
                 </div>
 
+                <hr>
+
                 <div class="mb-3">
                     <label for="tuas_eye_wash" class="form-label">Tuas Eye Wash</label>
                     <div class="input-group">
@@ -163,6 +168,8 @@
                     <input type="file" class="form-control" id="photo_tuas_eye_wash" name="photo_tuas_eye_wash" required
                         onchange="previewImage('photo_tuas_eye_wash', 'photo-tuas_eye_wash-preview')">
                 </div>
+
+                <hr>
 
                 <div class="mb-3">
                     <label for="tuas_shower" class="form-label">Tuas Shower</label>
@@ -186,6 +193,7 @@
                         onchange="previewImage('photo_tuas_shower', 'photo-tuas_shower-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="sign" class="form-label">Sign</label>
@@ -209,6 +217,7 @@
                         onchange="previewImage('photo_sign', 'photo-sign-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="shower_head" class="form-label">Shower Head</label>

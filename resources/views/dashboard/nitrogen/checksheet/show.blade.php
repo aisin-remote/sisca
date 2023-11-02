@@ -34,32 +34,32 @@
                         <td>{{ $checksheet->nitrogens->locations->location_name }}</td>
                     </tr>
                     <tr>
-                        <th>Sistem Operasional</th>
+                        <th>Indikator System Power</th>
                         <td>{{ $checksheet->operasional }}</td>
                     </tr>
                     <tr>
-                        <th>Catatan Sistem Operasional</th>
+                        <th>Catatan Indikator System Power</th>
                         <td>{{ $checksheet->catatan_operasional }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Sistem Operasional</th>
+                        <th>Photo Indikator System Power</th>
                         <td>
                             <img src="{{ asset('storage/' . $checksheet->photo_operasional) }}" alt="Photo Operasional"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Selector Mode</th>
+                        <th>Selector Mode Automatic</th>
                         <td>{{ $checksheet->selector_mode }}</td>
                     </tr>
                     <tr>
-                        <th>Catatan Selector Mode</th>
+                        <th>Catatan Selector Mode Automatic</th>
                         <td>{{ $checksheet->catatan_selector_mode }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Selector Mode</th>
+                        <th>Photo Selector Mode Automatic</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_selector_mode) }}" alt="Photo Selector Mode"
+                            <img src="{{ asset('storage/' . $checksheet->photo_selector_mode) }}" alt="Photo Selector Mode Automatic"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>

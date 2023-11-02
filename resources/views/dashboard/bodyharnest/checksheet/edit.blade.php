@@ -76,6 +76,7 @@
                 <input type="file" class="form-control" id="photo_shoulder_straps" name="photo_shoulder_straps" onchange="previewImage('photo_shoulder_straps', 'photo-shoulder_straps-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hook" class="form-label">Hook</label>
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_hook" name="photo_hook" onchange="previewImage('photo_hook', 'photo-hook-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="buckles_waist" class="form-label">Buckles Waist</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_buckles_waist" name="photo_buckles_waist" onchange="previewImage('photo_buckles_waist', 'photo-buckles_waist-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="buckles_chest" class="form-label">Buckles Chest</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_buckles_chest" name="photo_buckles_chest" onchange="previewImage('photo_buckles_chest', 'photo-buckles_chest-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="leg_straps" class="form-label">Leg Straps</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_leg_straps" name="photo_leg_straps" onchange="previewImage('photo_leg_straps', 'photo-leg_straps-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="buckles_leg" class="form-label">Buckles Leg</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_buckles_leg" name="photo_buckles_leg" onchange="previewImage('photo_buckles_leg', 'photo-buckles_leg-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="back_d_ring" class="form-label">Back D-Ring</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_back_d_ring" name="photo_back_d_ring" onchange="previewImage('photo_back_d_ring', 'photo-back_d_ring-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="carabiner" class="form-label">Carabiner</label>
@@ -272,6 +279,7 @@
                 <input type="file" class="form-control" id="photo_carabiner" name="photo_carabiner" onchange="previewImage('photo_carabiner', 'photo-carabiner-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="straps_rope" class="form-label">Straps / Rope</label>
@@ -300,6 +308,7 @@
                 <input type="file" class="form-control" id="photo_straps_rope" name="photo_straps_rope" onchange="previewImage('photo_straps_rope', 'photo-straps_rope-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="shock_absorber" class="form-label">Shock Absorber</label>

@@ -93,8 +93,8 @@
                             <th rowspan="2" scope="col" class="text-center align-middle">Aksi</th>
                         </tr>
                         <tr>
-                            <th class="text-center align-middle">Sistem Operasional</th>
-                            <th class="text-center align-middle">Selector Mode</th>
+                            <th class="text-center align-middle">Indikator System Power</th>
+                            <th class="text-center align-middle">Selector Mode Automatic</th>
                             <th class="text-center align-middle">Pintu Tabung</th>
                             <th class="text-center align-middle">Pressure Tabung Pilot Nitrogen</th>
                             <th class="text-center align-middle">Pressure Tabung Nitrogen No 1</th>

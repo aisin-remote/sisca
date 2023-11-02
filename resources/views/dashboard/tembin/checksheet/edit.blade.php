@@ -76,6 +76,7 @@
                 <input type="file" class="form-control" id="photo_master_link" name="photo_master_link" onchange="previewImage('photo_master_link', 'photo-master_link-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="body_tembin" class="form-label">Body Tembin</label>
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_body_tembin" name="photo_body_tembin" onchange="previewImage('photo_body_tembin', 'photo-body_tembin-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="mur_baut" class="form-label">Mur & Baut</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_mur_baut" name="photo_mur_baut" onchange="previewImage('photo_mur_baut', 'photo-mur_baut-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="shackle" class="form-label">Shackle</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_shackle" name="photo_shackle" onchange="previewImage('photo_shackle', 'photo-shackle-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hook_atas" class="form-label">Hook Atas</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_hook_atas" name="photo_hook_atas" onchange="previewImage('photo_hook_atas', 'photo-hook_atas-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pengunci_hook_atas" class="form-label">Pengunci Hook Atas</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_pengunci_hook_atas" name="photo_pengunci_hook_atas" onchange="previewImage('photo_pengunci_hook_atas', 'photo-pengunci_hook_atas-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="mata_chain" class="form-label">Mata Chain</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_mata_chain" name="photo_mata_chain" onchange="previewImage('photo_mata_chain', 'photo-mata_chain-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="chain" class="form-label">Chain</label>
@@ -272,6 +279,7 @@
                 <input type="file" class="form-control" id="photo_chain" name="photo_chain" onchange="previewImage('photo_chain', 'photo-chain-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hook_bawah" class="form-label">Hook Bawah</label>
@@ -300,6 +308,7 @@
                 <input type="file" class="form-control" id="photo_hook_bawah" name="photo_hook_bawah" onchange="previewImage('photo_hook_bawah', 'photo-hook_bawah-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pengunci_hook_bawah" class="form-label">Pengunci Hook Bawah</label>

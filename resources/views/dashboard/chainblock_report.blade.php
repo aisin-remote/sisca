@@ -110,31 +110,31 @@
                 <table class="table table-sm table-borderless">
                     <tbody>
                         <tr>
-                            <td scope="col">1. Master Link</td>
+                            <td scope="col">1. Geared Trolley</td>
                             <td scope="col">= a</td>
-                            <td scope="col">5. Hook Atas</td>
+                            <td scope="col">5. Latch Hook Atas</td>
                             <td scope="col">= e</td>
-                            <td scope="col">9. Hook Bawah</td>
+                            <td scope="col">9. Latch Hook Bawah</td>
                             <td scope="col">= i</td>
                         </tr>
                         <tr>
-                            <td scope="col">2. Body Tembin</td>
+                            <td scope="col">2. Gerakan Halus</td>
                             <td scope="col">= b</td>
-                            <td scope="col">6. Pengunci Hook Atas</td>
+                            <td scope="col">6. Hook Atas</td>
                             <td scope="col">= f</td>
-                            <td scope="col">10. Pengunci Hook Bawah</td>
+                            <td scope="col">10. Hook Bawah</td>
                             <td scope="col">= j</td>
                         </tr>
                         <tr>
-                            <td scope="col">3. Mur & Baut</td>
+                            <td scope="col">3. Chain Geared Trolley</td>
                             <td scope="col">= c</td>
-                            <td scope="col">7. Mata Chain</td>
+                            <td scope="col">7. Hand Chain</td>
                             <td scope="col">= g</td>
                         </tr>
                         <tr>
-                            <td scope="col">4. Shackle</td>
+                            <td scope="col">4. Hooking Geared Trolly</td>
                             <td scope="col">= d</td>
-                            <td scope="col">8. Chain</td>
+                            <td scope="col">8. Load Chain</td>
                             <td scope="col">= h</td>
                         </tr>
                     </tbody>

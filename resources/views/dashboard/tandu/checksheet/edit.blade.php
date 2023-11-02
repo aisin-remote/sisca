@@ -76,6 +76,7 @@
                 <input type="file" class="form-control" id="photo_kunci_pintu" name="photo_kunci_pintu" onchange="previewImage('photo_kunci_pintu', 'photo-kunci_pintu-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pintu" class="form-label">Pintu</label>
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_pintu" name="photo_pintu" onchange="previewImage('photo_pintu', 'photo-pintu-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="sign" class="form-label">Sign</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_sign" name="photo_sign" onchange="previewImage('photo_sign', 'photo-sign-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hand_grip" class="form-label">Hand Grip</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_hand_grip" name="photo_hand_grip" onchange="previewImage('photo_hand_grip', 'photo-hand_grip-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_body" name="photo_body" onchange="previewImage('photo_body', 'photo-body-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="engsel" class="form-label">Engsel</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_engsel" name="photo_engsel" onchange="previewImage('photo_engsel', 'photo-engsel-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="kaki" class="form-label">Kaki</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_kaki" name="photo_kaki" onchange="previewImage('photo_kaki', 'photo-kaki-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="belt" class="form-label">Belt</label>
@@ -272,6 +279,7 @@
                 <input type="file" class="form-control" id="photo_belt" name="photo_belt" onchange="previewImage('photo_belt', 'photo-belt-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="rangka" class="form-label">Rangka</label>

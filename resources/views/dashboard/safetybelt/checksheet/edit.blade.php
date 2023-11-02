@@ -76,6 +76,7 @@
                 <input type="file" class="form-control" id="photo_buckle" name="photo_buckle" onchange="previewImage('photo_buckle', 'photo-buckle-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="seams" class="form-label">Seams</label>
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_seams" name="photo_seams" onchange="previewImage('photo_seams', 'photo-seams-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="reel" class="form-label">Reel</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_reel" name="photo_reel" onchange="previewImage('photo_reel', 'photo-reel-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="shock_absorber" class="form-label">Shock Absorber</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_shock_absorber" name="photo_shock_absorber" onchange="previewImage('photo_shock_absorber', 'photo-shock_absorber-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="ring" class="form-label">Ring</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_ring" name="photo_ring" onchange="previewImage('photo_ring', 'photo-ring-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="torso_belt" class="form-label">Torso Belt</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_torso_belt" name="photo_torso_belt" onchange="previewImage('photo_torso_belt', 'photo-torso_belt-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="strap" class="form-label">Strap</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_strap" name="photo_strap" onchange="previewImage('photo_strap', 'photo-strap-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="rope" class="form-label">Rope</label>
@@ -272,6 +279,7 @@
                 <input type="file" class="form-control" id="photo_rope" name="photo_rope" onchange="previewImage('photo_rope', 'photo-rope-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="seam_protection_tube" class="form-label">Seam Protection Tube</label>
@@ -300,6 +308,7 @@
                 <input type="file" class="form-control" id="photo_seam_protection_tube" name="photo_seam_protection_tube" onchange="previewImage('photo_seam_protection_tube', 'photo-seam_protection_tube-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="hook" class="form-label">Hook</label>

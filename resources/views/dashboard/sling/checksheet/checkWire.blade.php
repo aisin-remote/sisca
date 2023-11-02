@@ -73,9 +73,10 @@
                         onchange="previewImage('photo_serabut_wire', 'photo-serabut_wire-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="bagian_wire_1" class="form-label">Bagian Wire 1</label>
+                    <label for="bagian_wire_1" class="form-label">Sling Terlilit</label>
                     <div class="input-group">
                         <select class="form-select" id="bagian_wire_1" name="bagian_wire_1" required>
                             <option value="" selected disabled>Select</option>
@@ -86,19 +87,20 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_bagian_wire_1" style="display:none;">
-                    <label for="catatan_bagian_wire_1" class="form-label">Catatan Bagian Wire 1</label>
+                    <label for="catatan_bagian_wire_1" class="form-label">Catatan Sling Terlilit</label>
                     <textarea class="form-control" name="catatan_bagian_wire_1" id="catatan_bagian_wire_1" cols="30" rows="5">{{ old('catatan_bagian_wire_1') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_bagian_wire_1" class="form-label">Foto Bagian Wire 1</label>
+                    <label for="photo_bagian_wire_1" class="form-label">Foto Sling Terlilit</label>
                     <img class="photo-bagian_wire_1-preview img-fluid mb-3" style="max-height: 300px">
                     <input type="file" class="form-control" id="photo_bagian_wire_1" name="photo_bagian_wire_1" required
                         onchange="previewImage('photo_bagian_wire_1', 'photo-bagian_wire_1-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="bagian_wire_2" class="form-label">Bagian Wire 2</label>
+                    <label for="bagian_wire_2" class="form-label">Karat</label>
                     <div class="input-group">
                         <select class="form-select" id="bagian_wire_2" name="bagian_wire_2" required>
                             <option value="" selected disabled>Select</option>
@@ -109,19 +111,20 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_bagian_wire_2" style="display:none;">
-                    <label for="catatan_bagian_wire_2" class="form-label">Catatan Bagian Wire 2</label>
+                    <label for="catatan_bagian_wire_2" class="form-label">Catatan Karat</label>
                     <textarea class="form-control" name="catatan_bagian_wire_2" id="catatan_bagian_wire_2" cols="30" rows="5">{{ old('catatan_bagian_wire_2') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_bagian_wire_2" class="form-label">Foto Bagian Wire 2</label>
+                    <label for="photo_bagian_wire_2" class="form-label">Foto Karat</label>
                     <img class="photo-bagian_wire_2-preview img-fluid mb-3" style="max-height: 300px">
                     <input type="file" class="form-control" id="photo_bagian_wire_2" name="photo_bagian_wire_2" required
                         onchange="previewImage('photo_bagian_wire_2', 'photo-bagian_wire_2-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
-                    <label for="kumpulan_wire_1" class="form-label">Kumpulan Wire 1</label>
+                    <label for="kumpulan_wire_1" class="form-label">Serabut Keluar</label>
                     <div class="input-group">
                         <select class="form-select" id="kumpulan_wire_1" name="kumpulan_wire_1" required>
                             <option value="" selected disabled>Select</option>
@@ -132,15 +135,17 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_kumpulan_wire_1" style="display:none;">
-                    <label for="catatan_kumpulan_wire_1" class="form-label">Catatan Kumpulan Wire 1</label>
+                    <label for="catatan_kumpulan_wire_1" class="form-label">Catatan Serabut Keluar</label>
                     <textarea class="form-control" name="catatan_kumpulan_wire_1" id="catatan_kumpulan_wire_1" cols="30" rows="5">{{ old('catatan_kumpulan_wire_1') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_kumpulan_wire_1" class="form-label">Foto Kumpulan Wire 1</label>
+                    <label for="photo_kumpulan_wire_1" class="form-label">Foto Serabut Keluar</label>
                     <img class="photo-kumpulan_wire_1-preview img-fluid mb-3" style="max-height: 300px">
                     <input type="file" class="form-control" id="photo_kumpulan_wire_1" name="photo_kumpulan_wire_1" required
                         onchange="previewImage('photo_kumpulan_wire_1', 'photo-kumpulan_wire_1-preview')">
                 </div>
+
+                <hr>
 
                 <div class="mb-3">
                     <label for="diameter_wire" class="form-label">Diameter Wire</label>
@@ -164,8 +169,10 @@
                         onchange="previewImage('photo_diameter_wire', 'photo-diameter_wire-preview')">
                 </div>
 
+                <hr>
+
                 <div class="mb-3">
-                    <label for="kumpulan_wire_2" class="form-label">Kumpulan Wire 2</label>
+                    <label for="kumpulan_wire_2" class="form-label">Wire Longgar</label>
                     <div class="input-group">
                         <select class="form-select" id="kumpulan_wire_2" name="kumpulan_wire_2" required>
                             <option value="" selected disabled>Select</option>
@@ -176,16 +183,17 @@
                     </div>
                 </div>
                 <div class="mb-3 mt-3" id="catatanField_kumpulan_wire_2" style="display:none;">
-                    <label for="catatan_kumpulan_wire_2" class="form-label">Catatan Kumpulan Wire 2</label>
+                    <label for="catatan_kumpulan_wire_2" class="form-label">Catatan Wire Longgar</label>
                     <textarea class="form-control" name="catatan_kumpulan_wire_2" id="catatan_kumpulan_wire_2" cols="30" rows="5">{{ old('catatan_kumpulan_wire_2') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_kumpulan_wire_2" class="form-label">Foto Kumpulan Wire 2</label>
+                    <label for="photo_kumpulan_wire_2" class="form-label">Foto Wire Longgar</label>
                     <img class="photo-kumpulan_wire_2-preview img-fluid mb-3" style="max-height: 300px">
                     <input type="file" class="form-control" id="photo_kumpulan_wire_2" name="photo_kumpulan_wire_2" required
                         onchange="previewImage('photo_kumpulan_wire_2', 'photo-kumpulan_wire_2-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="hook_wire" class="form-label">Hook Wire</label>
@@ -209,6 +217,7 @@
                         onchange="previewImage('photo_hook_wire', 'photo-hook_wire-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="pengunci_hook" class="form-label">Pengunci Hook</label>
@@ -232,6 +241,7 @@
                         onchange="previewImage('photo_pengunci_hook', 'photo-pengunci_hook-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="mata_sling" class="form-label">Mata Sling</label>

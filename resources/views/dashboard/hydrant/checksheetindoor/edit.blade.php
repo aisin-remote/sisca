@@ -76,6 +76,7 @@
                 <input type="file" class="form-control" id="photo_pintu" name="photo_pintu" onchange="previewImage('photo_pintu', 'photo-pintu-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="lampu" class="form-label">Lampu</label>
@@ -104,6 +105,7 @@
                 <input type="file" class="form-control" id="photo_lampu" name="photo_lampu" onchange="previewImage('photo_lampu', 'photo-lampu-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="emergency" class="form-label">Tombol Emergency</label>
@@ -132,6 +134,7 @@
                 <input type="file" class="form-control" id="photo_emergency" name="photo_emergency" onchange="previewImage('photo_emergency', 'photo-emergency-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="nozzle" class="form-label">Nozzle</label>
@@ -160,6 +163,7 @@
                 <input type="file" class="form-control" id="photo_nozzle" name="photo_nozzle" onchange="previewImage('photo_nozzle', 'photo-nozzle-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="selang" class="form-label">Selang</label>
@@ -188,6 +192,7 @@
                 <input type="file" class="form-control" id="photo_selang" name="photo_selang" onchange="previewImage('photo_selang', 'photo-selang-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="valve" class="form-label">Valve</label>
@@ -216,6 +221,7 @@
                 <input type="file" class="form-control" id="photo_valve" name="photo_valve" onchange="previewImage('photo_valve', 'photo-valve-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="coupling" class="form-label">Coupling/Sambungan</label>
@@ -244,6 +250,7 @@
                 <input type="file" class="form-control" id="photo_coupling" name="photo_coupling" onchange="previewImage('photo_coupling', 'photo-coupling-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="pressure" class="form-label">Pressure</label>
@@ -272,6 +279,7 @@
                 <input type="file" class="form-control" id="photo_pressure" name="photo_pressure" onchange="previewImage('photo_pressure', 'photo-pressure-preview')">
             </div>
 
+            <hr>
 
             <div class="mb-3">
                 <label for="kupla" class="form-label">Kopling/Kupla</label>

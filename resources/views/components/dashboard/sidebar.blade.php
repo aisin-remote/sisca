@@ -3,7 +3,7 @@
 <nav id="sidebar">
     <div class="sidebar-header">
         <a class="navbar-brand d-flex justify-content-center" href="/">
-            <img src="/foto/logo-sisca.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;">
+            <img src="/foto/logo-sisca.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;" id="logo-sidebar">
         </a>
     </div>
     <ul class="list-unstyled components">

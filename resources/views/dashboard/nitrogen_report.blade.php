@@ -114,7 +114,7 @@
             <table class="table table-sm table-borderless">
                 <tbody>
                     <tr>
-                        <td scope="col">1. Sistem Operasional</td>
+                        <td scope="col">1. Indikator System Power</td>
                         <td scope="col">= a</td>
                         <td scope="col">4. Pressure Pilot</td>
                         <td scope="col">= d</td>
@@ -122,7 +122,7 @@
                         <td scope="col">= g</td>
                     </tr>
                     <tr>
-                        <td scope="col">2. Selector Mode</td>
+                        <td scope="col">2. Selector Mode Automatic</td>
                         <td scope="col">= b</td>
                         <td scope="col">5. Pressure No 1</td>
                         <td scope="col">= e</td>

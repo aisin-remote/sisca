@@ -29,7 +29,7 @@
                             <th scope="col">NPK</th>
                             <th scope="col">No Chain Block</th>
                             <th scope="col">Geared Trolley</th>
-                            <th scope="col">Chain Geared Trolley 1</th>
+                            <th scope="col">Gerakan Halus</th>
                             <th scope="col">Chain Geared Trolley 2</th>
                             <th scope="col">Hooking Geared Trolly</th>
                             <th scope="col">Latch Hook Atas</th>

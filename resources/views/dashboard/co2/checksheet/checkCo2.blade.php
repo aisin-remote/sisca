@@ -73,6 +73,7 @@
                         onchange="previewImage('photo_cover', 'photo-cover-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="tabung" class="form-label">Tabung</label>
@@ -96,6 +97,7 @@
                         onchange="previewImage('photo_tabung', 'photo-tabung-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="lock_pin" class="form-label">Lock Pin</label>
@@ -119,6 +121,7 @@
                         onchange="previewImage('photo_lock_pin', 'photo-lock_pin-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="segel_lock_pin" class="form-label">Segel Lock Pin</label>
@@ -142,6 +145,7 @@
                         onchange="previewImage('photo_segel_lock_pin', 'photo-segel_lock_pin-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="kebocoran_regulator_tabung" class="form-label">Kebocoran Regulator Tabung</label>
@@ -165,6 +169,7 @@
                         onchange="previewImage('photo_kebocoran_regulator_tabung', 'photo-kebocoran_regulator_tabung-preview')">
                 </div>
 
+                <hr>
 
                 <div class="mb-3">
                     <label for="selang" class="form-label">Selang</label>
