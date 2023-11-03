@@ -35,7 +35,11 @@
                     </tr>
                     <tr>
                         <th>Cover</th>
-                        <td>{{ $checksheet->cover }}</td>
+                        @if ($checksheet->cover === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->cover }}</td>
+                        @else
+                            <td>{{ $checksheet->cover }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Cover</th>
@@ -50,7 +54,11 @@
                     </tr>
                     <tr>
                         <th>Tabung</th>
-                        <td>{{ $checksheet->tabung }}</td>
+                        @if ($checksheet->tabung === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->tabung }}</td>
+                        @else
+                            <td>{{ $checksheet->tabung }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Tabung</th>
@@ -65,7 +73,11 @@
                     </tr>
                     <tr>
                         <th>Lock Pin</th>
-                        <td>{{ $checksheet->lock_pin }}</td>
+                        @if ($checksheet->lock_pin === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->lock_pin }}</td>
+                        @else
+                            <td>{{ $checksheet->lock_pin }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Lock Pin</th>
@@ -80,7 +92,11 @@
                     </tr>
                     <tr>
                         <th>Segel Lock Pin</th>
-                        <td>{{ $checksheet->segel_lock_pin }}</td>
+                        @if ($checksheet->segel_lock_pin === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->segel_lock_pin }}</td>
+                        @else
+                            <td>{{ $checksheet->segel_lock_pin }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Segel Lock Pin</th>
@@ -95,7 +111,11 @@
                     </tr>
                     <tr>
                         <th>Kebocoran Regulator Tabung</th>
-                        <td>{{ $checksheet->kebocoran_regulator_tabung }}</td>
+                        @if ($checksheet->kebocoran_regulator_tabung === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->kebocoran_regulator_tabung }}</td>
+                        @else
+                            <td>{{ $checksheet->kebocoran_regulator_tabung }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Kebocoran Regulator Tabung</th>
@@ -111,7 +131,11 @@
                     </tr>
                     <tr>
                         <th>Selang</th>
-                        <td>{{ $checksheet->selang }}</td>
+                        @if ($checksheet->selang === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->selang }}</td>
+                        @else
+                            <td>{{ $checksheet->selang }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Selang</th>

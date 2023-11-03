@@ -50,15 +50,70 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->tabung_number }}</td>
                                 <td>{{ $checksheet->nitrogens->locations->location_name }}</td>
-                                <td>{{ $checksheet->operasional }}</td>
-                                <td>{{ $checksheet->selector_mode }}</td>
-                                <td>{{ $checksheet->pintu_tabung }}</td>
-                                <td>{{ $checksheet->pressure_pilot }}</td>
-                                <td>{{ $checksheet->pressure_no1 }}</td>
-                                <td>{{ $checksheet->pressure_no2 }}</td>
-                                <td>{{ $checksheet->pressure_no3 }}</td>
-                                <td>{{ $checksheet->pressure_no4 }}</td>
-                                <td>{{ $checksheet->pressure_no5 }}</td>
+
+                                @if ($checksheet->operasional === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->operasional }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->operasional }}</td>
+                                @endif
+
+                                @if ($checksheet->selector_mode === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->selector_mode }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->selector_mode }}</td>
+                                @endif
+
+                                @if ($checksheet->pintu_tabung === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pintu_tabung }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pintu_tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure_pilot === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure_pilot }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pressure_pilot }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure_no1 === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure_no1 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pressure_no1 }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure_no2 === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure_no2 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pressure_no2 }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure_no3 === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure_no3 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pressure_no3 }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure_no4 === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure_no4 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pressure_no4 }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure_no5 === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure_no5 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pressure_no5 }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('nitrogen.checksheetnitrogen.show', $checksheet->id) }}"

@@ -47,12 +47,49 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->tabung_number }}</td>
                                 <td>{{ $checksheet->co2s->locations->location_name }}</td>
-                                <td>{{ $checksheet->cover }}</td>
-                                <td>{{ $checksheet->tabung }}</td>
-                                <td>{{ $checksheet->lock_pin }}</td>
-                                <td>{{ $checksheet->segel_lock_pin }}</td>
-                                <td>{{ $checksheet->kebocoran_regulator_tabung }}</td>
-                                <td>{{ $checksheet->selang }}</td>
+
+                                @if ($checksheet->cover === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->cover }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->cover }}</td>
+                                @endif
+
+                                @if ($checksheet->tabung === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->tabung }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->lock_pin }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->segel_lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->segel_lock_pin }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->segel_lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->kebocoran_regulator_tabung === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->kebocoran_regulator_tabung }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->kebocoran_regulator_tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->selang === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->selang }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->selang }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('co2.checksheetco2.show', $checksheet->id) }}"

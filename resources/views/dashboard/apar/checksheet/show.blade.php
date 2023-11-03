@@ -38,7 +38,11 @@
                         </tr>
                         <tr>
                             <th>Pressure</th>
-                            <td>{{ $checksheet->pressure }}</td>
+                            @if ($checksheet->pressure === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->pressure }}</td>
+                            @else
+                                <td>{{ $checksheet->pressure }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pressure</th>
@@ -53,7 +57,11 @@
                         </tr>
                         <tr>
                             <th>Hose</th>
-                            <td>{{ $checksheet->hose }}</td>
+                            @if ($checksheet->hose === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->hose }}</td>
+                            @else
+                                <td>{{ $checksheet->hose }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Hose</th>
@@ -68,7 +76,11 @@
                         </tr>
                         <tr>
                             <th>Tabung</th>
-                            <td>{{ $checksheet->tabung }}</td>
+                            @if ($checksheet->tabung === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->tabung }}</td>
+                            @else
+                                <td>{{ $checksheet->tabung }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tabung</th>
@@ -83,7 +95,11 @@
                         </tr>
                         <tr>
                             <th>Regulator</th>
-                            <td>{{ $checksheet->regulator }}</td>
+                            @if ($checksheet->regulator === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->regulator }}</td>
+                            @else
+                                <td>{{ $checksheet->regulator }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Regulator</th>
@@ -98,7 +114,11 @@
                         </tr>
                         <tr>
                             <th>Lock Pin</th>
-                            <td>{{ $checksheet->lock_pin }}</td>
+                            @if ($checksheet->lock_pin === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->lock_pin }}</td>
+                            @else
+                                <td>{{ $checksheet->lock_pin }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Lock Pin</th>
@@ -113,7 +133,11 @@
                         </tr>
                         <tr>
                             <th>Powder</th>
-                            <td>{{ $checksheet->powder }}</td>
+                            @if ($checksheet->powder === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->powder }}</td>
+                            @else
+                                <td>{{ $checksheet->powder }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Powder</th>
@@ -166,7 +190,11 @@
                         </tr>
                         <tr>
                             <th>Pressure</th>
-                            <td>{{ $checksheet->pressure }}</td>
+                            @if ($checksheet->pressure === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->pressure }}</td>
+                            @else
+                                <td>{{ $checksheet->pressure }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pressure</th>
@@ -181,7 +209,11 @@
                         </tr>
                         <tr>
                             <th>Hose</th>
-                            <td>{{ $checksheet->hose }}</td>
+                            @if ($checksheet->hose === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->hose }}</td>
+                            @else
+                                <td>{{ $checksheet->hose }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Hose</th>
@@ -196,7 +228,11 @@
                         </tr>
                         <tr>
                             <th>Corong</th>
-                            <td>{{ $checksheet->corong }}</td>
+                            @if ($checksheet->corong === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->corong }}</td>
+                            @else
+                                <td>{{ $checksheet->corong }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Corong</th>
@@ -211,7 +247,11 @@
                         </tr>
                         <tr>
                             <th>Tabung</th>
-                            <td>{{ $checksheet->tabung }}</td>
+                            @if ($checksheet->tabung === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->tabung }}</td>
+                            @else
+                                <td>{{ $checksheet->tabung }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tabung</th>
@@ -226,7 +266,11 @@
                         </tr>
                         <tr>
                             <th>Regulator</th>
-                            <td>{{ $checksheet->regulator }}</td>
+                            @if ($checksheet->regulator === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->regulator }}</td>
+                            @else
+                                <td>{{ $checksheet->regulator }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Regulator</th>
@@ -241,7 +285,11 @@
                         </tr>
                         <tr>
                             <th>Lock Pin</th>
-                            <td>{{ $checksheet->lock_pin }}</td>
+                            @if ($checksheet->lock_pin === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->lock_pin }}</td>
+                            @else
+                                <td>{{ $checksheet->lock_pin }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Lock Pin</th>
@@ -256,7 +304,11 @@
                         </tr>
                         <tr>
                             <th>Berat Tabung</th>
-                            <td>{{ $checksheet->berat_tabung }}</td>
+                            @if ($checksheet->berat_tabung === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->berat_tabung }}</td>
+                            @else
+                                <td>{{ $checksheet->berat_tabung }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Berat Tabung</th>

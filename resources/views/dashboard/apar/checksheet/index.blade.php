@@ -26,7 +26,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive col-lg-12">
-                <table class="table table-striped table-sm" id="dtBasicExample1">
+                <table class="table table-striped table-sm" id="dtBasicExample2">
                     <thead>
                         <tr class="text-center align-middle">
                             <th scope="col">#</th>
@@ -56,13 +56,49 @@
                                 <td>
                                     {{ $checksheet->apars->locations->location_name ?? 'Tidak ada lokasi' }}
                                 </td>
-                                <td>{{ $checksheet->pressure }}</td>
-                                <td>{{ $checksheet->hose }}</td>
-                                <td>{{ $checksheet->corong }}</td>
-                                <td>{{ $checksheet->tabung }}</td>
-                                <td>{{ $checksheet->regulator }}</td>
-                                <td>{{ $checksheet->lock_pin }}</td>
-                                <td>{{ $checksheet->berat_tabung }}</td>
+
+                                @if ($checksheet->pressure === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure }}</td>
+                                @else
+                                    <td>{{ $checksheet->pressure }}</td>
+                                @endif
+
+                                @if ($checksheet->hose === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->hose }}</td>
+                                @else
+                                    <td>{{ $checksheet->hose }}</td>
+                                @endif
+
+                                @if ($checksheet->corong === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->corong }}</td>
+                                @else
+                                    <td>{{ $checksheet->corong }}</td>
+                                @endif
+
+                                @if ($checksheet->tabung === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->tabung }}</td>
+                                @else
+                                    <td>{{ $checksheet->tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->regulator === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->regulator }}</td>
+                                @else
+                                    <td>{{ $checksheet->regulator }}</td>
+                                @endif
+
+                                @if ($checksheet->lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->lock_pin }}</td>
+                                @else
+                                    <td>{{ $checksheet->lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->berat_tabung === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->berat_tabung }}</td>
+                                @else
+                                    <td>{{ $checksheet->berat_tabung }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}"
@@ -102,7 +138,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive col-lg-12">
-                <table class="table table-striped table-sm" id="dtBasicExample2">
+                <table class="table table-striped table-sm" id="dtBasicExample">
                     <thead>
                         <tr class="text-center align-middle">
                             <th scope="col">#</th>
@@ -131,12 +167,43 @@
                                 <td>
                                     {{ $checksheet->apars->locations->location_name ?? 'Tidak ada lokasi' }}
                                 </td>
-                                <td>{{ $checksheet->pressure }}</td>
-                                <td>{{ $checksheet->hose }}</td>
-                                <td>{{ $checksheet->tabung }}</td>
-                                <td>{{ $checksheet->regulator }}</td>
-                                <td>{{ $checksheet->lock_pin }}</td>
-                                <td>{{ $checksheet->powder }}</td>
+
+                                @if ($checksheet->pressure === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->pressure }}</td>
+                                @else
+                                    <td>{{ $checksheet->pressure }}</td>
+                                @endif
+
+                                @if ($checksheet->hose === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->hose }}</td>
+                                @else
+                                    <td>{{ $checksheet->hose }}</td>
+                                @endif
+
+                                @if ($checksheet->tabung === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->tabung }}</td>
+                                @else
+                                    <td>{{ $checksheet->tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->regulator === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->regulator }}</td>
+                                @else
+                                    <td>{{ $checksheet->regulator }}</td>
+                                @endif
+
+                                @if ($checksheet->lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->lock_pin }}</td>
+                                @else
+                                    <td>{{ $checksheet->lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->powder === 'NG')
+                                    <td class="text-danger fw-bolder">{{ $checksheet->powder }}</td>
+                                @else
+                                    <td>{{ $checksheet->powder }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}"

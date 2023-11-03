@@ -108,12 +108,49 @@
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->tabung_number }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->cover }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->tabung }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->lock_pin }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->segel_lock_pin }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->kebocoran_regulator_tabung }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->selang }}</td>
+
+                                @if ($checksheet->cover === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->cover }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->cover }}</td>
+                                @endif
+
+                                @if ($checksheet->tabung === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->tabung }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->lock_pin }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->segel_lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->segel_lock_pin }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->segel_lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->kebocoran_regulator_tabung === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->kebocoran_regulator_tabung }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->kebocoran_regulator_tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->selang === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->selang }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->selang }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('co2.checksheetco2.show', $checksheet->id) }}"

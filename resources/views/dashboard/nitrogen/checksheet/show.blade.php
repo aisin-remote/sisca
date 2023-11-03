@@ -35,7 +35,11 @@
                     </tr>
                     <tr>
                         <th>Indikator System Power</th>
-                        <td>{{ $checksheet->operasional }}</td>
+                        @if ($checksheet->operasional === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->operasional }}</td>
+                        @else
+                            <td>{{ $checksheet->operasional }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Indikator System Power</th>
@@ -50,7 +54,11 @@
                     </tr>
                     <tr>
                         <th>Selector Mode Automatic</th>
-                        <td>{{ $checksheet->selector_mode }}</td>
+                        @if ($checksheet->selector_mode === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->selector_mode }}</td>
+                        @else
+                            <td>{{ $checksheet->selector_mode }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Selector Mode Automatic</th>
@@ -59,13 +67,18 @@
                     <tr>
                         <th>Photo Selector Mode Automatic</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_selector_mode) }}" alt="Photo Selector Mode Automatic"
-                                style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            <img src="{{ asset('storage/' . $checksheet->photo_selector_mode) }}"
+                                alt="Photo Selector Mode Automatic" style="max-width: 250px; max-height: 300px;"
+                                class="img-fluid">
                         </td>
                     </tr>
                     <tr>
                         <th>Pintu Tabung</th>
-                        <td>{{ $checksheet->pintu_tabung }}</td>
+                        @if ($checksheet->pintu_tabung === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pintu_tabung }}</td>
+                        @else
+                            <td>{{ $checksheet->pintu_tabung }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pintu Tabung</th>
@@ -80,7 +93,11 @@
                     </tr>
                     <tr>
                         <th>Pressure Tabung Pilot Nitrogen</th>
-                        <td>{{ $checksheet->pressure_pilot }}</td>
+                        @if ($checksheet->pressure_pilot === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pressure_pilot }}</td>
+                        @else
+                            <td>{{ $checksheet->pressure_pilot }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Tabung Pilot Nitrogen</th>
@@ -95,7 +112,11 @@
                     </tr>
                     <tr>
                         <th>Pressure Tabung Nitrogen No 1</th>
-                        <td>{{ $checksheet->pressure_no1 }}</td>
+                        @if ($checksheet->pressure_no1 === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pressure_no1 }}</td>
+                        @else
+                            <td>{{ $checksheet->pressure_no1 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pressure Tabung Nitrogen No 1</th>
@@ -110,7 +131,11 @@
                     </tr>
                     <tr>
                         <th>Pressure Tabung Nitrogen No 2</th>
-                        <td>{{ $checksheet->pressure_no2 }}</td>
+                        @if ($checksheet->pressure_no2 === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pressure_no2 }}</td>
+                        @else
+                            <td>{{ $checksheet->pressure_no2 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pressure Tabung Nitrogen No 2</th>
@@ -125,7 +150,11 @@
                     </tr>
                     <tr>
                         <th>Pressure Tabung Nitrogen No 3</th>
-                        <td>{{ $checksheet->pressure_no3 }}</td>
+                        @if ($checksheet->pressure_no3 === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pressure_no3 }}</td>
+                        @else
+                            <td>{{ $checksheet->pressure_no3 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pressure Tabung Nitrogen No 3</th>
@@ -140,7 +169,11 @@
                     </tr>
                     <tr>
                         <th>Pressure Tabung Nitrogen No 4</th>
-                        <td>{{ $checksheet->pressure_no4 }}</td>
+                        @if ($checksheet->pressure_no4 === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pressure_no4 }}</td>
+                        @else
+                            <td>{{ $checksheet->pressure_no4 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pressure Tabung Nitrogen No 4</th>
@@ -155,7 +188,11 @@
                     </tr>
                     <tr>
                         <th>Pressure Tabung Nitrogen No 5</th>
-                        <td>{{ $checksheet->pressure_no5 }}</td>
+                        @if ($checksheet->pressure_no5 === 'NG')
+                            <td class="text-danger fw-bolder">{{ $checksheet->pressure_no5 }}</td>
+                        @else
+                            <td>{{ $checksheet->pressure_no5 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pressure Tabung Nitrogen No 5</th>

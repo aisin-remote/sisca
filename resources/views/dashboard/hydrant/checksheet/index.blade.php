@@ -57,14 +57,63 @@
                                 <td>
                                     {{ $checksheet->hydrants->locations->location_name ?? 'Tidak ada lokasi' }}
                                 </td>
-                                <td>{{ $checksheet->pintu }}</td>
-                                <td>{{ $checksheet->emergency }}</td>
-                                <td>{{ $checksheet->nozzle }}</td>
-                                <td>{{ $checksheet->selang }}</td>
-                                <td>{{ $checksheet->valve }}</td>
-                                <td>{{ $checksheet->coupling }}</td>
-                                <td>{{ $checksheet->pressure }}</td>
-                                <td>{{ $checksheet->kupla }}</td>
+
+                                @if ($checksheet->pintu === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->pintu }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pintu }}</td>
+                                @endif
+
+                                @if ($checksheet->emergency === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->emergency }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->emergency }}</td>
+                                @endif
+
+                                @if ($checksheet->nozzle === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->nozzle }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->nozzle }}</td>
+                                @endif
+
+                                @if ($checksheet->selang === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->selang }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->selang }}</td>
+                                @endif
+
+                                @if ($checksheet->valve === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->valve }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->valve }}</td>
+                                @endif
+
+                                @if ($checksheet->coupling === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->coupling }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->coupling }}</td>
+                                @endif
+
+                                @if ($checksheet->pressure === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->pressure }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pressure }}</td>
+                                @endif
+
+                                @if ($checksheet->kupla === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->kupla }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->kupla }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('hydrant.checksheetindoor.show', $checksheet->id) }}"
@@ -135,14 +184,63 @@
                                 <td>
                                     {{ $checksheet->hydrants->locations->location_name ?? 'Tidak ada lokasi' }}
                                 </td>
-                                <td>{{ $checksheet->pintu }}</td>
-                                <td>{{ $checksheet->nozzle }}</td>
-                                <td>{{ $checksheet->selang }}</td>
-                                <td>{{ $checksheet->tuas }}</td>
-                                <td>{{ $checksheet->pilar }}</td>
-                                <td>{{ $checksheet->penutup }}</td>
-                                <td>{{ $checksheet->rantai }}</td>
-                                <td>{{ $checksheet->kupla }}</td>
+
+                                @if ($checksheet->pintu === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->pintu }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pintu }}</td>
+                                @endif
+
+                                @if ($checksheet->nozzle === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->nozzle }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->nozzle }}</td>
+                                @endif
+
+                                @if ($checksheet->selang === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->selang }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->selang }}</td>
+                                @endif
+
+                                @if ($checksheet->tuas === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->tuas }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->tuas }}</td>
+                                @endif
+
+                                @if ($checksheet->pilar === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->pilar }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pilar }}</td>
+                                @endif
+
+                                @if ($checksheet->penutup === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->penutup }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->penutup }}</td>
+                                @endif
+
+                                @if ($checksheet->rantai === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->rantai }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->rantai }}</td>
+                                @endif
+
+                                @if ($checksheet->kupla === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->kupla }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->kupla }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('hydrant.checksheetoutdoor.show', $checksheet->id) }}"

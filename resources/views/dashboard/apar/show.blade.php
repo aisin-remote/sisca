@@ -160,13 +160,49 @@
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->apar_number }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->pressure }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hose }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->corong }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->tabung }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->regulator }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->lock_pin }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->berat_tabung }}</td>
+
+                                @if ($checksheet->pressure === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->pressure }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pressure }}</td>
+                                @endif
+
+                                @if ($checksheet->hose === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->hose }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hose }}</td>
+                                @endif
+
+                                @if ($checksheet->corong === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->corong }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->corong }}</td>
+                                @endif
+
+                                @if ($checksheet->tabung === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->tabung }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->regulator === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->regulator }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->regulator }}</td>
+                                @endif
+
+                                @if ($checksheet->lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->lock_pin }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->berat_tabung === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->berat_tabung }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->berat_tabung }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('apar.checksheetco2.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>
@@ -220,12 +256,43 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td>{{ $checksheet->apar_number }}</td>
-                                <td>{{ $checksheet->pressure }}</td>
-                                <td>{{ $checksheet->hose }}</td>
-                                <td>{{ $checksheet->tabung }}</td>
-                                <td>{{ $checksheet->regulator }}</td>
-                                <td>{{ $checksheet->lock_pin }}</td>
-                                <td>{{ $checksheet->powder }}</td>
+
+                                @if ($checksheet->pressure === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->pressure }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pressure }}</td>
+                                @endif
+
+                                @if ($checksheet->hose === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->hose }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hose }}</td>
+                                @endif
+
+                                @if ($checksheet->tabung === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->tabung }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->tabung }}</td>
+                                @endif
+
+                                @if ($checksheet->regulator === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->regulator }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->regulator }}</td>
+                                @endif
+
+                                @if ($checksheet->lock_pin === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->lock_pin }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->lock_pin }}</td>
+                                @endif
+
+                                @if ($checksheet->powder === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">{{ $checksheet->powder }}</td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->powder }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('apar.checksheetpowder.show', $checksheet->id) }}" class="badge bg-info me-2">Info</a>

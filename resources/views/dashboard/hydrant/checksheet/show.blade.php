@@ -36,7 +36,11 @@
                         </tr>
                         <tr>
                             <th>Pintu Hydrant</th>
-                            <td>{{ $checksheet->pintu }}</td>
+                            @if ($checksheet->pintu === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->pintu }}</td>
+                            @else
+                                <td>{{ $checksheet->pintu }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pintu Hydrant</th>
@@ -51,7 +55,11 @@
                         </tr>
                         <tr>
                             <th>Nozzle</th>
-                            <td>{{ $checksheet->nozzle }}</td>
+                            @if ($checksheet->nozzle === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->nozzle }}</td>
+                            @else
+                                <td>{{ $checksheet->nozzle }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Nozzle</th>
@@ -66,7 +74,11 @@
                         </tr>
                         <tr>
                             <th>Selang</th>
-                            <td>{{ $checksheet->selang }}</td>
+                            @if ($checksheet->selang === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->selang }}</td>
+                            @else
+                                <td>{{ $checksheet->selang }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Selang</th>
@@ -81,7 +93,11 @@
                         </tr>
                         <tr>
                             <th>Tuas Pilar</th>
-                            <td>{{ $checksheet->tuas }}</td>
+                            @if ($checksheet->tuas === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->tuas }}</td>
+                            @else
+                                <td>{{ $checksheet->tuas }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tuas Pilar</th>
@@ -96,7 +112,11 @@
                         </tr>
                         <tr>
                             <th>Pilar</th>
-                            <td>{{ $checksheet->pilar }}</td>
+                            @if ($checksheet->pilar === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->pilar }}</td>
+                            @else
+                                <td>{{ $checksheet->pilar }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pilar</th>
@@ -111,7 +131,11 @@
                         </tr>
                         <tr>
                             <th>Penutup Pilar</th>
-                            <td>{{ $checksheet->penutup }}</td>
+                            @if ($checksheet->penutup === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->penutup }}</td>
+                            @else
+                                <td>{{ $checksheet->penutup }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Penutup Pilar</th>
@@ -126,7 +150,11 @@
                         </tr>
                         <tr>
                             <th>Rantai Penutup Pilar</th>
-                            <td>{{ $checksheet->rantai }}</td>
+                            @if ($checksheet->rantai === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->rantai }}</td>
+                            @else
+                                <td>{{ $checksheet->rantai }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Rantai Penutup Pilar</th>
@@ -142,7 +170,11 @@
                         </tr>
                         <tr>
                             <th>Kopling/Kupla</th>
-                            <td>{{ $checksheet->kupla }}</td>
+                            @if ($checksheet->kupla === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->kupla }}</td>
+                            @else
+                                <td>{{ $checksheet->kupla }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Kopling/Kupla</th>
@@ -193,7 +225,11 @@
                         </tr>
                         <tr>
                             <th>Pintu Hydrant</th>
-                            <td>{{ $checksheet->pintu }}</td>
+                            @if ($checksheet->pintu === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->pintu }}</td>
+                            @else
+                                <td>{{ $checksheet->pintu }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pintu Hydrant</th>
@@ -208,7 +244,11 @@
                         </tr>
                         <tr>
                             <th>Lampu</th>
-                            <td>{{ $checksheet->lampu }}</td>
+                            @if ($checksheet->lampu === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->lampu }}</td>
+                            @else
+                                <td>{{ $checksheet->lampu }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Lampu</th>
@@ -223,7 +263,11 @@
                         </tr>
                         <tr>
                             <th>Tombol Emergency</th>
-                            <td>{{ $checksheet->emergency }}</td>
+                            @if ($checksheet->emergency === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->emergency }}</td>
+                            @else
+                                <td>{{ $checksheet->emergency }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tombol Emergency</th>
@@ -239,7 +283,11 @@
                         </tr>
                         <tr>
                             <th>Nozzle</th>
-                            <td>{{ $checksheet->nozzle }}</td>
+                            @if ($checksheet->nozzle === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->nozzle }}</td>
+                            @else
+                                <td>{{ $checksheet->nozzle }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Nozzle</th>
@@ -254,7 +302,11 @@
                         </tr>
                         <tr>
                             <th>Selang</th>
-                            <td>{{ $checksheet->selang }}</td>
+                            @if ($checksheet->selang === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->selang }}</td>
+                            @else
+                                <td>{{ $checksheet->selang }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Selang</th>
@@ -269,7 +321,11 @@
                         </tr>
                         <tr>
                             <th>Valve</th>
-                            <td>{{ $checksheet->valve }}</td>
+                            @if ($checksheet->valve === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->valve }}</td>
+                            @else
+                                <td>{{ $checksheet->valve }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Valve</th>
@@ -284,7 +340,11 @@
                         </tr>
                         <tr>
                             <th>Coupling/Sambungan</th>
-                            <td>{{ $checksheet->coupling }}</td>
+                            @if ($checksheet->coupling === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->coupling }}</td>
+                            @else
+                                <td>{{ $checksheet->coupling }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Coupling/Sambungan</th>
@@ -300,7 +360,11 @@
                         </tr>
                         <tr>
                             <th>Pressure</th>
-                            <td>{{ $checksheet->pressure }}</td>
+                            @if ($checksheet->pressure === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->pressure }}</td>
+                            @else
+                                <td>{{ $checksheet->pressure }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pressure</th>
@@ -315,7 +379,11 @@
                         </tr>
                         <tr>
                             <th>Kopling/Kupla</th>
-                            <td>{{ $checksheet->kupla }}</td>
+                            @if ($checksheet->kupla === 'NG')
+                                <td class="text-danger fw-bolder">{{ $checksheet->kupla }}</td>
+                            @else
+                                <td>{{ $checksheet->kupla }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Kopling/Kupla</th>
