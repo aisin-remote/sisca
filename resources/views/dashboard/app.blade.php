@@ -72,7 +72,7 @@
         <!-- Sidebar  -->
         <x-dashboard.sidebar />
 
-        <!-- navbar  -->
+        <!-- Navbar  -->
         <div id="content">
             <x-dashboard.navbar />
 
@@ -81,12 +81,16 @@
                 <i class="bi bi-arrow-up"></i>
             </button>
         </div>
+        {{-- Footer --}}
+    <x-dashboard.footer />
     </div>
+
     <script>
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
                 $('#content').toggleClass('active');
+                $('#footer').toggleClass('active')
                 $('body').toggleClass('sidebar-active'); // Tambahkan ini
             });
         });

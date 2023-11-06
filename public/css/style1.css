@@ -7,6 +7,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    min-height: 100vh;
+    margin: 0;
 }
 
 p {
@@ -52,9 +54,9 @@ a:focus {
 ----------------------------------------------------- */
 
 .wrapper {
-    display: flex;
     width: 100%;
     align-items: stretch;
+    flex: 1;
 }
 
 #sidebar {
@@ -152,6 +154,10 @@ ul.CTAs a {
     min-height: 100vh;
     transition: all 0.3s;
     margin-left: 250px;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 #content.active {
@@ -352,5 +358,29 @@ figure.zoom img {
 }
 
 .custom-rounded-left {
-    border-radius: 0 5px 5px 0; /* Sudut kiri atas dan kiri bawah 0, sudut kanan atas dan kanan bawah 5px */
+    border-radius: 0 5px 5px 0;
+    /* Sudut kiri atas dan kiri bawah 0, sudut kanan atas dan kanan bawah 5px */
+}
+
+#footer {
+    flex-shrink: 0;
+    width: 100%;
+    bottom: 0;
+    height: 60px;
+    padding: 1rem;
+}
+
+#footer.active {
+    margin-left: 0px;
+    width: 100%;
+}
+
+#footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: 0.875rem;
+    color: #6c757d;
+    /* Warna teks seperti pada tailwind "text-gray-600" */
 }

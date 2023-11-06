@@ -2,6 +2,7 @@
 @section('title', 'All Eyewasher Report')
 
 @section('content')
+
     <form class="form-inline mb-5 col-lg-12" method="GET" action="{{ route('home.checksheet.sling') }}">
         <div class="input-group mb-3">
             <label class="input-group-text" for="selected_year">Pilih Tahun:</label>
@@ -167,6 +168,5 @@
             {{-- </div> --}}
         </div>
     </div>
-</div>
 
 @endsection

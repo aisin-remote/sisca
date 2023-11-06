@@ -29,7 +29,7 @@
     <nav class="navbar navbar-expand-md" style="background-color: #FCFCFC;">
         <div class="container mx-auto">
             <a class="navbar-brand" href="/">
-                <img src="https://www.aisinindonesia.co.id/assetweb/image/logo/aisin-indonesia-logo.svg" alt="">
+                <img src="foto\logo-aiia.png" style="width: 150px; height: auto;" alt="">
             </a>
             {{-- <div class="position-relative">
                 <div class="d-flex justify-content-between align-items-center">
