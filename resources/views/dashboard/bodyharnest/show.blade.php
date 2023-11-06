@@ -119,16 +119,87 @@
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->bodyharnest_number }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->shoulder_straps }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hook }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->buckles_waist }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->buckles_chest }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->leg_straps }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->buckles_leg }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->back_d_ring }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->carabiner }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->straps_rope }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->shock_absorber }}</td>
+
+                                @if ($checksheet->shoulder_straps === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->shoulder_straps }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->shoulder_straps }}</td>
+                                @endif
+
+                                @if ($checksheet->hook === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hook }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hook }}</td>
+                                @endif
+
+                                @if ($checksheet->buckles_waist === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->buckles_waist }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->buckles_waist }}</td>
+                                @endif
+
+                                @if ($checksheet->buckles_chest === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->buckles_chest }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->buckles_chest }}</td>
+                                @endif
+
+                                @if ($checksheet->leg_straps === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->leg_straps }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->leg_straps }}</td>
+                                @endif
+
+                                @if ($checksheet->buckles_leg === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->buckles_leg }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->buckles_leg }}</td>
+                                @endif
+
+                                @if ($checksheet->back_d_ring === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->back_d_ring }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->back_d_ring }}</td>
+                                @endif
+
+                                @if ($checksheet->carabiner === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->carabiner }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->carabiner }}</td>
+                                @endif
+
+                                @if ($checksheet->straps_rope === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->straps_rope }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->straps_rope }}</td>
+                                @endif
+
+                                @if ($checksheet->shock_absorber === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->shock_absorber }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->shock_absorber }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('bodyharnest.checksheetbodyharnest.show', $checksheet->id) }}"

@@ -48,7 +48,13 @@
                         </tr>
                         <tr>
                             <th>Serabut Wire</th>
-                            <td>{{ $checksheet->serabut_wire }}</td>
+                            @if ($checksheet->serabut_wire === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->serabut_wire }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->serabut_wire }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Serabut Wire</th>
@@ -57,13 +63,19 @@
                         <tr>
                             <th>Photo Serabut Wire</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_serabut_wire) }}" alt="Photo Serabut Wire"
-                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_serabut_wire) }}"
+                                    alt="Photo Serabut Wire" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
                             <th>Sling Terlilit</th>
-                            <td>{{ $checksheet->bagian_wire_1 }}</td>
+                            @if ($checksheet->bagian_wire_1 === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->bagian_wire_1 }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->bagian_wire_1 }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Sling Terlilit</th>
@@ -79,7 +91,13 @@
                         </tr>
                         <tr>
                             <th>Karat</th>
-                            <td>{{ $checksheet->bagian_wire_2 }}</td>
+                            @if ($checksheet->bagian_wire_2 === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->bagian_wire_2 }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->bagian_wire_2 }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Karat</th>
@@ -88,14 +106,19 @@
                         <tr>
                             <th>Photo Karat</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_wire_2) }}"
-                                    alt="Photo Karat" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_bagian_wire_2) }}" alt="Photo Karat"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
                             <th>Serabut Keluar</th>
-                            <td>{{ $checksheet->kumpulan_wire_1 }}</td>
+                            @if ($checksheet->kumpulan_wire_1 === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->kumpulan_wire_1 }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->kumpulan_wire_1 }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Serabut Keluar</th>
@@ -111,7 +134,13 @@
                         </tr>
                         <tr>
                             <th>Diameter Wire</th>
-                            <td>{{ $checksheet->diameter_wire }}</td>
+                            @if ($checksheet->diameter_wire === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->diameter_wire }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->diameter_wire }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Diameter Wire</th>
@@ -127,7 +156,13 @@
                         </tr>
                         <tr>
                             <th>Wire Longgar</th>
-                            <td>{{ $checksheet->kumpulan_wire_2 }}</td>
+                            @if ($checksheet->kumpulan_wire_2 === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->kumpulan_wire_2 }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->kumpulan_wire_2 }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Wire Longgar</th>
@@ -137,14 +172,19 @@
                             <th>Photo Wire Longgar</th>
                             <td>
                                 <img src="{{ asset('storage/' . $checksheet->photo_kumpulan_wire_2) }}"
-                                    alt="Photo Wire Longgar" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                    alt="Photo Wire Longgar" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
 
                         <tr>
                             <th>Hook Wire</th>
-                            <td>{{ $checksheet->hook_wire }}</td>
+                            @if ($checksheet->hook_wire === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->hook_wire }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->hook_wire }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Hook Wire</th>
@@ -160,11 +200,17 @@
 
                         <tr>
                             <th>Pengunci Hook</th>
-                            <td>{{ $checksheet->mata_sling }}</td>
+                            @if ($checksheet->pengunci_hook === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengunci_hook }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengunci_hook }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pengunci Hook</th>
-                            <td>{{ $checksheet->catatan_mata_sling }}</td>
+                            <td>{{ $checksheet->catatan_pengunci_hook }}</td>
                         </tr>
                         <tr>
                             <th>Photo Pengunci Hook</th>
@@ -178,7 +224,13 @@
 
                         <tr>
                             <th>Mata Sling</th>
-                            <td>{{ $checksheet->mata_sling }}</td>
+                            @if ($checksheet->mata_sling === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->mata_sling }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->mata_sling }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Mata Sling</th>
@@ -241,7 +293,13 @@
                         </tr>
                         <tr>
                             <th>Tag Sling Belt</th>
-                            <td>{{ $checksheet->kelengkapan_tag_sling_belt }}</td>
+                            @if ($checksheet->kelengkapan_tag_sling_belt === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->kelengkapan_tag_sling_belt }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->kelengkapan_tag_sling_belt }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tag Sling Belt</th>
@@ -257,7 +315,13 @@
                         </tr>
                         <tr>
                             <th>Belt Robek</th>
-                            <td>{{ $checksheet->bagian_pinggir_belt_robek }}</td>
+                            @if ($checksheet->bagian_pinggir_belt_robek === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->bagian_pinggir_belt_robek }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->bagian_pinggir_belt_robek }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Belt Robek</th>
@@ -267,13 +331,18 @@
                             <th>Photo Belt Robek</th>
                             <td>
                                 <img src="{{ asset('storage/' . $checksheet->photo_bagian_pinggir_belt_robek) }}"
-                                    alt="Photo Belt Robek" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                    alt="Photo Belt Robek" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
                             <th>Belt Kusut</th>
-                            <td>{{ $checksheet->pengecekan_lapisan_belt_1 }}</td>
+                            @if ($checksheet->pengecekan_lapisan_belt_1 === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengecekan_lapisan_belt_1 }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengecekan_lapisan_belt_1 }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Belt Kusut</th>
@@ -283,13 +352,18 @@
                             <th>Photo Belt Kusut</th>
                             <td>
                                 <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_1) }}"
-                                    alt="Photo Belt Kusut" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                    alt="Photo Belt Kusut" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
                             <th>Jahitan Belt</th>
-                            <td>{{ $checksheet->pengecekan_jahitan_belt }}</td>
+                            @if ($checksheet->pengecekan_jahitan_belt === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengecekan_jahitan_belt }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengecekan_jahitan_belt }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Jahitan Belt</th>
@@ -299,13 +373,18 @@
                             <th>Photo Jahitan Belt</th>
                             <td>
                                 <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_jahitan_belt) }}"
-                                    alt="Photo Jahitan Belt" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                    alt="Photo Jahitan Belt" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
                         <tr>
                             <th>Belt Menipis</th>
-                            <td>{{ $checksheet->pengecekan_permukaan_belt }}</td>
+                            @if ($checksheet->pengecekan_permukaan_belt === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengecekan_permukaan_belt }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengecekan_permukaan_belt }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Belt Menipis</th>
@@ -315,14 +394,19 @@
                             <th>Photo Belt Menipis</th>
                             <td>
                                 <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_permukaan_belt) }}"
-                                    alt="Photo Belt Menipis" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                    alt="Photo Belt Menipis" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
 
                         <tr>
                             <th>Belt Scratch</th>
-                            <td>{{ $checksheet->pengecekan_lapisan_belt_2 }}</td>
+                            @if ($checksheet->pengecekan_lapisan_belt_2 === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengecekan_lapisan_belt_2 }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengecekan_lapisan_belt_2 }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Belt Scratch</th>
@@ -332,14 +416,19 @@
                             <th>Photo Belt Scratch</th>
                             <td>
                                 <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_lapisan_belt_2) }}"
-                                    alt="Photo Belt Scratch" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                    alt="Photo Belt Scratch" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
 
                         <tr>
                             <th>Belt Aus</th>
-                            <td>{{ $checksheet->pengecekan_aus }}</td>
+                            @if ($checksheet->pengecekan_aus === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengecekan_aus }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengecekan_aus }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Belt Aus</th>
@@ -348,15 +437,20 @@
                         <tr>
                             <th>Photo Belt Aus</th>
                             <td>
-                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_aus) }}"
-                                    alt="Photo Belt Aus" style="max-width: 250px; max-height: 300px;"
-                                    class="img-fluid">
+                                <img src="{{ asset('storage/' . $checksheet->photo_pengecekan_aus) }}" alt="Photo Belt Aus"
+                                    style="max-width: 250px; max-height: 300px;" class="img-fluid">
                             </td>
                         </tr>
 
                         <tr>
                             <th>Hook Wire</th>
-                            <td>{{ $checksheet->hook_wire }}</td>
+                            @if ($checksheet->hook_wire === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->hook_wire }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->hook_wire }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Hook Wire</th>
@@ -372,7 +466,13 @@
 
                         <tr>
                             <th>Pengunci Hook</th>
-                            <td>{{ $checksheet->pengunci_hook }}</td>
+                            @if ($checksheet->pengunci_hook === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pengunci_hook }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pengunci_hook }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pengunci Hook</th>

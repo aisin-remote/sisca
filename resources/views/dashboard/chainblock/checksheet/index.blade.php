@@ -49,16 +49,87 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->chainblock_number }}</td>
-                                <td>{{ $checksheet->geared_trolley }}</td>
-                                <td>{{ $checksheet->chain_geared_trolley_1 }}</td>
-                                <td>{{ $checksheet->chain_geared_trolley_2 }}</td>
-                                <td>{{ $checksheet->hooking_geared_trolly }}</td>
-                                <td>{{ $checksheet->latch_hook_atas }}</td>
-                                <td>{{ $checksheet->hook_atas }}</td>
-                                <td>{{ $checksheet->hand_chain }}</td>
-                                <td>{{ $checksheet->load_chain }}</td>
-                                <td>{{ $checksheet->latch_hook_bawah }}</td>
-                                <td>{{ $checksheet->hook_bawah }}</td>
+
+                                @if ($checksheet->geared_trolley === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->geared_trolley }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->geared_trolley }}</td>
+                                @endif
+
+                                @if ($checksheet->chain_geared_trolley_1 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->chain_geared_trolley_1 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->chain_geared_trolley_1 }}</td>
+                                @endif
+
+                                @if ($checksheet->chain_geared_trolley_2 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->chain_geared_trolley_2 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->chain_geared_trolley_2 }}</td>
+                                @endif
+
+                                @if ($checksheet->hooking_geared_trolly === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hooking_geared_trolly }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hooking_geared_trolly }}</td>
+                                @endif
+
+                                @if ($checksheet->latch_hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->latch_hook_atas }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->latch_hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook_atas }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->hand_chain === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hand_chain }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hand_chain }}</td>
+                                @endif
+
+                                @if ($checksheet->load_chain === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->load_chain }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->load_chain }}</td>
+                                @endif
+
+                                @if ($checksheet->latch_hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->latch_hook_bawah }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->latch_hook_bawah }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook_bawah }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook_bawah }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('chainblock.checksheetchainblock.show', $checksheet->id) }}"

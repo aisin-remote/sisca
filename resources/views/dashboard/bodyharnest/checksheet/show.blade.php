@@ -31,7 +31,13 @@
                     </tr>
                     <tr>
                         <th>Shoulder Straps</th>
-                        <td>{{ $checksheet->shoulder_straps }}</td>
+                        @if ($checksheet->shoulder_straps === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->shoulder_straps }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->shoulder_straps }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Shoulder Straps</th>
@@ -46,7 +52,13 @@
                     </tr>
                     <tr>
                         <th>Hook</th>
-                        <td>{{ $checksheet->hook }}</td>
+                        @if ($checksheet->hook === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hook }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hook }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hook</th>
@@ -61,7 +73,13 @@
                     </tr>
                     <tr>
                         <th>Buckles Waist</th>
-                        <td>{{ $checksheet->buckles_waist }}</td>
+                        @if ($checksheet->buckles_waist === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->buckles_waist }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->buckles_waist }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Buckles Waist</th>
@@ -76,7 +94,13 @@
                     </tr>
                     <tr>
                         <th>Buckles Chest</th>
-                        <td>{{ $checksheet->buckles_chest }}</td>
+                        @if ($checksheet->buckles_chest === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->buckles_chest }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->buckles_chest }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Buckles Chest</th>
@@ -91,7 +115,13 @@
                     </tr>
                     <tr>
                         <th>Leg Straps</th>
-                        <td>{{ $checksheet->leg_straps }}</td>
+                        @if ($checksheet->leg_straps === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->leg_straps }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->leg_straps }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Leg Straps</th>
@@ -106,7 +136,13 @@
                     </tr>
                     <tr>
                         <th>Buckles Leg</th>
-                        <td>{{ $checksheet->buckles_leg }}</td>
+                        @if ($checksheet->buckles_leg === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->buckles_leg }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->buckles_leg }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Buckles Leg</th>
@@ -121,7 +157,13 @@
                     </tr>
                     <tr>
                         <th>Back D-Ring</th>
-                        <td>{{ $checksheet->back_d_ring }}</td>
+                        @if ($checksheet->back_d_ring === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->back_d_ring }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->back_d_ring }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Back D-Ring</th>
@@ -136,7 +178,13 @@
                     </tr>
                     <tr>
                         <th>Carabiner</th>
-                        <td>{{ $checksheet->carabiner }}</td>
+                        @if ($checksheet->carabiner === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->carabiner }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->carabiner }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Carabiner</th>
@@ -151,7 +199,13 @@
                     </tr>
                     <tr>
                         <th>Straps / Rope</th>
-                        <td>{{ $checksheet->straps_rope }}</td>
+                        @if ($checksheet->straps_rope === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->straps_rope }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->straps_rope }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Straps / Rope</th>
@@ -166,7 +220,13 @@
                     </tr>
                     <tr>
                         <th>Shock Absorber</th>
-                        <td>{{ $checksheet->shock_absorber }}</td>
+                        @if ($checksheet->shock_absorber === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->shock_absorber }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->shock_absorber }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Shock Absorber</th>

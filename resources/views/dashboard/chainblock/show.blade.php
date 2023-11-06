@@ -106,16 +106,87 @@
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->chainblock_number }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->geared_trolley }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->chain_geared_trolley_1 }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->chain_geared_trolley_2 }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hooking_geared_trolly }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->latch_hook_atas }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hook_atas }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hand_chain }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->load_chain }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->latch_hook_bawah }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hook_bawah }}</td>
+
+                                @if ($checksheet->geared_trolley === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->geared_trolley }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->geared_trolley }}</td>
+                                @endif
+
+                                @if ($checksheet->chain_geared_trolley_1 === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->chain_geared_trolley_1 }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->chain_geared_trolley_1 }}</td>
+                                @endif
+
+                                @if ($checksheet->chain_geared_trolley_2 === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->chain_geared_trolley_2 }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->chain_geared_trolley_2 }}</td>
+                                @endif
+
+                                @if ($checksheet->hooking_geared_trolly === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hooking_geared_trolly }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hooking_geared_trolly }}</td>
+                                @endif
+
+                                @if ($checksheet->latch_hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->latch_hook_atas }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->latch_hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hook_atas }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->hand_chain === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hand_chain }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hand_chain }}</td>
+                                @endif
+
+                                @if ($checksheet->load_chain === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->load_chain }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->load_chain }}</td>
+                                @endif
+
+                                @if ($checksheet->latch_hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->latch_hook_bawah }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->latch_hook_bawah }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hook_bawah }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hook_bawah }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('chainblock.checksheetchainblock.show', $checksheet->id) }}"

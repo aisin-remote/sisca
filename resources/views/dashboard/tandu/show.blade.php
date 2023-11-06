@@ -106,30 +106,94 @@
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->tandu_number }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->kunci_pintu }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->pintu }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->sign }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hand_grip }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->body }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->engsel }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->kaki }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->belt}}</td>
-                                <td class="text-center align-middle">{{ $checksheet->rangka}}</td>
+
+                                @if ($checksheet->kunci_pintu === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->kunci_pintu }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->kunci_pintu }}</td>
+                                @endif
+
+                                @if ($checksheet->pintu === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->pintu }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pintu }}</td>
+                                @endif
+
+                                @if ($checksheet->sign === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->sign }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->sign }}</td>
+                                @endif
+
+                                @if ($checksheet->hand_grip === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hand_grip }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hand_grip }}</td>
+                                @endif
+
+                                @if ($checksheet->body === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->body }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->body }}</td>
+                                @endif
+
+                                @if ($checksheet->engsel === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->engsel }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->engsel }}</td>
+                                @endif
+
+                                @if ($checksheet->kaki === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->kaki }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->kaki }}</td>
+                                @endif
+
+                                @if ($checksheet->belt === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->belt }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->belt }}</td>
+                                @endif
+
+                                @if ($checksheet->rangka === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->rangka }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->rangka }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('tandu.checksheettandu.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                            @can('admin')
-                                                <a href="{{ route('tandu.checksheettandu.edit', $checksheet->id) }}"
-                                                    class="badge bg-warning me-2">Edit</a>
-                                                <form action="{{ route('tandu.checksheettandu.destroy', $checksheet->id) }}"
-                                                    method="POST" class="delete-form">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="badge bg-danger border-0"
-                                                        onclick="return confirm('Ingin menghapus Data Check Sheet Tandu?')">Delete</button>
-                                                </form>
-                                            @endcan
+                                        @can('admin')
+                                            <a href="{{ route('tandu.checksheettandu.edit', $checksheet->id) }}"
+                                                class="badge bg-warning me-2">Edit</a>
+                                            <form action="{{ route('tandu.checksheettandu.destroy', $checksheet->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge bg-danger border-0"
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Tandu?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

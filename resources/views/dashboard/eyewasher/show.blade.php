@@ -133,11 +133,52 @@
                                     <td class="text-center align-middle">
                                         {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                     <td class="text-center align-middle">{{ $checksheet->eyewasher_number }}</td>
-                                    <td class="text-center align-middle">{{ $checksheet->pijakan }}</td>
-                                    <td class="text-center align-middle">{{ $checksheet->pipa_saluran_air }}</td>
-                                    <td class="text-center align-middle">{{ $checksheet->wastafel }}</td>
-                                    <td class="text-center align-middle">{{ $checksheet->kran_air }}</td>
-                                    <td class="text-center align-middle">{{ $checksheet->tuas }}</td>
+
+                                    @if ($checksheet->pijakan === 'NG')
+                                        <td class="text-danger fw-bolder text-center align-middle">
+                                            {{ $checksheet->pijakan }}
+                                        </td>
+                                    @else
+                                        <td class="text-center align-middle">{{ $checksheet->pijakan }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->pipa_saluran_air === 'NG')
+                                        <td class="text-danger fw-bolder text-center align-middle">
+                                            {{ $checksheet->pipa_saluran_air }}
+                                        </td>
+                                    @else
+                                        <td class="text-center align-middle">{{ $checksheet->pipa_saluran_air }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->wastafel === 'NG')
+                                        <td class="text-danger fw-bolder text-center align-middle">
+                                            {{ $checksheet->wastafel }}
+                                        </td>
+                                    @else
+                                        <td class="text-center align-middle">{{ $checksheet->wastafel }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->kran_air === 'NG')
+                                        <td class="text-danger fw-bolder text-center align-middle">
+                                            {{ $checksheet->kran_air }}
+                                        </td>
+                                    @else
+                                        <td class="text-center align-middle">{{ $checksheet->kran_air }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->tuas === 'NG')
+                                        <td class="text-danger fw-bolder text-center align-middle">
+                                            {{ $checksheet->tuas }}
+                                        </td>
+                                    @else
+                                        <td class="text-center align-middle">{{ $checksheet->tuas }}
+                                        </td>
+                                    @endif
+
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('eyewasher.checksheeteyewasher.show', $checksheet->id) }}"
@@ -195,14 +236,79 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                     <td>{{ $checksheet->eyewasher_number }}</td>
-                                    <td>{{ $checksheet->instalation_base }}</td>
-                                    <td>{{ $checksheet->pipa_saluran_air }}</td>
-                                    <td>{{ $checksheet->wastafel_eye_wash }}</td>
-                                    <td>{{ $checksheet->kran_eye_wash }}</td>
-                                    <td>{{ $checksheet->tuas_eye_wash }}</td>
-                                    <td>{{ $checksheet->tuas_shower }}</td>
-                                    <td>{{ $checksheet->sign }}</td>
-                                    <td>{{ $checksheet->shower_head }}</td>
+
+                                    @if ($checksheet->instalation_base === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->instalation_base }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->instalation_base }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->pipa_saluran_air === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->pipa_saluran_air }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->pipa_saluran_air }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->wastafel_eye_wash === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->wastafel_eye_wash }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->wastafel_eye_wash }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->kran_eye_wash === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->kran_eye_wash }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->kran_eye_wash }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->tuas_eye_wash === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->tuas_eye_wash }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->tuas_eye_wash }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->tuas_shower === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->tuas_shower }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->tuas_shower }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->sign === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->sign }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->sign }}
+                                        </td>
+                                    @endif
+
+                                    @if ($checksheet->shower_head === 'NG')
+                                        <td class="text-danger fw-bolder">
+                                            {{ $checksheet->shower_head }}
+                                        </td>
+                                    @else
+                                        <td>{{ $checksheet->shower_head }}
+                                        </td>
+                                    @endif
+
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('eyewasher.checksheetshower.show', $checksheet->id) }}"

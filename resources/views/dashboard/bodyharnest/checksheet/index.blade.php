@@ -49,16 +49,87 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->bodyharnest_number }}</td>
-                                <td>{{ $checksheet->shoulder_straps }}</td>
-                                <td>{{ $checksheet->hook }}</td>
-                                <td>{{ $checksheet->buckles_waist }}</td>
-                                <td>{{ $checksheet->buckles_chest }}</td>
-                                <td>{{ $checksheet->leg_straps }}</td>
-                                <td>{{ $checksheet->buckles_leg }}</td>
-                                <td>{{ $checksheet->back_d_ring }}</td>
-                                <td>{{ $checksheet->carabiner }}</td>
-                                <td>{{ $checksheet->straps_rope }}</td>
-                                <td>{{ $checksheet->shock_absorber }}</td>
+
+                                @if ($checksheet->shoulder_straps === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->shoulder_straps }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->shoulder_straps }}</td>
+                                @endif
+
+                                @if ($checksheet->hook === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook }}</td>
+                                @endif
+
+                                @if ($checksheet->buckles_waist === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->buckles_waist }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->buckles_waist }}</td>
+                                @endif
+
+                                @if ($checksheet->buckles_chest === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->buckles_chest }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->buckles_chest }}</td>
+                                @endif
+
+                                @if ($checksheet->leg_straps === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->leg_straps }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->leg_straps }}</td>
+                                @endif
+
+                                @if ($checksheet->buckles_leg === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->buckles_leg }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->buckles_leg }}</td>
+                                @endif
+
+                                @if ($checksheet->back_d_ring === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->back_d_ring }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->back_d_ring }}</td>
+                                @endif
+
+                                @if ($checksheet->carabiner === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->carabiner }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->carabiner }}</td>
+                                @endif
+
+                                @if ($checksheet->straps_rope === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->straps_rope }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->straps_rope }}</td>
+                                @endif
+
+                                @if ($checksheet->shock_absorber === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->shock_absorber }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->shock_absorber }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('bodyharnest.checksheetbodyharnest.show', $checksheet->id) }}"

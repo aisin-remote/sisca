@@ -49,16 +49,87 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->safetybelt_number }}</td>
-                                <td>{{ $checksheet->buckle }}</td>
-                                <td>{{ $checksheet->seams }}</td>
-                                <td>{{ $checksheet->reel }}</td>
-                                <td>{{ $checksheet->shock_absorber }}</td>
-                                <td>{{ $checksheet->ring }}</td>
-                                <td>{{ $checksheet->torso_belt }}</td>
-                                <td>{{ $checksheet->strap }}</td>
-                                <td>{{ $checksheet->rope }}</td>
-                                <td>{{ $checksheet->seam_protection_tube }}</td>
-                                <td>{{ $checksheet->hook }}</td>
+
+                                @if ($checksheet->buckle === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->buckle }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->buckle }}</td>
+                                @endif
+
+                                @if ($checksheet->seams === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->seams }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->seams }}</td>
+                                @endif
+
+                                @if ($checksheet->reel === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->reel }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->reel }}</td>
+                                @endif
+
+                                @if ($checksheet->shock_absorber === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->shock_absorber }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->shock_absorber }}</td>
+                                @endif
+
+                                @if ($checksheet->ring === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->ring }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->ring }}</td>
+                                @endif
+
+                                @if ($checksheet->torso_belt === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->torso_belt }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->torso_belt }}</td>
+                                @endif
+
+                                @if ($checksheet->strap === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->strap }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->strap }}</td>
+                                @endif
+
+                                @if ($checksheet->rope === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->rope }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->rope }}</td>
+                                @endif
+
+                                @if ($checksheet->seam_protection_tube === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->seam_protection_tube }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->seam_protection_tube }}</td>
+                                @endif
+
+                                @if ($checksheet->hook === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('safetybelt.checksheetsafetybelt.show', $checksheet->id) }}"

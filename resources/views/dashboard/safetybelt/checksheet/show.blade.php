@@ -31,7 +31,13 @@
                     </tr>
                     <tr>
                         <th>Buckle</th>
-                        <td>{{ $checksheet->buckle }}</td>
+                        @if ($checksheet->buckle === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->buckle }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->buckle }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Buckle</th>
@@ -46,7 +52,13 @@
                     </tr>
                     <tr>
                         <th>Seams</th>
-                        <td>{{ $checksheet->seams }}</td>
+                        @if ($checksheet->seams === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->seams }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->seams }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Seams</th>
@@ -61,7 +73,13 @@
                     </tr>
                     <tr>
                         <th>Reel</th>
-                        <td>{{ $checksheet->reel }}</td>
+                        @if ($checksheet->reel === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->reel }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->reel }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Reel</th>
@@ -76,7 +94,13 @@
                     </tr>
                     <tr>
                         <th>Shock Absorber</th>
-                        <td>{{ $checksheet->shock_absorber }}</td>
+                        @if ($checksheet->shock_absorber === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->shock_absorber }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->shock_absorber }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Shock Absorber</th>
@@ -91,7 +115,13 @@
                     </tr>
                     <tr>
                         <th>Ring</th>
-                        <td>{{ $checksheet->ring }}</td>
+                        @if ($checksheet->ring === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->ring }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->ring }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Ring</th>
@@ -106,7 +136,13 @@
                     </tr>
                     <tr>
                         <th>Torso Belt</th>
-                        <td>{{ $checksheet->torso_belt }}</td>
+                        @if ($checksheet->torso_belt === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->torso_belt }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->torso_belt }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Torso Belt</th>
@@ -121,7 +157,13 @@
                     </tr>
                     <tr>
                         <th>Strap</th>
-                        <td>{{ $checksheet->strap }}</td>
+                        @if ($checksheet->strap === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->strap }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->strap }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Strap</th>
@@ -136,7 +178,13 @@
                     </tr>
                     <tr>
                         <th>Rope</th>
-                        <td>{{ $checksheet->rope }}</td>
+                        @if ($checksheet->rope === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->rope }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->rope }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Rope</th>
@@ -151,7 +199,13 @@
                     </tr>
                     <tr>
                         <th>Seam Protection Tube</th>
-                        <td>{{ $checksheet->seam_protection_tube }}</td>
+                        @if ($checksheet->seam_protection_tube === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->seam_protection_tube }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->seam_protection_tube }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Seam Protection Tube</th>
@@ -167,7 +221,13 @@
                     </tr>
                     <tr>
                         <th>Hook</th>
-                        <td>{{ $checksheet->hook }}</td>
+                        @if ($checksheet->hook === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hook }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hook }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hook</th>

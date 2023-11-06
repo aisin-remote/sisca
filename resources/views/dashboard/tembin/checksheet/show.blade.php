@@ -31,7 +31,13 @@
                     </tr>
                     <tr>
                         <th>Master Link</th>
-                        <td>{{ $checksheet->master_link }}</td>
+                        @if ($checksheet->master_link === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->master_link }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->master_link }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Master Link</th>
@@ -46,7 +52,13 @@
                     </tr>
                     <tr>
                         <th>Body Tembin</th>
-                        <td>{{ $checksheet->body_tembin }}</td>
+                        @if ($checksheet->body_tembin === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->body_tembin }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->body_tembin }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Body Tembin</th>
@@ -61,7 +73,13 @@
                     </tr>
                     <tr>
                         <th>Mur & Baut</th>
-                        <td>{{ $checksheet->mur_baut }}</td>
+                        @if ($checksheet->mur_baut === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->mur_baut }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->mur_baut }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Mur & Baut</th>
@@ -76,7 +94,13 @@
                     </tr>
                     <tr>
                         <th>Shackle</th>
-                        <td>{{ $checksheet->shackle }}</td>
+                        @if ($checksheet->shackle === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->shackle }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->shackle }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Shackle</th>
@@ -91,7 +115,13 @@
                     </tr>
                     <tr>
                         <th>Hook Atas</th>
-                        <td>{{ $checksheet->hook_atas }}</td>
+                        @if ($checksheet->hook_atas === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hook_atas }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hook_atas }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hook Atas</th>
@@ -106,7 +136,13 @@
                     </tr>
                     <tr>
                         <th>Pengunci Hook Atas</th>
-                        <td>{{ $checksheet->pengunci_hook_atas }}</td>
+                        @if ($checksheet->pengunci_hook_atas === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->pengunci_hook_atas }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->pengunci_hook_atas }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pengunci Hook Atas</th>
@@ -122,7 +158,13 @@
                     </tr>
                     <tr>
                         <th>Mata Chain</th>
-                        <td>{{ $checksheet->mata_chain }}</td>
+                        @if ($checksheet->mata_chain === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->mata_chain }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->mata_chain }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Mata Chain</th>
@@ -137,7 +179,13 @@
                     </tr>
                     <tr>
                         <th>Chain</th>
-                        <td>{{ $checksheet->chain }}</td>
+                        @if ($checksheet->chain === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->chain }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->chain }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Chain</th>
@@ -152,7 +200,13 @@
                     </tr>
                     <tr>
                         <th>Hook Bawah</th>
-                        <td>{{ $checksheet->hook_bawah }}</td>
+                        @if ($checksheet->hook_bawah === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hook_bawah }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hook_bawah }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hook Bawah</th>
@@ -167,7 +221,13 @@
                     </tr>
                     <tr>
                         <th>Pengunci Hook Bawah</th>
-                        <td>{{ $checksheet->pengunci_hook_bawah }}</td>
+                        @if ($checksheet->pengunci_hook_bawah === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->pengunci_hook_bawah }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->pengunci_hook_bawah }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pengunci Hook Bawah</th>

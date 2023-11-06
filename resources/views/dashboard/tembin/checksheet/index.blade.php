@@ -49,16 +49,87 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->tembin_number }}</td>
-                                <td>{{ $checksheet->master_link }}</td>
-                                <td>{{ $checksheet->body_tembin }}</td>
-                                <td>{{ $checksheet->mur_baut }}</td>
-                                <td>{{ $checksheet->shackle }}</td>
-                                <td>{{ $checksheet->hook_atas }}</td>
-                                <td>{{ $checksheet->pengunci_hook_atas }}</td>
-                                <td>{{ $checksheet->mata_chain }}</td>
-                                <td>{{ $checksheet->chain }}</td>
-                                <td>{{ $checksheet->hook_bawah }}</td>
-                                <td>{{ $checksheet->pengunci_hook_bawah }}</td>
+
+                                @if ($checksheet->master_link === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->master_link }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->master_link }}</td>
+                                @endif
+
+                                @if ($checksheet->body_tembin === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->body_tembin }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->body_tembin }}</td>
+                                @endif
+
+                                @if ($checksheet->mur_baut === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->mur_baut }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->mur_baut }}</td>
+                                @endif
+
+                                @if ($checksheet->shackle === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->shackle }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->shackle }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook_atas }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->pengunci_hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengunci_hook_atas }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengunci_hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->mata_chain === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->mata_chain }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->mata_chain }}</td>
+                                @endif
+
+                                @if ($checksheet->chain === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->chain }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->chain }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook_bawah }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook_bawah }}</td>
+                                @endif
+
+                                @if ($checksheet->pengunci_hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengunci_hook_bawah }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengunci_hook_bawah }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('tembin.checksheettembin.show', $checksheet->id) }}"

@@ -35,11 +35,23 @@
                     </tr>
                     <tr>
                         <th>Kunci Pintu</th>
-                        <td>{{ $checksheet->kunci_pintu }}</td>
+                        @if ($checksheet->kunci_pintu === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->kunci_pintu }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->kunci_pintu }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Kunci Pintu</th>
-                        <td>{{ $checksheet->catatan_kunci_pintu }}</td>
+                        @if ($checksheet->catatan_kunci_pintu === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->catatan_kunci_pintu }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->catatan_kunci_pintu }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Photo Kunci Pintu</th>
@@ -50,7 +62,13 @@
                     </tr>
                     <tr>
                         <th>Pintu</th>
-                        <td>{{ $checksheet->pintu }}</td>
+                        @if ($checksheet->pintu === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->pintu }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->pintu }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Pintu</th>
@@ -65,7 +83,13 @@
                     </tr>
                     <tr>
                         <th>Sign</th>
-                        <td>{{ $checksheet->sign }}</td>
+                        @if ($checksheet->sign === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->sign }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->sign }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Sign</th>
@@ -80,7 +104,13 @@
                     </tr>
                     <tr>
                         <th>Hand Grip</th>
-                        <td>{{ $checksheet->hand_grip }}</td>
+                        @if ($checksheet->hand_grip === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hand_grip }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hand_grip }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hand Grip</th>
@@ -95,7 +125,13 @@
                     </tr>
                     <tr>
                         <th>Body</th>
-                        <td>{{ $checksheet->body }}</td>
+                        @if ($checksheet->body === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->body }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->body }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Body</th>
@@ -110,7 +146,13 @@
                     </tr>
                     <tr>
                         <th>Engsel</th>
-                        <td>{{ $checksheet->engsel }}</td>
+                        @if ($checksheet->engsel === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->engsel }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->engsel }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Engsel</th>
@@ -125,7 +167,13 @@
                     </tr>
                     <tr>
                         <th>Kaki</th>
-                        <td>{{ $checksheet->kaki }}</td>
+                        @if ($checksheet->kaki === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->kaki }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->kaki }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Kaki</th>
@@ -140,7 +188,13 @@
                     </tr>
                     <tr>
                         <th>Belt</th>
-                        <td>{{ $checksheet->belt }}</td>
+                        @if ($checksheet->belt === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->belt }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->belt }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Belt</th>
@@ -155,7 +209,13 @@
                     </tr>
                     <tr>
                         <th>Rangka</th>
-                        <td>{{ $checksheet->rangka }}</td>
+                        @if ($checksheet->rangka === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->rangka }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->rangka }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Rangka</th>

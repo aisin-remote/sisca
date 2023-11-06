@@ -43,34 +43,39 @@
                                 {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->zona_number }}</td>
-                                <td>
-                                    @if ($checksheet->ng_smoke_detector === '0')
-                                        OK
-                                    @else
+
+                                @if ($checksheet->ng_smoke_detector != '0')
+                                    <td class="text-danger fw-bolder">
                                         NG
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($checksheet->ng_heat_detector === '0')
-                                        OK
-                                    @else
+                                    </td>
+                                @else
+                                    <td>OK</td>
+                                @endif
+
+                                @if ($checksheet->ng_heat_detector != '0')
+                                    <td class="text-danger fw-bolder">
                                         NG
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($checksheet->ng_beam_detector === '0')
-                                        OK
-                                    @else
+                                    </td>
+                                @else
+                                    <td>OK</td>
+                                @endif
+
+                                @if ($checksheet->ng_beam_detector != '0')
+                                    <td class="text-danger fw-bolder">
                                         NG
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($checksheet->ng_push_button === '0')
-                                        OK
-                                    @else
+                                    </td>
+                                @else
+                                    <td>OK</td>
+                                @endif
+
+                                @if ($checksheet->ng_push_button != '0')
+                                    <td class="text-danger fw-bolder">
                                         NG
-                                    @endif
-                                </td>
+                                    </td>
+                                @else
+                                    <td>OK</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('facp.checksheetfacp.show', $checksheet->id) }}"

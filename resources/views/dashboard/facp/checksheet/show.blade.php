@@ -36,7 +36,13 @@
                     </tr>
                     <tr>
                         <th>Jumlah Smoke Detector (NG)</th>
-                        <td>{{ $checksheet->ng_smoke_detector }}</td>
+                        @if ($checksheet->ng_smoke_detector != '0')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->ng_smoke_detector }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->ng_smoke_detector }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Total Smoke Detector (OK+NG)</th>
@@ -64,7 +70,13 @@
                     </tr>
                     <tr>
                         <th>Jumlah Heat Detector (NG)</th>
-                        <td>{{ $checksheet->ng_heat_detector }}</td>
+                        @if ($checksheet->ng_heat_detector != '0')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->ng_heat_detector }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->ng_heat_detector }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Total Heat Detector (OK+NG)</th>
@@ -92,7 +104,13 @@
                     </tr>
                     <tr>
                         <th>Jumlah Beam Detector (NG)</th>
-                        <td>{{ $checksheet->ng_beam_detector }}</td>
+                        @if ($checksheet->ng_beam_detector != '0')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->ng_beam_detector }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->ng_beam_detector }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Total Beam Detector (OK+NG)</th>
@@ -120,7 +138,13 @@
                     </tr>
                     <tr>
                         <th>Jumlah Push Button (NG)</th>
-                        <td>{{ $checksheet->ng_push_button }}</td>
+                        @if ($checksheet->ng_push_button != '0')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->ng_push_button }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->ng_push_button }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Total Push Button (OK+NG)</th>

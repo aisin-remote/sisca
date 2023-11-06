@@ -50,15 +50,79 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->tandu_number }}</td>
                                 <td>{{ $checksheet->tandus->locations->location_name }}</td>
-                                <td>{{ $checksheet->kunci_pintu }}</td>
-                                <td>{{ $checksheet->pintu }}</td>
-                                <td>{{ $checksheet->sign }}</td>
-                                <td>{{ $checksheet->hand_grip }}</td>
-                                <td>{{ $checksheet->body }}</td>
-                                <td>{{ $checksheet->engsel }}</td>
-                                <td>{{ $checksheet->kaki }}</td>
-                                <td>{{ $checksheet->belt }}</td>
-                                <td>{{ $checksheet->rangka }}</td>
+
+                                @if ($checksheet->kunci_pintu === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->kunci_pintu }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->kunci_pintu }}</td>
+                                @endif
+
+                                @if ($checksheet->pintu === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pintu }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pintu }}</td>
+                                @endif
+
+                                @if ($checksheet->sign === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->sign }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->sign }}</td>
+                                @endif
+
+                                @if ($checksheet->hand_grip === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hand_grip }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hand_grip }}</td>
+                                @endif
+
+                                @if ($checksheet->body === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->body }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->body }}</td>
+                                @endif
+
+                                @if ($checksheet->engsel === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->engsel }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->engsel }}</td>
+                                @endif
+
+                                @if ($checksheet->kaki === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->kaki }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->kaki }}</td>
+                                @endif
+
+                                @if ($checksheet->belt === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->belt }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->belt }}</td>
+                                @endif
+
+                                @if ($checksheet->rangka === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->rangka }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->rangka }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('tandu.checksheettandu.show', $checksheet->id) }}"

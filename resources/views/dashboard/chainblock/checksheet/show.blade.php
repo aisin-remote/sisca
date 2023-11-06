@@ -31,7 +31,13 @@
                     </tr>
                     <tr>
                         <th>Geared Trolley</th>
-                        <td>{{ $checksheet->geared_trolley }}</td>
+                        @if ($checksheet->geared_trolley === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->geared_trolley }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->geared_trolley }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Geared Trolley</th>
@@ -40,13 +46,19 @@
                     <tr>
                         <th>Photo Geared Trolley</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_geared_trolley) }}" alt="Photo Geared Trolley"
-                                style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            <img src="{{ asset('storage/' . $checksheet->photo_geared_trolley) }}"
+                                alt="Photo Geared Trolley" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
                         <th>Gerakan Halus</th>
-                        <td>{{ $checksheet->chain_geared_trolley_1 }}</td>
+                        @if ($checksheet->chain_geared_trolley_1 === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->chain_geared_trolley_1 }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->chain_geared_trolley_1 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Gerakan Halus</th>
@@ -56,13 +68,18 @@
                         <th>Photo Gerakan Halus</th>
                         <td>
                             <img src="{{ asset('storage/' . $checksheet->photo_chain_geared_trolley_1) }}"
-                                alt="Photo Gerakan Halus" style="max-width: 250px; max-height: 300px;"
-                                class="img-fluid">
+                                alt="Photo Gerakan Halus" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
                         <th>Chain Geared Trolley 2</th>
-                        <td>{{ $checksheet->chain_geared_trolley_2 }}</td>
+                        @if ($checksheet->chain_geared_trolley_2 === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->chain_geared_trolley_2 }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->chain_geared_trolley_2 }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Chain Geared Trolley 2</th>
@@ -78,7 +95,13 @@
                     </tr>
                     <tr>
                         <th>Hooking Geared Trolly</th>
-                        <td>{{ $checksheet->hooking_geared_trolly }}</td>
+                        @if ($checksheet->hooking_geared_trolly === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hooking_geared_trolly }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hooking_geared_trolly }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hooking Geared Trolly</th>
@@ -94,7 +117,13 @@
                     </tr>
                     <tr>
                         <th>Latch Hook Atas</th>
-                        <td>{{ $checksheet->latch_hook_atas }}</td>
+                        @if ($checksheet->latch_hook_atas === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->latch_hook_atas }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->latch_hook_atas }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Latch Hook Atas</th>
@@ -109,7 +138,13 @@
                     </tr>
                     <tr>
                         <th>Hook Atas</th>
-                        <td>{{ $checksheet->hook_atas }}</td>
+                        @if ($checksheet->hook_atas === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hook_atas }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hook_atas }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hook Atas</th>
@@ -124,7 +159,13 @@
                     </tr>
                     <tr>
                         <th>Hand Chain</th>
-                        <td>{{ $checksheet->hand_chain }}</td>
+                        @if ($checksheet->hand_chain === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hand_chain }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hand_chain }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hand Chain</th>
@@ -139,7 +180,13 @@
                     </tr>
                     <tr>
                         <th>Load Chain</th>
-                        <td>{{ $checksheet->load_chain }}</td>
+                        @if ($checksheet->load_chain === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->load_chain }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->load_chain }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Load Chain</th>
@@ -154,7 +201,13 @@
                     </tr>
                     <tr>
                         <th>Latch Hook Bawah</th>
-                        <td>{{ $checksheet->latch_hook_bawah }}</td>
+                        @if ($checksheet->latch_hook_bawah === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->latch_hook_bawah }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->latch_hook_bawah }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Latch Hook Bawah</th>
@@ -169,7 +222,13 @@
                     </tr>
                     <tr>
                         <th>Hook Bawah</th>
-                        <td>{{ $checksheet->hook_bawah }}</td>
+                        @if ($checksheet->hook_bawah === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->hook_bawah }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->hook_bawah }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Catatan Hook Bawah</th>

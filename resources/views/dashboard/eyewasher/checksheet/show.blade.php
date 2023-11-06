@@ -40,7 +40,13 @@
                         </tr>
                         <tr>
                             <th>Instalation Base</th>
-                            <td>{{ $checksheet->instalation_base }}</td>
+                            @if ($checksheet->instalation_base === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->instalation_base }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->instalation_base }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Instalation Base</th>
@@ -56,7 +62,13 @@
                         </tr>
                         <tr>
                             <th>Pipa Saluran Air</th>
-                            <td>{{ $checksheet->pipa_saluran_air }}</td>
+                            @if ($checksheet->pipa_saluran_air === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pipa_saluran_air }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pipa_saluran_air }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pipa Saluran Air</th>
@@ -72,7 +84,13 @@
                         </tr>
                         <tr>
                             <th>Wastafel Eye Wash</th>
-                            <td>{{ $checksheet->wastafel_eye_wash }}</td>
+                            @if ($checksheet->wastafel_eye_wash === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->wastafel_eye_wash }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->wastafel_eye_wash }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Wastafel Eye Wash</th>
@@ -88,7 +106,13 @@
                         </tr>
                         <tr>
                             <th>Kran Eye Wash</th>
-                            <td>{{ $checksheet->kran_eye_wash }}</td>
+                            @if ($checksheet->kran_eye_wash === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->kran_eye_wash }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->kran_eye_wash }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Kran Eye Wash</th>
@@ -104,7 +128,13 @@
                         </tr>
                         <tr>
                             <th>Tuas Eye Wash</th>
-                            <td>{{ $checksheet->tuas_eye_wash }}</td>
+                            @if ($checksheet->tuas_eye_wash === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->tuas_eye_wash }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->tuas_eye_wash }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tuas Eye Wash</th>
@@ -120,7 +150,13 @@
                         </tr>
                         <tr>
                             <th>Tuas Shower</th>
-                            <td>{{ $checksheet->tuas_shower }}</td>
+                            @if ($checksheet->tuas_shower === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->tuas_shower }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->tuas_shower }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tuas Shower</th>
@@ -135,7 +171,13 @@
                         </tr>
                         <tr>
                             <th>Sign</th>
-                            <td>{{ $checksheet->sign }}</td>
+                            @if ($checksheet->sign === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->sign }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->sign }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Sign</th>
@@ -151,7 +193,13 @@
                         </tr>
                         <tr>
                             <th>Shower Head</th>
-                            <td>{{ $checksheet->shower_head }}</td>
+                            @if ($checksheet->shower_head === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->shower_head }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->shower_head }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Shower Head</th>
@@ -206,7 +254,13 @@
                         </tr>
                         <tr>
                             <th>Pijakan</th>
-                            <td>{{ $checksheet->pijakan }}</td>
+                            @if ($checksheet->pijakan === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pijakan }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pijakan }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pijakan</th>
@@ -221,7 +275,13 @@
                         </tr>
                         <tr>
                             <th>Pipa Saluran Air</th>
-                            <td>{{ $checksheet->pipa_saluran_air }}</td>
+                            @if ($checksheet->pipa_saluran_air === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->pipa_saluran_air }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->pipa_saluran_air }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Pipa Saluran Air</th>
@@ -237,7 +297,13 @@
                         </tr>
                         <tr>
                             <th>Wastafel</th>
-                            <td>{{ $checksheet->wastafel }}</td>
+                            @if ($checksheet->wastafel === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->wastafel }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->wastafel }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Wastafel</th>
@@ -252,7 +318,13 @@
                         </tr>
                         <tr>
                             <th>Kran Air</th>
-                            <td>{{ $checksheet->kran_air }}</td>
+                            @if ($checksheet->kran_air === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->kran_air }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->kran_air }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Kran Air</th>
@@ -267,7 +339,13 @@
                         </tr>
                         <tr>
                             <th>Tuas</th>
-                            <td>{{ $checksheet->tuas }}</td>
+                            @if ($checksheet->tuas === 'NG')
+                                <td class="text-danger fw-bolder">
+                                    {{ $checksheet->tuas }}
+                                </td>
+                            @else
+                                <td>{{ $checksheet->tuas }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>Catatan Tuas</th>

@@ -57,15 +57,79 @@
                                 <td>{{ $checksheet->slings->swl }}</td>
                                 <td>{{ $checksheet->slings->locations->location_name }}</td>
                                 <td>{{ $checksheet->slings->plant }}</td>
-                                <td>{{ $checksheet->serabut_wire }}</td>
-                                <td>{{ $checksheet->bagian_wire_1 }}</td>
-                                <td>{{ $checksheet->bagian_wire_2 }}</td>
-                                <td>{{ $checksheet->kumpulan_wire_1 }}</td>
-                                <td>{{ $checksheet->diameter_wire }}</td>
-                                <td>{{ $checksheet->kumpulan_wire_2 }}</td>
-                                <td>{{ $checksheet->hook_wire }}</td>
-                                <td>{{ $checksheet->pengunci_hook }}</td>
-                                <td>{{ $checksheet->mata_sling }}</td>
+
+                                @if ($checksheet->serabut_wire === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->serabut_wire }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->serabut_wire }}</td>
+                                @endif
+
+                                @if ($checksheet->bagian_wire_1 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->bagian_wire_1 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->bagian_wire_1 }}</td>
+                                @endif
+
+                                @if ($checksheet->bagian_wire_2 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->bagian_wire_2 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->bagian_wire_2 }}</td>
+                                @endif
+
+                                @if ($checksheet->kumpulan_wire_1 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->kumpulan_wire_1 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->kumpulan_wire_1 }}</td>
+                                @endif
+
+                                @if ($checksheet->diameter_wire === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->diameter_wire }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->diameter_wire }}</td>
+                                @endif
+
+                                @if ($checksheet->kumpulan_wire_2 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->kumpulan_wire_2 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->kumpulan_wire_2 }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_wire === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook_wire }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook_wire }}</td>
+                                @endif
+
+                                @if ($checksheet->pengunci_hook === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengunci_hook }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengunci_hook }}</td>
+                                @endif
+
+                                @if ($checksheet->mata_sling === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->mata_sling }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->mata_sling }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('sling.checksheetwire.show', $checksheet->id) }}"
@@ -141,15 +205,79 @@
                                 <td>{{ $checksheet->slings->swl }}</td>
                                 <td>{{ $checksheet->slings->locations->location_name }}</td>
                                 <td>{{ $checksheet->slings->plant }}</td>
-                                <td>{{ $checksheet->kelengkapan_tag_sling_belt }}</td>
-                                <td>{{ $checksheet->bagian_pinggir_belt_robek }}</td>
-                                <td>{{ $checksheet->pengecekan_lapisan_belt_1 }}</td>
-                                <td>{{ $checksheet->pengecekan_jahitan_belt }}</td>
-                                <td>{{ $checksheet->pengecekan_permukaan_belt }}</td>
-                                <td>{{ $checksheet->pengecekan_lapisan_belt_2 }}</td>
-                                <td>{{ $checksheet->pengecekan_aus }}</td>
-                                <td>{{ $checksheet->hook_wire }}</td>
-                                <td>{{ $checksheet->pengunci_hook }}</td>
+
+                                @if ($checksheet->kelengkapan_tag_sling_belt === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->kelengkapan_tag_sling_belt }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->kelengkapan_tag_sling_belt }}</td>
+                                @endif
+
+                                @if ($checksheet->bagian_pinggir_belt_robek === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->bagian_pinggir_belt_robek }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->bagian_pinggir_belt_robek }}</td>
+                                @endif
+
+                                @if ($checksheet->pengecekan_lapisan_belt_1 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengecekan_lapisan_belt_1 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengecekan_lapisan_belt_1 }}</td>
+                                @endif
+
+                                @if ($checksheet->pengecekan_jahitan_belt === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengecekan_jahitan_belt }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengecekan_jahitan_belt }}</td>
+                                @endif
+
+                                @if ($checksheet->pengecekan_permukaan_belt === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengecekan_permukaan_belt }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengecekan_permukaan_belt }}</td>
+                                @endif
+
+                                @if ($checksheet->pengecekan_lapisan_belt_2 === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengecekan_lapisan_belt_2 }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengecekan_lapisan_belt_2 }}</td>
+                                @endif
+
+                                @if ($checksheet->pengecekan_aus === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengecekan_aus }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengecekan_aus }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_wire === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->hook_wire }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->hook_wire }}</td>
+                                @endif
+
+                                @if ($checksheet->pengunci_hook === 'NG')
+                                    <td class="text-danger fw-bolder">
+                                        {{ $checksheet->pengunci_hook }}
+                                    </td>
+                                @else
+                                    <td>{{ $checksheet->pengunci_hook }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('sling.checksheetbelt.show', $checksheet->id) }}"

@@ -124,25 +124,57 @@
                                     {{ intval($checksheet->ok_smoke_detector) + intval($checksheet->ng_smoke_detector) }}
                                 </td>
                                 <td class="text-center align-middle">{{ $checksheet->ok_smoke_detector }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->ng_smoke_detector }}</td>
+                                @if ($checksheet->ng_smoke_detector != '0')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->ng_smoke_detector }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->ng_smoke_detector }}</td>
+                                @endif
+
+
 
                                 <td class="text-center align-middle">
                                     {{ intval($checksheet->ok_heat_detector) + intval($checksheet->ng_heat_detector) }}
                                 </td>
                                 <td class="text-center align-middle">{{ $checksheet->ok_heat_detector }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->ng_heat_detector }}</td>
+                                @if ($checksheet->ng_heat_detector != '0')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->ng_heat_detector }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->ng_heat_detector }}</td>
+                                @endif
+
+
 
                                 <td class="text-center align-middle">
                                     {{ intval($checksheet->ok_beam_detector) + intval($checksheet->ng_beam_detector) }}
                                 </td>
                                 <td class="text-center align-middle">{{ $checksheet->ok_beam_detector }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->ng_beam_detector }}</td>
+                                @if ($checksheet->ng_beam_detector != '0')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->ng_beam_detector }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->ng_beam_detector }}</td>
+                                @endif
+
+
 
                                 <td class="text-center align-middle">
                                     {{ intval($checksheet->ok_push_button) + intval($checksheet->ng_push_button) }}
                                 </td>
                                 <td class="text-center align-middle">{{ $checksheet->ok_push_button }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->ng_push_button }}</td>
+                                @if ($checksheet->ng_push_button != '0')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->ng_push_button }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->ng_push_button }}</td>
+                                @endif
+
+
 
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">

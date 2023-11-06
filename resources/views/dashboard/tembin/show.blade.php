@@ -107,16 +107,87 @@
                                 <td class="text-center align-middle">
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->tembin_number }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->master_link }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->body_tembin }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->mur_baut }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->shackle }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hook_atas }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->pengunci_hook_atas }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->mata_chain }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->chain }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->hook_bawah }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->pengunci_hook_bawah }}</td>
+
+                                @if ($checksheet->master_link === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->master_link }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->master_link }}</td>
+                                @endif
+
+                                @if ($checksheet->body_tembin === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->body_tembin }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->body_tembin }}</td>
+                                @endif
+
+                                @if ($checksheet->mur_baut === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->mur_baut }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->mur_baut }}</td>
+                                @endif
+
+                                @if ($checksheet->shackle === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->shackle }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->shackle }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hook_atas }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->pengunci_hook_atas === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->pengunci_hook_atas }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pengunci_hook_atas }}</td>
+                                @endif
+
+                                @if ($checksheet->mata_chain === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->mata_chain }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->mata_chain }}</td>
+                                @endif
+
+                                @if ($checksheet->chain === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->chain }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->chain }}</td>
+                                @endif
+
+                                @if ($checksheet->hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->hook_bawah }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->hook_bawah }}</td>
+                                @endif
+
+                                @if ($checksheet->pengunci_hook_bawah === 'NG')
+                                    <td class="text-danger fw-bolder text-center align-middle">
+                                        {{ $checksheet->pengunci_hook_bawah }}
+                                    </td>
+                                @else
+                                    <td class="text-center align-middle">{{ $checksheet->pengunci_hook_bawah }}</td>
+                                @endif
+
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('tembin.checksheettembin.show', $checksheet->id) }}"
