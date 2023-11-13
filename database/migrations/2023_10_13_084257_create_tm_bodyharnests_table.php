@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('location_id');
             $table->string('no_bodyharnest')->unique();
             $table->string('plant')->nullable()->default('-');
-            $table->string('tinggi')->nullable()->default('-');
             $table->timestamps();
         });
     }

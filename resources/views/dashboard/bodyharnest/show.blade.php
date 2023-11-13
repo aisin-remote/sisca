@@ -28,12 +28,6 @@
             </div>
             <hr class="mt-2">
             <div class="row">
-                <div class="h6 col-3">Tinggi</div>
-                <div class="col-2">:</div>
-                <div class="col-6 text-muted">{{ $bodyharnest->tinggi }}</div>
-            </div>
-            <hr class="mt-2">
-            <div class="row">
                 <div class="h6 col-3">Area</div>
                 <div class="col-2">:</div>
                 <div class="col-6 text-muted">{{ $bodyharnest->locations->location_name }}</div>

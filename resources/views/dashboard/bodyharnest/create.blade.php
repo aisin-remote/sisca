@@ -20,16 +20,6 @@
             </div>
 
             <div class="mb-3 col-md-6">
-                <label for="tinggi" class="form-label">Tinggi</label>
-                <input type="number" step="1" name="tinggi" id="tinggi" placeholder="Masukkan Tinggi"
-                    class="form-control @error('tinggi') is-invalid @enderror" value="{{ old('tinggi') }}">
-                @error('tinggi')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-
-            <div class="mb-3 col-md-6">
                 <label for="location_id" class="form-label">Area</label>
                 <select name="location_id" id="location_id" class="form-control @error('location_id') is-invalid @enderror">
                     <option selected disabled>Pilih Area</option>

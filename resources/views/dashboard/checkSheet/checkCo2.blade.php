@@ -29,9 +29,6 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('process.checksheet.co2', ['tagNumber' => $tagNumber]) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
                     <div class="mb-3">
                         <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
                         <input type="date" class="form-control" id="tanggal_pengecekan" name="tanggal_pengecekan"
@@ -233,7 +230,6 @@
         </div>
     </div>
     </form>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen-elemen yang dibutuhkan

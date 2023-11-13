@@ -6,7 +6,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Edit Data Safety Belt</h1>
     </div>
-    <form action="{{ route('safety-belt.update', $safetybelt->id) }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
+    <form action="{{ route('data-safetybelt.update', $safetybelt->id) }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">

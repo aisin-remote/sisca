@@ -53,7 +53,7 @@
         </div>
 
     </div>
-    {{-- <form action="{{ route('export.checksheetstembin') }}" method="POST" class="col-md-6 mb-3">
+    <form action="{{ route('export.checksheetstembin.jimbi') }}" method="POST" class="col-md-6 mb-3">
         @method('POST')
         @csrf
         <div class="form-group mb-3">
@@ -67,7 +67,7 @@
             <input type="hidden" name="tembin_number" value="{{ $tembin->no_equip }}">
         </div>
         <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> | Download</button>
-    </form> --}}
+    </form>
 
     @if (session()->has('success1'))
         <div class="mt-2 alert alert-success col-lg-12">

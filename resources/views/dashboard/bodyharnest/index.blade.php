@@ -20,7 +20,6 @@
                 <tr class="text-center align-middle">
                     <th scope="col">#</th>
                     <th scope="col">No Body Harnest</th>
-                    <th scope="col">Tinggi</th>
                     <th scope="col">Area</th>
                     <th scope="col">Plant</th>
                     <th scope="col">Aksi</th>
@@ -31,7 +30,6 @@
                     <tr class="text-center align-middle">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $bodyharnest->no_bodyharnest }}</td>
-                        <td>{{ $bodyharnest->tinggi }}</td>
                         <td>{{ $bodyharnest->locations->location_name }}</td>
                         <td>{{ $bodyharnest->plant }}</td>
                         <td>

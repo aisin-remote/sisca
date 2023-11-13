@@ -208,7 +208,6 @@
         </div>
     </div>
     </form>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen-elemen yang dibutuhkan

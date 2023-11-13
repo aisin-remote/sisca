@@ -580,9 +580,13 @@ Route::post('/export-checksheet-report-sling', [CheckSheetSlingController::class
 
 // Export CheckSheet Tembin
 Route::post('/export-checksheet-tembin', [CheckSheetTembinController::class, 'exportExcelWithTemplate'])->name('export.checksheetstembin');
+Route::post('/export-checksheet-tembin-1', [CheckSheetTembinController::class, 'exportExcelWithTemplate1'])->name('export.checksheetstembin.jimbi');
+
 
 // Export CheckSheet Chain Block
 Route::post('/export-checksheet-chainblock', [CheckSheetChainblockController::class, 'exportExcelWithTemplate'])->name('export.checksheetschainblock');
+Route::post('/export-checksheet-chain-block', [CheckSheetChainblockController::class, 'exportExcelWithTemplate1'])->name('export.checksheets.chainblock');
+
 
 // Export CheckSheet Body Harnest
 Route::post('/export-checksheet-bodyharnest', [CheckSheetBodyHarnestController::class, 'exportExcelWithTemplate'])->name('export.checksheetsbodyharnest');

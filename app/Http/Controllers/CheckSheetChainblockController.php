@@ -568,4 +568,138 @@ class CheckSheetChainblockController extends Controller
             'selectedYear' => $selectedYear,
         ]);
     }
+
+    public function exportExcelWithTemplate1(Request $request)
+    {
+        // Load the template Excel file
+        $templatePath = public_path('templates/template-checksheet-chain-block.xlsx');
+        $spreadsheet = IOFactory::load($templatePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Retrieve tag_number from the form
+        $chainblockNumber = $request->input('chainblock_number');
+
+
+        // Retrieve the selected year from the form
+        $selectedYear = $request->input('tahun');
+
+        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
+        $data = CheckSheetChainblock::with('chainblocks')
+            ->select('tanggal_pengecekan', 'chainblock_number', 'geared_trolley', 'chain_geared_trolley_1', 'chain_geared_trolley_2', 'hooking_geared_trolly', 'latch_hook_atas', 'hook_atas', 'hand_chain', 'load_chain', 'latch_hook_bawah', 'hook_bawah')
+            ->whereYear('tanggal_pengecekan', $selectedYear)
+            ->where('chainblock_number', $chainblockNumber) // Gunakan nilai tag_number yang diambil dari form
+            ->get();
+
+        // Array asosiatif untuk mencocokkan nama bulan dengan kolom
+        $bulanKolom = [
+            1 => 'W',  // Januari -> Kolom H
+            2 => 'Y',  // Februari -> Kolom I
+            3 => 'AA',  // Maret -> Kolom J
+            4 => 'AC',  // April -> Kolom K
+            5 => 'AE',  // Mei -> Kolom L
+            6 => 'AG',  // Juni -> Kolom M
+            7 => 'AI',  // Juli -> Kolom N
+            8 => 'AK',  // Agustus -> Kolom O
+            9 => 'AM',  // September -> Kolom P
+            10 => 'AO', // Oktober -> Kolom Q
+            11 => 'AQ', // November -> Kolom R
+            12 => 'AS', // Desember -> Kolom S
+        ];
+
+        $worksheet->setCellValue('AN' . 3, $data[0]->chainblocks->locations->location_name);
+        $worksheet->setCellValue('AN' . 4, $data[0]->chainblocks->handling_detail);
+
+
+
+        foreach ($data as $item) {
+
+            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
+            $bulan = Carbon::parse($item->tanggal_pengecekan)->format('n');
+
+            // Tentukan kolom berdasarkan bulan
+            $col = $bulanKolom[$bulan];
+
+            // Set value based on $item->pressure
+            if ($item->geared_trolley === 'OK') {
+                $worksheet->setCellValue($col . 8, '√');
+            } else if ($item->geared_trolley === 'NG') {
+                $worksheet->setCellValue($col . 8, 'X');
+            }
+
+            // Set value based on $item->hose
+            if ($item->chain_geared_trolley_1 === 'OK') {
+                $worksheet->setCellValue($col . 11, '√');
+            } else if ($item->chain_geared_trolley_1 === 'NG') {
+                $worksheet->setCellValue($col . 11, 'X');
+            }
+
+            // Set value based on $item->corong
+            if ($item->chain_geared_trolley_2 === 'OK') {
+                $worksheet->setCellValue($col . 14, '√');
+            } else if ($item->chain_geared_trolley_2 === 'NG') {
+                $worksheet->setCellValue($col . 14, 'X');
+            }
+
+            // Set value based on $item->tabung
+            if ($item->hooking_geared_trolly === 'OK') {
+                $worksheet->setCellValue($col . 17, '√');
+            } else if ($item->hooking_geared_trolly === 'NG') {
+                $worksheet->setCellValue($col . 17, 'X');
+            }
+
+            // Set value based on $item->regulator
+            if ($item->latch_hook_atas === 'OK') {
+                $worksheet->setCellValue($col . 20, '√');
+            } else if ($item->latch_hook_atas === 'NG') {
+                $worksheet->setCellValue($col . 20, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->hook_atas === 'OK') {
+                $worksheet->setCellValue($col . 23, '√');
+            } else if ($item->hook_atas === 'NG') {
+                $worksheet->setCellValue($col . 23, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->hand_chain === 'OK') {
+                $worksheet->setCellValue($col . 26, '√');
+            } else if ($item->hand_chain === 'NG') {
+                $worksheet->setCellValue($col . 26, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->load_chain === 'OK') {
+                $worksheet->setCellValue($col . 29, '√');
+            } else if ($item->load_chain === 'NG') {
+                $worksheet->setCellValue($col . 29, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->latch_hook_bawah === 'OK') {
+                $worksheet->setCellValue($col . 32, '√');
+            } else if ($item->latch_hook_bawah === 'NG') {
+                $worksheet->setCellValue($col . 32, 'X');
+            }
+
+            // Set value based on $item->lock_pin
+            if ($item->hook_bawah === 'OK') {
+                $worksheet->setCellValue($col . 35, '√');
+            } else if ($item->hook_bawah === 'NG') {
+                $worksheet->setCellValue($col . 35, 'X');
+            }
+
+
+            // Increment row for the next data
+            $col++;
+        }
+
+
+        // Create a new Excel writer and save the modified spreadsheet
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $outputPath = public_path('templates/checksheet-chain-block.xlsx');
+        $writer->save($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
+    }
 }

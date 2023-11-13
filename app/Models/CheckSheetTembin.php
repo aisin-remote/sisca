@@ -49,7 +49,7 @@ class CheckSheetTembin extends Model
 
     public function tembins()
     {
-        return $this->belongsTo(Tandu::class, 'tembin_number', 'no_equip');
+        return $this->belongsTo(Tembin::class, 'tembin_number', 'no_equip');
     }
 
     public $timestamps = true;

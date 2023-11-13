@@ -1,5 +1,5 @@
 @extends('dashboard.app')
-@section('title', 'All Eyewasher Report')
+@section('title', 'All Sling Report')
 
 @section('content')
 
@@ -25,12 +25,12 @@
 
     <div
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h3>All Eyewasher Report</h3>
+        <h3>All Sling Report</h3>
         <div class="form-group">
             <form action="{{ route('export.checksheetsreport.sling') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Eyewasher</label>
+                <label for="tahun">Download Check Sheet Sling</label>
                 <div class="input-group">
                     <select name="tahun" id="tahun" class="form-control">
                         @php

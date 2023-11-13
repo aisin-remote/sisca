@@ -26,7 +26,6 @@ class BodyharnestController extends Controller
     {
         $validate = $request->validate([
             'no_bodyharnest' => 'required|unique:tm_bodyharnests',
-            'tinggi' => 'required',
             'location_id' => 'required',
             'plant' => 'nullable',
         ]);
@@ -73,8 +72,6 @@ class BodyharnestController extends Controller
         $bodyharnest = Bodyharnest::findOrFail($id);
 
         $validateData = $request->validate([
-            'tinggi' => 'required',
-            'location_id' => 'required',
             'plant' => 'nullable',
         ]);
 

@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="h6 col-3">No Adress</div>
                 <div class="col-2">:</div>
-                <div class="col-6 text-muted">{{ $facp->no_adress }}</div>
+                <div class="col-6 text-muted">{{ $facp->nomor_adress }}</div>
             </div>
         </div>
     </div>

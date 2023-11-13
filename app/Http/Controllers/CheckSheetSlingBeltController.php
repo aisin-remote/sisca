@@ -471,7 +471,7 @@ class CheckSheetSlingBeltController extends Controller
         $worksheet->setCellValue('X' . 4, $data[0]->slings->plant);
         $worksheet->setCellValue('AA' . 4, $data[0]->slings->locations->location_name);
         $worksheet->setCellValue('AD' . 4, $data[0]->sling_number);
-        $worksheet->setCellValue('AG' . 4, $data[0]->slings->swl);
+        $worksheet->setCellValue('AG' . 4, $data[0]->slings->swl . " Ton");
 
         foreach ($data as $item) {
 

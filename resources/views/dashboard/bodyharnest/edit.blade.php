@@ -6,7 +6,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Edit Data Body Harnest</h1>
     </div>
-    <form action="{{ route('body-harnest.update', $bodyharnest->id) }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
+    <form action="{{ route('data-bodyharnest.update', $bodyharnest->id) }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -15,15 +15,6 @@
                 <input type="text" name="no_bodyharnest" id="no_bodyharnest" placeholder="Masukkan No Body Harnest"
                     class="form-control @error('no_bodyharnest') is-invalid @enderror" value="{{ old('no_bodyharnest') ?? $bodyharnest->no_bodyharnest}}" readonly>
                 @error('no_bodyharnest')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3 col-md-6">
-                <label for="tinggi" class="form-label">Tinggi</label>
-                <input type="number" step="1" name="tinggi" id="tinggi" placeholder="Masukkan Tinggi"
-                    class="form-control @error('tinggi') is-invalid @enderror" value="{{ old('tinggi') ?? $bodyharnest->tinggi}}">
-                @error('tinggi')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
