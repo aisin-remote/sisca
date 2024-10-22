@@ -8,6 +8,7 @@ use App\Http\Controllers\Co2Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EyewasherController;
 use App\Http\Controllers\FacpController;
+use App\Http\Controllers\HeadCraneController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
@@ -168,6 +169,12 @@ Route::resource('/dashboard/master/location', LocationController::class)->only('
 Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy')->middleware('admin');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
+//Route Head Crane
+Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('create', 'store', 'edit', 'destroy')->middleware('admin');
+Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('index', 'show')->middleware('auth');
+Route::put('/dashboard/master/head-crane/{data_headcrane}', [HeadCraneController::class, 'update'])->name('head-crane.update')->middleware('admin');
+
+
 use App\Http\Controllers\CheckSheetController;
 use App\Http\Controllers\CheckSheetEyewasherController;
 use App\Http\Controllers\CheckSheetEyewasherOnlyController;
@@ -183,6 +190,7 @@ use App\Http\Controllers\CheckSheetTembinController;
 use App\Http\Controllers\CheckSheetBodyHarnestController;
 use App\Http\Controllers\CheckSheetSafetyBeltController;
 use App\Http\Controllers\CheckSheetFacpController;
+use App\Http\Controllers\CheckSheetHeadCraneController;
 
 Route::middleware(['auth'])->group(function () {
     // checksheet
@@ -198,12 +206,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form');
     Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form');
     Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form');
+    Route::get('/dashboard/check-sheet/head-crane', [CheckSheetHeadCraneController::class, 'showForm'])->name('head-crane.show.form');
 
 
     Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
     Route::get('/dashboard/check-sheet/apar/all-check-sheet', [CheckSheetController::class, 'index'])->name('checksheet.index');
 
-    Route::get('/dashboard/hydrant/checksheet', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
     Route::post('/dashboard/hydrant/process-checksheet', [CheckSheetHydrantController::class, 'processForm'])->name('hydrant.process.form');
     Route::get('/dashboard/hydrant/checksheet/all-check-sheet', [CheckSheetHydrantController::class, 'index'])->name('hydrant.checksheet.index');
 
@@ -282,6 +290,17 @@ Route::middleware(['admin'])->group(function () {
 });
 Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show')->middleware('auth');
 
+
+//Checksheet Safety Belt
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard/safetybelt/checksheetsafetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'createForm'])->name('checksheetsafetybelt');
+    Route::post('/dashboard/safetybelt/process-checksheet-safetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'store'])->name('process.checksheet.safetybelt');
+    Route::delete('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'destroy'])->name('safetybelt.checksheetsafetybelt.destroy');
+    Route::get('/dashboard/check-sheet/safetybelt/{id}/edit', [CheckSheetSafetyBeltController::class, 'edit'])->name('safetybelt.checksheetsafetybelt.edit');
+    Route::put('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'update'])->name('safetybelt.checksheetsafetybelt.update');
+});
+Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show')->middleware('auth');
 
 
 

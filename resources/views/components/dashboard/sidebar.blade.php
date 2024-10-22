@@ -1,30 +1,31 @@
-
 <!-- Sidebar  -->
 <nav id="sidebar">
     <div class="sidebar-header">
         <a class="navbar-brand d-flex justify-content-center" href="/">
-            <img src="/foto/logo-sisca.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;" id="logo-sidebar">
+            <img src="/foto/logo-sisca.png" alt="Logo AIIA" class="img-fluid" style="max-width: 200px; height: auto;"
+                id="logo-sidebar">
         </a>
     </div>
     <ul class="list-unstyled components">
         <li class="{{ Request::is('dashboard') ? 'active show' : '' }} menu">
             <a class="nav_link" href="/dashboard">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
-                    <i class="bi bi-bar-chart-line-fill"  style="margin-left: 9px;"></i>
+                    <i class="bi bi-bar-chart-line-fill" style="margin-left: 9px;"></i>
                     Dashboard
                     <i class="fas fa-chevron-down" style="opacity: 0;"></i>
                 </span>
             </a>
         </li>
 
-        <li class="{{Request::is('dashboard/location*') ? 'active show' : ''}} menu">
+        <li class="{{ Request::is('dashboard/location*') ? 'active show' : '' }} menu">
             <a href="#locationSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
                     <i class="bi bi-pin-map-fill"></i> Location
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
-            <ul class="collapse list-unstyled {{ Request::is('dashboard/location*') ? 'show' : '' }}" id="locationSubmenu">
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/location*') ? 'show' : '' }}"
+                id="locationSubmenu">
                 <li class="{{ Request::is('dashboard/location/all-equipment*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/location/all-equipment">All Equipment</a>
                 </li>
@@ -36,8 +37,9 @@
                 </li>
             </ul>
         </li>
-        <li class="{{Request::is('dashboard/master*') ? 'active show' : ''}} menu">
-            <a href="#masterSubmenu" aria-controls="masterSubmenu"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <li class="{{ Request::is('dashboard/master*') ? 'active show' : '' }} menu">
+            <a href="#masterSubmenu" aria-controls="masterSubmenu" data-toggle="collapse" aria-expanded="false"
+                class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
                     <i class="bi bi-database-fill-add"></i> Master
                     <i class="fas fa-chevron-down"></i>
@@ -83,16 +85,20 @@
                 <li class="{{ Request::is('dashboard/master/facp*') ? 'active' : '' }} submenu">
                     <a href="/dashboard/master/facp">FACP</a>
                 </li>
+                <li class="{{ Request::is('dashboard/master/head-crane*') ? 'active' : '' }} submenu">
+                    <a href="/dashboard/master/head-crane">Head Crane</a>
+                </li>
             </ul>
         </li>
-        <li class="{{Request::is('dashboard/check-sheet*') ? 'active show' : ''}} menu">
+        <li class="{{ Request::is('dashboard/check-sheet*') ? 'active show' : '' }} menu">
             <a href="#checksheetSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
                     <i class="bi bi-clipboard2-check-fill"></i> Check Sheet
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
-            <ul class="collapse list-unstyled {{ Request::is('dashboard/check-sheet*') ? 'show' : '' }}" id="checksheetSubmenu">
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/check-sheet*') ? 'show' : '' }}"
+                id="checksheetSubmenu">
                 <li class="{{ Request::is('dashboard/check-sheet/apar*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/apar">Apar</a>
                 </li>
@@ -129,16 +135,20 @@
                 <li class="{{ Request::is('dashboard/check-sheet/facp*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/check-sheet/facp">FACP</a>
                 </li>
+                <li class="{{ Request::is('dashboard/check-sheet/head-crane*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/check-sheet/head-crane">Head Crane</a>
+                </li>
             </ul>
         </li>
-        <li class="{{Request::is('dashboard/report*') ? 'active show' : ''}}">
+        <li class="{{ Request::is('dashboard/report*') ? 'active show' : '' }}">
             <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <span style="display: flex; justify-content: space-between; align-items: center;">
                     <i class="bi bi-exclamation-triangle-fill"></i> Report
                     <i class="fas fa-chevron-down"></i>
                 </span>
             </a>
-            <ul class="collapse list-unstyled {{ Request::is('dashboard/report*') ? 'show' : '' }}" id="reportSubmenu">
+            <ul class="collapse list-unstyled {{ Request::is('dashboard/report*') ? 'show' : '' }}"
+                id="reportSubmenu">
                 <li class="{{ Request::is('dashboard/report/apar*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/apar">Apar</a>
                 </li>
@@ -174,6 +184,9 @@
                 </li>
                 <li class="{{ Request::is('dashboard/report/facp*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/facp">FACP</a>
+                </li>
+                <li class="{{ Request::is('dashboard/report/head-crane*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/head-crane">Head Crane</a>
                 </li>
             </ul>
         </li>
