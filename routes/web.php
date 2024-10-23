@@ -172,7 +172,7 @@ Route::delete('/dashboard/master/location/{data_location}', [LocationController:
 //Route Head Crane
 Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('create', 'store', 'edit', 'destroy')->middleware('admin');
 Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('index', 'show')->middleware('auth');
-Route::put('/dashboard/master/head-crane/{data_headcrane}', [HeadCraneController::class, 'update'])->name('head-crane.update')->middleware('admin');
+Route::post('/dashboard/master/head-crane/{data_headcrane}', [HeadCraneController::class, 'update'])->name('head-crane.update')->middleware('admin');
 
 
 use App\Http\Controllers\CheckSheetController;
@@ -206,7 +206,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/check-sheet/bodyharnest', [CheckSheetBodyHarnestController::class, 'showForm'])->name('bodyharnest.show.form');
     Route::get('/dashboard/check-sheet/safetybelt', [CheckSheetSafetyBeltController::class, 'showForm'])->name('safetybelt.show.form');
     Route::get('/dashboard/check-sheet/facp', [CheckSheetFacpController::class, 'showForm'])->name('facp.show.form');
-    Route::get('/dashboard/check-sheet/head-crane', [CheckSheetHeadCraneController::class, 'showForm'])->name('head-crane.show.form');
+    Route::get('/dashboard/check-sheet/head-crane', [CheckSheetHeadCraneController::class, 'showForm'])->name('headcrane.show.form');
 
 
     Route::post('/dashboard/apar/process-checksheet', [CheckSheetController::class, 'processForm'])->name('process.form');
@@ -244,6 +244,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/dashboard/facp/process-checksheet', [CheckSheetFacpController::class, 'processForm'])->name('facp.process.form');
     Route::get('/dashboard/facp/checksheet/all-check-sheet', [CheckSheetFacpController::class, 'index'])->name('facp.checksheet.index');
+
+    Route::post('/dashboard/headcrane/process-checksheet', [CheckSheetHeadCraneController::class, 'processForm'])->name('headcrane.process.form');
+    Route::get('/dashboard/headcrane/checksheet/all-check-sheet', [CheckSheetHeadCraneController::class, 'index'])->name('headcrane.checksheet.index');
 });
 
 
@@ -291,16 +294,16 @@ Route::middleware(['admin'])->group(function () {
 Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show')->middleware('auth');
 
 
-//Checksheet Safety Belt
+//Checksheet Head Crane
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/dashboard/safetybelt/checksheetsafetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'createForm'])->name('checksheetsafetybelt');
-    Route::post('/dashboard/safetybelt/process-checksheet-safetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'store'])->name('process.checksheet.safetybelt');
-    Route::delete('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'destroy'])->name('safetybelt.checksheetsafetybelt.destroy');
-    Route::get('/dashboard/check-sheet/safetybelt/{id}/edit', [CheckSheetSafetyBeltController::class, 'edit'])->name('safetybelt.checksheetsafetybelt.edit');
-    Route::put('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'update'])->name('safetybelt.checksheetsafetybelt.update');
+    Route::get('/dashboard/headcrane/checksheetheadcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'createForm'])->name('checksheetheadcrane');
+    Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('process.checksheet.headcrane');
+    Route::delete('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'destroy'])->name('headcrane.checksheetheadcrane.destroy');
+    Route::get('/dashboard/check-sheet/headcrane/{id}/edit', [CheckSheetHeadCraneController::class, 'edit'])->name('headcrane.checksheetheadcrane.edit');
+    Route::put('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'update'])->name('headcrane.checksheetheadcrane.update');
 });
-Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltController::class, 'show'])->name('safetybelt.checksheetsafetybelt.show')->middleware('auth');
+Route::get('/dashboard/check-sheet/headcrane/{id}/show', [CheckSheetHeadCraneController::class, 'show'])->name('headcrane.checksheetheadcrane.show')->middleware('auth');
 
 
 
@@ -615,3 +618,6 @@ Route::post('/export-checksheet-safetybelt', [CheckSheetSafetyBeltController::cl
 
 // Export CheckSheet FACP
 Route::post('/export-checksheet-facp', [CheckSheetFacpController::class, 'exportExcelWithTemplate'])->name('export.checksheetsfacp');
+
+//Route CheckSheet HeadCrane
+Route::post('/export-checksheet-headcrane', [CheckSheetHeadCraneController::class, 'exportExcelWithTemplate'])->name('export.checksheetsheadcrane');

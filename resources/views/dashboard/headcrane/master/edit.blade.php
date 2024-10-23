@@ -6,10 +6,8 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Edit Data Head Crane</h1>
     </div>
-    <form action="{{ route('head-crane.update', $headcrane->id) }}" method="POST" class="mb-5 col-lg-12"
-        enctype="multipart/form-data">
+    <form action="{{ route('head-crane.update', $headcrane->id) }}" method="POST" class="mb-5 col-lg-12">
         @csrf
-        @method('PUT')
         <div class="row">
             <div class="mb-3 col-md-6">
                 <label for="no_headcrane" class="form-label">No Head Crane</label>

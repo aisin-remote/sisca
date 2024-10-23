@@ -34,7 +34,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h5>Check Sheet Terbaru</h5>
-        <a href="/dashboard/safetybelt/checksheet/all-check-sheet" class="btn-link text-primary"
+        <a href="/dashboard/headcrane/checksheet/all-check-sheet" class="btn-link text-primary"
             style="text-decoration: underline;">
             Semua Check Sheet
         </a>
@@ -54,7 +54,7 @@
                             <th scope="col">Tanggal Pengecekan</th>
                             <th scope="col">Terakhir Update</th>
                             <th scope="col">NPK</th>
-                            <th scope="col">Nomor Safety Belt</th>
+                            <th scope="col">Nomor Head Crane</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -65,21 +65,21 @@
                                 <td>{{ $checkSheet->created_at->format('d F Y') }}</td>
                                 <td>{{ $checkSheet->updated_at->format('d F Y') }}</td>
                                 <td>{{ $checkSheet->npk }}</td>
-                                <td>{{ $checkSheet->safetybelt_number }}</td>
+                                <td>{{ $checkSheet->headcrane_number }}</td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{ route('safetybelt.checksheetsafetybelt.show', $checkSheet->id) }}"
+                                        <a href="{{ route('headcrane.checksheetheadcrane.show', $checkSheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
                                         @can('admin')
-                                            <a href="{{ route('safetybelt.checksheetsafetybelt.edit', $checkSheet->id) }}"
+                                            <a href="{{ route('headcrane.checksheetheadcrane.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
-                                                action="{{ route('safetybelt.checksheetsafetybelt.destroy', $checkSheet->id) }}"
+                                                action="{{ route('headcrane.checksheetheadcrane.destroy', $checkSheet->id) }}"
                                                 method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="badge bg-danger border-0"
-                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Safety Belt?')">Delete</button>
+                                                    onclick="return confirm('Ingin menghapus Data Check Sheet Head Crane?')">Delete</button>
                                             </form>
                                         @endcan
                                     </div>

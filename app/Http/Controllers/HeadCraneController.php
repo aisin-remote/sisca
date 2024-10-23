@@ -67,17 +67,16 @@ class HeadCraneController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request);
         $headcrane = HeadCrane::findOrFail($id);
 
-        $validateData = $request->validate([
-            'location_id' => 'required',
-            'plant' => 'nullable',
-        ]);
+        // Ambil data dari request dan lakukan validasi manual jika diperlukan
+        $inputData = $request->only(['location_id', 'plant']);
 
-        $headcrane->update($validateData);
+        // Update data headcrane
+        $headcrane->update($inputData);
 
-        return redirect()->route('head-crane.index')->with('success', 'Data berhasil di update.');
+        // Redirect dengan pesan sukses
+        return redirect()->route('head-crane.index')->with('success', 'Data berhasil diupdate.');
     }
 
     public function destroy($id)
@@ -85,6 +84,6 @@ class HeadCraneController extends Controller
         $headcrane = HeadCrane::find($id);
         $headcrane->delete();
 
-        return redirect()->route('head-crane.index')->with('success', 'Data Safety Belt berhasil dihapus');
+        return redirect()->route('head-crane.index')->with('success', 'Data Head Crane berhasil dihapus');
     }
 }
