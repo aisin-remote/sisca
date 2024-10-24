@@ -1,10 +1,10 @@
 @extends('dashboard.app')
-@section('title', 'Check Sheet Safety Belt')
+@section('title', 'Check Sheet Head Crane')
 
 @section('content')
 
     <div class="container">
-        <h1>Check Sheet Safety Belt</h1>
+        <h1>Check Sheet Head Crane</h1>
         <hr>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -29,8 +29,8 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('process.checksheet.safetybelt', ['safetybeltNumber' => $safetybeltNumber]) }}" method="POST"
-                    enctype="multipart/form-data">
+                <form action="{{ route('process.checksheet.headcrane', ['headcraneNumber' => $headcraneNumber]) }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
@@ -43,252 +43,240 @@
                             value="{{ auth()->user()->npk }}" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="safetybelt_number" class="form-label">Nomor Safety Belt</label>
-                        <input type="text" class="form-control" id="safetybelt_number" value="{{ $safetybeltNumber }}"
-                            name="safetybelt_number" required autofocus readonly>
+                        <label for="headcrane_number" class="form-label">Nomor Head Crane</label>
+                        <input type="text" class="form-control" id="headcrane_number" value="{{ $headcraneNumber }}"
+                            name="headcrane_number" required autofocus readonly>
                     </div>
             </div>
             <div class="col-md-6">
 
 
                 <div class="mb-3">
-                    <label for="buckle" class="form-label">Buckle</label>
+                    <label for="cross_travelling" class="form-label">Cross Travelling</label>
                     <div class="input-group">
-                        <select class="form-select" id="buckle" name="buckle" required>
+                        <select class="form-select" id="cross_travelling" name="cross_travelling" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('buckle') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('buckle') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('cross_travelling') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('cross_travelling') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_buckle"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_cross_travelling"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_buckle" style="display:none;">
-                    <label for="catatan_buckle" class="form-label">Catatan Buckle</label>
-                    <textarea class="form-control" name="catatan_buckle" id="catatan_buckle" cols="30" rows="5">{{ old('catatan_buckle') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_cross_travelling" style="display:none;">
+                    <label for="catatan_cross_travelling" class="form-label">Catatan Cross travelling</label>
+                    <textarea class="form-control" name="catatan_cross_travelling" id="catatan_cross_travelling" cols="30"
+                        rows="5">{{ old('catatan_cross_travelling') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_buckle" class="form-label">Foto Buckle</label>
-                    <img class="photo-buckle-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_buckle" name="photo_buckle" required
-                        onchange="previewImage('photo_buckle', 'photo-buckle-preview')">
+                    <label for="photo_cross_travelling" class="form-label">Foto Cross Travelling</label>
+                    <img class="photo-cross_travelling-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_cross_travelling" name="photo_cross_travelling"
+                        required onchange="previewImage('photo_cross_travelling', 'photo-cross_travelling-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="seams" class="form-label">Seams</label>
+                    <label for="long_travelling" class="form-label">Long Travelling</label>
                     <div class="input-group">
-                        <select class="form-select" id="seams" name="seams" required>
+                        <select class="form-select" id="long_travelling" name="long_travelling" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('seams') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('seams') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('long_travelling') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('long_travelling') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_seams"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_long_travelling"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_seams" style="display:none;">
-                    <label for="catatan_seams" class="form-label">Catatan Seams</label>
-                    <textarea class="form-control" name="catatan_seams" id="catatan_seams" cols="30" rows="5">{{ old('catatan_seams') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_long_travelling" style="display:none;">
+                    <label for="catatan_long_travelling" class="form-label">Catatan Long Travelling</label>
+                    <textarea class="form-control" name="catatan_long_travelling" id="catatan_long_travelling" cols="30"
+                        rows="5">{{ old('catatan_long_travelling') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_seams" class="form-label">Foto Seams</label>
-                    <img class="photo-seams-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_seams" name="photo_seams" required
-                        onchange="previewImage('photo_seams', 'photo-seams-preview')">
+                    <label for="photo_long_travelling" class="form-label">Foto Long Travelling</label>
+                    <img class="photo-long_travelling-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_long_travelling" name="photo_long_travelling"
+                        required onchange="previewImage('photo_long_travelling', 'photo-long_travelling-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="reel" class="form-label">Reel</label>
+                    <label for="button_up" class="form-label">Button Up</label>
                     <div class="input-group">
-                        <select class="form-select" id="reel" name="reel" required>
+                        <select class="form-select" id="button_up" name="button_up" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('reel') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('reel') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('button_up') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('button_up') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_reel"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_button_up"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_reel" style="display:none;">
-                    <label for="catatan_reel" class="form-label">Catatan Reel</label>
-                    <textarea class="form-control" name="catatan_reel" id="catatan_reel" cols="30" rows="5">{{ old('catatan_reel') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_button_up" style="display:none;">
+                    <label for="catatan_button_up" class="form-label">Catatan Button Up</label>
+                    <textarea class="form-control" name="catatan_button_up" id="catatan_button_up" cols="30" rows="5">{{ old('catatan_button_up') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_reel" class="form-label">Foto Reel</label>
-                    <img class="photo-reel-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_reel" name="photo_reel" required
-                        onchange="previewImage('photo_reel', 'photo-reel-preview')">
+                    <label for="photo_button_up" class="form-label">Foto Button Up</label>
+                    <img class="photo-button_up-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_button_up" name="photo_button_up" required
+                        onchange="previewImage('photo_button_up', 'photo-button_up-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="shock_absorber" class="form-label">Shock Absorber</label>
+                    <label for="button_down" class="form-label">Button Down</label>
                     <div class="input-group">
-                        <select class="form-select" id="shock_absorber" name="shock_absorber" required>
+                        <select class="form-select" id="button_down" name="button_down" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('shock_absorber') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('shock_absorber') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('button_down') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('button_down') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_shock_absorber"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_button_down"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_shock_absorber" style="display:none;">
-                    <label for="catatan_shock_absorber" class="form-label">Catatan Shock Absorber</label>
-                    <textarea class="form-control" name="catatan_shock_absorber" id="catatan_shock_absorber" cols="30" rows="5">{{ old('catatan_shock_absorber') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_button_down" style="display:none;">
+                    <label for="catatan_button_down" class="form-label">Catatan Button Down</label>
+                    <textarea class="form-control" name="catatan_button_down" id="catatan_button_down" cols="30" rows="5">{{ old('catatan_button_down') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_shock_absorber" class="form-label">Foto Shock Absorber</label>
-                    <img class="photo-shock_absorber-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_shock_absorber" name="photo_shock_absorber" required
-                        onchange="previewImage('photo_shock_absorber', 'photo-shock_absorber-preview')">
+                    <label for="photo_button_down" class="form-label">Foto Button Down</label>
+                    <img class="photo-button_down-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_button_down" name="photo_button_down" required
+                        onchange="previewImage('photo_button_down', 'photo-button_down-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="ring" class="form-label">Ring</label>
+                    <label for="button_push" class="form-label">Buttton Push</label>
                     <div class="input-group">
-                        <select class="form-select" id="ring" name="ring" required>
+                        <select class="form-select" id="button_push" name="button_push" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('ring') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('ring') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('button_push') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('button_push') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_ring"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_button_push"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_ring" style="display:none;">
-                    <label for="catatan_ring" class="form-label">Catatan Ring</label>
-                    <textarea class="form-control" name="catatan_ring" id="catatan_ring" cols="30" rows="5">{{ old('catatan_ring') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_button_push" style="display:none;">Button Push</label>
+                    <textarea class="form-control" name="catatan_button_push" id="catatan_button_push" cols="30" rows="5">{{ old('catatan_button_push') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_ring" class="form-label">Foto Ring</label>
-                    <img class="photo-ring-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_ring" name="photo_ring" required
-                        onchange="previewImage('photo_ring', 'photo-ring-preview')">
+                    <label for="photo_button_push" class="form-label">Foto Button Push</label>
+                    <img class="photo-button_push-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_button_push" name="photo_button_push" required
+                        onchange="previewImage('photo_button_push', 'photo-button_push-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="torso_belt" class="form-label">Torso Belt</label>
+                    <label for="wire_rope" class="form-label">Wire Rope</label>
                     <div class="input-group">
-                        <select class="form-select" id="torso_belt" name="torso_belt" required>
+                        <select class="form-select" id="wire_rope" name="wire_rope" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('torso_belt') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('torso_belt') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('wire_rope') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('wire_rope') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_torso_belt"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_wire_rope"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_torso_belt" style="display:none;">
-                    <label for="catatan_torso_belt" class="form-label">Catatan Torso Belt</label>
-                    <textarea class="form-control" name="catatan_torso_belt" id="catatan_torso_belt" cols="30" rows="5">{{ old('catatan_torso_belt') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_wire_rope" style="display:none;">
+                    <label for="catatan_wire_rope" class="form-label">Catatan Wire Rope</label>
+                    <textarea class="form-control" name="catatan_wire_rope" id="catatan_wire_rope" cols="30" rows="5">{{ old('catatan_wire_rope') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_torso_belt" class="form-label">Foto Torso Belt</label>
-                    <img class="photo-torso_belt-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_torso_belt" name="photo_torso_belt" required
-                        onchange="previewImage('photo_torso_belt', 'photo-torso_belt-preview')">
+                    <label for="photo_wire_rope" class="form-label">Foto Wire Rope</label>
+                    <img class="photo-wire_rope-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_wire_rope" name="photo_wire_rope" required
+                        onchange="previewImage('photo_wire_rope', 'photo-wire_rope-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="strap" class="form-label">Strap</label>
+                    <label for="block_hook" class="form-label">Block Hook</label>
                     <div class="input-group">
-                        <select class="form-select" id="strap" name="strap" required>
+                        <select class="form-select" id="block_hook" name="block_hook" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('strap') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('strap') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('block_hook') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('block_hook') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_strap"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_block_hook"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_strap" style="display:none;">
-                    <label for="catatan_strap" class="form-label">Catatan Strap</label>
-                    <textarea class="form-control" name="catatan_strap" id="catatan_strap" cols="30" rows="5">{{ old('catatan_strap') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_block_hook" style="display:none;">
+                    <label for="catatan_block_hook" class="form-label">Catatan Block Hook</label>
+                    <textarea class="form-control" name="catatan_block_hook" id="catatan_block_hook" cols="30" rows="5">{{ old('catatan_block_hook') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_strap" class="form-label">Foto Strap</label>
-                    <img class="photo-strap-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_strap" name="photo_strap" required
-                        onchange="previewImage('photo_strap', 'photo-strap-preview')">
+                    <label for="photo_block_hook" class="form-label">Foto Block Hook</label>
+                    <img class="photo-block_hook-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_block_hook" name="photo_block_hook" required
+                        onchange="previewImage('photo_block_hook', 'photo-block_hook-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="rope" class="form-label">Rope</label>
+                    <label for="hom" class="form-label">Hom</label>
                     <div class="input-group">
-                        <select class="form-select" id="rope" name="rope" required>
+                        <select class="form-select" id="hom" name="hom" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('rope') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('rope') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('hom') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('hom') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_rope"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_hom"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_rope" style="display:none;">
-                    <label for="catatan_rope" class="form-label">Catatan Rope</label>
-                    <textarea class="form-control" name="catatan_rope" id="catatan_rope" cols="30" rows="5">{{ old('catatan_rope') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_hom" style="display:none;">
+                    <label for="catatan_hom" class="form-label">Catatan Hom</label>
+                    <textarea class="form-control" name="catatan_hom" id="catatan_hom" cols="30" rows="5">{{ old('catatan_hom') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_rope" class="form-label">Foto Rope</label>
-                    <img class="photo-rope-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_rope" name="photo_rope" required
-                        onchange="previewImage('photo_rope', 'photo-rope-preview')">
+                    <label for="photo_hom" class="form-label">Foto Hom</label>
+                    <img class="photo-hom-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_hom" name="photo_hom" required
+                        onchange="previewImage('photo_hom', 'photo-hom-preview')">
                 </div>
 
                 <hr>
 
                 <div class="mb-3">
-                    <label for="seam_protection_tube" class="form-label">Seam Protection Tube</label>
+                    <label for="emergency_stop" class="form-label">Emergency Stop</label>
                     <div class="input-group">
-                        <select class="form-select" id="seam_protection_tube" name="seam_protection_tube" required>
+                        <select class="form-select" id="emergency_stop" name="emergency_stop" required>
                             <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('seam_protection_tube') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('seam_protection_tube') == 'NG' ? 'selected' : '' }}>NG</option>
+                            <option value="OK" {{ old('emergency_stop') == 'OK' ? 'selected' : '' }}>OK</option>
+                            <option value="NG" {{ old('emergency_stop') == 'NG' ? 'selected' : '' }}>NG</option>
                         </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_seam_protection_tube"><i class="bi bi-bookmark-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="tambahCatatan_emergency_stop"><i
+                                class="bi bi-bookmark-plus"></i></button>
                     </div>
                 </div>
-                <div class="mb-3 mt-3" id="catatanField_seam_protection_tube" style="display:none;">
-                    <label for="catatan_seam_protection_tube" class="form-label">Catatan Seam Protection Tube</label>
-                    <textarea class="form-control" name="catatan_seam_protection_tube" id="catatan_seam_protection_tube" cols="30" rows="5">{{ old('catatan_seam_protection_tube') }}</textarea>
+                <div class="mb-3 mt-3" id="catatanField_emergency_stop" style="display:none;">
+                    <label for="catatan_emergency_stop" class="form-label">Catatan Emergency Stop</label>
+                    <textarea class="form-control" name="catatan_emergency_stop" id="catatan_emergency_stop" cols="30"
+                        rows="5">{{ old('catatan_emergency_stop') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="photo_seam_protection_tube" class="form-label">Foto Seam Protection Tube</label>
-                    <img class="photo-seam_protection_tube-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_seam_protection_tube" name="photo_seam_protection_tube" required
-                        onchange="previewImage('photo_seam_protection_tube', 'photo-seam_protection_tube-preview')">
+                    <label for="photo_emergency_stop" class="form-label">Foto Emergency Stop</label>
+                    <img class="photo-emergency_stop-preview img-fluid mb-3" style="max-height: 300px">
+                    <input type="file" class="form-control" id="photo_emergency_stop" name="photo_emergency_stop"
+                        required onchange="previewImage('photo_emergency_stop', 'photo-emergency_stop-preview')">
                 </div>
 
                 <hr>
-
-                <div class="mb-3">
-                    <label for="hook" class="form-label">Hook</label>
-                    <div class="input-group">
-                        <select class="form-select" id="hook" name="hook" required>
-                            <option value="" selected disabled>Select</option>
-                            <option value="OK" {{ old('hook') == 'OK' ? 'selected' : '' }}>OK</option>
-                            <option value="NG" {{ old('hook') == 'NG' ? 'selected' : '' }}>NG</option>
-                        </select>
-                        <button type="button" class="btn btn-success" id="tambahCatatan_hook"><i class="bi bi-bookmark-plus"></i></button>
-                    </div>
-                </div>
-                <div class="mb-3 mt-3" id="catatanField_hook" style="display:none;">
-                    <label for="catatan_hook" class="form-label">Catatan Hook</label>
-                    <textarea class="form-control" name="catatan_hook" id="catatan_hook" cols="30" rows="5">{{ old('catatan_hook') }}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="photo_hook" class="form-label">Foto Hook</label>
-                    <img class="photo-hook-preview img-fluid mb-3" style="max-height: 300px">
-                    <input type="file" class="form-control" id="photo_hook" name="photo_hook" required
-                        onchange="previewImage('photo_hook', 'photo-hook-preview')">
-                </div>
-
 
             </div>
         </div>
@@ -307,184 +295,168 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen-elemen yang dibutuhkan
-            const tambahCatatanButtonBuckle = document.getElementById('tambahCatatan_buckle');
-            const tambahCatatanButtonSeams = document.getElementById('tambahCatatan_seams');
-            const tambahCatatanButtonReel = document.getElementById('tambahCatatan_reel');
-            const tambahCatatanButtonShock_absorber = document.getElementById('tambahCatatan_shock_absorber');
-            const tambahCatatanButtonRing = document.getElementById('tambahCatatan_ring');
-            const tambahCatatanButtonTorsobelt = document.getElementById('tambahCatatan_torso_belt');
-            const tambahCatatanButtonStrap = document.getElementById('tambahCatatan_strap');
-            const tambahCatatanButtonRope = document.getElementById('tambahCatatan_rope');
-            const tambahCatatanButtonSeam_protection_tube = document.getElementById('tambahCatatan_seam_protection_tube');
-            const tambahCatatanButtonHook = document.getElementById('tambahCatatan_hook');
+            const tambahCatatanButtonCrossTravelling = document.getElementById('tambahCatatan_cross_travelling');
+            const tambahCatatanLongTravelling = document.getElementById('tambahCatatan_long_travelling');
+            const tambahCatatanButtonButtonUp = document.getElementById('tambahCatatan_button_up');
+            const tambahCatatanButtonButtonDown = document.getElementById('tambahCatatan_button_down');
+            const tambahCatatanButtonButtonPush = document.getElementById('tambahCatatan_button_push');
+            const tambahCatatanButtonWireRope = document.getElementById('tambahCatatan_wire_rope');
+            const tambahCatatanButtonBlockHook = document.getElementById('tambahCatatan_block_hook');
+            const tambahCatatanButtonHom = document.getElementById('tambahCatatan_hom');
+            const tambahCatatanButtonEmergencyStop = document.getElementById(
+                'tambahCatatan_emergency_stop');
 
 
 
-            const catatanFieldBuckle = document.getElementById('catatanField_buckle');
-            const catatanFieldSeams = document.getElementById('catatanField_seams');
-            const catatanFieldReel = document.getElementById('catatanField_reel');
-            const catatanFieldShock_absorber = document.getElementById('catatanField_shock_absorber');
-            const catatanFieldRing = document.getElementById('catatanField_ring');
-            const catatanFieldTorsobelt = document.getElementById('catatanField_torso_belt');
-            const catatanFieldStrap = document.getElementById('catatanField_strap');
-            const catatanFieldRope = document.getElementById('catatanField_rope');
-            const catatanFieldSeam_protection_tube = document.getElementById('catatanField_seam_protection_tube');
-            const catatanFieldHook = document.getElementById('catatanField_hook');
+            const catatanFieldCrossTravelling = document.getElementById('catatanField_cross_travelling');
+            const catatanFieldLongTravelling = document.getElementById('catatanField_long_travelling');
+            const catatanFieldButtonUp = document.getElementById('catatanField_button_up');
+            const catatanFieldButtonDown = document.getElementById('catatanField_button_down');
+            const catatanFieldButtonPush = document.getElementById('catatanField_button_push');
+            const catatanFieldWireRope = document.getElementById('catatanField_wire_rope');
+            const catatanFieldBlockHook = document.getElementById('catatanField_block_hook');
+            const catatanFieldHom = document.getElementById('catatanField_hom');
+            const catatanFieldEmergencyStop = document.getElementById('catatanField_emergency_stop');
 
 
 
             // Tambahkan event listener untuk button "Tambah Catatan Buckle"
-            tambahCatatanButtonBuckle.addEventListener('click', function() {
+            tambahCatatanButtonCrossTravelling.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldBuckle.style.display === 'none') {
-                    catatanFieldBuckle.style.display = 'block';
-                    tambahCatatanButtonBuckle.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonBuckle.classList.remove('btn-success');
-                    tambahCatatanButtonBuckle.classList.add('btn-danger');
+                if (catatanFieldCrosstambahCatatanButtonCrossTravelling.style.display === 'none') {
+                    catatanFieldCrosstambahCatatanButtonCrossTravelling.style.display = 'block';
+                    tambahCatatanButtonCrossTravelling.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonCrossTravelling.classList.remove('btn-success');
+                    tambahCatatanButtonCrossTravelling.classList.add('btn-danger');
                 } else {
-                    catatanFieldBuckle.style.display = 'none';
-                    tambahCatatanButtonBuckle.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonBuckle.classList.remove('btn-danger');
-                    tambahCatatanButtonBuckle.classList.add('btn-success');
+                    catatanFieldCrosstambahCatatanButtonCrossTravelling.style.display = 'none';
+                    tambahCatatanButtonCrossTravelling.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonCrossTravelling.classList.remove('btn-danger');
+                    tambahCatatanButtonCrossTravelling.classList.add('btn-success');
                 }
             });
 
             // ... Tambahkan event listener untuk tombol-tombol tambah catatan lainnya di sini ...
-            tambahCatatanButtonSeams.addEventListener('click', function() {
+            tambahCatatanButtonLongTravelling.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldSeams.style.display === 'none') {
-                    catatanFieldSeams.style.display = 'block';
-                    tambahCatatanButtonSeams.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonSeams.classList.remove('btn-success');
-                    tambahCatatanButtonSeams.classList.add('btn-danger');
+                if (catatanFieldLongTravelling.style.display === 'none') {
+                    catatanFieldLongTravelling.style.display = 'block';
+                    tambahCatatanButtonLongTravelling.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonLongTravelling.classList.remove('btn-success');
+                    tambahCatatanButtonLongTravelling.classList.add('btn-danger');
                 } else {
-                    catatanFieldSeams.style.display = 'none';
-                    tambahCatatanButtonSeams.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonSeams.classList.remove('btn-danger');
-                    tambahCatatanButtonSeams.classList.add('btn-success');
+                    catatanFieldLongTravelling.style.display = 'none';
+                    tambahCatatanButtonLongTravelling.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonLongTravelling.classList.remove('btn-danger');
+                    tambahCatatanButtonLongTravelling.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonReel.addEventListener('click', function() {
+            tambahCatatanButtonButtonUp.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldReel.style.display === 'none') {
-                    catatanFieldReel.style.display = 'block';
-                    tambahCatatanButtonReel.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonReel.classList.remove('btn-success');
-                    tambahCatatanButtonReel.classList.add('btn-danger');
+                if (catatanFieldButambahCatatanButtonButtonUp.style.display === 'none') {
+                    catatanFieldButambahCatatanButtonButtonUp.style.display = 'block';
+                    tambahCatatanButtonButtonUp.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonButtonUp.classList.remove('btn-success');
+                    tambahCatatanButtonButtonUp.classList.add('btn-danger');
                 } else {
-                    catatanFieldReel.style.display = 'none';
-                    tambahCatatanButtonReel.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonReel.classList.remove('btn-danger');
-                    tambahCatatanButtonReel.classList.add('btn-success');
+                    catatanFieldButambahCatatanButtonButtonUp.style.display = 'none';
+                    tambahCatatanButtonButtonUp.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonButtonUp.classList.remove('btn-danger');
+                    tambahCatatanButtonButtonUp.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonShock_absorber.addEventListener('click', function() {
+            tambahCatatanButtonButtonDown.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldShock_absorber.style.display === 'none') {
-                    catatanFieldShock_absorber.style.display = 'block';
-                    tambahCatatanButtonShock_absorber.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonShock_absorber.classList.remove('btn-success');
-                    tambahCatatanButtonShock_absorber.classList.add('btn-danger');
+                if (catatanFieldtambahCatatanButtonButtonDown.style.display === 'none') {
+                    catatanFieldtambahCatatanButtonButtonDown.style.display = 'block';
+                    tambahCatatanButtonButtonDown.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonButtonDown.classList.remove('btn-success');
+                    tambahCatatanButtonButtonDown.classList.add('btn-danger');
                 } else {
-                    catatanFieldShock_absorber.style.display = 'none';
-                    tambahCatatanButtonShock_absorber.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonShock_absorber.classList.remove('btn-danger');
-                    tambahCatatanButtonShock_absorber.classList.add('btn-success');
+                    catatanFieldtambahCatatanButtonButtonDown.style.display = 'none';
+                    tambahCatatanButtonButtonDown.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonButtonDown.classList.remove('btn-danger');
+                    tambahCatatanButtonButtonDown.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonRing.addEventListener('click', function() {
+            tambahCatatanButtonButtonPush.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldRing.style.display === 'none') {
-                    catatanFieldRing.style.display = 'block';
-                    tambahCatatanButtonRing.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonRing.classList.remove('btn-success');
-                    tambahCatatanButtonRing.classList.add('btn-danger');
+                if (catatanFieldBtambahCatatanButtonButtonPush.style.display === 'none') {
+                    catatanFieldBtambahCatatanButtonButtonPush.style.display = 'block';
+                    tambahCatatanButtonButtonPush.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonButtonPush.classList.remove('btn-success');
+                    tambahCatatanButtonButtonPush.classList.add('btn-danger');
                 } else {
-                    catatanFieldRing.style.display = 'none';
-                    tambahCatatanButtonRing.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonRing.classList.remove('btn-danger');
-                    tambahCatatanButtonRing.classList.add('btn-success');
+                    catatanFieldBtambahCatatanButtonButtonPush.style.display = 'none';
+                    tambahCatatanButtonButtonPush.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonButtonPush.classList.remove('btn-danger');
+                    tambahCatatanButtonButtonPush.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonTorsobelt.addEventListener('click', function() {
+            tambahCatatanButtonWireRope.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldTorsobelt.style.display === 'none') {
-                    catatanFieldTorsobelt.style.display = 'block';
-                    tambahCatatanButtonTorsobelt.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonTorsobelt.classList.remove('btn-success');
-                    tambahCatatanButtonTorsobelt.classList.add('btn-danger');
+                if (catatanFieldWirtambahCatatanButtonWireRope.style.display === 'none') {
+                    catatanFieldWirtambahCatatanButtonWireRope.style.display = 'block';
+                    tambahCatatanButtonWireRope.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonWireRope.classList.remove('btn-success');
+                    tambahCatatanButtonWireRope.classList.add('btn-danger');
                 } else {
-                    catatanFieldTorsobelt.style.display = 'none';
-                    tambahCatatanButtonTorsobelt.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonTorsobelt.classList.remove('btn-danger');
-                    tambahCatatanButtonTorsobelt.classList.add('btn-success');
+                    catatanFieldWirtambahCatatanButtonWireRope.style.display = 'none';
+                    tambahCatatanButtonWireRope.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonWireRope.classList.remove('btn-danger');
+                    tambahCatatanButtonWireRope.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonStrap.addEventListener('click', function() {
+            tambahCatatanButtonBlockHook.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldStrap.style.display === 'none') {
-                    catatanFieldStrap.style.display = 'block';
-                    tambahCatatanButtonStrap.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonStrap.classList.remove('btn-success');
-                    tambahCatatanButtonStrap.classList.add('btn-danger');
+                if (catatanFieldBltambahCatatanButtonBlockHook.style.display === 'none') {
+                    catatanFieldBltambahCatatanButtonBlockHook.style.display = 'block';
+                    tambahCatatanButtonBlockHook.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonBlockHook.classList.remove('btn-success');
+                    tambahCatatanButtonBlockHook.classList.add('btn-danger');
                 } else {
-                    catatanFieldStrap.style.display = 'none';
-                    tambahCatatanButtonStrap.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonStrap.classList.remove('btn-danger');
-                    tambahCatatanButtonStrap.classList.add('btn-success');
+                    catatanFieldBltambahCatatanButtonBlockHook.style.display = 'none';
+                    tambahCatatanButtonBlockHook.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonBlockHook.classList.remove('btn-danger');
+                    tambahCatatanButtonBlockHook.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonRope.addEventListener('click', function() {
+            tambahCatatanButtonHom.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldRope.style.display === 'none') {
-                    catatanFieldRope.style.display = 'block';
-                    tambahCatatanButtonRope.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonRope.classList.remove('btn-success');
-                    tambahCatatanButtonRope.classList.add('btn-danger');
+                if (catatanFieldHtambahCatatanButtonHom.style.display === 'none') {
+                    catatanFieldHtambahCatatanButtonHom.style.display = 'block';
+                    tambahCatatanButtonHom.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonHom.classList.remove('btn-success');
+                    tambahCatatanButtonHom.classList.add('btn-danger');
                 } else {
-                    catatanFieldRope.style.display = 'none';
-                    tambahCatatanButtonRope.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonRope.classList.remove('btn-danger');
-                    tambahCatatanButtonRope.classList.add('btn-success');
+                    catatanFieldHtambahCatatanButtonHom.style.display = 'none';
+                    tambahCatatanButtonHom.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonHom.classList.remove('btn-danger');
+                    tambahCatatanButtonHom.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonSeam_protection_tube.addEventListener('click', function() {
+            tambahCatatanButtonEmergencyStop.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldSeam_protection_tube.style.display === 'none') {
-                    catatanFieldSeam_protection_tube.style.display = 'block';
-                    tambahCatatanButtonSeam_protection_tube.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonSeam_protection_tube.classList.remove('btn-success');
-                    tambahCatatanButtonSeam_protection_tube.classList.add('btn-danger');
+                if (catatanFieldEtambahCatatanButtonEmergencyStop.style.display === 'none') {
+                    catatanFieldEtambahCatatanButtonEmergencyStop.style.display = 'block';
+                    tambahCatatanButtonEmergencyStop.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonEmergencyStop.classList.remove('btn-success');
+                    tambahCatatanButtonEmergencyStop.classList.add('btn-danger');
                 } else {
-                    catatanFieldSeam_protection_tube.style.display = 'none';
-                    tambahCatatanButtonSeam_protection_tube.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonSeam_protection_tube.classList.remove('btn-danger');
-                    tambahCatatanButtonSeam_protection_tube.classList.add('btn-success');
+                    catatanFieldEtambahCatatanButtonEmergencyStop.style.display = 'none';
+                    tambahCatatanButtonEmergencyStop.innerHTML =
+                        '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonEmergencyStop.classList.remove('btn-danger');
+                    tambahCatatanButtonEmergencyStop.classList.add('btn-success');
                 }
             });
-
-            tambahCatatanButtonHook.addEventListener('click', function() {
-                // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldHook.style.display === 'none') {
-                    catatanFieldHook.style.display = 'block';
-                    tambahCatatanButtonHook.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonHook.classList.remove('btn-success');
-                    tambahCatatanButtonHook.classList.add('btn-danger');
-                } else {
-                    catatanFieldHook.style.display = 'none';
-                    tambahCatatanButtonHook.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonHook.classList.remove('btn-danger');
-                    tambahCatatanButtonHook.classList.add('btn-success');
-                }
-            });
-
         });
     </script>
 

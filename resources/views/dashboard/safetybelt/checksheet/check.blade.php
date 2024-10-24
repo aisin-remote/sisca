@@ -4,7 +4,7 @@
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h1>Check Sheet Head Crane</h1>
+        <h1>Check Sheet Safety Belts</h1>
     </div>
     @if (session()->has('error'))
         <div class="alert alert-danger col-lg-6">
@@ -16,15 +16,15 @@
             {{ session()->get('success') }}
         </div>
     @endif
-    <form action="{{ route('headcrane.process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
+    <form action="{{ route('safetybelt.process.form') }}" method="POST" class="mb-5 col-lg-12" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="mb-3 col-md-6">
-                <label for="headcrane_number" class="form-label">No Safety Belt</label>
-                <input type="text" name="headcrane_number" id="headcrane_number" placeholder="Masukkan No headcrane"
-                    class="form-control @error('headcrane_number') is-invalid @enderror"
-                    value="{{ old('headcrane_number') }}" required autofocus>
-                @error('headcrane_number')
+                <label for="safetybelt_number" class="form-label">No Safety Belt</label>
+                <input type="text" name="safetybelt_number" id="safetybelt_number" placeholder="Masukkan No safetybelt"
+                    class="form-control @error('safetybelt_number') is-invalid @enderror"
+                    value="{{ old('safetybelt_number') }}" required autofocus>
+                @error('safetybelt_number')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

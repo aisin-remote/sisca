@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class CheckSheetHeadCraneController extends Controller
 {
     public function showForm()
     {
         $latestCheckSheetHeadCranes = CheckSheetHeadCrane::orderBy('updated_at', 'desc')->take(10)->get();
 
-        return view('dashboard.headcrane.checksheet.index', compact('latestCheckSheetHeadCranes'));
+        return view('dashboard.headcrane.checksheet.check', compact('latestCheckSheetHeadCranes'));
     }
 
     public function processForm(Request $request)
@@ -28,7 +29,7 @@ class CheckSheetHeadCraneController extends Controller
         $headcrane = HeadCrane::where('no_headcrane', $headcraneNumber)->first();
 
         if (!$headcrane) {
-            return back()->with('error', 'Safety Belt Number tidak ditemukan.');
+            return back()->with('error', 'Head Crane Number tidak ditemukan.');
         }
 
         $headcraneNumber = strtoupper($headcraneNumber);
@@ -45,7 +46,7 @@ class CheckSheetHeadCraneController extends Controller
 
         if (!$headcrane) {
             // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
-            return redirect()->route('headcrane.show.form', compact('latestCheckSheetHeadCranes'))->with('error', 'Safety Belt Number tidak ditemukan.');
+            return redirect()->route('headcrane.show.form', compact('latestCheckSheetHeadCranes'))->with('error', 'Head Crane Number tidak ditemukan.');
         }
 
         $headcraneNumber = strtoupper($headcraneNumber);
@@ -161,52 +162,48 @@ class CheckSheetHeadCraneController extends Controller
                 'tanggal_pengecekan' => 'required|date',
                 'npk' => 'required',
                 'headcrane_number' => 'required',
-                'buckle' => 'required',
-                'catatan_buckle' => 'nullable|string|max:255',
-                'photo_buckle' => 'required|image|file|max:3072',
-                'seams' => 'required',
-                'catatan_seams' => 'nullable|string|max:255',
-                'photo_seams' => 'required|image|file|max:3072',
-                'reel' => 'required',
-                'catatan_reel' => 'nullable|string|max:255',
-                'photo_reel' => 'required|image|file|max:3072',
-                'shock_absorber' => 'required',
-                'catatan_shock_absorber' => 'nullable|string|max:255',
-                'photo_shock_absorber' => 'required|image|file|max:3072',
-                'ring' => 'required',
-                'catatan_ring' => 'nullable|string|max:255',
-                'photo_ring' => 'required|image|file|max:3072',
-                'torso_belt' => 'required',
-                'catatan_torso_belt' => 'nullable|string|max:255',
-                'photo_torso_belt' => 'required|image|file|max:3072',
-                'strap' => 'required',
-                'catatan_strap' => 'nullable|string|max:255',
-                'photo_strap' => 'required|image|file|max:3072',
-                'rope' => 'required',
-                'catatan_rope' => 'nullable|string|max:255',
-                'photo_rope' => 'required|image|file|max:3072',
-                'seam_protection_tube' => 'required',
-                'catatan_seam_protection_tube' => 'nullable|string|max:255',
-                'photo_seam_protection_tube' => 'required|image|file|max:3072',
-                'hook' => 'required',
-                'catatan_hook' => 'nullable|string|max:255',
-                'photo_hook' => 'required|image|file|max:3072',
+                'cross_travelling' => 'required',
+                'catatan_cross_travelling' => 'nullable|string|max:255',
+                'photo_cross_travelling' => 'required|image|file|max:3072',
+                'long_travelling' => 'required',
+                'catatan_long_travelling' => 'nullable|string|max:255',
+                'photo_long_travelling' => 'required|image|file|max:3072',
+                'button_up' => 'required',
+                'catatan_button_up' => 'nullable|string|max:255',
+                'photo_button_up' => 'required|image|file|max:3072',
+                'button_down' => 'required',
+                'catatan_button_down' => 'nullable|string|max:255',
+                'photo_button_down' => 'required|image|file|max:3072',
+                'button_push' => 'required',
+                'catatan_button_push' => 'nullable|string|max:255',
+                'photo_button_push' => 'required|image|file|max:3072',
+                'wire_rope' => 'required',
+                'catatan_wire_rope' => 'nullable|string|max:255',
+                'photo_wire_rope' => 'required|image|file|max:3072',
+                'block_hook' => 'required',
+                'catatan_block_hook' => 'nullable|string|max:255',
+                'photo_block_hook' => 'required|image|file|max:3072',
+                'hom' => 'required',
+                'catatan_hom' => 'nullable|string|max:255',
+                'photo_hom' => 'required|image|file|max:3072',
+                'emergency_stop' => 'required',
+                'catatan_emergency_stop' => 'nullable|string|max:255',
+                'photo_emergency_stop' => 'required|image|file|max:3072',
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
             $validatedData['headcrane_number'] = strtoupper($validatedData['headcrane_number']);
 
-            if ($request->file('photo_buckle') && $request->file('photo_seams') && $request->file('photo_reel') && $request->file('photo_shock_absorber') && $request->file('photo_ring') && $request->file('photo_torso_belt') && $request->file('photo_strap') && $request->file('photo_rope') && $request->file('photo_seam_protection_tube') && $request->file('photo_hook')) {
-                $validatedData['photo_buckle'] = $request->file('photo_buckle')->store('checksheet-safety-belt');
-                $validatedData['photo_seams'] = $request->file('photo_seams')->store('checksheet-safety-belt');
-                $validatedData['photo_reel'] = $request->file('photo_reel')->store('checksheet-safety-belt');
-                $validatedData['photo_shock_absorber'] = $request->file('photo_shock_absorber')->store('checksheet-safety-belt');
-                $validatedData['photo_ring'] = $request->file('photo_ring')->store('checksheet-safety-belt');
-                $validatedData['photo_torso_belt'] = $request->file('photo_torso_belt')->store('checksheet-safety-belt');
-                $validatedData['photo_strap'] = $request->file('photo_strap')->store('checksheet-safety-belt');
-                $validatedData['photo_rope'] = $request->file('photo_rope')->store('checksheet-safety-belt');
-                $validatedData['photo_seam_protection_tube'] = $request->file('photo_seam_protection_tube')->store('checksheet-safety-belt');
-                $validatedData['photo_hook'] = $request->file('photo_hook')->store('checksheet-safety-belt');
+            if ($request->file('photo_cross_travelling') && $request->file('photo_long_travelling') && $request->file('photo_button_up') && $request->file('photo_button_down') && $request->file('photo_button_push') && $request->file('photo_wire_rope') && $request->file('photo_block_hook') && $request->file('photo_hom') && $request->file('photo_emergency_stop') && $request->file('photo_hook')) {
+                $validatedData['photo_cross_travelling'] = $request->file('photo_cross_travelling')->store('checksheet-head-crane');
+                $validatedData['photo_long_travelling'] = $request->file('photo_long_travelling')->store('checksheet-head-crane');
+                $validatedData['photo_button_up'] = $request->file('photo_button_up')->store('checksheet-head-crane');
+                $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
+                $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
+                $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
+                $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
+                $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
+                $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
             }
 
             // Perbarui data entri yang sudah ada
@@ -219,36 +216,34 @@ class CheckSheetHeadCraneController extends Controller
                 'tanggal_pengecekan' => 'required|date',
                 'npk' => 'required',
                 'headcrane_number' => 'required',
-                'buckle' => 'required',
-                'catatan_buckle' => 'nullable|string|max:255',
-                'photo_buckle' => 'required|image|file|max:3072',
-                'seams' => 'required',
-                'catatan_seams' => 'nullable|string|max:255',
-                'photo_seams' => 'required|image|file|max:3072',
-                'reel' => 'required',
-                'catatan_reel' => 'nullable|string|max:255',
-                'photo_reel' => 'required|image|file|max:3072',
-                'shock_absorber' => 'required',
-                'catatan_shock_absorber' => 'nullable|string|max:255',
-                'photo_shock_absorber' => 'required|image|file|max:3072',
-                'ring' => 'required',
-                'catatan_ring' => 'nullable|string|max:255',
-                'photo_ring' => 'required|image|file|max:3072',
-                'torso_belt' => 'required',
-                'catatan_torso_belt' => 'nullable|string|max:255',
-                'photo_torso_belt' => 'required|image|file|max:3072',
-                'strap' => 'required',
-                'catatan_strap' => 'nullable|string|max:255',
-                'photo_strap' => 'required|image|file|max:3072',
-                'rope' => 'required',
-                'catatan_rope' => 'nullable|string|max:255',
-                'photo_rope' => 'required|image|file|max:3072',
-                'seam_protection_tube' => 'required',
-                'catatan_seam_protection_tube' => 'nullable|string|max:255',
-                'photo_seam_protection_tube' => 'required|image|file|max:3072',
-                'hook' => 'required',
-                'catatan_hook' => 'nullable|string|max:255',
-                'photo_hook' => 'required|image|file|max:3072',
+                'cross_travelling' => 'required',
+                'catatan_cross_travelling' => 'nullable|string|max:255',
+                'photo_cross_travelling' => 'required|image|file|max:3072',
+                'long_travelling' => 'required',
+                'catatan_long_travelling' => 'nullable|string|max:255',
+                'photo_long_travelling' => 'required|image|file|max:3072',
+                'button_up' => 'required',
+                'catatan_button_up' => 'nullable|string|max:255',
+                'photo_button_up' => 'required|image|file|max:3072',
+                'button_down' => 'required',
+                'catatan_button_down' => 'nullable|string|max:255',
+                'photo_button_down' => 'required|image|file|max:3072',
+                'button_push' => 'required',
+                'catatan_button_push' => 'nullable|string|max:255',
+                'photo_button_push' => 'required|image|file|max:3072',
+                'wire_rope' => 'required',
+                'catatan_wire_rope' => 'nullable|string|max:255',
+                'photo_wire_rope' => 'required|image|file|max:3072',
+                'block_hook' => 'required',
+                'catatan_block_hook' => 'nullable|string|max:255',
+                'photo_block_hook' => 'required|image|file|max:3072',
+                'hom' => 'required',
+                'catatan_hom' => 'nullable|string|max:255',
+                'photo_hom' => 'required|image|file|max:3072',
+                'emergency_stop' => 'required',
+                'catatan_emergency_stop' => 'nullable|string|max:255',
+                'photo_emergency_stop' => 'required|image|file|max:3072',
+
                 // tambahkan validasi untuk atribut lainnya
             ]);
 
@@ -278,17 +273,16 @@ class CheckSheetHeadCraneController extends Controller
             // Set tanggal_pengecekan sesuai dengan tanggal awal kuartal
             $validatedData['tanggal_pengecekan'] = $tanggalAwalKuartal;
 
-            if ($request->file('photo_buckle') && $request->file('photo_seams') && $request->file('photo_reel') && $request->file('photo_shock_absorber') && $request->file('photo_ring') && $request->file('photo_torso_belt') && $request->file('photo_strap') && $request->file('photo_rope') && $request->file('photo_seam_protection_tube') && $request->file('photo_hook')) {
-                $validatedData['photo_buckle'] = $request->file('photo_buckle')->store('checksheet-safety-belt');
-                $validatedData['photo_seams'] = $request->file('photo_seams')->store('checksheet-safety-belt');
-                $validatedData['photo_reel'] = $request->file('photo_reel')->store('checksheet-safety-belt');
-                $validatedData['photo_shock_absorber'] = $request->file('photo_shock_absorber')->store('checksheet-safety-belt');
-                $validatedData['photo_ring'] = $request->file('photo_ring')->store('checksheet-safety-belt');
-                $validatedData['photo_torso_belt'] = $request->file('photo_torso_belt')->store('checksheet-safety-belt');
-                $validatedData['photo_strap'] = $request->file('photo_strap')->store('checksheet-safety-belt');
-                $validatedData['photo_rope'] = $request->file('photo_rope')->store('checksheet-safety-belt');
-                $validatedData['photo_seam_protection_tube'] = $request->file('photo_seam_protection_tube')->store('checksheet-safety-belt');
-                $validatedData['photo_hook'] = $request->file('photo_hook')->store('checksheet-safety-belt');
+            if ($request->file('photo_cross_travelling') && $request->file('photo_long_travelling') && $request->file('photo_button_up') && $request->file('photo_button_down') && $request->file('photo_button_push') && $request->file('photo_wire_rope') && $request->file('photo_block_hook') && $request->file('photo_hom') && $request->file('photo_emergency_stop') && $request->file('photo_hook')) {
+                $validatedData['photo_cross_travelling'] = $request->file('photo_buckle')->store('checksheet-head-crane');
+                $validatedData['photo_long_travelling'] = $request->file('photo_seams')->store('checksheet-head-crane');
+                $validatedData['photo_button_up'] = $request->file('photo_reel')->store('checksheet-head-crane');
+                $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
+                $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
+                $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
+                $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
+                $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
+                $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
             }
 
             // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
@@ -310,8 +304,8 @@ class CheckSheetHeadCraneController extends Controller
 
     public function edit($id)
     {
-        $CheckSheetHeadCrane = CheckSheetHeadCrane::findOrFail($id);
-        return view('dashboard.headcrane.checksheet.edit', compact('CheckSheetHeadCrane'));
+        $checkSheetheadcrane = CheckSheetHeadCrane::findOrFail($id);
+        return view('dashboard.headcrane.checksheet.edit', compact('checkSheetheadcrane'));
     }
 
     public function update(Request $request, $id)
@@ -334,7 +328,7 @@ class CheckSheetHeadCraneController extends Controller
             'photo_shock_absorber' => 'image|file|max:3072',
             'ring' => 'required',
             'catatan_ring' => 'nullable|string|max:255',
-            'photo_ring' => 'image|file|max:3072',
+            'photo_button_push' => 'image|file|max:3072',
             'torso_belt' => 'required',
             'catatan_torso_belt' => 'nullable|string|max:255',
             'photo_torso_belt' => 'image|file|max:3072',
@@ -344,9 +338,9 @@ class CheckSheetHeadCraneController extends Controller
             'rope' => 'required',
             'catatan_rope' => 'nullable|string|max:255',
             'photo_rope' => 'image|file|max:3072',
-            'seam_protection_tube' => 'required',
-            'catatan_seam_protection_tube' => 'nullable|string|max:255',
-            'photo_seam_protection_tube' => 'image|file|max:3072',
+            'emergency_stop' => 'required',
+            'catatan_emergency_stop' => 'nullable|string|max:255',
+            'photo_emergency_stop' => 'image|file|max:3072',
             'hook' => 'required',
             'catatan_hook' => 'nullable|string|max:255',
             'photo_hook' => 'image|file|max:3072',
@@ -467,7 +461,6 @@ class CheckSheetHeadCraneController extends Controller
         $checksheetheadcrane = CheckSheetHeadCrane::when($tanggal_filter, function ($query) use ($tanggal_filter) {
             return $query->where('tanggal_pengecekan', $tanggal_filter);
         })->get();
-        dd($checksheetheadcrane);
 
         return view('dashboard.headcrane.checksheet.index', compact('checksheetheadcrane'));
     }

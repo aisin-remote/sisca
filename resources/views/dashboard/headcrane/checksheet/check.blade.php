@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($latestCheckSheetSafetybelts as $index => $checkSheet)
+                        @forelse ($latestCheckSheetHeadCranes as $index => $checkSheet)
                             <tr class="text-center align-middle">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $checkSheet->created_at->format('d F Y') }}</td>

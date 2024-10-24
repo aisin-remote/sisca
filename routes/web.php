@@ -297,8 +297,8 @@ Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltC
 //Checksheet Head Crane
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/dashboard/headcrane/checksheetheadcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'createForm'])->name('checksheetheadcrane');
-    Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('process.checksheet.headcrane');
+    Route::get('/dashboard/headcrane/checksheetheadcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'createForm'])->name('CheckSheetHeadCrane');
+    Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('F');
     Route::delete('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'destroy'])->name('headcrane.checksheetheadcrane.destroy');
     Route::get('/dashboard/check-sheet/headcrane/{id}/edit', [CheckSheetHeadCraneController::class, 'edit'])->name('headcrane.checksheetheadcrane.edit');
     Route::put('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'update'])->name('headcrane.checksheetheadcrane.update');
