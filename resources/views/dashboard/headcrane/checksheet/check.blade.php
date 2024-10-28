@@ -20,7 +20,7 @@
         @csrf
         <div class="row">
             <div class="mb-3 col-md-6">
-                <label for="headcrane_number" class="form-label">No Safety Belt</label>
+                <label for="headcrane_number" class="form-label">No Head Crane</label>
                 <input type="text" name="headcrane_number" id="headcrane_number" placeholder="Masukkan No headcrane"
                     class="form-control @error('headcrane_number') is-invalid @enderror"
                     value="{{ old('headcrane_number') }}" required autofocus>

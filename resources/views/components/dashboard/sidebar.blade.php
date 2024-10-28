@@ -185,8 +185,8 @@
                 <li class="{{ Request::is('dashboard/report/facp*') ? 'active' : '' }} submenu">
                     <a class="nav-link" href="/dashboard/report/facp">FACP</a>
                 </li>
-                <li class="{{ Request::is('dashboard/report/head-crane*') ? 'active' : '' }} submenu">
-                    <a class="nav-link" href="/dashboard/report/head-crane">Head Crane</a>
+                <li class="{{ Request::is('dashboard/report/headcrane*') ? 'active' : '' }} submenu">
+                    <a class="nav-link" href="/dashboard/report/headcrane">Head Crane</a>
                 </li>
             </ul>
         </li>

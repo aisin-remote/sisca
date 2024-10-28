@@ -1,10 +1,10 @@
 @extends('dashboard.app')
-@section('title', 'Check Sheet Safety Belt')
+@section('title', 'Check Sheet Head Crane')
 
 @section('content')
 
     <div class="container">
-        <h1>Check Sheet Safety Belt</h1>
+        <h1>Check Sheet Head Crane</h1>
         <hr>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -404,183 +404,165 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil elemen-elemen yang dibutuhkan
-            const tambahCatatanButtonBuckle = document.getElementById('tambahCatatan_buckle');
-            const tambahCatatanButtonSeams = document.getElementById('tambahCatatan_seams');
-            const tambahCatatanButtonReel = document.getElementById('tambahCatatan_reel');
-            const tambahCatatanButtonShock_absorber = document.getElementById('tambahCatatan_shock_absorber');
-            const tambahCatatanButtonRing = document.getElementById('tambahCatatan_ring');
-            const tambahCatatanButtonTorsobelt = document.getElementById('tambahCatatan_torso_belt');
-            const tambahCatatanButtonStrap = document.getElementById('tambahCatatan_strap');
-            const tambahCatatanButtonRope = document.getElementById('tambahCatatan_rope');
-            const tambahCatatanButtonSeam_protection_tube = document.getElementById(
-                'tambahCatatan_seam_protection_tube');
-            const tambahCatatanButtonHook = document.getElementById('tambahCatatan_hook');
+            const tambahCatatanButtonCrossTravelling = document.getElementById('tambahCatatan_cross_travelling');
+            const tambahCatatanButtonLongTravelling = document.getElementById('tambahCatatan_long_travelling');
+            const tambahCatatanButtonButtonUp = document.getElementById('tambahCatatan_button_up');
+            const tambahCatatanButtonButtonDown = document.getElementById('tambahCatatan_button_down');
+            const tambahCatatanButtonButtonPush = document.getElementById('tambahCatatan_button_push');
+            const tambahCatatanButtonWireRope = document.getElementById('tambahCatatan_wire_rope');
+            const tambahCatatanButtonBlockHook = document.getElementById('tambahCatatan_block_hook');
+            const tambahCatatanButtonHom = document.getElementById('tambahCatatan_hom');
+            const tambahCatatanButtonEmergencyStop = document.getElementById(
+                'tambahCatatan_emergency_stop');
 
 
-
-            const catatanFieldBuckle = document.getElementById('catatanField_buckle');
-            const catatanFieldSeams = document.getElementById('catatanField_seams');
-            const catatanFieldReel = document.getElementById('catatanField_reel');
-            const catatanFieldShock_absorber = document.getElementById('catatanField_shock_absorber');
-            const catatanFieldRing = document.getElementById('catatanField_ring');
-            const catatanFieldTorsobelt = document.getElementById('catatanField_torso_belt');
-            const catatanFieldStrap = document.getElementById('catatanField_strap');
-            const catatanFieldRope = document.getElementById('catatanField_rope');
-            const catatanFieldSeam_protection_tube = document.getElementById('catatanField_seam_protection_tube');
-            const catatanFieldHook = document.getElementById('catatanField_hook');
+            const catatanFieldCrossTravelling = document.getElementById('catatanField_cross_travelling');
+            const catatanFieldLongTravelling = document.getElementById('catatanField_long_travelling');
+            const catatanFieldButtonUp = document.getElementById('catatanField_button_up');
+            const catatanFieldButtonDown = document.getElementById('catatanField_button_down');
+            const catatanFieldButtonPush = document.getElementById('catatanField_button_push');
+            const catatanFieldWireRope = document.getElementById('catatanField_wire_rope');
+            const catatanFieldBlockHook = document.getElementById('catatanField_block_hook');
+            const catatanFieldHom = document.getElementById('catatanField_hom');
+            const catatanFieldEmergencyStop = document.getElementById('catatanField_emergency_stop');
 
 
 
             // Tambahkan event listener untuk button "Tambah Catatan Buckle"
-            tambahCatatanButtonBuckle.addEventListener('click', function() {
+            tambahCatatanButtonCrossTravelling.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldBuckle.style.display === 'none') {
-                    catatanFieldBuckle.style.display = 'block';
-                    tambahCatatanButtonBuckle.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonBuckle.classList.remove('btn-success');
-                    tambahCatatanButtonBuckle.classList.add('btn-danger');
+                if (catatanFieldCrossTravelling.style.display === 'none') {
+                    catatanFieldCrossTravelling.style.display = 'block';
+                    tambahCatatanButtonCrossTravelling.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonCrossTravelling.classList.remove('btn-success');
+                    tambahCatatanButtonCrossTravelling.classList.add('btn-danger');
                 } else {
-                    catatanFieldBuckle.style.display = 'none';
-                    tambahCatatanButtonBuckle.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonBuckle.classList.remove('btn-danger');
-                    tambahCatatanButtonBuckle.classList.add('btn-success');
+                    catatanFieldCrossTravelling.style.display = 'none';
+                    tambahCatatanButtonCrossTravelling.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonCrossTravelling.classList.remove('btn-danger');
+                    tambahCatatanButtonCrossTravelling.classList.add('btn-success');
                 }
             });
 
             // ... Tambahkan event listener untuk tombol-tombol tambah catatan lainnya di sini ...
-            tambahCatatanButtonSeams.addEventListener('click', function() {
+            tambahCatatanButtonLongTravelling.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldSeams.style.display === 'none') {
-                    catatanFieldSeams.style.display = 'block';
-                    tambahCatatanButtonSeams.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonSeams.classList.remove('btn-success');
-                    tambahCatatanButtonSeams.classList.add('btn-danger');
+                if (catatanFieldLongTravelling.style.display === 'none') {
+                    catatanFieldLongTravelling.style.display = 'block';
+                    tambahCatatanButtonLongTravelling.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonLongTravelling.classList.remove('btn-success');
+                    tambahCatatanButtonLongTravelling.classList.add('btn-danger');
                 } else {
-                    catatanFieldSeams.style.display = 'none';
-                    tambahCatatanButtonSeams.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonSeams.classList.remove('btn-danger');
-                    tambahCatatanButtonSeams.classList.add('btn-success');
+                    catatanFieldLongTravelling.style.display = 'none';
+                    tambahCatatanButtonLongTravelling.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonLongTravelling.classList.remove('btn-danger');
+                    tambahCatatanButtonLongTravelling.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonReel.addEventListener('click', function() {
+            tambahCatatanButtonButtonUp.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldReel.style.display === 'none') {
-                    catatanFieldReel.style.display = 'block';
-                    tambahCatatanButtonReel.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonReel.classList.remove('btn-success');
-                    tambahCatatanButtonReel.classList.add('btn-danger');
+                if (catatanFieldButtonUp.style.display === 'none') {
+                    catatanFieldButtonUp.style.display = 'block';
+                    tambahCatatanButtonButtonUp.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonButtonUp.classList.remove('btn-success');
+                    tambahCatatanButtonButtonUp.classList.add('btn-danger');
                 } else {
-                    catatanFieldReel.style.display = 'none';
-                    tambahCatatanButtonReel.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonReel.classList.remove('btn-danger');
-                    tambahCatatanButtonReel.classList.add('btn-success');
+                    catatanFieldButtonUp.style.display = 'none';
+                    tambahCatatanButtonButtonUp.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonButtonUp.classList.remove('btn-danger');
+                    tambahCatatanButtonButtonUp.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonShock_absorber.addEventListener('click', function() {
+            tambahCatatanButtonButtonDown.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldShock_absorber.style.display === 'none') {
-                    catatanFieldShock_absorber.style.display = 'block';
-                    tambahCatatanButtonShock_absorber.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonShock_absorber.classList.remove('btn-success');
-                    tambahCatatanButtonShock_absorber.classList.add('btn-danger');
+                if (catatanFieldButtonDown.style.display === 'none') {
+                    catatanFieldButtonDown.style.display = 'block';
+                    tambahCatatanButtonButtonDown.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonButtonDown.classList.remove('btn-success');
+                    tambahCatatanButtonButtonDown.classList.add('btn-danger');
                 } else {
-                    catatanFieldShock_absorber.style.display = 'none';
-                    tambahCatatanButtonShock_absorber.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonShock_absorber.classList.remove('btn-danger');
-                    tambahCatatanButtonShock_absorber.classList.add('btn-success');
+                    catatanFieldButtonDown.style.display = 'none';
+                    tambahCatatanButtonButtonDown.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonButtonDown.classList.remove('btn-danger');
+                    tambahCatatanButtonButtonDown.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonRing.addEventListener('click', function() {
+            tambahCatatanButtonButtonPush.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldRing.style.display === 'none') {
-                    catatanFieldRing.style.display = 'block';
-                    tambahCatatanButtonRing.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonRing.classList.remove('btn-success');
-                    tambahCatatanButtonRing.classList.add('btn-danger');
+                if (catatanFieldButtonPush.style.display === 'none') {
+                    catatanFieldButtonPush.style.display = 'block';
+                    tambahCatatanButtonButtonPush.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonButtonPush.classList.remove('btn-success');
+                    tambahCatatanButtonButtonPush.classList.add('btn-danger');
                 } else {
-                    catatanFieldRing.style.display = 'none';
-                    tambahCatatanButtonRing.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonRing.classList.remove('btn-danger');
-                    tambahCatatanButtonRing.classList.add('btn-success');
+                    catatanFieldButtonPush.style.display = 'none';
+                    tambahCatatanButtonButtonPush.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonButtonPush.classList.remove('btn-danger');
+                    tambahCatatanButtonButtonPush.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonTorsobelt.addEventListener('click', function() {
+            tambahCatatanButtonWireRope.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldTorsobelt.style.display === 'none') {
-                    catatanFieldTorsobelt.style.display = 'block';
-                    tambahCatatanButtonTorsobelt.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonTorsobelt.classList.remove('btn-success');
-                    tambahCatatanButtonTorsobelt.classList.add('btn-danger');
+                if (catatanFieldWireRope.style.display === 'none') {
+                    catatanFieldWireRope.style.display = 'block';
+                    tambahCatatanButtonWireRope.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonWireRope.classList.remove('btn-success');
+                    tambahCatatanButtonWireRope.classList.add('btn-danger');
                 } else {
-                    catatanFieldTorsobelt.style.display = 'none';
-                    tambahCatatanButtonTorsobelt.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonTorsobelt.classList.remove('btn-danger');
-                    tambahCatatanButtonTorsobelt.classList.add('btn-success');
+                    catatanFieldWireRope.style.display = 'none';
+                    tambahCatatanButtonWireRope.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonWireRope.classList.remove('btn-danger');
+                    tambahCatatanButtonWireRope.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonStrap.addEventListener('click', function() {
+            tambahCatatanButtonBlockHook.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldStrap.style.display === 'none') {
-                    catatanFieldStrap.style.display = 'block';
-                    tambahCatatanButtonStrap.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonStrap.classList.remove('btn-success');
-                    tambahCatatanButtonStrap.classList.add('btn-danger');
+                if (catatanFieldBlockHook.style.display === 'none') {
+                    catatanFieldBlockHook.style.display = 'block';
+                    tambahCatatanButtonBlockHook.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonBlockHook.classList.remove('btn-success');
+                    tambahCatatanButtonBlockHook.classList.add('btn-danger');
                 } else {
-                    catatanFieldStrap.style.display = 'none';
-                    tambahCatatanButtonStrap.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonStrap.classList.remove('btn-danger');
-                    tambahCatatanButtonStrap.classList.add('btn-success');
+                    catatanFieldBlockHook.style.display = 'none';
+                    tambahCatatanButtonBlockHook.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonBlockHook.classList.remove('btn-danger');
+                    tambahCatatanButtonBlockHook.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonRope.addEventListener('click', function() {
+            tambahCatatanButtonHom.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldRope.style.display === 'none') {
-                    catatanFieldRope.style.display = 'block';
-                    tambahCatatanButtonRope.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonRope.classList.remove('btn-success');
-                    tambahCatatanButtonRope.classList.add('btn-danger');
+                if (catatanFieldHom.style.display === 'none') {
+                    catatanFieldHom.style.display = 'block';
+                    tambahCatatanButtonHom.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonHom.classList.remove('btn-success');
+                    tambahCatatanButtonHom.classList.add('btn-danger');
                 } else {
-                    catatanFieldRope.style.display = 'none';
-                    tambahCatatanButtonRope.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonRope.classList.remove('btn-danger');
-                    tambahCatatanButtonRope.classList.add('btn-success');
+                    catatanFieldHom.style.display = 'none';
+                    tambahCatatanButtonHom.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
+                    tambahCatatanButtonHom.classList.remove('btn-danger');
+                    tambahCatatanButtonHom.classList.add('btn-success');
                 }
             });
 
-            tambahCatatanButtonSeam_protection_tube.addEventListener('click', function() {
+            tambahCatatanButtonEmergencyStop.addEventListener('click', function() {
                 // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldSeam_protection_tube.style.display === 'none') {
-                    catatanFieldSeam_protection_tube.style.display = 'block';
-                    tambahCatatanButtonSeam_protection_tube.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonSeam_protection_tube.classList.remove('btn-success');
-                    tambahCatatanButtonSeam_protection_tube.classList.add('btn-danger');
+                if (catatanFieldEmergencyStop.style.display === 'none') {
+                    catatanFieldEmergencyStop.style.display = 'block';
+                    tambahCatatanButtonEmergencyStop.innerHTML = '<i class="bi bi-bookmark-x"></i>';
+                    tambahCatatanButtonEmergencyStop.classList.remove('btn-success');
+                    tambahCatatanButtonEmergencyStop.classList.add('btn-danger');
                 } else {
-                    catatanFieldSeam_protection_tube.style.display = 'none';
-                    tambahCatatanButtonSeam_protection_tube.innerHTML =
+                    catatanFieldEmergencyStop.style.display = 'none';
+                    tambahCatatanButtonEmergencyStop.innerHTML =
                         '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonSeam_protection_tube.classList.remove('btn-danger');
-                    tambahCatatanButtonSeam_protection_tube.classList.add('btn-success');
-                }
-            });
-
-            tambahCatatanButtonHook.addEventListener('click', function() {
-                // Toggle tampilan field catatan ketika tombol diklik
-                if (catatanFieldHook.style.display === 'none') {
-                    catatanFieldHook.style.display = 'block';
-                    tambahCatatanButtonHook.innerHTML = '<i class="bi bi-bookmark-x"></i>';
-                    tambahCatatanButtonHook.classList.remove('btn-success');
-                    tambahCatatanButtonHook.classList.add('btn-danger');
-                } else {
-                    catatanFieldHook.style.display = 'none';
-                    tambahCatatanButtonHook.innerHTML = '<i class="bi bi-bookmark-plus"></i>';
-                    tambahCatatanButtonHook.classList.remove('btn-danger');
-                    tambahCatatanButtonHook.classList.add('btn-success');
+                    tambahCatatanButtonEmergencyStop.classList.remove('btn-danger');
+                    tambahCatatanButtonEmergencyStop.classList.add('btn-success');
                 }
             });
 

@@ -298,7 +298,7 @@ Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltC
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard/headcrane/checksheetheadcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'createForm'])->name('CheckSheetHeadCrane');
-    Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('F');
+    Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('process.checksheet.headcrane');
     Route::delete('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'destroy'])->name('headcrane.checksheetheadcrane.destroy');
     Route::get('/dashboard/check-sheet/headcrane/{id}/edit', [CheckSheetHeadCraneController::class, 'edit'])->name('headcrane.checksheetheadcrane.edit');
     Route::put('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'update'])->name('headcrane.checksheetheadcrane.update');
@@ -495,6 +495,7 @@ Route::get('/dashboard/report/tembin', [CheckSheetTembinController::class, 'repo
 Route::get('/dashboard/report/chainblock', [CheckSheetChainblockController::class, 'report'])->name('home.checksheet.chainblock')->middleware('auth');
 Route::get('/dashboard/report/bodyharnest', [CheckSheetBodyHarnestController::class, 'report'])->name('home.checksheet.bodyharnest')->middleware('auth');
 Route::get('/dashboard/report/safetybelt', [CheckSheetSafetyBeltController::class, 'report'])->name('home.checksheet.safetybelt')->middleware('auth');
+Route::get('/dashboard/report/headcrane', [CheckSheetHeadCraneController::class, 'report'])->name('home.checksheet.headcrane')->middleware('auth');
 Route::get('/dashboard/report/facp', [CheckSheetFacpController::class, 'report'])->name('home.checksheet.facp')->middleware('auth');
 
 

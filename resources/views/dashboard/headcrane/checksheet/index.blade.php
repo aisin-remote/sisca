@@ -28,16 +28,15 @@
                             <th scope="col">Tanggal Pengecekan</th>
                             <th scope="col">NPK</th>
                             <th scope="col">No Head Crane</th>
-                            <th scope="col">Buckle</th>
-                            <th scope="col">Seams</th>
-                            <th scope="col">Reel</th>
-                            <th scope="col">Shock_absorber</th>
-                            <th scope="col">Ring</th>
-                            <th scope="col">Torso Belt</th>
-                            <th scope="col">Strap</th>
-                            <th scope="col">Rope</th>
-                            <th scope="col">Seam Protection Tube</th>
-                            <th scope="col">Hook</th>
+                            <th scope="col">Cross Travelling</th>
+                            <th scope="col">Long Travelling</th>
+                            <th scope="col">Button Up</th>
+                            <th scope="col">Button Down</th>
+                            <th scope="col">Buttton Push</th>
+                            <th scope="col">Wire Rope</th>
+                            <th scope="col">Block Hook</th>
+                            <th scope="col">Hom</th>
+                            <th scope="col">Emergency Stop</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -50,84 +49,76 @@
                                 <td>{{ $checksheet->npk }}</td>
                                 <td>{{ $checksheet->headcrane_number }}</td>
 
-                                @if ($checksheet->buckle === 'NG')
+                                @if ($checksheet->cross_travelling === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->buckle }}
+                                        {{ $checksheet->cross_travelling }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->buckle }}</td>
+                                    <td>{{ $checksheet->cross_travelling }}</td>
                                 @endif
 
-                                @if ($checksheet->seams === 'NG')
+                                @if ($checksheet->long_travelling === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->seams }}
+                                        {{ $checksheet->long_travelling }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->seams }}</td>
+                                    <td>{{ $checksheet->long_travelling }}</td>
                                 @endif
 
-                                @if ($checksheet->reel === 'NG')
+                                @if ($checksheet->button_up === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->reel }}
+                                        {{ $checksheet->button_up }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->reel }}</td>
+                                    <td>{{ $checksheet->button_up }}</td>
                                 @endif
 
-                                @if ($checksheet->shock_absorber === 'NG')
+                                @if ($checksheet->button_down === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->shock_absorber }}
+                                        {{ $checksheet->button_down }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->shock_absorber }}</td>
+                                    <td>{{ $checksheet->button_down }}</td>
                                 @endif
 
-                                @if ($checksheet->ring === 'NG')
+                                @if ($checksheet->button_push === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->ring }}
+                                        {{ $checksheet->button_push }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->ring }}</td>
+                                    <td>{{ $checksheet->button_push }}</td>
                                 @endif
 
-                                @if ($checksheet->torso_belt === 'NG')
+                                @if ($checksheet->wire_rope === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->torso_belt }}
+                                        {{ $checksheet->wire_rope }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->torso_belt }}</td>
+                                    <td>{{ $checksheet->wire_rope }}</td>
                                 @endif
 
-                                @if ($checksheet->strap === 'NG')
+                                @if ($checksheet->block_hook === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->strap }}
+                                        {{ $checksheet->block_hook }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->strap }}</td>
+                                    <td>{{ $checksheet->block_hook }}</td>
                                 @endif
 
-                                @if ($checksheet->rope === 'NG')
+                                @if ($checksheet->hom === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->rope }}
+                                        {{ $checksheet->hom }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->rope }}</td>
+                                    <td>{{ $checksheet->hom }}</td>
                                 @endif
 
-                                @if ($checksheet->seam_protection_tube === 'NG')
+                                @if ($checksheet->emergency_stop === 'NG')
                                     <td class="text-danger fw-bolder">
-                                        {{ $checksheet->seam_protection_tube }}
+                                        {{ $checksheet->emergency_stop }}
                                     </td>
                                 @else
-                                    <td>{{ $checksheet->seam_protection_tube }}</td>
-                                @endif
-
-                                @if ($checksheet->hook === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->hook }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->hook }}</td>
+                                    <td>{{ $checksheet->emergency_stop }}</td>
                                 @endif
 
                                 <td class="text-center align-middle">

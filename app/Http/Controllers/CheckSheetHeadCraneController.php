@@ -97,7 +97,7 @@ class CheckSheetHeadCraneController extends Controller
 
         if ($existingCheckSheet) {
             // Jika sudah ada entri, tampilkan halaman edit
-            return redirect()->route('headcrane.CheckSheetHeadCrane.edit', $existingCheckSheet->id)
+            return redirect()->route('headcrane.checksheetheadcrane.edit', $existingCheckSheet->id)
                 ->with('error', 'Check Sheet headcrane sudah ada untuk headcrane ' . $headcraneNumber . ' pada triwulan ini. Silahkan edit.');
         } else {
             // Jika belum ada entri, tampilkan halaman create
@@ -314,108 +314,98 @@ class CheckSheetHeadCraneController extends Controller
 
         // Validasi data yang diinputkan
         $rules = [
-            'buckle' => 'required',
-            'catatan_buckle' => 'nullable|string|max:255',
-            'photo_buckle' => 'image|file|max:3072',
-            'seams' => 'required',
-            'catatan_seams' => 'nullable|string|max:255',
-            'photo_seams' => 'image|file|max:3072',
-            'reel' => 'required',
-            'catatan_reel' => 'nullable|string|max:255',
-            'photo_reel' => 'image|file|max:3072',
-            'shock_absorber' => 'required',
-            'catatan_shock_absorber' => 'nullable|string|max:255',
-            'photo_shock_absorber' => 'image|file|max:3072',
-            'ring' => 'required',
-            'catatan_ring' => 'nullable|string|max:255',
-            'photo_button_push' => 'image|file|max:3072',
-            'torso_belt' => 'required',
-            'catatan_torso_belt' => 'nullable|string|max:255',
-            'photo_torso_belt' => 'image|file|max:3072',
-            'strap' => 'required',
-            'catatan_strap' => 'nullable|string|max:255',
-            'photo_strap' => 'image|file|max:3072',
-            'rope' => 'required',
-            'catatan_rope' => 'nullable|string|max:255',
-            'photo_rope' => 'image|file|max:3072',
+            'cross_travelling' => 'required',
+            'catatan_cross_travelling' => 'nullable|string|max:255',
+            'photo_cross_travelling' => 'required|image|file|max:3072',
+            'long_travelling' => 'required',
+            'catatan_long_travelling' => 'nullable|string|max:255',
+            'photo_long_travelling' => 'required|image|file|max:3072',
+            'button_up' => 'required',
+            'catatan_button_up' => 'nullable|string|max:255',
+            'photo_button_up' => 'required|image|file|max:3072',
+            'button_down' => 'required',
+            'catatan_button_down' => 'nullable|string|max:255',
+            'photo_button_down' => 'required|image|file|max:3072',
+            'button_push' => 'required',
+            'catatan_button_push' => 'nullable|string|max:255',
+            'photo_button_push' => 'required|image|file|max:3072',
+            'wire_rope' => 'required',
+            'catatan_wire_rope' => 'nullable|string|max:255',
+            'photo_wire_rope' => 'required|image|file|max:3072',
+            'block_hook' => 'required',
+            'catatan_block_hook' => 'nullable|string|max:255',
+            'photo_block_hook' => 'required|image|file|max:3072',
+            'hom' => 'required',
+            'catatan_hom' => 'nullable|string|max:255',
+            'photo_hom' => 'required|image|file|max:3072',
             'emergency_stop' => 'required',
             'catatan_emergency_stop' => 'nullable|string|max:255',
-            'photo_emergency_stop' => 'image|file|max:3072',
-            'hook' => 'required',
-            'catatan_hook' => 'nullable|string|max:255',
-            'photo_hook' => 'image|file|max:3072',
+            'photo_emergency_stop' => 'required|image|file|max:3072',
         ];
 
         $validatedData = $request->validate($rules);
 
-        if ($request->file('photo_buckle')) {
-            if ($request->oldImage_buckle) {
-                Storage::delete($request->oldImage_buckle);
+        if ($request->file('photo_cross_travelling')) {
+            if ($request->oldImage_cross_travelling) {
+                Storage::delete($request->oldImage_cross_travelling);
             }
-            $validatedData['photo_buckle'] = $request->file('photo_buckle')->store('checksheet-safety-belt');
+            $validatedData['photo_cross_travelling'] = $request->file('photo_cross_travelling')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_seams')) {
-            if ($request->oldImage_seams) {
-                Storage::delete($request->oldImage_seams);
+        if ($request->file('photo_long_travelling')) {
+            if ($request->oldImage_long_travelling) {
+                Storage::delete($request->oldImage_long_travelling);
             }
-            $validatedData['photo_seams'] = $request->file('photo_seams')->store('checksheet-safety-belt');
+            $validatedData['photo_long_travelling'] = $request->file('photo_long_travelling')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_reel')) {
-            if ($request->oldImage_reel) {
-                Storage::delete($request->oldImage_reel);
+        if ($request->file('photo_button_up')) {
+            if ($request->oldImage_button_up) {
+                Storage::delete($request->oldImage_button_up);
             }
-            $validatedData['photo_reel'] = $request->file('photo_reel')->store('checksheet-safety-belt');
+            $validatedData['photo_button_up'] = $request->file('photo_button_up')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_shock_absorber')) {
-            if ($request->oldImage_shock_absorber) {
-                Storage::delete($request->oldImage_shock_absorber);
+        if ($request->file('photo_button_down')) {
+            if ($request->oldImage_button_down) {
+                Storage::delete($request->oldImage_button_down);
             }
-            $validatedData['photo_shock_absorber'] = $request->file('photo_shock_absorber')->store('checksheet-safety-belt');
+            $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_ring')) {
-            if ($request->oldImage_ring) {
-                Storage::delete($request->oldImage_ring);
+        if ($request->file('photo_button_push')) {
+            if ($request->oldImage_button_push) {
+                Storage::delete($request->oldImage_button_push);
             }
-            $validatedData['photo_ring'] = $request->file('photo_ring')->store('checksheet-safety-belt');
+            $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_torso_belt')) {
-            if ($request->oldImage_torso_belt) {
-                Storage::delete($request->oldImage_torso_belt);
+        if ($request->file('photo_wire_rope')) {
+            if ($request->oldImage_wire_rope) {
+                Storage::delete($request->oldImage_wire_rope);
             }
-            $validatedData['photo_torso_belt'] = $request->file('photo_torso_belt')->store('checksheet-safety-belt');
+            $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_strap')) {
-            if ($request->oldImage_strap) {
-                Storage::delete($request->oldImage_strap);
+        if ($request->file('photo_block_hook')) {
+            if ($request->oldImage_block_hook) {
+                Storage::delete($request->oldImage_block_hook);
             }
-            $validatedData['photo_strap'] = $request->file('photo_strap')->store('checksheet-safety-belt');
+            $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_rope')) {
-            if ($request->oldImage_rope) {
-                Storage::delete($request->oldImage_rope);
+        if ($request->file('photo_hom')) {
+            if ($request->oldImage_hom) {
+                Storage::delete($request->oldImage_hom);
             }
-            $validatedData['photo_rope'] = $request->file('photo_rope')->store('checksheet-safety-belt');
+            $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
         }
 
-        if ($request->file('photo_seam_protection_tube')) {
-            if ($request->oldImage_seam_protection_tube) {
-                Storage::delete($request->oldImage_seam_protection_tube);
+        if ($request->file('photo_emergency_stop')) {
+            if ($request->oldImage_emergency_stop) {
+                Storage::delete($request->oldImage_emergency_stop);
             }
-            $validatedData['photo_seam_protection_tube'] = $request->file('photo_seam_protection_tube')->store('checksheet-safety-belt');
-        }
-
-        if ($request->file('photo_hook')) {
-            if ($request->oldImage_hook) {
-                Storage::delete($request->oldImage_hook);
-            }
-            $validatedData['photo_hook'] = $request->file('photo_hook')->store('checksheet-safety-belt');
+            $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
         }
 
 
@@ -425,32 +415,31 @@ class CheckSheetHeadCraneController extends Controller
         $headcrane = headcrane::where('no_headcrane', $CheckSheetHeadCrane->headcrane_number)->first();
 
         if (!$headcrane) {
-            return back()->with('error', 'Safety Belt tidak ditemukan.');
+            return back()->with('error', 'Head Crane tidak ditemukan.');
         }
 
-        return redirect()->route('safety-belt.show', $headcrane->id)->with('success1', 'Data Check Sheet Safety Belt berhasil diperbarui.');
+        return redirect()->route('head-crane.show', $headcrane->id)->with('success1', 'Data Check Sheet Head Crane berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $CheckSheetHeadCrane = CheckSheetHeadCrane::find($id);
 
-        if ($CheckSheetHeadCrane->photo_buckle || $CheckSheetHeadCrane->photo_seams || $CheckSheetHeadCrane->photo_reel || $CheckSheetHeadCrane->photo_shock_absorber || $CheckSheetHeadCrane->photo_ring || $CheckSheetHeadCrane->photo_torso_belt || $CheckSheetHeadCrane->photo_strap || $CheckSheetHeadCrane->photo_rope || $CheckSheetHeadCrane->photo_seam_protection_tube || $CheckSheetHeadCrane->photo_hook) {
-            Storage::delete($CheckSheetHeadCrane->photo_buckle);
-            Storage::delete($CheckSheetHeadCrane->photo_seams);
-            Storage::delete($CheckSheetHeadCrane->photo_reel);
-            Storage::delete($CheckSheetHeadCrane->photo_shock_absorber);
-            Storage::delete($CheckSheetHeadCrane->photo_ring);
-            Storage::delete($CheckSheetHeadCrane->photo_torso_belt);
-            Storage::delete($CheckSheetHeadCrane->photo_strap);
-            Storage::delete($CheckSheetHeadCrane->photo_rope);
-            Storage::delete($CheckSheetHeadCrane->photo_seam_protection_tube);
-            Storage::delete($CheckSheetHeadCrane->photo_hook);
+        if ($CheckSheetHeadCrane->photo_cross_travelling || $CheckSheetHeadCrane->photo_long_travelling || $CheckSheetHeadCrane->photo_button_up || $CheckSheetHeadCrane->photo_button_down || $CheckSheetHeadCrane->photo_button_push || $CheckSheetHeadCrane->photo_wire_rope || $CheckSheetHeadCrane->photo_block_hook || $CheckSheetHeadCrane->photo_hom || $CheckSheetHeadCrane->photo_emergency_stop) {
+            Storage::delete($CheckSheetHeadCrane->photo_cross_travelling);
+            Storage::delete($CheckSheetHeadCrane->photo_long_travelling);
+            Storage::delete($CheckSheetHeadCrane->photo_button_up);
+            Storage::delete($CheckSheetHeadCrane->photo_button_down);
+            Storage::delete($CheckSheetHeadCrane->photo_button_push);
+            Storage::delete($CheckSheetHeadCrane->photo_wire_rope);
+            Storage::delete($CheckSheetHeadCrane->photo_block_hook);
+            Storage::delete($CheckSheetHeadCrane->photo_hom);
+            Storage::delete($CheckSheetHeadCrane->photo_emergency_stop);
         }
 
         $CheckSheetHeadCrane->delete();
 
-        return back()->with('success1', 'Data Check Sheet Safety Belt berhasil dihapus');
+        return back()->with('success1', 'Data Check Sheet Head Crane berhasil dihapus');
     }
 
     public function index(Request $request)
@@ -469,20 +458,19 @@ class CheckSheetHeadCraneController extends Controller
     {
         $selectedYear = $request->input('selected_year', date('Y'));
 
-        $headcraneData = headcrane::leftJoin('tt_check_sheet_safety_belts', 'tm_HeadCranes.no_headcrane', '=', 'tt_check_sheet_safety_belts.headcrane_number')
+        $headcraneData = headcrane::leftJoin('tt_check_sheet_head_cranes', 'tm_HeadCranes.no_headcrane', '=', 'tt_check_sheet_head_cranes.headcrane_number')
             ->select(
-                'tm_HeadCranes.no_headcrane as headcrane_number',
-                'tt_check_sheet_safety_belts.tanggal_pengecekan',
-                'tt_check_sheet_safety_belts.buckle',
-                'tt_check_sheet_safety_belts.seams',
-                'tt_check_sheet_safety_belts.reel',
-                'tt_check_sheet_safety_belts.shock_absorber',
-                'tt_check_sheet_safety_belts.ring',
-                'tt_check_sheet_safety_belts.torso_belt',
-                'tt_check_sheet_safety_belts.strap',
-                'tt_check_sheet_safety_belts.rope',
-                'tt_check_sheet_safety_belts.seam_protection_tube',
-                'tt_check_sheet_safety_belts.hook',
+                'tm_headcranes.no_headcrane as headcrane_number',
+                'tt_check_sheet_head_cranes.tanggal_pengecekan',
+                'tt_check_sheet_head_cranes.cross_travelling',
+                'tt_check_sheet_head_cranes.long_travelling',
+                'tt_check_sheet_head_cranes.button_up',
+                'tt_check_sheet_head_cranes.button_down',
+                'tt_check_sheet_head_cranes.button_push',
+                'tt_check_sheet_head_cranes.wire_rope',
+                'tt_check_sheet_head_cranes.block_hook',
+                'tt_check_sheet_head_cranes.hom',
+                'tt_check_sheet_head_cranes.emergency_stop',
             )
             ->get();
 
@@ -503,16 +491,15 @@ class CheckSheetHeadCraneController extends Controller
                 $issueCodes = [];
 
                 // Map issue codes for powder type
-                if ($headcrane['buckle'] === 'NG') $issueCodes[] = 'a';
-                if ($headcrane['seams'] === 'NG') $issueCodes[] = 'b';
-                if ($headcrane['reel'] === 'NG') $issueCodes[] = 'c';
-                if ($headcrane['shock_absorber'] === 'NG') $issueCodes[] = 'd';
-                if ($headcrane['ring'] === 'NG') $issueCodes[] = 'e';
-                if ($headcrane['torso_belt'] === 'NG') $issueCodes[] = 'f';
-                if ($headcrane['strap'] === 'NG') $issueCodes[] = 'g';
-                if ($headcrane['rope'] === 'NG') $issueCodes[] = 'h';
-                if ($headcrane['seam_protection_tube'] === 'NG') $issueCodes[] = 'i';
-                if ($headcrane['hook'] === 'NG') $issueCodes[] = 'j';
+                if ($headcrane['cross_travelling'] === 'NG') $issueCodes[] = 'a';
+                if ($headcrane['long_travelling'] === 'NG') $issueCodes[] = 'b';
+                if ($headcrane['button_up'] === 'NG') $issueCodes[] = 'c';
+                if ($headcrane['button_down'] === 'NG') $issueCodes[] = 'd';
+                if ($headcrane['button_push'] === 'NG') $issueCodes[] = 'e';
+                if ($headcrane['wire_rope'] === 'NG') $issueCodes[] = 'f';
+                if ($headcrane['block_hook'] === 'NG') $issueCodes[] = 'g';
+                if ($headcrane['hom'] === 'NG') $issueCodes[] = 'h';
+                if ($headcrane['emergency_stop'] === 'NG') $issueCodes[] = 'i';
 
                 if (empty($issueCodes)) {
                     $issueCodes[] = 'OK';
@@ -535,7 +522,7 @@ class CheckSheetHeadCraneController extends Controller
         // Save JSON to a file
         Storage::disk('local')->put('headcrane_data.json', $jsonString);
 
-        return view('dashboard.headcrane_report', [
+        return view('dashboard.headcrane.reports.index', [
             'headcraneData' => $mappedheadcraneData,
             'selectedYear' => $selectedYear,
         ]);
@@ -557,7 +544,7 @@ class CheckSheetHeadCraneController extends Controller
 
         // Retrieve data from the checksheetsco2 table for the selected year and tag_number
         $data = CheckSheetHeadCrane::with('HeadCranes')
-            ->select('tanggal_pengecekan', 'headcrane_number', 'buckle', 'seams', 'reel', 'shock_absorber', 'ring', 'torso_belt', 'strap', 'rope', 'seam_protection_tube', 'hook')
+            ->select('tanggal_pengecekan', 'headcrane_number', 'cross_travelling', 'long_travelling', 'button_up', 'button_down', 'button_push', 'wire_rope', 'block_hook', 'hom', 'emergency_stop')
             ->where(function ($query) use ($selectedYear, $headcraneNumber) {
                 // Kondisi untuk memanggil data berdasarkan tahun dan tag_number
                 $query->whereYear('tanggal_pengecekan', $selectedYear)
@@ -604,70 +591,63 @@ class CheckSheetHeadCraneController extends Controller
             $col = $quartalKolom[$quartal];
 
             // Set value based on $item->pressure
-            if ($item->buckle === 'OK') {
+            if ($item->cross_travelling === 'OK') {
                 $worksheet->setCellValue($col . 9, '√');
-            } else if ($item->buckle === 'NG') {
+            } else if ($item->cross_travelling === 'NG') {
                 $worksheet->setCellValue($col . 9, 'X');
             }
 
             // Set value based on $item->hose
-            if ($item->seams === 'OK') {
+            if ($item->long_travelling === 'OK') {
                 $worksheet->setCellValue($col . 12, '√');
-            } else if ($item->seams === 'NG') {
+            } else if ($item->long_travelling === 'NG') {
                 $worksheet->setCellValue($col . 12, 'X');
             }
 
             // Set value based on $item->corong
-            if ($item->reel === 'OK') {
+            if ($item->button_up === 'OK') {
                 $worksheet->setCellValue($col . 15, '√');
-            } else if ($item->reel === 'NG') {
+            } else if ($item->button_up === 'NG') {
                 $worksheet->setCellValue($col . 15, 'X');
             }
 
             // Set value based on $item->tabung
-            if ($item->shock_absorber === 'OK') {
+            if ($item->button_down === 'OK') {
                 $worksheet->setCellValue($col . 18, '√');
-            } else if ($item->shock_absorber === 'NG') {
+            } else if ($item->button_down === 'NG') {
                 $worksheet->setCellValue($col . 18, 'X');
             }
 
             // Set value based on $item->regulator
-            if ($item->ring === 'OK') {
+            if ($item->button_push === 'OK') {
                 $worksheet->setCellValue($col . 21, '√');
-            } else if ($item->ring === 'NG') {
+            } else if ($item->button_push === 'NG') {
                 $worksheet->setCellValue($col . 21, 'X');
             }
 
-            if ($item->torso_belt === 'OK') {
+            if ($item->wire_rope === 'OK') {
                 $worksheet->setCellValue($col . 24, '√');
-            } else if ($item->torso_belt === 'NG') {
+            } else if ($item->wire_rope === 'NG') {
                 $worksheet->setCellValue($col . 24, 'X');
             }
 
-            if ($item->strap === 'OK') {
+            if ($item->block_hook === 'OK') {
                 $worksheet->setCellValue($col . 27, '√');
-            } else if ($item->strap === 'NG') {
+            } else if ($item->block_hook === 'NG') {
                 $worksheet->setCellValue($col . 27, 'X');
             }
 
-            if ($item->rope === 'OK') {
+            if ($item->hom === 'OK') {
                 $worksheet->setCellValue($col . 30, '√');
-            } else if ($item->rope === 'NG') {
+            } else if ($item->hom === 'NG') {
                 $worksheet->setCellValue($col . 30, 'X');
             }
 
-            if ($item->seam_protection_tube === 'OK') {
+            if ($item->emergency_stop === 'OK') {
                 $worksheet->setCellValue($col . 33, '√');
-            } else if ($item->seam_protection_tube === 'NG') {
+            } else if ($item->emergency_stop === 'NG') {
                 $worksheet->setCellValue($col . 33, 'X');
             }
-
-            if ($item->hook === 'OK') {
-                $worksheet->setCellValue($col . 36, '√');
-            } else if ($item->hook === 'NG') {
-                $worksheet->setCellValue($col . 36, 'X');
-            }
-
             // Increment row for the next data
             $col++;
         }
@@ -675,7 +655,7 @@ class CheckSheetHeadCraneController extends Controller
 
         // Create a new Excel writer and save the modified spreadsheet
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $outputPath = public_path('templates/checksheet-safety-belt.xlsx');
+        $outputPath = public_path('templates/checksheet-head-crane.xlsx');
         $writer->save($outputPath);
 
         return response()->download($outputPath)->deleteFileAfterSend(true);

@@ -1,12 +1,12 @@
 @extends('dashboard.app')
-@section('title', 'Data Check Sheet Safety Belt')
+@section('title', 'Data Check Sheet Head Crane')
 
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
-        <h1>Detail Check Sheet Safety Belt</h1>
+        <h1>Detail Check Sheet Head Crane</h1>
         @can('admin')
-            <a href="{{ route('safetybelt.checksheetsafetybelt.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
+            <a href="{{ route('headcrane.checksheetheadcrane.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
         @endcan
     </div>
     <div class="card col-md-12">
@@ -26,218 +26,196 @@
                         <td>{{ $checksheet->npk }}</td>
                     </tr>
                     <tr>
-                        <th>No Safety Belt</th>
-                        <td>{{ $checksheet->safetybelt_number }}</td>
+                        <th>No Head Crane</th>
+                        <td>{{ $checksheet->headcrane_number }}</td>
                     </tr>
                     <tr>
-                        <th>Buckle</th>
-                        @if ($checksheet->buckle === 'NG')
+                        <th>Cross Travelling</th>
+                        @if ($checksheet->cross_travelling === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->buckle }}
+                                {{ $checksheet->cross_travelling }}
                             </td>
                         @else
-                            <td>{{ $checksheet->buckle }}</td>
+                            <td>{{ $checksheet->cross_travelling }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Buckle</th>
-                        <td>{{ $checksheet->catatan_buckle }}</td>
+                        <th>Catatan Cross Travelling</th>
+                        <td>{{ $checksheet->catatan_cross_travelling }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Buckle</th>
+                        <th>Photo Cross Travelling</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_buckle) }}" alt="Photo Buckle"
+                            <img src="{{ asset('storage/' . $checksheet->photo_cross_travelling) }}"
+                                alt="Photo Cross Travelling" style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Long Travelling</th>
+                        @if ($checksheet->long_travelling === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->long_travelling }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->long_travelling }}</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <th>Catatan Long Travelling</th>
+                        <td>{{ $checksheet->catatan_long_travelling }}</td>
+                    </tr>
+                    <tr>
+                        <th>Photo Long Travelling</th>
+                        <td>
+                            <img src="{{ asset('storage/' . $checksheet->photo_long_travelling) }}"
+                                alt="Photo Long Travelling" style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Button Up</th>
+                        @if ($checksheet->button_up === 'NG')
+                            <td class="text-danger fw-bolder">
+                                {{ $checksheet->button_up }}
+                            </td>
+                        @else
+                            <td>{{ $checksheet->button_up }}</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <th>Catatan Button Up</th>
+                        <td>{{ $checksheet->catatan_button_up }}</td>
+                    </tr>
+                    <tr>
+                        <th>Photo Button Up</th>
+                        <td>
+                            <img src="{{ asset('storage/' . $checksheet->photo_button_up) }}" alt="Photo Button Up"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Seams</th>
-                        @if ($checksheet->seams === 'NG')
+                        <th>Butoon Down</th>
+                        @if ($checksheet->button_down === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->seams }}
+                                {{ $checksheet->button_down }}
                             </td>
                         @else
-                            <td>{{ $checksheet->seams }}</td>
+                            <td>{{ $checksheet->button_down }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Seams</th>
-                        <td>{{ $checksheet->catatan_seams }}</td>
+                        <th>Catatan Button Down</th>
+                        <td>{{ $checksheet->catatan_button_down }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Seams</th>
+                        <th>Photo Button Down</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_seams) }}" alt="Photo Seams"
+                            <img src="{{ asset('storage/' . $checksheet->photo_button_down) }}" alt="Photo Button Down"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Reel</th>
-                        @if ($checksheet->reel === 'NG')
+                        <th>Button Push</th>
+                        @if ($checksheet->button_push === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->reel }}
+                                {{ $checksheet->button_push }}
                             </td>
                         @else
-                            <td>{{ $checksheet->reel }}</td>
+                            <td>{{ $checksheet->button_push }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Reel</th>
-                        <td>{{ $checksheet->catatan_reel }}</td>
+                        <th>Catatan Button Push</th>
+                        <td>{{ $checksheet->catatan_button_push }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Reel</th>
+                        <th>Photo button_push</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_reel) }}" alt="Photo Reel"
+                            <img src="{{ asset('storage/' . $checksheet->photo_button_push) }}" alt="Photo Button Push"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Shock Absorber</th>
-                        @if ($checksheet->shock_absorber === 'NG')
+                        <th>Wire Rope</th>
+                        @if ($checksheet->wire_rope === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->shock_absorber }}
+                                {{ $checksheet->wire_rope }}
                             </td>
                         @else
-                            <td>{{ $checksheet->shock_absorber }}</td>
+                            <td>{{ $checksheet->wire_rope }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Shock Absorber</th>
-                        <td>{{ $checksheet->catatan_shock_absorber }}</td>
+                        <th>Catatan Wire Rope</th>
+                        <td>{{ $checksheet->catatan_wire_rope }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Shock Absorber</th>
+                        <th>Photo Wire Rope</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_shock_absorber) }}"
-                                alt="Photo Shock Absorber" style="max-width: 250px; max-height: 300px;" class="img-fluid">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Ring</th>
-                        @if ($checksheet->ring === 'NG')
-                            <td class="text-danger fw-bolder">
-                                {{ $checksheet->ring }}
-                            </td>
-                        @else
-                            <td>{{ $checksheet->ring }}</td>
-                        @endif
-                    </tr>
-                    <tr>
-                        <th>Catatan Ring</th>
-                        <td>{{ $checksheet->catatan_ring }}</td>
-                    </tr>
-                    <tr>
-                        <th>Photo Ring</th>
-                        <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_ring) }}" alt="Photo Ring"
+                            <img src="{{ asset('storage/' . $checksheet->photo_wire_rope) }}" alt="Photo Wire Rope"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Torso Belt</th>
-                        @if ($checksheet->torso_belt === 'NG')
+                        <th>block_hook</th>
+                        @if ($checksheet->block_hook === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->torso_belt }}
+                                {{ $checksheet->block_hook }}
                             </td>
                         @else
-                            <td>{{ $checksheet->torso_belt }}</td>
+                            <td>{{ $checksheet->block_hook }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Torso Belt</th>
-                        <td>{{ $checksheet->catatan_torso_belt }}</td>
+                        <th>Catatan Block Hook</th>
+                        <td>{{ $checksheet->catatan_block_hook }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Torso Belt</th>
+                        <th>Photo Block Hook</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_torso_belt) }}" alt="Photo Torso Belt"
+                            <img src="{{ asset('storage/' . $checksheet->photo_block_hook) }}" alt="Photo Block Hook"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Strap</th>
-                        @if ($checksheet->strap === 'NG')
+                        <th>Hom</th>
+                        @if ($checksheet->hom === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->strap }}
+                                {{ $checksheet->hom }}
                             </td>
                         @else
-                            <td>{{ $checksheet->strap }}</td>
+                            <td>{{ $checksheet->hom }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Strap</th>
-                        <td>{{ $checksheet->catatan_strap }}</td>
+                        <th>Catatan Hom</th>
+                        <td>{{ $checksheet->catatan_hom }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Strap</th>
+                        <th>Photo Hom</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_strap) }}" alt="Photo Strap"
+                            <img src="{{ asset('storage/' . $checksheet->photo_hom) }}" alt="Photo Hom"
                                 style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                     <tr>
-                        <th>Rope</th>
-                        @if ($checksheet->rope === 'NG')
+                        <th>Emergency Stop</th>
+                        @if ($checksheet->emergency_stop === 'NG')
                             <td class="text-danger fw-bolder">
-                                {{ $checksheet->rope }}
+                                {{ $checksheet->emergency_stop }}
                             </td>
                         @else
-                            <td>{{ $checksheet->rope }}</td>
+                            <td>{{ $checksheet->emergency_stop }}</td>
                         @endif
                     </tr>
                     <tr>
-                        <th>Catatan Rope</th>
-                        <td>{{ $checksheet->catatan_rope }}</td>
+                        <th>Catatan Emergency Stop</th>
+                        <td>{{ $checksheet->catatan_emergency_stop }}</td>
                     </tr>
                     <tr>
-                        <th>Photo Rope</th>
+                        <th>Photo Emergency Stop</th>
                         <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_rope) }}" alt="Photo Rope"
-                                style="max-width: 250px; max-height: 300px;" class="img-fluid">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Seam Protection Tube</th>
-                        @if ($checksheet->seam_protection_tube === 'NG')
-                            <td class="text-danger fw-bolder">
-                                {{ $checksheet->seam_protection_tube }}
-                            </td>
-                        @else
-                            <td>{{ $checksheet->seam_protection_tube }}</td>
-                        @endif
-                    </tr>
-                    <tr>
-                        <th>Catatan Seam Protection Tube</th>
-                        <td>{{ $checksheet->catatan_seam_protection_tube }}</td>
-                    </tr>
-                    <tr>
-                        <th>Photo Seam Protection Tube</th>
-                        <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_seam_protection_tube) }}"
-                                alt="Photo Seam Protection Tube" style="max-width: 250px; max-height: 300px;"
-                                class="img-fluid">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Hook</th>
-                        @if ($checksheet->hook === 'NG')
-                            <td class="text-danger fw-bolder">
-                                {{ $checksheet->hook }}
-                            </td>
-                        @else
-                            <td>{{ $checksheet->hook }}</td>
-                        @endif
-                    </tr>
-                    <tr>
-                        <th>Catatan Hook</th>
-                        <td>{{ $checksheet->catatan_hook }}</td>
-                    </tr>
-                    <tr>
-                        <th>Photo Hook</th>
-                        <td>
-                            <img src="{{ asset('storage/' . $checksheet->photo_hook) }}" alt="Photo Hook"
-                                style="max-width: 250px; max-height: 300px;" class="img-fluid">
+                            <img src="{{ asset('storage/' . $checksheet->photo_emergency_stop) }}"
+                                alt="Photo Emergency Stop" style="max-width: 250px; max-height: 300px;" class="img-fluid">
                         </td>
                     </tr>
                 </table>

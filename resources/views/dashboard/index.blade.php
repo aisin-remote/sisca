@@ -174,7 +174,17 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Grafik Head Crane -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Head Crane</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="HeadCraneChart" class="img-fluid"></canvas> <!-- Ganti id dengan yang berbeda -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -608,7 +618,41 @@
             }
         });
 
+        // Grafik HeadCrane
 
+        var ctxHeadCrane = document.getElementById('HeadCraneChart').getContext('2d'); // Ganti id dengan yang sesuai
+        var HeadCraneChart = new Chart(ctxHeadCrane, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data_HeadCrane['labels']) !!},
+                datasets: [{
+                    label: 'OK',
+                    data: {!! json_encode($data_HeadCrane['okData_HeadCrane']) !!},
+                    backgroundColor: 'rgba(0, 204, 68, 1)',
+                    borderColor: 'rgba(0, 131, 51, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'NG',
+                    data: {!! json_encode($data_HeadCrane['notOkData_HeadCrane']) !!},
+                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                    borderColor: 'rgba(139, 0, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' // Atur posisi keterangan (legend)
+                    }
+                }
+            }
+        });
 
         // Grafik FACP
 
