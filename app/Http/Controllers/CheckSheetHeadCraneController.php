@@ -458,7 +458,7 @@ class CheckSheetHeadCraneController extends Controller
     {
         $selectedYear = $request->input('selected_year', date('Y'));
 
-        $headcraneData = headcrane::leftJoin('tt_check_sheet_head_cranes', 'tm_HeadCranes.no_headcrane', '=', 'tt_check_sheet_head_cranes.headcrane_number')
+        $headcraneData = headcrane::leftJoin('tt_check_sheet_head_cranes', 'tm_headcranes.no_headcrane', '=', 'tt_check_sheet_head_cranes.headcrane_number')
             ->select(
                 'tm_headcranes.no_headcrane as headcrane_number',
                 'tt_check_sheet_head_cranes.tanggal_pengecekan',
