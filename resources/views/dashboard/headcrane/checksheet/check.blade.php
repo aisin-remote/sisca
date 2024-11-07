@@ -70,7 +70,7 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('headcrane.checksheetheadcrane.show', $checkSheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        @can('admin')
+                                        @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
                                             <a href="{{ route('headcrane.checksheetheadcrane.edit', $checkSheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
@@ -81,7 +81,7 @@
                                                 <button type="submit" class="badge bg-danger border-0"
                                                     onclick="return confirm('Ingin menghapus Data Check Sheet Head Crane?')">Delete</button>
                                             </form>
-                                        @endcan
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

@@ -22,6 +22,7 @@ use App\Models\CheckSheetSlingWire;
 use App\Models\CheckSheetTabungCo2;
 use App\Models\CheckSheetTandu;
 use App\Models\CheckSheetTembin;
+use Auth;
 
 class DashboardController extends Controller
 {

@@ -55,7 +55,7 @@ Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('das
 
 // Route Apar
 Route::resource('/dashboard/master/apar', AparController::class)->only(['create', 'store', 'edit', 'destroy'])
-    ->middleware('admin');
+    ->middleware(['admin']);
 Route::resource('/dashboard/master/apar', AparController::class)->only(['index', 'show'])
     ->middleware('auth');
 Route::put('/dashboard/master/apar/{data_apar}', [AparController::class, 'update'])->name('apar.update')->middleware('admin');
@@ -164,15 +164,21 @@ Route::resource('/dashboard/master/facp', FacpController::class)->only(['index',
 Route::put('/dashboard/master/facp/{data_facp}', [FacpController::class, 'update'])->name('data-facp.update')->middleware('admin');
 
 // Route Location
-Route::resource('/dashboard/master/location', LocationController::class)->only('create', 'store')->middleware('admin');
+Route::resource('/dashboard/master/location', LocationController::class)->only('create', 'store');
 Route::resource('/dashboard/master/location', LocationController::class)->only('index')->middleware('auth');
-Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy')->middleware('admin');
+Route::delete('/dashboard/master/location/{data_location}', [LocationController::class, 'destroy'])->name('location.destroy');
 // Route::put('/dashboard/apar/data_location/{data_location}', [LocationController::class, 'update'])->name('data_location.update');
 
 //Route Head Crane
-Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('create', 'store', 'edit', 'destroy')->middleware('admin');
+// Route::group(['middleware' => ['auth', 'mte']], function () {
+//     Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('create', 'store', 'edit', 'destroy');
+//     Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('index', 'show');
+//     Route::post('/dashboard/master/head-crane/{data_headcrane}', [HeadCraneController::class, 'update'])->name('head-crane.update');
+// });
+
+Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('create', 'store', 'edit', 'destroy');
 Route::resource('/dashboard/master/head-crane', HeadCraneController::class)->only('index', 'show')->middleware('auth');
-Route::post('/dashboard/master/head-crane/{data_headcrane}', [HeadCraneController::class, 'update'])->name('head-crane.update')->middleware('admin');
+Route::post('/dashboard/master/head-crane/{data_headcrane}', [HeadCraneController::class, 'update'])->name('head-crane.update');
 
 
 use App\Http\Controllers\CheckSheetController;
@@ -192,7 +198,7 @@ use App\Http\Controllers\CheckSheetSafetyBeltController;
 use App\Http\Controllers\CheckSheetFacpController;
 use App\Http\Controllers\CheckSheetHeadCraneController;
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     // checksheet
     Route::get('/dashboard/check-sheet/apar', [CheckSheetController::class, 'showForm'])->name('show.form');
     Route::get('/dashboard/check-sheet/hydrant', [CheckSheetHydrantController::class, 'showForm'])->name('hydrant.show.form');
@@ -256,7 +262,7 @@ Route::middleware(['auth'])->group(function () {
 
 //Checksheet Tandu
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/tandu/checksheettandu/{tanduNumber}', [CheckSheetTanduController::class, 'createForm'])->name('checksheettandu');
     Route::post('/dashboard/tandu/process-checksheet-tandu/{tanduNumber}', [CheckSheetTanduController::class, 'store'])->name('process.checksheet.tandu');
     Route::delete('/dashboard/check-sheet/tandu/{id}', [CheckSheetTanduController::class, 'destroy'])->name('tandu.checksheettandu.destroy');
@@ -270,7 +276,7 @@ Route::get('/dashboard/check-sheet/tandu/{id}/show', [CheckSheetTanduController:
 
 //Checksheet FACP
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/facp/checksheetfacp/{facpNumber}', [CheckSheetFacpController::class, 'createForm'])->name('checksheetfacp');
     Route::post('/dashboard/facp/process-checksheet-facp/{facpNumber}', [CheckSheetFacpController::class, 'store'])->name('process.checksheet.facp');
     Route::delete('/dashboard/check-sheet/facp/{id}', [CheckSheetFacpController::class, 'destroy'])->name('facp.checksheetfacp.destroy');
@@ -281,10 +287,9 @@ Route::middleware(['admin'])->group(function () {
 Route::get('/dashboard/check-sheet/facp/{id}/show', [CheckSheetFacpController::class, 'show'])->name('facp.checksheetfacp.show')->middleware('auth');
 
 
-
 //Checksheet Safety Belt
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/safetybelt/checksheetsafetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'createForm'])->name('checksheetsafetybelt');
     Route::post('/dashboard/safetybelt/process-checksheet-safetybelt/{safetybeltNumber}', [CheckSheetSafetyBeltController::class, 'store'])->name('process.checksheet.safetybelt');
     Route::delete('/dashboard/check-sheet/safetybelt/{id}', [CheckSheetSafetyBeltController::class, 'destroy'])->name('safetybelt.checksheetsafetybelt.destroy');
@@ -296,20 +301,19 @@ Route::get('/dashboard/check-sheet/safetybelt/{id}/show', [CheckSheetSafetyBeltC
 
 //Checksheet Head Crane
 
-Route::middleware(['admin'])->group(function () {
-    Route::get('/dashboard/headcrane/checksheetheadcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'createForm'])->name('CheckSheetHeadCrane');
-    Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('process.checksheet.headcrane');
-    Route::delete('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'destroy'])->name('headcrane.checksheetheadcrane.destroy');
-    Route::get('/dashboard/check-sheet/headcrane/{id}/edit', [CheckSheetHeadCraneController::class, 'edit'])->name('headcrane.checksheetheadcrane.edit');
-    Route::put('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'update'])->name('headcrane.checksheetheadcrane.update');
-});
+
+Route::get('/dashboard/headcrane/checksheetheadcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'createForm'])->name('CheckSheetHeadCrane');
+Route::post('/dashboard/headcrane/process-checksheet-headcrane/{headcraneNumber}', [CheckSheetHeadCraneController::class, 'store'])->name('process.checksheet.headcrane');
+Route::delete('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'destroy'])->name('headcrane.checksheetheadcrane.destroy');
+Route::get('/dashboard/check-sheet/headcrane/{id}/edit', [CheckSheetHeadCraneController::class, 'edit'])->name('headcrane.checksheetheadcrane.edit');
+Route::put('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'update'])->name('headcrane.checksheetheadcrane.update');
 Route::get('/dashboard/check-sheet/headcrane/{id}/show', [CheckSheetHeadCraneController::class, 'show'])->name('headcrane.checksheetheadcrane.show')->middleware('auth');
 
 
 
 //Checksheet Body Harnest
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard/bodyharnest/checksheetbodyharnest/{bodyharnestNumber}', [CheckSheetBodyHarnestController::class, 'createForm'])->name('checksheetbodyharnest');
     Route::post('/dashboard/bodyharnest/process-checksheet-bodyharnest/{bodyharnestNumber}', [CheckSheetBodyHarnestController::class, 'store'])->name('process.checksheet.bodyharnest');
     Route::delete('/dashboard/check-sheet/bodyharnest/{id}', [CheckSheetBodyHarnestController::class, 'destroy'])->name('bodyharnest.checksheetbodyharnest.destroy');
@@ -323,7 +327,7 @@ Route::get('/dashboard/check-sheet/bodyharnest/{id}/show', [CheckSheetBodyHarnes
 
 //Checksheet Chain Block
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/chainblock/checksheetchainblock/{chainblockNumber}', [CheckSheetChainblockController::class, 'createForm'])->name('checksheetchainblock');
     Route::post('/dashboard/chainblock/process-checksheet-chainblock/{chainblockNumber}', [CheckSheetChainblockController::class, 'store'])->name('process.checksheet.chainblock');
     Route::delete('/dashboard/check-sheet/chainblock/{id}', [CheckSheetChainblockController::class, 'destroy'])->name('chainblock.checksheetchainblock.destroy');
@@ -337,7 +341,7 @@ Route::get('/dashboard/check-sheet/chainblock/{id}/show', [CheckSheetChainblockC
 
 //Checksheet Tembin
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/tembin/checksheettembin/{tembinNumber}', [CheckSheetTembinController::class, 'createForm'])->name('checksheettembin');
     Route::post('/dashboard/tembin/process-checksheet-tembin/{tembinNumber}', [CheckSheetTembinController::class, 'store'])->name('process.checksheet.tembin');
     Route::delete('/dashboard/check-sheet/tembin/{id}', [CheckSheetTembinController::class, 'destroy'])->name('tembin.checksheettembin.destroy');
@@ -350,7 +354,7 @@ Route::get('/dashboard/check-sheet/tembin/{id}/show', [CheckSheetTembinControlle
 
 
 //Checksheet Sling Belt
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/sling/checksheetbelt/{slingNumber}', [CheckSheetSlingBeltController::class, 'showForm'])->name('checksheetbelt');
     Route::post('/dashboard/sling/process-checksheet-belt/{slingNumber}', [CheckSheetSlingBeltController::class, 'store'])->name('process.checksheet.belt');
     Route::delete('/dashboard/check-sheet/sling-belt/{id}', [CheckSheetSlingBeltController::class, 'destroy'])->name('sling.checksheetbelt.destroy');
@@ -363,7 +367,7 @@ Route::get('/dashboard/check-sheet/sling-belt/{id}/show', [CheckSheetSlingBeltCo
 
 
 //Checksheet Sling Wire
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/sling/checksheetwire/{slingNumber}', [CheckSheetSlingWireController::class, 'showForm'])->name('checksheetwire');
     Route::post('/dashboard/sling/process-checksheet-wire/{slingNumber}', [CheckSheetSlingWireController::class, 'store'])->name('process.checksheet.wire');
     Route::delete('/dashboard/check-sheet/sling-wire/{id}', [CheckSheetSlingWireController::class, 'destroy'])->name('sling.checksheetwire.destroy');
@@ -377,7 +381,7 @@ Route::get('/dashboard/check-sheet/sling-wire/{id}/show', [CheckSheetSlingWireCo
 
 
 //Checksheet Eyewasher
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/eyewasher/checksheeteyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'showForm'])->name('checksheeteyewasher');
     Route::post('/dashboard/eyewasher/process-checksheet-eyewasher/{eyewasherNumber}', [CheckSheetEyewasherOnlyController::class, 'store'])->name('process.checksheet.eyewasher');
     Route::delete('/dashboard/check-sheet/eyewasher/{id}', [CheckSheetEyewasherOnlyController::class, 'destroy'])->name('eyewasher.checksheeteyewasher.destroy');
@@ -388,7 +392,7 @@ Route::get('/dashboard/check-sheet/eyewasher/{id}/show', [CheckSheetEyewasherOnl
 
 
 //Checksheet Eyewasher Shower
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/eyewasher/checksheetshower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'showForm'])->name('checksheetshower');
     Route::post('/dashboard/eyewasher/process-checksheet-shower/{eyewasherNumber}', [CheckSheetEyewasherShowerController::class, 'store'])->name('process.checksheet.shower');
     Route::delete('/dashboard/check-sheet/eyewasher-show/{id}', [CheckSheetEyewasherShowerController::class, 'destroy'])->name('eyewasher.checksheetshower.destroy');
@@ -401,7 +405,7 @@ Route::get('/dashboard/check-sheet/eyewasher-shower/{id}/show', [CheckSheetEyewa
 
 //Checksheet CO2
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/co2/checksheetco2/{co2Number}', [CheckSheetTabungCo2Controller::class, 'createForm'])->name('checksheettabungco2');
     Route::post('/dashboard/co2/process-checksheet-co2/{tabungNumber}', [CheckSheetTabungCo2Controller::class, 'store'])->name('process.checksheet.tabungco2');
     Route::delete('/dashboard/check-sheet/co2/{id}', [CheckSheetTabungCo2Controller::class, 'destroy'])->name('co2.checksheetco2.destroy');
@@ -413,7 +417,7 @@ Route::get('/dashboard/check-sheet/co2/{id}/show', [CheckSheetTabungCo2Controlle
 
 
 // Untuk Checksheet Nitrogen
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/nitrogen/checksheetnitrogen/{nitrogenNumber}', [CheckSheetNitrogenServerController::class, 'createForm'])->name('checksheetnitrogen');
     Route::post('/dashboard/hydrant/process-checksheet-nitrogen/{tabungNumber}', [CheckSheetNitrogenServerController::class, 'store'])->name('process.checksheet.nitrogen');
     Route::delete('/dashboard/check-sheet/nitrogen/{id}', [CheckSheetNitrogenServerController::class, 'destroy'])->name('nitrogen.checksheetnitrogen.destroy');
@@ -426,7 +430,7 @@ Route::get('/dashboard/check-sheet/nitrogen/{id}/show', [CheckSheetNitrogenServe
 
 use App\Http\Controllers\CheckSheetHydrantIndoorController;
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/hydrant/checksheetindoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'showForm'])->name('checksheetindoor');
     Route::post('/dashboard/hydrant/process-checksheet-hydrant-indoor/{hydrantNumber}', [CheckSheetHydrantIndoorController::class, 'store'])->name('process.checksheet.indoor');
     Route::delete('/dashboard/check-sheet/hydrantindoor/{id}', [CheckSheetHydrantIndoorController::class, 'destroy'])->name('hydrant.checksheetindoor.destroy');
@@ -439,7 +443,7 @@ Route::get('/dashboard/check-sheet/hydrantindoor/{id}/show', [CheckSheetHydrantI
 
 use App\Http\Controllers\CheckSheetHydrantOutdoorController;
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/hydrant/checksheetoutdoor/{hydrantNumber}', [CheckSheetHydrantOutdoorController::class, 'showForm'])->name('checksheetoutdoor');
     Route::post('/dashboard/hydrant/process-checksheet-hydrant-outdoor/{hydrantNumber}', [CheckSheetHydrantOutdoorController::class, 'store'])->name('process.checksheet.outdoor');
     Route::delete('/dashboard/check-sheet/hydrantoutdoor/{id}', [CheckSheetHydrantOutdoorController::class, 'destroy'])->name('hydrant.checksheetoutdoor.destroy');
@@ -453,7 +457,7 @@ Route::get('/dashboard/check-sheet/hydrantoutdoor/{id}/show', [CheckSheetHydrant
 use App\Http\Controllers\CheckSheetCo2Controller;
 
 // Menggunakan middleware auth untuk routes terkait checksheetco2
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/check-sheet/aparco2/{tagNumber}', [CheckSheetCo2Controller::class, 'showForm'])->name('checksheetco2');
     Route::post('/dashboard/apar/process-checksheet-co2-af11e/{tagNumber}', [CheckSheetCo2Controller::class, 'store'])->name('process.checksheet.co2');
     Route::delete('/dashboard/check-sheet/aparco2/{id}', [CheckSheetCo2Controller::class, 'destroy'])->name('apar.checksheetco2.destroy');
@@ -466,7 +470,7 @@ Route::get('/dashboard/check-sheet/aparco2/{id}/show', [CheckSheetCo2Controller:
 use App\Http\Controllers\CheckSheetPowderController;
 
 // Menggunakan middleware auth untuk routes terkait checksheetpowder
-Route::middleware(['admin'])->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/dashboard/check-sheet/aparpowder/{tagNumber}', [CheckSheetPowderController::class, 'showForm'])->name('checksheetpowder');
     Route::post('/dashboard/apar/process-checksheet-powder/{tagNumber}', [CheckSheetPowderController::class, 'store'])->name('process.checksheet.powder');
     Route::delete('/dashboard/check-sheet/aparpowder/{id}', [CheckSheetPowderController::class, 'destroy'])->name('apar.checksheetpowder.destroy');

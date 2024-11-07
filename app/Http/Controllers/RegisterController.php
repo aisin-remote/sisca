@@ -9,28 +9,33 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
-    public function index ()
+    public function index()
     {
         return view('auth.register');
     }
 
-    public function store (Request $request)
+    public function store(Request $request)
     {
+        // Validasi input
         $validatedData = $request->validate([
             'name' => 'required',
             'npk' => 'required|unique:users',
-            'password' => ['required', Password::min(8)]
+            'password' => ['required', Password::min(8)],
+            'role' => 'required|in:User,MTE', // Menambahkan validasi role
         ]);
 
+        // Validasi konfirmasi password
         $request->validate([
             'password_confirmation' => 'required|same:password'
         ]);
 
-
+        // Hash password
         $validatedData['password'] = Hash::make($validatedData['password']);
 
+        // Simpan data user ke database
         User::create($validatedData);
 
-        return redirect('/login') -> with('message', "Registrasi berhasil! Silahkan login");
+        // Redirect ke halaman login dengan pesan sukses
+        return redirect('/login')->with('message', "Registrasi berhasil! Silahkan login");
     }
 }

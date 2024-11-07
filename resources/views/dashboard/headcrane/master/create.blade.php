@@ -12,8 +12,8 @@
             <div class="mb-3 col-md-6">
                 <label for="no_headcrane" class="form-label">No Head Crane</label>
                 <input type="text" name="no_headcrane" id="no_headcrane" placeholder="Masukkan No Head Crane"
-                    class="form-control @error('no_headcrane') is-invalid @enderror" value="{{ old('no_headcrane') }}" required
-                    autofocus>
+                    class="form-control @error('no_headcrane') is-invalid @enderror" value="{{ old('no_headcrane') }}"
+                    required autofocus>
                 @error('no_headcrane')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

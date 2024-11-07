@@ -20,8 +20,8 @@ class CheckSheetHeadCraneController extends Controller
 
     public function processForm(Request $request)
     {
-        if (auth()->user()->role != 'Admin') {
-            return back()->with('error', 'Hanya admin yang dapat melakukan check');
+        if (auth()->user()->role != 'Admin' && auth()->user()->role != 'MTE')  {
+            return back()->with('error', 'Hanya admin dan mte yang dapat melakukan check');
         }
 
         $headcraneNumber = $request->input('headcrane_number');

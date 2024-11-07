@@ -5,9 +5,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Info Head Crane</h1>
-        @can('admin')
+        @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
             <a href="{{ route('head-crane.edit', $headcrane->id) }}" class="btn btn-warning">Edit</a>
-        @endcan
+        @endif
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-12">
@@ -89,20 +89,19 @@
                             <th rowspan="2" scope="col" class="text-center align-middle">#</th>
                             <th rowspan="2" scope="col" class="text-center align-middle">Tanggal</th>
                             <th rowspan="2" scope="col" class="text-center align-middle">No Head Crane</th>
-                            <th colspan="10" scope="colgroup" class="text-center">Item Check</th>
+                            <th colspan="9" scope="colgroup" class="text-center">Item Check</th>
                             <th rowspan="2" scope="col" class="text-center align-middle">Aksi</th>
                         </tr>
                         <tr>
-                            <th class="text-center align-middle">Buckle</th>
-                            <th class="text-center align-middle">Seams</th>
-                            <th class="text-center align-middle">Reel</th>
-                            <th class="text-center align-middle">Shock Absorber</th>
-                            <th class="text-center align-middle">Ring</th>
-                            <th class="text-center align-middle">Torso Belt</th>
-                            <th class="text-center align-middle">Strap</th>
-                            <th class="text-center align-middle">Rope</th>
-                            <th class="text-center align-middle">Seam Protection Tube</th>
-                            <th class="text-center align-middle">Hook</th>
+                            <th class="text-center align-middle">Cross Travelling</th>
+                            <th class="text-center align-middle">Long Travellin</th>
+                            <th class="text-center align-middle">Button Up</th>
+                            <th class="text-center align-middle">Button Down</th>
+                            <th class="text-center align-middle">Button Push</th>
+                            <th class="text-center align-middle">Wire Rope</th>
+                            <th class="text-center align-middle">Block Hook</th>
+                            <th class="text-center align-middle">Hom</th>
+                            <th class="text-center align-middle">Emergency Stop</th>
 
                         </tr>
                     </thead>
@@ -114,91 +113,82 @@
                                     {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
                                 <td class="text-center align-middle">{{ $checksheet->headcrane_number }}</td>
 
-                                @if ($checksheet->buckle === 'NG')
+                                @if ($checksheet->cross_travelling === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->buckle }}
+                                        {{ $checksheet->cross_travelling }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->buckle }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->cross_travelling }}</td>
                                 @endif
 
-                                @if ($checksheet->seams === 'NG')
+                                @if ($checksheet->long_travelling === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->seams }}
+                                        {{ $checksheet->long_travelling }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->seams }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->long_travelling }}</td>
                                 @endif
 
-                                @if ($checksheet->reel === 'NG')
+                                @if ($checksheet->button_up === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->reel }}
+                                        {{ $checksheet->button_up }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->reel }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->button_up }}</td>
                                 @endif
 
-                                @if ($checksheet->shock_absorber === 'NG')
+                                @if ($checksheet->button_down === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->shock_absorber }}
+                                        {{ $checksheet->button_down }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->shock_absorber }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->button_down }}</td>
                                 @endif
 
-                                @if ($checksheet->ring === 'NG')
+                                @if ($checksheet->button_push === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->ring }}
+                                        {{ $checksheet->button_push }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->ring }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->button_push }}</td>
                                 @endif
 
-                                @if ($checksheet->torso_belt === 'NG')
+                                @if ($checksheet->wire_rope === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->torso_belt }}
+                                        {{ $checksheet->wire_rope }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->torso_belt }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->wire_rope }}</td>
                                 @endif
 
-                                @if ($checksheet->strap === 'NG')
+                                @if ($checksheet->block_hook === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->strap }}
+                                        {{ $checksheet->block_hook }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->strap }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->block_hook }}</td>
                                 @endif
 
-                                @if ($checksheet->rope === 'NG')
+                                @if ($checksheet->hom === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->rope }}
+                                        {{ $checksheet->hom }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->rope }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->hom }}</td>
                                 @endif
 
-                                @if ($checksheet->seam_protection_tube === 'NG')
+                                @if ($checksheet->emergency_stop === 'NG')
                                     <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->seam_protection_tube }}
+                                        {{ $checksheet->emergency_stop }}
                                     </td>
                                 @else
-                                    <td class="text-center align-middle">{{ $checksheet->seam_protection_tube }}</td>
+                                    <td class="text-center align-middle">{{ $checksheet->emergency_stop }}</td>
                                 @endif
-
-                                @if ($checksheet->hook === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->hook }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->hook }}</td>
-                                @endif
-
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{ route('headcrane.checksheetheadcrane.show', $checksheet->id) }}"
                                             class="badge bg-info me-2">Info</a>
-                                        @can('admin')
+                                        @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
                                             <a href="{{ route('headcrane.checksheetheadcrane.edit', $checksheet->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
@@ -209,7 +199,7 @@
                                                 <button type="submit" class="badge bg-danger border-0"
                                                     onclick="return confirm('Ingin menghapus Data Check Sheet Head Crane?')">Delete</button>
                                             </form>
-                                        @endcan
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

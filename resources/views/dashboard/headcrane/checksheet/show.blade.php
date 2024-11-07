@@ -5,9 +5,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h1>Detail Check Sheet Head Crane</h1>
-        @can('admin')
+        @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
             <a href="{{ route('headcrane.checksheetheadcrane.edit', $checksheet->id) }}" class="btn btn-warning">Edit</a>
-        @endcan
+        @endif
     </div>
     <div class="card col-md-12">
         <div class="card-body">

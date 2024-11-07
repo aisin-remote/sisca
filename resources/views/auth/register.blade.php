@@ -52,6 +52,19 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
+                                    <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                                    <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
+                                        <option value="" disabled selected>Select role</option>
+                                        <option value="User" {{ old('role') == 'User' ? 'selected' : '' }}>Safety</option>
+                                        <option value="MTE" {{ old('role') == 'MTE' ? 'selected' : '' }}>MTE</option>
+                                    </select>
+                                    @error('role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
                                     <label for="password" class="form-label">Password <span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
