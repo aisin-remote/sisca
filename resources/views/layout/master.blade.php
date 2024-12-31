@@ -18,7 +18,7 @@
     <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="{{ asset('dist/cssbootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap-icons.css') }}">
 
     <!-- CSS-->
     <link rel="stylesheet" href="/css/style.css">
