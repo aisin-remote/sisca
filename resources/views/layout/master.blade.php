@@ -13,8 +13,7 @@
     <link rel="icon" href="/foto/aii.ico">
 
     <!-- CSS & JS Bootstrap -->
-    <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">
     <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
