@@ -11,8 +11,7 @@
     <link rel="icon" href="/foto/aii.ico">
 
     {{-- CSS & JS Bootstrap --}}
-    <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">
     <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
@@ -36,9 +35,7 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <!-- Popper.JS -->
-    <script src="{{ asset('dist/js/popper.min.js') }}"
-        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
-    </script>
+    <script src="{{ asset('dist/js/popper.min.js') }}" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="{{ asset('dist/js/bootstrap.min.js') }}"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
