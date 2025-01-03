@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckSheetHeadCrane;
 use App\Models\HeadCrane;
+use App\Models\ItemCheckHeadCrane;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -85,5 +86,9 @@ class HeadCraneController extends Controller
         $headcrane->delete();
 
         return redirect()->route('head-crane.index')->with('success', 'Data Head Crane berhasil dihapus');
+    }
+    public function location()
+    {
+        return view('dashboard.headcrane.location.index');
     }
 }

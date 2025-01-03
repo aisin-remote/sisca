@@ -107,6 +107,14 @@ Route::get('/dashboard/location/hydrant/indoor', function () {
     return view('dashboard.hydrant.location.indoor');
 })->middleware('auth');
 
+//Lokasi HeadCrane
+Route::get('/dashboard/location/headcrane', [HeadcraneController::class, 'location'])->name('headcrane.location.index')->middleware('auth');
+Route::get('/dashboard/location/headcrane/demag', function () {
+    return view('dashboard.headcrane.location.demag');
+})->middleware('auth');
+Route::get('/dashboard/location/headcrane/kito', function () {
+    return view('dashboard.headcrane.location.kito');
+})->middleware('auth');
 
 // Route Hydrant
 Route::resource('/dashboard/master/hydrant', HydrantController::class)->only(['create', 'store', 'edit', 'destroy'])->middleware('admin');
@@ -308,7 +316,6 @@ Route::delete('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneContr
 Route::get('/dashboard/check-sheet/headcrane/{id}/edit', [CheckSheetHeadCraneController::class, 'edit'])->name('headcrane.checksheetheadcrane.edit');
 Route::put('/dashboard/check-sheet/headcrane/{id}', [CheckSheetHeadCraneController::class, 'update'])->name('headcrane.checksheetheadcrane.update');
 Route::get('/dashboard/check-sheet/headcrane/{id}/show', [CheckSheetHeadCraneController::class, 'show'])->name('headcrane.checksheetheadcrane.show')->middleware('auth');
-
 
 
 //Checksheet Body Harnest

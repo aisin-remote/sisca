@@ -26,15 +26,23 @@
             </a>
             <ul class="collapse list-unstyled {{ Request::is('dashboard/location*') ? 'show' : '' }}"
                 id="locationSubmenu">
-                <li class="{{ Request::is('dashboard/location/all-equipment*') ? 'active' : '' }} submenu">
-                    <a class="nav-link" href="/dashboard/location/all-equipment">All Equipment</a>
-                </li>
-                <li class="{{ Request::is('dashboard/location/apar*') ? 'active' : '' }} submenu">
-                    <a class="nav-link" href="/dashboard/location/apar">Apar</a>
-                </li>
-                <li class="{{ Request::is('dashboard/location/hydrant*') ? 'active' : '' }} submenu">
-                    <a class="nav-link" href="/dashboard/location/hydrant">Hydrant</a>
-                </li>
+                @if (Auth::check() && Auth::user()->role === 'Admin')
+                    <li class="{{ Request::is('dashboard/location/all-equipment*') ? 'active' : '' }} submenu">
+                        <a class="nav-link" href="/dashboard/location/all-equipment">All Equipment</a>
+                    </li>
+                    <li class="{{ Request::is('dashboard/location/apar*') ? 'active' : '' }} submenu">
+                        <a class="nav-link" href="/dashboard/location/apar">Apar</a>
+                    </li>
+                    <li class="{{ Request::is('dashboard/location/hydrant*') ? 'active' : '' }} submenu">
+                        <a class="nav-link" href="/dashboard/location/hydrant">Hydrant</a>
+                    </li>
+                @endif
+                @if (Auth::check() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'MTE'))
+                    <li class="{{ Request::is('dashboard/location/headcrane*') ? 'active' : '' }} submenu">
+                        <a class="nav-link" href="/dashboard/location/headcrane">HeadCrane</a>
+                    </li>
+                @endif
+
             </ul>
         </li>
         <li class="{{ Request::is('dashboard/master*') ? 'active show' : '' }} menu">

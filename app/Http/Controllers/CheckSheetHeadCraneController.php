@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckSheetHeadCrane;
 use App\Models\HeadCrane;
+use App\Models\ItemCheckHeadCrane;
+use App\Models\ProsedurItemCheckHeadCrane;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -13,14 +16,18 @@ class CheckSheetHeadCraneController extends Controller
 {
     public function showForm()
     {
-        $latestCheckSheetHeadCranes = CheckSheetHeadCrane::orderBy('updated_at', 'desc')->take(10)->get();
+        $latestCheckSheetHeadCranes = CheckSheetHeadCrane::orderBy('updated_at', 'desc')
+            ->distinct('headcrane_number') // Menyaring duplikat berdasarkan headcrane_number
+            ->take(10) // Ambil 10 hasil terbaru
+            ->get();
+
 
         return view('dashboard.headcrane.checksheet.check', compact('latestCheckSheetHeadCranes'));
     }
 
     public function processForm(Request $request)
     {
-        if (auth()->user()->role != 'Admin' && auth()->user()->role != 'MTE')  {
+        if (auth()->user()->role != 'Admin' && auth()->user()->role != 'MTE') {
             return back()->with('error', 'Hanya admin dan mte yang dapat melakukan check');
         }
 
@@ -41,259 +48,272 @@ class CheckSheetHeadCraneController extends Controller
     {
         $latestCheckSheetHeadCranes = CheckSheetHeadCrane::orderBy('updated_at', 'desc')->take(10)->get();
 
-        // Mencari entri Co2 berdasarkan no_tabung
+        // Mencari entri HeadCrane berdasarkan nomor headcrane
         $headcrane = HeadCrane::where('no_headcrane', $headcraneNumber)->first();
-
         if (!$headcrane) {
-            // Jika no_tabung tidak ditemukan, tampilkan pesan kesalahan
-            return redirect()->route('headcrane.show.form', compact('latestCheckSheetHeadCranes'))->with('error', 'Head Crane Number tidak ditemukan.');
+            return redirect()->route('headcrane.show.form', compact('latestCheckSheetHeadCranes'))
+                ->with('error', 'Head Crane Number tidak ditemukan.');
         }
 
         $headcraneNumber = strtoupper($headcraneNumber);
 
         // Mendapatkan bulan dan tahun saat ini
-        $currentMonth = Carbon::now()->month; // Mengatur $currentMonth menjadi Januari
-        $currentYear = Carbon::now()->year; // Mengatur $currentYear menjadi 2024
-
-
-        // Menghitung musim berdasarkan bulan saat ini
-        if ($currentMonth >= 4 && $currentMonth <= 6) {
-            // Musim 1 (Februari, Maret, April)
-            $season = 1;
-        } elseif ($currentMonth >= 7 && $currentMonth <= 9) {
-            // Musim 2 (Mei, Juni, Juli)
-            $season = 2;
-        } elseif ($currentMonth >= 10 && $currentMonth <= 12) {
-            // Musim 3 (Agustus, September, Oktober)
-            $season = 3;
-        } else {
-            // Musim 4 (November, Desember, Januari tahun sebelumnya)
-            $season = 4;
-        }
-
-        // Menghitung bulan awal musim untuk melakukan pengecekan
-        if ($season == 1) {
-            $startMonth = 4;
-        } elseif ($season == 2) {
-            $startMonth = 7;
-        } elseif ($season == 3) {
-            $startMonth = 10;
-        } else {
-            $startMonth = 1;
-        }
-
-        // Mencari entri CheckSheetSlingWire untuk sling_number tertentu dan 3 bulan musim tersebut
-        $existingCheckSheet = CheckSheetHeadCrane::where('headcrane_number', $headcraneNumber)
-            ->where(function ($query) use ($currentYear, $currentMonth, $startMonth, $season) {
-
-                // Untuk musim lainnya, mencari data pada tahun ini
-                $query->where(function ($q) use ($currentYear, $startMonth) {
-                    $q->whereYear('created_at', $currentYear)
-                        ->whereMonth('created_at', '>=', $startMonth)
-                        ->whereMonth('created_at', '<=', $startMonth + 2);
-                });
-            })
-            ->first();
-
-        if ($existingCheckSheet) {
-            // Jika sudah ada entri, tampilkan halaman edit
-            return redirect()->route('headcrane.checksheetheadcrane.edit', $existingCheckSheet->id)
-                ->with('error', 'Check Sheet headcrane sudah ada untuk headcrane ' . $headcraneNumber . ' pada triwulan ini. Silahkan edit.');
-        } else {
-            // Jika belum ada entri, tampilkan halaman create
-            $checkSheetHeadCranes = CheckSheetHeadCrane::all();
-            return view('dashboard.headcrane.checksheet.checkheadcrane', compact('checkSheetHeadCranes', 'headcraneNumber'));
-        }
-    }
-
-    public function store(Request $request)
-    {
-        // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
         // Menghitung musim berdasarkan bulan saat ini
-        if ($currentMonth >= 4 && $currentMonth <= 6) {
-            // Musim 1 (Februari, Maret, April)
-            $season = 1;
-        } elseif ($currentMonth >= 7 && $currentMonth <= 9) {
-            // Musim 2 (Mei, Juni, Juli)
-            $season = 2;
-        } elseif ($currentMonth >= 10 && $currentMonth <= 12) {
-            // Musim 3 (Agustus, September, Oktober)
-            $season = 3;
-        } else {
-            // Musim 4 (November, Desember, Januari tahun sebelumnya)
-            $season = 4;
-        }
+        $season = match (true) {
+            $currentMonth >= 4 && $currentMonth <= 6 => 1,
+            $currentMonth >= 7 && $currentMonth <= 9 => 2,
+            $currentMonth >= 10 && $currentMonth <= 12 => 3,
+            default => 4,
+        };
 
         // Menghitung bulan awal musim untuk melakukan pengecekan
-        if ($season == 1) {
-            $startMonth = 4;
-        } elseif ($season == 2) {
-            $startMonth = 7;
-        } elseif ($season == 3) {
-            $startMonth = 10;
-        } else {
-            $startMonth = 1;
-        }
+        $startMonth = match ($season) {
+            1 => 4,
+            2 => 7,
+            3 => 10,
+            4 => 1,
+        };
 
-        // // Mencari entri CheckSheetIndoor untuk bulan dan tahun saat ini
-        // $existingCheckSheet = CheckSheetBodyHarnest::where('bodyharnest_number', $request->bodyharnest_number)
-        //     ->whereYear('created_at', $currentYear)
-        //     ->whereMonth('created_at', $currentMonth)
-        //     ->first();
-        // Mencari entri CheckSheetSlingWire untuk sling_number tertentu dan 3 bulan musim tersebut
-        $existingCheckSheet = CheckSheetHeadCrane::where('headcrane_number', $request->headcrane_number)
-            ->where(function ($query) use ($currentYear, $startMonth, $season) {
-
-                // Untuk musim lainnya, mencari data pada tahun ini
-                $query->where(function ($q) use ($currentYear, $startMonth) {
-                    $q->whereYear('created_at', $currentYear)
-                        ->whereMonth('created_at', '>=', $startMonth)
-                        ->whereMonth('created_at', '<=', $startMonth + 2);
-                });
-            })
+        // Mencari entri CheckSheetHeadCrane berdasarkan nomor headcrane dan triwulan
+        $existingCheckSheet = CheckSheetHeadCrane::where('headcrane_number', $headcraneNumber)
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', '>=', $startMonth)
+            ->whereMonth('created_at', '<=', $startMonth + 2)
             ->first();
 
         if ($existingCheckSheet) {
-            // Jika sudah ada entri, perbarui entri tersebut
-            $validatedData = $request->validate([
-                'tanggal_pengecekan' => 'required|date',
-                'npk' => 'required',
-                'headcrane_number' => 'required',
-                'cross_travelling' => 'required',
-                'catatan_cross_travelling' => 'nullable|string|max:255',
-                'photo_cross_travelling' => 'required|image|file|max:3072',
-                'long_travelling' => 'required',
-                'catatan_long_travelling' => 'nullable|string|max:255',
-                'photo_long_travelling' => 'required|image|file|max:3072',
-                'button_up' => 'required',
-                'catatan_button_up' => 'nullable|string|max:255',
-                'photo_button_up' => 'required|image|file|max:3072',
-                'button_down' => 'required',
-                'catatan_button_down' => 'nullable|string|max:255',
-                'photo_button_down' => 'required|image|file|max:3072',
-                'button_push' => 'required',
-                'catatan_button_push' => 'nullable|string|max:255',
-                'photo_button_push' => 'required|image|file|max:3072',
-                'wire_rope' => 'required',
-                'catatan_wire_rope' => 'nullable|string|max:255',
-                'photo_wire_rope' => 'required|image|file|max:3072',
-                'block_hook' => 'required',
-                'catatan_block_hook' => 'nullable|string|max:255',
-                'photo_block_hook' => 'required|image|file|max:3072',
-                'hom' => 'required',
-                'catatan_hom' => 'nullable|string|max:255',
-                'photo_hom' => 'required|image|file|max:3072',
-                'emergency_stop' => 'required',
-                'catatan_emergency_stop' => 'nullable|string|max:255',
-                'photo_emergency_stop' => 'required|image|file|max:3072',
-                // tambahkan validasi untuk atribut lainnya
-            ]);
-
-            $validatedData['headcrane_number'] = strtoupper($validatedData['headcrane_number']);
-
-            if ($request->file('photo_cross_travelling') && $request->file('photo_long_travelling') && $request->file('photo_button_up') && $request->file('photo_button_down') && $request->file('photo_button_push') && $request->file('photo_wire_rope') && $request->file('photo_block_hook') && $request->file('photo_hom') && $request->file('photo_emergency_stop') && $request->file('photo_hook')) {
-                $validatedData['photo_cross_travelling'] = $request->file('photo_cross_travelling')->store('checksheet-head-crane');
-                $validatedData['photo_long_travelling'] = $request->file('photo_long_travelling')->store('checksheet-head-crane');
-                $validatedData['photo_button_up'] = $request->file('photo_button_up')->store('checksheet-head-crane');
-                $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
-                $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
-                $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
-                $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
-                $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
-                $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
-            }
-
-            // Perbarui data entri yang sudah ada
-            $existingCheckSheet->update($validatedData);
-
-            return redirect()->route('headcrane.show.form')->with('success', 'Data berhasil diperbarui.');
+            return redirect()->route('headcrane.checksheetheadcrane.edit', $existingCheckSheet->id)
+                ->with('error', 'Check Sheet headcrane sudah ada untuk headcrane ' . $headcraneNumber . ' pada triwulan ini. Silahkan edit.');
         } else {
-            // Jika sudah ada entri, perbarui entri tersebut
-            $validatedData = $request->validate([
-                'tanggal_pengecekan' => 'required|date',
-                'npk' => 'required',
-                'headcrane_number' => 'required',
-                'cross_travelling' => 'required',
-                'catatan_cross_travelling' => 'nullable|string|max:255',
-                'photo_cross_travelling' => 'required|image|file|max:3072',
-                'long_travelling' => 'required',
-                'catatan_long_travelling' => 'nullable|string|max:255',
-                'photo_long_travelling' => 'required|image|file|max:3072',
-                'button_up' => 'required',
-                'catatan_button_up' => 'nullable|string|max:255',
-                'photo_button_up' => 'required|image|file|max:3072',
-                'button_down' => 'required',
-                'catatan_button_down' => 'nullable|string|max:255',
-                'photo_button_down' => 'required|image|file|max:3072',
-                'button_push' => 'required',
-                'catatan_button_push' => 'nullable|string|max:255',
-                'photo_button_push' => 'required|image|file|max:3072',
-                'wire_rope' => 'required',
-                'catatan_wire_rope' => 'nullable|string|max:255',
-                'photo_wire_rope' => 'required|image|file|max:3072',
-                'block_hook' => 'required',
-                'catatan_block_hook' => 'nullable|string|max:255',
-                'photo_block_hook' => 'required|image|file|max:3072',
-                'hom' => 'required',
-                'catatan_hom' => 'nullable|string|max:255',
-                'photo_hom' => 'required|image|file|max:3072',
-                'emergency_stop' => 'required',
-                'catatan_emergency_stop' => 'nullable|string|max:255',
-                'photo_emergency_stop' => 'required|image|file|max:3072',
+            // Ambil semua item checksheet dan prosedur terkait
+            $itemChecksheets = ItemCheckHeadCrane::with('procedures')->get(); // Mengambil data prosedur terkait melalui relasi
 
-                // tambahkan validasi untuk atribut lainnya
-            ]);
-
-            $validatedData['headcrane_number'] = strtoupper($validatedData['headcrane_number']);
-
-            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
-            $tanggalPengecekan = Carbon::parse($validatedData['tanggal_pengecekan']);
-            $bulan = $tanggalPengecekan->month;
-
-            // Tentukan tanggal awal kuartal berdasarkan bulan
-            if ($bulan >= 4 && $bulan <= 6) {
-                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 4, 1); // Kuartal 1
-            } elseif ($bulan >= 7 && $bulan <= 9) {
-                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 7, 1); // Kuartal 2
-            } elseif ($bulan >= 10 && $bulan <= 12) {
-                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 10, 1); // Kuartal 3
-            } else {
-                // Jika bulan di luar kuartal, maka masuk ke kuartal 4
-                $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 1, 1); // Kuartal 4
-
-                // Jika bulan adalah Januari, kurangi tahun sebelumnya
-                if ($bulan >= 1 && $bulan <= 3) {
-                    $tanggalAwalKuartal->subYear();
-                }
-            }
-
-            // Set tanggal_pengecekan sesuai dengan tanggal awal kuartal
-            $validatedData['tanggal_pengecekan'] = $tanggalAwalKuartal;
-
-            if ($request->file('photo_cross_travelling') && $request->file('photo_long_travelling') && $request->file('photo_button_up') && $request->file('photo_button_down') && $request->file('photo_button_push') && $request->file('photo_wire_rope') && $request->file('photo_block_hook') && $request->file('photo_hom') && $request->file('photo_emergency_stop') && $request->file('photo_hook')) {
-                $validatedData['photo_cross_travelling'] = $request->file('photo_buckle')->store('checksheet-head-crane');
-                $validatedData['photo_long_travelling'] = $request->file('photo_seams')->store('checksheet-head-crane');
-                $validatedData['photo_button_up'] = $request->file('photo_reel')->store('checksheet-head-crane');
-                $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
-                $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
-                $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
-                $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
-                $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
-                $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
-            }
-
-            // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
-            $validatedData['npk'] = auth()->user()->npk;
-
-            // Simpan data baru ke database menggunakan metode create
-            CheckSheetHeadCrane::create($validatedData);
-
-            return redirect()->route('headcrane.show.form')->with('success', 'Data berhasil disimpan.');
+            return view('dashboard.headcrane.checksheet.checkheadcrane', compact('latestCheckSheetHeadCranes', 'headcraneNumber', 'itemChecksheets'));
         }
     }
+    public function store(Request $request, $headcraneNumber)
+    {
+        $validated = $request->validate([
+            'tanggal_pengecekan' => 'required|date',
+            'npk' => 'required|string',
+            'headcrane_number' => 'required|string',
+            // Validasi untuk setiap check, photo, dan catatan
+            // Contoh: check_item_id, photo_item_id, note_item_id
+        ]);
+
+        foreach ($request->all() as $key => $value) {
+            // Proses untuk setiap data yang diterima
+            if (strpos($key, 'check_') === 0) {
+                $itemId = explode('_', $key)[1];
+                $procedureId = explode('_', $key)[2];
+
+                // Simpan data ke database
+                CheckSheetHeadCrane::create([
+                    'tanggal_pengecekan' => $request->tanggal_pengecekan,
+                    'npk' => $request->npk,
+                    'headcrane_number' => $request->headcrane_number,
+                    'id_prosedur_item_check' => $procedureId,
+                    'check' => $value,
+                    'catatan' => $request->input("note_{$itemId}_{$procedureId}"),
+                    'photo' => $request->file("photo_{$itemId}_{$procedureId}") ? $request->file("photo_{$itemId}_{$procedureId}")->store('photos') : null,
+                ]);
+            }
+        }
+
+        return redirect()->route('CheckSheetHeadCrane')->with('success', 'Data berhasil disimpan.');
+    }
+
+    // public function store(Request $request)
+    // {
+    //     // Mendapatkan bulan dan tahun saat ini
+    //     $currentMonth = Carbon::now()->month;
+    //     $currentYear = Carbon::now()->year;
+
+    //     // Menghitung musim berdasarkan bulan saat ini
+    //     if ($currentMonth >= 4 && $currentMonth <= 6) {
+    //         // Musim 1 (Februari, Maret, April)
+    //         $season = 1;
+    //     } elseif ($currentMonth >= 7 && $currentMonth <= 9) {
+    //         // Musim 2 (Mei, Juni, Juli)
+    //         $season = 2;
+    //     } elseif ($currentMonth >= 10 && $currentMonth <= 12) {
+    //         // Musim 3 (Agustus, September, Oktober)
+    //         $season = 3;
+    //     } else {
+    //         // Musim 4 (November, Desember, Januari tahun sebelumnya)
+    //         $season = 4;
+    //     }
+
+    //     // Menghitung bulan awal musim untuk melakukan pengecekan
+    //     if ($season == 1) {
+    //         $startMonth = 4;
+    //     } elseif ($season == 2) {
+    //         $startMonth = 7;
+    //     } elseif ($season == 3) {
+    //         $startMonth = 10;
+    //     } else {
+    //         $startMonth = 1;
+    //     }
+
+    //     // // Mencari entri CheckSheetIndoor untuk bulan dan tahun saat ini
+    //     // $existingCheckSheet = CheckSheetBodyHarnest::where('bodyharnest_number', $request->bodyharnest_number)
+    //     //     ->whereYear('created_at', $currentYear)
+    //     //     ->whereMonth('created_at', $currentMonth)
+    //     //     ->first();
+    //     // Mencari entri CheckSheetSlingWire untuk sling_number tertentu dan 3 bulan musim tersebut
+    //     $existingCheckSheet = CheckSheetHeadCrane::where('headcrane_number', $request->headcrane_number)
+    //         ->where(function ($query) use ($currentYear, $startMonth, $season) {
+
+    //             // Untuk musim lainnya, mencari data pada tahun ini
+    //             $query->where(function ($q) use ($currentYear, $startMonth) {
+    //                 $q->whereYear('created_at', $currentYear)
+    //                     ->whereMonth('created_at', '>=', $startMonth)
+    //                     ->whereMonth('created_at', '<=', $startMonth + 2);
+    //             });
+    //         })
+    //         ->first();
+
+    //     if ($existingCheckSheet) {
+    //         // Jika sudah ada entri, perbarui entri tersebut
+    //         $validatedData = $request->validate([
+    //             'tanggal_pengecekan' => 'required|date',
+    //             'npk' => 'required',
+    //             'headcrane_number' => 'required',
+    //             'cross_travelling' => 'required',
+    //             'catatan_cross_travelling' => 'nullable|string|max:255',
+    //             'photo_cross_travelling' => 'required|image|file|max:3072',
+    //             'long_travelling' => 'required',
+    //             'catatan_long_travelling' => 'nullable|string|max:255',
+    //             'photo_long_travelling' => 'required|image|file|max:3072',
+    //             'button_up' => 'required',
+    //             'catatan_button_up' => 'nullable|string|max:255',
+    //             'photo_button_up' => 'required|image|file|max:3072',
+    //             'button_down' => 'required',
+    //             'catatan_button_down' => 'nullable|string|max:255',
+    //             'photo_button_down' => 'required|image|file|max:3072',
+    //             'button_push' => 'required',
+    //             'catatan_button_push' => 'nullable|string|max:255',
+    //             'photo_button_push' => 'required|image|file|max:3072',
+    //             'wire_rope' => 'required',
+    //             'catatan_wire_rope' => 'nullable|string|max:255',
+    //             'photo_wire_rope' => 'required|image|file|max:3072',
+    //             'block_hook' => 'required',
+    //             'catatan_block_hook' => 'nullable|string|max:255',
+    //             'photo_block_hook' => 'required|image|file|max:3072',
+    //             'hom' => 'required',
+    //             'catatan_hom' => 'nullable|string|max:255',
+    //             'photo_hom' => 'required|image|file|max:3072',
+    //             'emergency_stop' => 'required',
+    //             'catatan_emergency_stop' => 'nullable|string|max:255',
+    //             'photo_emergency_stop' => 'required|image|file|max:3072',
+    //             // tambahkan validasi untuk atribut lainnya
+    //         ]);
+
+    //         $validatedData['headcrane_number'] = strtoupper($validatedData['headcrane_number']);
+
+    //         if ($request->file('photo_cross_travelling') && $request->file('photo_long_travelling') && $request->file('photo_button_up') && $request->file('photo_button_down') && $request->file('photo_button_push') && $request->file('photo_wire_rope') && $request->file('photo_block_hook') && $request->file('photo_hom') && $request->file('photo_emergency_stop') && $request->file('photo_hook')) {
+    //             $validatedData['photo_cross_travelling'] = $request->file('photo_cross_travelling')->store('checksheet-head-crane');
+    //             $validatedData['photo_long_travelling'] = $request->file('photo_long_travelling')->store('checksheet-head-crane');
+    //             $validatedData['photo_button_up'] = $request->file('photo_button_up')->store('checksheet-head-crane');
+    //             $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
+    //             $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
+    //             $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
+    //             $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
+    //             $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
+    //             $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
+    //         }
+
+    //         // Perbarui data entri yang sudah ada
+    //         $existingCheckSheet->update($validatedData);
+
+    //         return redirect()->route('headcrane.show.form')->with('success', 'Data berhasil diperbarui.');
+    //     } else {
+    //         // Jika sudah ada entri, perbarui entri tersebut
+    //         $validatedData = $request->validate([
+    //             'tanggal_pengecekan' => 'required|date',
+    //             'npk' => 'required',
+    //             'headcrane_number' => 'required',
+    //             'cross_travelling' => 'required',
+    //             'catatan_cross_travelling' => 'nullable|string|max:255',
+    //             'photo_cross_travelling' => 'required|image|file|max:3072',
+    //             'long_travelling' => 'required',
+    //             'catatan_long_travelling' => 'nullable|string|max:255',
+    //             'photo_long_travelling' => 'required|image|file|max:3072',
+    //             'button_up' => 'required',
+    //             'catatan_button_up' => 'nullable|string|max:255',
+    //             'photo_button_up' => 'required|image|file|max:3072',
+    //             'button_down' => 'required',
+    //             'catatan_button_down' => 'nullable|string|max:255',
+    //             'photo_button_down' => 'required|image|file|max:3072',
+    //             'button_push' => 'required',
+    //             'catatan_button_push' => 'nullable|string|max:255',
+    //             'photo_button_push' => 'required|image|file|max:3072',
+    //             'wire_rope' => 'required',
+    //             'catatan_wire_rope' => 'nullable|string|max:255',
+    //             'photo_wire_rope' => 'required|image|file|max:3072',
+    //             'block_hook' => 'required',
+    //             'catatan_block_hook' => 'nullable|string|max:255',
+    //             'photo_block_hook' => 'required|image|file|max:3072',
+    //             'hom' => 'required',
+    //             'catatan_hom' => 'nullable|string|max:255',
+    //             'photo_hom' => 'required|image|file|max:3072',
+    //             'emergency_stop' => 'required',
+    //             'catatan_emergency_stop' => 'nullable|string|max:255',
+    //             'photo_emergency_stop' => 'required|image|file|max:3072',
+
+    //             // tambahkan validasi untuk atribut lainnya
+    //         ]);
+
+    //         $validatedData['headcrane_number'] = strtoupper($validatedData['headcrane_number']);
+
+    //         // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
+    //         $tanggalPengecekan = Carbon::parse($validatedData['tanggal_pengecekan']);
+    //         $bulan = $tanggalPengecekan->month;
+
+    //         // Tentukan tanggal awal kuartal berdasarkan bulan
+    //         if ($bulan >= 4 && $bulan <= 6) {
+    //             $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 4, 1); // Kuartal 1
+    //         } elseif ($bulan >= 7 && $bulan <= 9) {
+    //             $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 7, 1); // Kuartal 2
+    //         } elseif ($bulan >= 10 && $bulan <= 12) {
+    //             $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 10, 1); // Kuartal 3
+    //         } else {
+    //             // Jika bulan di luar kuartal, maka masuk ke kuartal 4
+    //             $tanggalAwalKuartal = Carbon::create($tanggalPengecekan->year, 1, 1); // Kuartal 4
+
+    //             // Jika bulan adalah Januari, kurangi tahun sebelumnya
+    //             if ($bulan >= 1 && $bulan <= 3) {
+    //                 $tanggalAwalKuartal->subYear();
+    //             }
+    //         }
+
+    //         // Set tanggal_pengecekan sesuai dengan tanggal awal kuartal
+    //         $validatedData['tanggal_pengecekan'] = $tanggalAwalKuartal;
+
+    //         if ($request->file('photo_cross_travelling') && $request->file('photo_long_travelling') && $request->file('photo_button_up') && $request->file('photo_button_down') && $request->file('photo_button_push') && $request->file('photo_wire_rope') && $request->file('photo_block_hook') && $request->file('photo_hom') && $request->file('photo_emergency_stop') && $request->file('photo_hook')) {
+    //             $validatedData['photo_cross_travelling'] = $request->file('photo_buckle')->store('checksheet-head-crane');
+    //             $validatedData['photo_long_travelling'] = $request->file('photo_seams')->store('checksheet-head-crane');
+    //             $validatedData['photo_button_up'] = $request->file('photo_reel')->store('checksheet-head-crane');
+    //             $validatedData['photo_button_down'] = $request->file('photo_button_down')->store('checksheet-head-crane');
+    //             $validatedData['photo_button_push'] = $request->file('photo_button_push')->store('checksheet-head-crane');
+    //             $validatedData['photo_wire_rope'] = $request->file('photo_wire_rope')->store('checksheet-head-crane');
+    //             $validatedData['photo_block_hook'] = $request->file('photo_block_hook')->store('checksheet-head-crane');
+    //             $validatedData['photo_hom'] = $request->file('photo_hom')->store('checksheet-head-crane');
+    //             $validatedData['photo_emergency_stop'] = $request->file('photo_emergency_stop')->store('checksheet-head-crane');
+    //         }
+
+    //         // Tambahkan npk ke dalam validated data berdasarkan user yang terautentikasi
+    //         $validatedData['npk'] = auth()->user()->npk;
+
+    //         // Simpan data baru ke database menggunakan metode create
+    //         CheckSheetHeadCrane::create($validatedData);
+
+    //         return redirect()->route('headcrane.show.form')->with('success', 'Data berhasil disimpan.');
+    //     }
+    // }
 
     public function show($id)
     {

@@ -782,7 +782,7 @@
             });
         </script>
     @else
-        <script>
+        {{-- <script>
             // Grafik HeadCrane
 
             var ctxHeadCrane = document.getElementById('HeadCraneChart').getContext('2d'); // Ganti id dengan yang sesuai
@@ -818,7 +818,7 @@
                     }
                 }
             });
-        </script>
+        </script> --}}
     @endif
     {{-- @if (Auth::user()->role == 'MTE')
         <script>
