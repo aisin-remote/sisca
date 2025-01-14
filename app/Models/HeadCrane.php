@@ -15,4 +15,8 @@ class HeadCrane extends Model
     {
         return $this->belongsTo(Location::class, 'location_id', 'id');
     }
+    public function checkSheets()
+    {
+        return $this->hasMany(CheckSheetHeadCrane::class, 'headcrane_id');
+    }
 }

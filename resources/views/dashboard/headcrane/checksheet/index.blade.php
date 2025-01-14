@@ -28,108 +28,46 @@
                             <th scope="col">Tanggal Pengecekan</th>
                             <th scope="col">NPK</th>
                             <th scope="col">No Head Crane</th>
-                            <th scope="col">Cross Travelling</th>
-                            <th scope="col">Long Travelling</th>
-                            <th scope="col">Button Up</th>
-                            <th scope="col">Button Down</th>
-                            <th scope="col">Buttton Push</th>
-                            <th scope="col">Wire Rope</th>
-                            <th scope="col">Block Hook</th>
-                            <th scope="col">Hom</th>
-                            <th scope="col">Emergency Stop</th>
+                            @foreach (['visual_check', 'cross_travelling', 'long_travelling', 'button_up', 'button_down', 'button_push', 'wire_rope', 'block_hook', 'hom', 'emergency_stop'] as $item)
+                                <th scope="col">{{ ucfirst(str_replace('_', ' ', $item)) }}</th>
+                            @endforeach
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($checksheetheadcrane as $checksheet)
+                        @foreach ($groupedChecksheet as $checkSheetId => $itemsByItemCheck)
                             <tr class="text-center align-middle">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
-                                {{-- <td>{{ strftime('%e %B %Y', strtotime($checksheet->updated_at)) }}</td> --}}
-                                <td>{{ $checksheet->npk }}</td>
-                                <td>{{ $checksheet->headcrane_number }}</td>
+                                @php
+                                    $firstItem = collect($itemsByItemCheck)->first(); // Mengambil item pertama
+                                    $tanggalPengecekan = $firstItem['items']->first()->tanggal_pengecekan ?? '-';
+                                    $npk = $firstItem['items']->first()->npk ?? '-';
+                                    $noHeadcrane = $firstItem['items']->first()->no_headcrane ?? '-';
+                                @endphp
+                                <td>{{ $tanggalPengecekan }}</td>
+                                <td>{{ $npk }}</td>
+                                <td>{{ $noHeadcrane }}</td>
 
-                                @if ($checksheet->cross_travelling === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->cross_travelling }}
+                                <!-- Perulangan untuk item -->
+                                @foreach ($itemsByItemCheck as $item)
+                                    <td class="text-center">
+                                        @php
+                                            $countOk = $item['countOk'] ?? 0; // Mengambil jumlah OK
+                                            $total = $item['total'] ?? 0; // Mengambil jumlah total
+                                        @endphp
+                                        {{ $countOk }} / {{ $total }}
                                     </td>
-                                @else
-                                    <td>{{ $checksheet->cross_travelling }}</td>
-                                @endif
-
-                                @if ($checksheet->long_travelling === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->long_travelling }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->long_travelling }}</td>
-                                @endif
-
-                                @if ($checksheet->button_up === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->button_up }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->button_up }}</td>
-                                @endif
-
-                                @if ($checksheet->button_down === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->button_down }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->button_down }}</td>
-                                @endif
-
-                                @if ($checksheet->button_push === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->button_push }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->button_push }}</td>
-                                @endif
-
-                                @if ($checksheet->wire_rope === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->wire_rope }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->wire_rope }}</td>
-                                @endif
-
-                                @if ($checksheet->block_hook === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->block_hook }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->block_hook }}</td>
-                                @endif
-
-                                @if ($checksheet->hom === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->hom }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->hom }}</td>
-                                @endif
-
-                                @if ($checksheet->emergency_stop === 'NG')
-                                    <td class="text-danger fw-bolder">
-                                        {{ $checksheet->emergency_stop }}
-                                    </td>
-                                @else
-                                    <td>{{ $checksheet->emergency_stop }}</td>
-                                @endif
+                                @endforeach
 
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{ route('headcrane.checksheetheadcrane.show', $checksheet->id) }}"
+                                        <a href="{{ route('headcrane.checksheetheadcrane.show', ['id' => $checkSheetId]) }}"
                                             class="badge bg-info me-2">Info</a>
                                         @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
-                                            <a href="{{ route('headcrane.checksheetheadcrane.edit', $checksheet->id) }}"
+                                            <a href="{{ route('headcrane.checksheetheadcrane.edit', ['id' => $checkSheetId]) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
-                                                action="{{ route('headcrane.checksheetheadcrane.destroy', $checksheet->id) }}"
+                                                action="{{ route('headcrane.checksheetheadcrane.destroy', ['id' => $checkSheetId]) }}"
                                                 method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
@@ -140,14 +78,15 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
-                            <td colspan="15">Tidak ada data...</td>
-                        @endforelse
+                        @endforeach
+
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 
     <script>
         $(document).ready(function() {

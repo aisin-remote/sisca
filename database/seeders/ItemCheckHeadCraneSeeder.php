@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ItemCheckHeadCrane;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ItemCheckHeadCraneSeeder extends Seeder
 {
@@ -80,16 +81,9 @@ class ItemCheckHeadCraneSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'item_check' => 'Long Travelling',
+                'item_check' => 'Long Traveling',
                 'prosedur'   => 'Kelancaran Pergerakan Hoist',
                 'standart'   => 'Bergerak Dengan Lancar, Tidak Ada Guncangan',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'item_check' => 'Long Travelling',
-                'prosedur'   => 'Rem Long Travelling',
-                'standart'   => 'Berfungsi Dengan Baik',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -108,7 +102,7 @@ class ItemCheckHeadCraneSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'item_check' => 'Long Travelling',
+                'item_check' => 'Long Traveling',
                 'prosedur'   => 'Kecepatan Long Traveling',
                 'standart'   => 'Hoist Akan Melambat Sebelum Posisi Maximum',
                 'created_at' => now(),
@@ -246,10 +240,11 @@ class ItemCheckHeadCraneSeeder extends Seeder
                 'standart'   => 'Berbunyi Saat Hoist Bergerak',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],[
-                'item_check' => 'Horn',
-                'prosedur'   => 'Suara Horn',
-                'standart'   => 'Berbunyi Saat Hoist Bergerak',
+            ],
+            [
+                'item_check' => 'Emergency Stop',
+                'prosedur'   => 'Fungsi Emergency Stop',
+                'standart'   => 'Hoist Berhenti Saat EMC Ditekan',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

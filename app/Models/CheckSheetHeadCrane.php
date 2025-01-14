@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class CheckSheetHeadCrane extends Model
 {
     use HasFactory;
-    protected $table = 'tt_check_sheet_head_crane';
+    protected $table = 'tm_check_sheet_head_crane';
     protected $guarded = ['id'];
-    public function headcranes()
+    public function headcrane()
     {
-        return $this->belongsTo(HeadCrane::class, 'headcrane_number', 'no_headcrane');
+        return $this->belongsTo(HeadCrane::class, 'headcrane_id');
     }
-    
+    public function checkSheetItems()
+    {
+        return $this->hasMany(CheckSheetItemHeadcrane::class, 'check_sheet_id');
+    }
     public $timestamps = true;
 }

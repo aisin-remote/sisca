@@ -2,7 +2,6 @@
 @section('title', 'Check Sheet Head Crane')
 
 @section('content')
-
     <div class="container">
         <h1>Check Sheet Head Crane</h1>
         <hr>
@@ -34,7 +33,7 @@
                     <div class="mb-3">
                         <label for="tanggal_pengecekan" class="form-label">Tanggal Pengecekan</label>
                         <input type="date" class="form-control" id="tanggal_pengecekan" name="tanggal_pengecekan"
-                            required readonly>
+                            required readonly value="{{ old('tanggal_pengecekan', now()->toDateString()) }}">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -70,67 +69,54 @@
                             <label class="form-label">Catatan</label>
                         </div>
                     </div>
-
                     <!-- List Prosedur -->
-                    @foreach ($item->procedures as $procedure)
-                        <div class="row align-items-start mb-3">
-                            <!-- Item Check -->
-                            <div class="col-md-4">
-                                <div class="custom-select"
-                                    style="border: 1px solid #ced4da; padding: 0.5rem; border-radius: 0.25rem; background-color: #fff;">
-                                    <p style="margin: 0; font-size: 1rem; color: #495057;">
-                                        {{ $procedure->prosedur }} - {{ $procedure->standart }}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Check Select -->
-                            <div class="col-md-2">
-                                <select class="form-select" id="check_{{ $item->id }}_{{ $procedure->id }}"
-                                    name="check_{{ $item->id }}_{{ $procedure->id }}" required>
-                                    <option value="" selected disabled>Select</option>
-                                    <option value="OK"
-                                        {{ old("check_{$item->id}_{$procedure->id}") == 'OK' ? 'selected' : '' }}>OK
-                                    </option>
-                                    <option value="NG"
-                                        {{ old("check_{$item->id}_{$procedure->id}") == 'NG' ? 'selected' : '' }}>NG
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!-- Photo -->
-                            <div class="col-md-3 d-flex flex-column align-items-start">
-                                <img id="photo-preview-{{ $item->id }}-{{ $procedure->id }}" class="img-fluid mb-2"
-                                    style="max-height: 150px; width: 100%; display: none;">
-                                <input type="file" class="form-control"
-                                    id="photo_{{ $item->id }}_{{ $procedure->id }}"
-                                    name="photo_{{ $item->id }}_{{ $procedure->id }}"
-                                    onchange="previewImage(this, 'photo-preview-{{ $item->id }}-{{ $procedure->id }}')">
-                            </div>
-
-                            <!-- Catatan -->
-                            <div class="col-md-3">
-                                <textarea class="form-control" id="note_{{ $item->id }}_{{ $procedure->id }}"
-                                    name="note_{{ $item->id }}_{{ $procedure->id }}" rows="2"></textarea>
+                    <div class="row align-items-start mb-3">
+                        <!-- Item Check -->
+                        <div class="col-md-4">
+                            <div class="custom-select"
+                                style="border: 1px solid #ced4da; padding: 0.5rem; border-radius: 0.25rem; background-color: #fff;">
+                                <p style="margin: 0; font-size: 1rem; color: #495057;">
+                                    {{ $item->item_check }} - {{ $item->prosedur }}
+                                </p>
                             </div>
                         </div>
-                    @endforeach
+                        <!-- Check Select -->
+                        <div class="col-md-2">
+                            <select class="form-select" id="check" name="check[{{ $item->id }}]" required>
+                                <option value="" selected disabled>Select</option>
+                                <option value="OK">OK</option>
+                                <option value="NG">NG</option>
+                            </select>
+                        </div>
+
+                        <!-- Photo -->
+                        <div class="col-md-3 d-flex flex-column align-items-start">
+                            <img id="photo-preview" class="img-fluid mb-2"
+                                style="max-height: 150px; width: 100%; display: none;">
+                            <input type="file" class="form-control" id="photo" name="photo[{{ $item->id }}]"
+                                onchange="previewImage(this, 'photo-preview')">
+                        </div>
+
+                        <!-- Catatan -->
+                        <div class="col-md-3">
+                            <textarea class="form-control" id="note" name="note[{{ $item->id }}]" rows="2"></textarea>
+                        </div>
+                    </div>
                 </div>
             @endforeach
+
             <div class="row mt-3">
                 <div class="col-md-12">
                     <p><strong>Catatan:</strong> Jika ada abnormal yang ditemukan segera laporkan ke atasan.</p>
                 </div>
             </div>
+
             <div class="row mt-2 mb-5">
                 <div class="col-md-12 text-end">
                     <button type="submit" class="btn btn-primary">Kirim</button>
                 </div>
             </div>
         </form>
-
-
-
         <script>
             document.querySelectorAll('.btn-success').forEach(button => {
                 button.addEventListener('click', () => {

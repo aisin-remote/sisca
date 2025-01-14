@@ -12,8 +12,8 @@ class ItemCheckHeadCrane extends Model
     protected $table = 'tm_item_check_head_crane';
     protected $guarded = ['id'];
 
-    public function procedures()
+    public function checkSheetItems()
     {
-        return $this->belongsToMany(ProsedurkHeadCrane::class, 'tm_prosedur_item_check', 'id_item_check', 'id_prosedur');
+        return $this->hasMany(CheckSheetItemHeadcrane::class, 'item_check_id');
     }
 }

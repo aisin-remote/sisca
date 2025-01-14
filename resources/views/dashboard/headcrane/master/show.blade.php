@@ -24,19 +24,19 @@
             <div class="row">
                 <div class="h6 col-3">No Head Crane</div>
                 <div class="col-2">:</div>
-                <div class="col-6 text-muted">{{ $headcrane->no_headcrane }}</div>
+                <div class="col-6 text-muted">{{ $headcrane->headcrane->no_headcrane }}</div>
             </div>
             <hr class="mt-2">
             <div class="row">
                 <div class="h6 col-3">Area</div>
                 <div class="col-2">:</div>
-                <div class="col-6 text-muted">{{ $headcrane->locations->location_name }}</div>
+                <div class="col-6 text-muted">{{ $headcrane->headcrane->locations->location_name }}</div>
             </div>
             <hr class="mt-2">
             <div class="row">
                 <div class="h6 col-3">Plant</div>
                 <div class="col-2">:</div>
-                <div class="col-6 text-muted">{{ $headcrane->plant }}</div>
+                <div class="col-6 text-muted">{{ $headcrane->headcrane->plant }}</div>
             </div>
         </div>
     </div>
@@ -89,110 +89,42 @@
                             <th rowspan="2" scope="col" class="text-center align-middle">#</th>
                             <th rowspan="2" scope="col" class="text-center align-middle">Tanggal</th>
                             <th rowspan="2" scope="col" class="text-center align-middle">No Head Crane</th>
-                            <th colspan="9" scope="colgroup" class="text-center">Item Check</th>
+                            <th colspan="10" scope="colgroup" class="text-center">Item Check</th>
                             <th rowspan="2" scope="col" class="text-center align-middle">Aksi</th>
                         </tr>
                         <tr>
-                            <th class="text-center align-middle">Cross Travelling</th>
-                            <th class="text-center align-middle">Long Travellin</th>
-                            <th class="text-center align-middle">Button Up</th>
-                            <th class="text-center align-middle">Button Down</th>
-                            <th class="text-center align-middle">Button Push</th>
-                            <th class="text-center align-middle">Wire Rope</th>
-                            <th class="text-center align-middle">Block Hook</th>
-                            <th class="text-center align-middle">Hom</th>
-                            <th class="text-center align-middle">Emergency Stop</th>
-
+                            @foreach (['Visual Check', 'cross_traveling', 'long_traveling', 'button_up', 'button_down', 'button_push', 'wire_rope', 'block_hook', 'hom', 'emergency_stop'] as $item)
+                                <th scope="col" class="text-center">{{ ucfirst(str_replace('_', ' ', $item)) }}</th>
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($checksheets as $checksheet)
+                        @foreach ($groupedByCheckSheetId as $checkSheet)
                             <tr class="align-middle">
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">
-                                    {{ strftime('%e %B %Y', strtotime($checksheet->tanggal_pengecekan)) }}</td>
-                                <td class="text-center align-middle">{{ $checksheet->headcrane_number }}</td>
-
-                                @if ($checksheet->cross_travelling === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->cross_travelling }}
+                                    {{ \Carbon\Carbon::parse($headcrane->tanggal_pengecekan)->format('d F Y') }}
+                                </td>
+                                <td class="text-center align-middle">{{ $headcrane->headcrane->no_headcrane }}</td>
+                                @foreach (['Visual Check', 'Cross Traveling', 'Long Traveling', 'Up Direction', 'Down Direction', 'Pendant Hoist', 'Wire Rope / Chain', 'Block Hook', 'Horn', 'Emergency Stop'] as $item)
+                                    <td class="text-center">
+                                        @if (isset($checkSheet['groupedByItemCheck'][$item]))
+                                            {{ $checkSheet['groupedByItemCheck'][$item]['OK'] }} /
+                                            {{ $checkSheet['groupedByItemCheck'][$item]['total'] }}
+                                        @else
+                                            -
+                                        @endif
                                     </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->cross_travelling }}</td>
-                                @endif
-
-                                @if ($checksheet->long_travelling === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->long_travelling }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->long_travelling }}</td>
-                                @endif
-
-                                @if ($checksheet->button_up === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->button_up }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->button_up }}</td>
-                                @endif
-
-                                @if ($checksheet->button_down === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->button_down }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->button_down }}</td>
-                                @endif
-
-                                @if ($checksheet->button_push === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->button_push }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->button_push }}</td>
-                                @endif
-
-                                @if ($checksheet->wire_rope === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->wire_rope }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->wire_rope }}</td>
-                                @endif
-
-                                @if ($checksheet->block_hook === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->block_hook }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->block_hook }}</td>
-                                @endif
-
-                                @if ($checksheet->hom === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->hom }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->hom }}</td>
-                                @endif
-
-                                @if ($checksheet->emergency_stop === 'NG')
-                                    <td class="text-danger fw-bolder text-center align-middle">
-                                        {{ $checksheet->emergency_stop }}
-                                    </td>
-                                @else
-                                    <td class="text-center align-middle">{{ $checksheet->emergency_stop }}</td>
-                                @endif
+                                @endforeach
                                 <td class="text-center align-middle">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{ route('headcrane.checksheetheadcrane.show', $checksheet->id) }}"
+                                        <a href="{{ route('headcrane.checksheetheadcrane.show', $headcrane->id) }}"
                                             class="badge bg-info me-2">Info</a>
                                         @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
-                                            <a href="{{ route('headcrane.checksheetheadcrane.edit', $checksheet->id) }}"
+                                            <a href="{{ route('headcrane.checksheetheadcrane.edit', $headcrane->id) }}"
                                                 class="badge bg-warning me-2">Edit</a>
                                             <form
-                                                action="{{ route('headcrane.checksheetheadcrane.destroy', $checksheet->id) }}"
+                                                action="{{ route('headcrane.checksheetheadcrane.destroy', $headcrane->id) }}"
                                                 method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
@@ -203,16 +135,12 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
-                            <td colspan="18">Tidak ada data...</td>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
     <script>
         document.getElementById('filterButton').addEventListener('click', function() {
             var selectedDate = document.getElementById('filterDate').value;
