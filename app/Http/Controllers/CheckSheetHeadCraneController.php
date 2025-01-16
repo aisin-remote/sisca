@@ -305,21 +305,8 @@ public function update(Request $request, $id)
     {
         $selectedYear = $request->input('selected_year', date('Y'));
 
-        $headcraneData = headcrane::leftJoin('tm_check_sheet_head_cranes', 'tm_headcranes.no_headcrane', '=', 'tm_check_sheet_head_cranes.headcrane_number')
-            ->select(
-                'tm_headcranes.no_headcrane as headcrane_number',
-                'tm_check_sheet_head_cranes.tanggal_pengecekan',
-                'tm_check_sheet_head_cranes.cross_travelling',
-                'tm_check_sheet_head_cranes.long_travelling',
-                'tm_check_sheet_head_cranes.button_up',
-                'tm_check_sheet_head_cranes.button_down',
-                'tm_check_sheet_head_cranes.button_push',
-                'tm_check_sheet_head_cranes.wire_rope',
-                'tm_check_sheet_head_cranes.block_hook',
-                'tm_check_sheet_head_cranes.hom',
-                'tm_check_sheet_head_cranes.emergency_stop',
-            )
-            ->get();
+        $headcraneData = CheckSheetItemHeadCrane::all();
+            // dd($headcraneData);
 
 
         // Filter out entries with tanggal_pengecekan = null and matching selected year

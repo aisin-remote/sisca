@@ -22,6 +22,7 @@ use App\Models\CheckSheetSlingWire;
 use App\Models\CheckSheetTabungCo2;
 use App\Models\CheckSheetTandu;
 use App\Models\CheckSheetTembin;
+use App\Models\CheckSheetItemHeadCrane;
 use Auth;
 
 class DashboardController extends Controller
@@ -739,54 +740,36 @@ class DashboardController extends Controller
         ];
 
         // Grafik HeadCrane
-        // $notOkData_HeadCrane = [];
-        // $okData_HeadCrane = [];
+        $notOkData_HeadCrane = [];
+        $okData_HeadCrane = [];
 
-        // foreach ($labels as $label) {
-        //     // Menghitung jumlah data dengan nilai "NG" berdasarkan tag_number dan bulan
-        //     $notOkData_HeadCrane[] = CheckSheetHeadCrane::whereYear('tanggal_pengecekan', $selectedYear)
-        //         ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
-        //         ->where(function ($query) {
-        //             $query->where('cross_travelling', 'NG')
-        //                 ->orWhere('long_travelling', 'NG')
-        //                 ->orWhere('button_up', 'NG')
-        //                 ->orWhere('button_down', 'NG')
-        //                 ->orWhere('button_push', 'NG')
-        //                 ->orWhere('wire_rope', 'NG')
-        //                 ->orWhere('block_hook', 'NG')
-        //                 ->orWhere('hom', 'NG')
-        //                 ->orWhere('emergency_stop', 'NG');
-        //         })
-        //         ->count();
-
-        //     // Menghitung jumlah data tanpa nilai "NG" berdasarkan tag_number dan bulan
-        //     $okData_HeadCrane[] = CheckSheetHeadCrane::whereYear('tanggal_pengecekan', $selectedYear)
-        //         ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)))
-        //         ->where(function ($query) {
-        //             $query->where('cross_travelling', 'OK')
-        //                 ->where('long_travelling', 'OK')
-        //                 ->where('button_up', 'OK')
-        //                 ->where('button_down', 'OK')
-        //                 ->where('button_push', 'OK')
-        //                 ->where('wire_rope', 'OK')
-        //                 ->where('block_hook', 'OK')
-        //                 ->where('hom', 'OK')
-        //                 ->where('emergency_stop', 'OK');
-        //         })
-        //         ->count();
-        // }
+        foreach ($labels as $label) {
+            // Menghitung jumlah data dengan nilai "NG" berdasarkan bulan dan tahun
+            $notOkData_HeadCrane[] = CheckSheetItemHeadCrane::whereHas('checkSheet', function ($query) use ($selectedYear, $label) {
+                $query->whereYear('tanggal_pengecekan', $selectedYear)
+                    ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)));
+            })->where('check', 'NG') // Menggunakan "Failed" untuk NG
+            ->count();
+        
+            // Menghitung jumlah data dengan nilai "OK" berdasarkan bulan dan tahun
+            $okData_HeadCrane[] = CheckSheetItemHeadCrane::whereHas('checkSheet', function ($query) use ($selectedYear, $label) {
+                $query->whereYear('tanggal_pengecekan', $selectedYear)
+                    ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)));
+            })->where('check', 'OK') // Menggunakan "Passed" untuk OK
+            ->count();
+        }
 
 
-        // $data_HeadCrane = [
-        //     'labels' => $labels,
-        //     'okData_HeadCrane' => $okData_HeadCrane,
-        //     'notOkData_HeadCrane' => $notOkData_HeadCrane,
-        // ];
+        $data_HeadCrane = [
+            'labels' => $labels,
+            'okData_HeadCrane' => $okData_HeadCrane,
+            'notOkData_HeadCrane' => $notOkData_HeadCrane,
+        ];
         // dd($data_HeadCrane);
 
 
         $availableYears = range(date('Y') - 1, date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'data_Facp', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'data_Facp','data_HeadCrane', 'availableYears'));
     }
 }

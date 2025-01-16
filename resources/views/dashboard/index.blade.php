@@ -201,12 +201,10 @@
                 <!-- Grafik Head Crane -->
                 <div class="col-lg-6 mb-3">
                     <div class="card">
-                        <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Head Crane
-                        </div>
+                        <div class="card-header text-center" style="background-color: #6d7fcc; color:white;">Head Crane</div>
                         <div class="card-body">
                             <div class="chart-container">
                                 <canvas id="HeadCraneChart" class="img-fluid"></canvas>
-                                <!-- Ganti id dengan yang berbeda -->
                             </div>
                         </div>
                     </div>
@@ -216,7 +214,6 @@
     </div>
 
 
-    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'User')
         <script>
             // Grafik Apar
             var ctx = document.getElementById('barChart').getContext('2d');
@@ -329,11 +326,7 @@
                 }
             });
 
-
-
             // Grafik Co2
-
-
             var ctxCo2 = document.getElementById('co2Chart').getContext('2d'); // Ganti id dengan yang sesuai
             var co2Chart = new Chart(ctxCo2, {
                 type: 'bar',
@@ -368,11 +361,7 @@
                 }
             });
 
-
-
             // Grafik Tandu
-
-
             var ctxTandu = document.getElementById('tanduChart').getContext('2d'); // Ganti id dengan yang sesuai
             var tanduChart = new Chart(ctxTandu, {
                 type: 'bar',
@@ -407,11 +396,7 @@
                 }
             });
 
-
-
             // Grafik Eyewasher
-
-
             var ctxEyewasher = document.getElementById('eyewasherChart').getContext('2d'); // Ganti id dengan yang sesuai
             var eyewasherChart = new Chart(ctxEyewasher, {
                 type: 'bar',
@@ -446,11 +431,7 @@
                 }
             });
 
-
-
             // Grafik Sling
-
-
             var ctxSling = document.getElementById('slingChart').getContext('2d'); // Ganti id dengan yang sesuai
             var slingChart = new Chart(ctxSling, {
                 type: 'bar',
@@ -485,11 +466,7 @@
                 }
             });
 
-
-
             // Grafik Tembin
-
-
             var ctxTembin = document.getElementById('tembinChart').getContext('2d'); // Ganti id dengan yang sesuai
             var tembinChart = new Chart(ctxTembin, {
                 type: 'bar',
@@ -524,11 +501,7 @@
                 }
             });
 
-
-
             // Grafik Chain Block
-
-
             var ctxChainblock = document.getElementById('chainblockChart').getContext('2d'); // Ganti id dengan yang sesuai
             var chainblockChart = new Chart(ctxChainblock, {
                 type: 'bar',
@@ -563,11 +536,7 @@
                 }
             });
 
-
-
             // Grafik Body Harnest
-
-
             var ctxBodyharnest = document.getElementById('bodyharnestChart').getContext('2d'); // Ganti id dengan yang sesuai
             var bodyharnestChart = new Chart(ctxBodyharnest, {
                 type: 'bar',
@@ -602,11 +571,7 @@
                 }
             });
 
-
-
             // Grafik Safety Belt
-
-
             var ctxSafetybelt = document.getElementById('safetybeltChart').getContext('2d'); // Ganti id dengan yang sesuai
             var safetybeltChart = new Chart(ctxSafetybelt, {
                 type: 'bar',
@@ -747,52 +712,51 @@
                 }
             });
         </script>
-    @else
-        {{-- <script>
+        <script>
             // Grafik HeadCrane
 
-            var ctxHeadCrane = document.getElementById('HeadCraneChart').getContext('2d'); // Ganti id dengan yang sesuai
+            var ctxHeadCrane = document.getElementById('HeadCraneChart').getContext('2d');
             var HeadCraneChart = new Chart(ctxHeadCrane, {
-                type: 'bar',
-                data: {
-                    labels: {!! json_encode($data_HeadCrane['labels']) !!},
-                    datasets: [{
-                        label: 'OK',
-                        data: {!! json_encode($data_HeadCrane['okData_HeadCrane']) !!},
-                        backgroundColor: 'rgba(0, 204, 68, 1)',
-                        borderColor: 'rgba(0, 131, 51, 1)',
-                        borderWidth: 1
-                    }, {
-                        label: 'NG',
-                        data: {!! json_encode($data_HeadCrane['notOkData_HeadCrane']) !!},
-                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                        borderColor: 'rgba(139, 0, 0, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top' // Atur posisi keterangan (legend)
-                        }
-                    }
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($data_HeadCrane['labels']) !!}, // Data label bulan
+            datasets: [{
+                label: 'OK',
+                data: {!! json_encode($data_HeadCrane['okData_HeadCrane']) !!}, // Data status OK
+                backgroundColor: 'rgba(0, 204, 68, 1)',
+                borderColor: 'rgba(0, 131, 51, 1)',
+                borderWidth: 1
+            }, {
+                label: 'NG',
+                data: {!! json_encode($data_HeadCrane['notOkData_HeadCrane']) !!}, // Data status NG
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                borderColor: 'rgba(139, 0, 0, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true // Skala Y dimulai dari 0
                 }
-            });
-        </script> --}}
-    @endif
-    {{-- @if (Auth::user()->role == 'MTE')
+            },
+            plugins: {
+                legend: {
+                    position: 'top' // Posisi legend di atas
+                }
+            }
+        }
+    });
+
+        </script>
+    @if (Auth::user()->role == 'MTE')
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const today = new Date().toISOString().substr(0, 10);
                 document.getElementById('tanggal_pengecekan').value = today;
             });
         </script>
-    @endif --}}
+    @endif
 
 @endsection

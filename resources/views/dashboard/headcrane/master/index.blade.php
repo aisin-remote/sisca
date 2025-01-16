@@ -35,6 +35,7 @@
                         <td>{{ $data->plant }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
+
                                 <a href="{{ route('head-crane.show', $data->id) }}" class="badge bg-info me-2">Info</a>
                                 @if (Auth::user()->role === 'MTE' || Auth::user()->role === 'Admin')
                                     <a href="{{ route('head-crane.edit', $data->id) }}"
