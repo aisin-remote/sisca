@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChecksheetItemHeadcrane extends Model
+class CheckSheetItemHeadcrane extends Model
 {
     protected $table = 'tt_check_sheet_item_headcrane';
     protected $guarded = [];
