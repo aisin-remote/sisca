@@ -749,14 +749,14 @@ class DashboardController extends Controller
                 $query->whereYear('tanggal_pengecekan', $selectedYear)
                     ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)));
             })->where('check', 'NG') // Menggunakan "Failed" untuk NG
-            ->count();
-        
+                ->count();
+
             // Menghitung jumlah data dengan nilai "OK" berdasarkan bulan dan tahun
             $okData_HeadCrane[] = CheckSheetItemHeadCrane::whereHas('checkSheet', function ($query) use ($selectedYear, $label) {
                 $query->whereYear('tanggal_pengecekan', $selectedYear)
                     ->whereMonth('tanggal_pengecekan', date('m', strtotime($label)));
             })->where('check', 'OK') // Menggunakan "Passed" untuk OK
-            ->count();
+                ->count();
         }
 
 
@@ -770,6 +770,6 @@ class DashboardController extends Controller
 
         $availableYears = range(date('Y') - 1, date('Y') + 1);
 
-        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'data_Facp','data_HeadCrane', 'availableYears'));
+        return view('dashboard.index', compact('data_Apar', 'data_Hydrant', 'data_Nitrogen', 'data_Tabungco2', 'data_Tandu', 'data_Eyewasher', 'data_Sling', 'data_Tembin', 'data_Chainblock', 'data_Bodyharnest', 'data_Safetybelt', 'data_Facp', 'data_HeadCrane', 'availableYears'));
     }
 }
