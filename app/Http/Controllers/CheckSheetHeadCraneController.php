@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CheckSheetHeadCrane;
-use App\Models\ChecksheetItemHeadcrane;
+use App\Models\CheckSheetItemHeadCrane;
 use App\Models\HeadCrane;
 use App\Models\ItemCheckHeadCrane;
 use App\Models\ProsedurItemCheckHeadCrane;
@@ -377,8 +377,8 @@ public function update(Request $request, $id)
 
 
         // Retrieve data from the checksheetsco2 table for the selected year and tag_number
-        $data = CheckSheetHeadCrane::with('HeadCranes')
-            ->select('tanggal_pengecekan', 'headcrane_number', 'cross_travelling', 'long_travelling', 'button_up', 'button_down', 'button_push', 'wire_rope', 'block_hook', 'hom', 'emergency_stop')
+        $data = CheckSheetItemHeadCrane::with(['itemCheck', 'checkSheet.headcrane.locations'])
+            ->select('tanggal_pengecekan', 'no_headcrane','location_name','plant')
             ->where(function ($query) use ($selectedYear, $headcraneNumber) {
                 // Kondisi untuk memanggil data berdasarkan tahun dan tag_number
                 $query->whereYear('tanggal_pengecekan', $selectedYear)

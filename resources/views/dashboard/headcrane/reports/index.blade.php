@@ -25,11 +25,11 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>All Head Crane Report</h3>
-        {{-- <div class="form-group">
-            <form action="{{ route('export.checksheetssafetybelt') }}" method="POST">
+        <div class="form-group">
+            <form action="{{ route('export.checksheetsheadcrane') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Safety Belt</label>
+                <label for="tahun">Download Check Sheet Head Crane</label>
                 <div class="input-group">
                     <select name="tahun" id="tahun" class="form-control">
                         @php
@@ -37,8 +37,8 @@
                             $years = [];
 
                             // Loop melalui data checksheet apar untuk mendapatkan tahun-tahun unik
-                            foreach ($safetybeltData as $safetybelt) {
-                                $year = date('Y', strtotime($safetybelt['tanggal_pengecekan']));
+                            foreach ($headcraneData as $headcrane) {
+                                $year = date('Y', strtotime($headcrane['tanggal_pengecekan']));
                                 if (!in_array($year, $years)) {
                                     $years[] = $year;
                                 }
@@ -56,7 +56,7 @@
                     <button class="btn btn-primary" id="filterButton">Download</button>
                 </div>
             </form>
-        </div> --}}
+        </div>
     </div>
     <div class="card rounded-bottom-0 mb-0 col-lg-12">
         <div class="card-body">
