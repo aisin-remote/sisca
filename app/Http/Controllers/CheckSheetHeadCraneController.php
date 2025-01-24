@@ -302,65 +302,91 @@ public function update(Request $request, $id)
 
 
     public function report(Request $request)
-    {
-        $selectedYear = $request->input('selected_year', date('Y'));
+{
+    $selectedYear = $request->input('selected_year', date('Y'));
 
-        $headcraneData = CheckSheetItemHeadCrane::all();
-            // dd($headcraneData);
+    $headcraneData = ChecksheetItemHeadcrane::select(
+        'tt_check_sheet_item_headcrane.*',
+        'tm_item_check_head_crane.item_check',
+        'tm_check_sheet_head_crane.tanggal_pengecekan',
+        'tm_check_sheet_head_crane.npk',
+        'tm_headcranes.no_headcrane',
+        'tm_locations.location_name'
+    )
+    ->join('tm_item_check_head_crane', 'tt_check_sheet_item_headcrane.item_check_id', '=', 'tm_item_check_head_crane.id')
+    ->join('tm_check_sheet_head_crane', 'tt_check_sheet_item_headcrane.check_sheet_id', '=', 'tm_check_sheet_head_crane.id')
+    ->join('tm_headcranes', 'tm_check_sheet_head_crane.headcrane_id', '=', 'tm_headcranes.id')
+    ->join('tm_locations', 'tm_headcranes.location_id', '=', 'tm_locations.id')
+    ->get();
+    
 
+    // Filter out entries with tanggal_pengecekan = null and matching selected year
+    $filteredHeadcraneData = $headcraneData->filter(function ($headcrane) use ($selectedYear) {
+        return $headcrane->tanggal_pengecekan !== null &&
+            date('Y', strtotime($headcrane->tanggal_pengecekan)) == $selectedYear;
+    });
+    $mappedHeadcraneData = $filteredHeadcraneData->groupBy('no_headcrane')->map(function ($headcraneGroup) {
+    $noHeadcrane = $headcraneGroup[0]->no_headcrane;
+    $tanggalPengecekan = $headcraneGroup[0]->tanggal_pengecekan;
+    $months = [];
 
-        // Filter out entries with tanggal_pengecekan = null and matching selected year
-        $filteredheadcraneData = $headcraneData->filter(function ($headcrane) use ($selectedYear) {
-            return $headcrane->tanggal_pengecekan !== null &&
-                date('Y', strtotime($headcrane->tanggal_pengecekan)) == $selectedYear;
-        });
+    // Process each item check in the group
+    $headcraneGroup->each(function ($headcrane) use (&$months) {
+        $month = date('n', strtotime($headcrane->tanggal_pengecekan));
+        $itemCheck = $headcrane->item_check;
+        $issueCodes = [];
 
-        $mappedheadcraneData = $filteredheadcraneData->groupBy('headcrane_number')->map(function ($headcraneGroup) {
-            $headcraneNumber = $headcraneGroup[0]['headcrane_number'];
-            $headcranePengecekan = $headcraneGroup[0]['tanggal_pengecekan'];
-            $months = [];
+        // Map issue codes for each item check (based on 'NG' checks)
+        if ($headcrane->check === 'NG') {
+            if ($headcrane->item_check === 'Visual Check') $issueCodes[] = 'a';
+            if ($headcrane->item_check === 'Cross Traveling') $issueCodes[] = 'b';
+            if ($headcrane->item_check === 'Long Traveling') $issueCodes[] = 'c';
+            if ($headcrane->item_check === 'Up Direction') $issueCodes[] = 'd';
+            if ($headcrane->item_check === 'Down Direction') $issueCodes[] = 'e';
+            if ($headcrane->item_check === 'Pendant Hoist') $issueCodes[] = 'f';
+            if ($headcrane->item_check === 'Wire Rope / Chain') $issueCodes[] = 'g';
+            if ($headcrane->item_check === 'Block Hook') $issueCodes[] = 'h';
+            if ($headcrane->item_check === 'Horn') $issueCodes[] = 'i';
+            if ($headcrane->item_check === 'Emergency Stop') $issueCodes[] = 'j';
+        }
 
-            foreach ($headcraneGroup as $headcrane) {
-                $month = date('n', strtotime($headcrane['tanggal_pengecekan']));
-                $issueCodes = [];
+        // If no 'NG' issues, add 'OK'
+        if (empty($issueCodes)) {
+            $issueCodes[] = 'OK';
+        }
 
-                // Map issue codes for powder type
-                if ($headcrane['cross_travelling'] === 'NG') $issueCodes[] = 'a';
-                if ($headcrane['long_travelling'] === 'NG') $issueCodes[] = 'b';
-                if ($headcrane['button_up'] === 'NG') $issueCodes[] = 'c';
-                if ($headcrane['button_down'] === 'NG') $issueCodes[] = 'd';
-                if ($headcrane['button_push'] === 'NG') $issueCodes[] = 'e';
-                if ($headcrane['wire_rope'] === 'NG') $issueCodes[] = 'f';
-                if ($headcrane['block_hook'] === 'NG') $issueCodes[] = 'g';
-                if ($headcrane['hom'] === 'NG') $issueCodes[] = 'h';
-                if ($headcrane['emergency_stop'] === 'NG') $issueCodes[] = 'i';
+        // Add the issue codes for the specific item_check to the month array
+        if (!isset($months[$month])) {
+            $months[$month] = []; // Initialize the array if not set
+        }
 
-                if (empty($issueCodes)) {
-                    $issueCodes[] = 'OK';
-                }
+        // Add the issue codes for the current item_check
+        $months[$month][$itemCheck] = $issueCodes;
+    });
 
+    // After processing all items, return the result
+    return [
+        'no_headcrane' => $noHeadcrane,
+        'tanggal_pengecekan' => $tanggalPengecekan,
+        'months' => $months,
+    ];
+});
 
-                $months[$month] = $issueCodes;
-            }
+// Dump the mapped data for inspection
+// dd($mappedHeadcraneData);
 
-            return [
-                'headcrane_number' => $headcraneNumber,
-                'tanggal_pengecekan' => $headcranePengecekan,
-                'months' => $months,
-            ];
-        });
+    // Convert to JSON
+    $jsonString = json_encode($mappedHeadcraneData, JSON_PRETTY_PRINT);
 
-        // Convert to JSON
-        $jsonString = json_encode($mappedheadcraneData, JSON_PRETTY_PRINT);
+    // Save JSON to a file
+    Storage::disk('local')->put('headcrane_data.json', $jsonString);
 
-        // Save JSON to a file
-        Storage::disk('local')->put('headcrane_data.json', $jsonString);
+    return view('dashboard.headcrane.reports.index', [
+        'headcraneData' => $mappedHeadcraneData,
+        'selectedYear' => $selectedYear,
+    ]);
+}
 
-        return view('dashboard.headcrane.reports.index', [
-            'headcraneData' => $mappedheadcraneData,
-            'selectedYear' => $selectedYear,
-        ]);
-    }
 
     public function exportExcelWithTemplate(Request $request)
     {
@@ -377,115 +403,69 @@ public function update(Request $request, $id)
 
 
         // Retrieve data from the checksheetsco2 table for the selected year and tag_number
-        $data = CheckSheetItemHeadCrane::with(['itemCheck', 'checkSheet.headcrane.locations'])
-            ->select('tanggal_pengecekan', 'no_headcrane','location_name','plant')
-            ->where(function ($query) use ($selectedYear, $headcraneNumber) {
-                // Kondisi untuk memanggil data berdasarkan tahun dan tag_number
-                $query->whereYear('tanggal_pengecekan', $selectedYear)
-                    ->where('headcrane_number', $headcraneNumber);
-            })
-            // ->orWhere(function ($query) use ($selectedYear, $headcraneNumber) {
-            //     // Kondisi untuk memanggil data bulan Januari tahun selanjutnya
-            //     $query->whereMonth('tanggal_pengecekan', 1)
-            //         ->whereYear('tanggal_pengecekan', $selectedYear + 1)
-            //         ->where('headcrane_number', $headcraneNumber);
-            // })
-            ->get();
+        $data = ChecksheetItemHeadcrane::select(
+        'tt_check_sheet_item_headcrane.*',
+        'tm_item_check_head_crane.item_check',
+        'tm_item_check_head_crane.prosedur',
+        'tm_check_sheet_head_crane.tanggal_pengecekan',
+        'tm_check_sheet_head_crane.npk',
+        'tm_headcranes.no_headcrane',
+        'tm_headcranes.plant',
+        'tm_locations.location_name'
+        )
 
+        ->join('tm_item_check_head_crane', 'tt_check_sheet_item_headcrane.item_check_id', '=', 'tm_item_check_head_crane.id')
+        ->join('tm_check_sheet_head_crane', 'tt_check_sheet_item_headcrane.check_sheet_id', '=', 'tm_check_sheet_head_crane.id')
+        ->join('tm_headcranes', 'tm_check_sheet_head_crane.headcrane_id', '=', 'tm_headcranes.id')
+        ->join('tm_locations', 'tm_headcranes.location_id', '=', 'tm_locations.id')
+        ->get();
+        // dd($data);
 
-        // Quartal mapping ke kolom
-        $quartalKolom = [
-            1 => 'AQ',  // Quartal 1 -> Kolom Y
-            2 => 'AT', // Quartal 2 -> Kolom AB
-            3 => 'AW', // Quartal 3 -> Kolom AE
-            4 => 'AN', // Quartal 4 -> Kolom AH
-        ];
+        $worksheet->setCellValue('AH' . 1, date('Y', strtotime($data[0]->tanggal_pengecekan)));
+        $worksheet->setCellValue('AH' . 2, date('F', strtotime($data[0]->tanggal_pengecekan)));
+        $worksheet->setCellValue('AH' . 3, $data[0]->no_headcrane);
+        $worksheet->setCellValue('AH' . 4, $data[0]->location_name);
+        $worksheet->setCellValue('AH' . 5, $data[0]->plant);
 
-        $worksheet->setCellValue('AU' . 2, $data[0]->headcrane_number);
-        $worksheet->setCellValue('AU' . 3, $data[0]->HeadCranes->locations->location_name);
-
+        $startColumn = 'H'; // Assuming column B is for day 1
         foreach ($data as $item) {
+        // Get the day of the month from tanggal_pengecekan
+        $day = Carbon::parse($item->tanggal_pengecekan)->day;
 
-            // Ambil bulan dari tanggal_pengecekan menggunakan Carbon
-            $bulan = Carbon::parse($item->tanggal_pengecekan)->month;
+        // Calculate the column dynamically based on the day
+        $col = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex(
+            \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($startColumn) + ($day - 1)
+        );
 
-            if ($bulan >= 4 && $bulan <= 6) {
-                $quartal = 1;
-            } elseif ($bulan >= 7 && $bulan <= 9) {
-                $quartal = 2;
-            } elseif ($bulan >= 10 && $bulan <= 12) {
-                $quartal = 3;
-            } else {
-                $quartal = 4;
-            }
-
-
-
-            // Tentukan kolom berdasarkan bulan
-            $col = $quartalKolom[$quartal];
-
-            // Set value based on $item->pressure
-            if ($item->cross_travelling === 'OK') {
-                $worksheet->setCellValue($col . 9, '√');
-            } else if ($item->cross_travelling === 'NG') {
-                $worksheet->setCellValue($col . 9, 'X');
-            }
-
-            // Set value based on $item->hose
-            if ($item->long_travelling === 'OK') {
-                $worksheet->setCellValue($col . 12, '√');
-            } else if ($item->long_travelling === 'NG') {
-                $worksheet->setCellValue($col . 12, 'X');
-            }
-
-            // Set value based on $item->corong
-            if ($item->button_up === 'OK') {
-                $worksheet->setCellValue($col . 15, '√');
-            } else if ($item->button_up === 'NG') {
-                $worksheet->setCellValue($col . 15, 'X');
-            }
-
-            // Set value based on $item->tabung
-            if ($item->button_down === 'OK') {
-                $worksheet->setCellValue($col . 18, '√');
-            } else if ($item->button_down === 'NG') {
-                $worksheet->setCellValue($col . 18, 'X');
-            }
-
-            // Set value based on $item->regulator
-            if ($item->button_push === 'OK') {
-                $worksheet->setCellValue($col . 21, '√');
-            } else if ($item->button_push === 'NG') {
-                $worksheet->setCellValue($col . 21, 'X');
-            }
-
-            if ($item->wire_rope === 'OK') {
-                $worksheet->setCellValue($col . 24, '√');
-            } else if ($item->wire_rope === 'NG') {
-                $worksheet->setCellValue($col . 24, 'X');
-            }
-
-            if ($item->block_hook === 'OK') {
-                $worksheet->setCellValue($col . 27, '√');
-            } else if ($item->block_hook === 'NG') {
-                $worksheet->setCellValue($col . 27, 'X');
-            }
-
-            if ($item->hom === 'OK') {
-                $worksheet->setCellValue($col . 30, '√');
-            } else if ($item->hom === 'NG') {
-                $worksheet->setCellValue($col . 30, 'X');
-            }
-
-            if ($item->emergency_stop === 'OK') {
-                $worksheet->setCellValue($col . 33, '√');
-            } else if ($item->emergency_stop === 'NG') {
-                $worksheet->setCellValue($col . 33, 'X');
-            }
-            // Increment row for the next data
-            $col++;
+        // Determine the correct row based on item_check and prosedur
+        switch ($item->prosedur) {
+            case 'Status Equipment':
+                $row = 9;
+                break;
+            case 'Arah Pergerakan Hoist':
+                $row = 10;
+                break;
+            case 'Suara Saat Hoist Berjalan':
+                $row = 11;
+                break;
+            case 'Kelancaran Pergerakan Hoist':
+                $row = 12;
+                break;
+            // Add other cases here for each prosedur...
+            default:
+                $row = null; // If no matching prosedur, skip
+                break;
         }
 
+        if ($row) {
+            // Set data in the correct column and row
+            if ($item->result === 'OK') {
+                $worksheet->setCellValue($col . $row, '√');
+            } else if ($item->result === 'NG') {
+                $worksheet->setCellValue($col . $row, 'X');
+            }
+        }
+    }
 
         // Create a new Excel writer and save the modified spreadsheet
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');

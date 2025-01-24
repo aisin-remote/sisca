@@ -10,7 +10,7 @@
                 @php
                     $currentYear = date('Y');
                     for ($year = $currentYear - 5; $year <= $currentYear; $year++) {
-                        echo "<option value=\" $year\">$year</option>";
+                        echo "<option value=\"$year\">$year</option>";
                     }
                 @endphp
             </select>
@@ -22,14 +22,13 @@
         <p class="mt-2">Data untuk tahun {{ request('selected_year') }}</p>
     @endif
 
-    <div
-        class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
+    <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap align-items-center mt-2 pb-2 mb-3 border-bottom col-lg-12">
         <h3>All Head Crane Report</h3>
         <div class="form-group">
             <form action="{{ route('export.checksheetsheadcrane') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Head Crane</label>
+                <label for="tahun">Download Check Sheet Apar</label>
                 <div class="input-group">
                     <select name="tahun" id="tahun" class="form-control">
                         @php
@@ -58,6 +57,7 @@
             </form>
         </div>
     </div>
+
     <div class="card rounded-bottom-0 mb-0 col-lg-12">
         <div class="card-body">
             <div class="table-responsive">
@@ -78,18 +78,18 @@
                         @foreach ($headcraneData as $headcrane)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $headcrane['headcrane_number'] }}</td>
+                                <td>{{ $headcrane['no_headcrane'] }}</td> <!-- Display the no_headcrane -->
                                 @for ($month = 1; $month <= 12; $month++)
                                     <td>
-                                        @if (isset($headcrane['months'][$month]))
-                                            @if (in_array('OK', $headcrane['months'][$month]))
-                                                <span class="badge bg-success">OK</span>
-                                            @else
-                                                @php
-                                                    $issueCodes = implode('+', $headcrane['months'][$month]);
-                                                @endphp
-                                                <span class="badge bg-danger">{{ $issueCodes }}</span>
-                                            @endif
+                                        @if (isset($headcrane['months'][$month])) <!-- Check if data exists for this month -->
+                                            @foreach ($headcrane['months'][$month] as $itemCheck => $statusCodes)
+                                                @if ($statusCodes[0] !== 'OK') <!-- Only display non-OK items -->
+                                                    @php
+                                                        $issueCodes = implode('+', $statusCodes);
+                                                    @endphp
+                                                    <span class="badge bg-danger">{{ $issueCodes }}</span>
+                                                @endif
+                                            @endforeach
                                         @endif
                                     </td>
                                 @endfor
@@ -97,7 +97,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
@@ -105,41 +104,42 @@
     <div class="card rounded-top-0 mt-0 col-lg-12">
         <div class="card-body">
             <p class="card-title"><strong>Keterangan Kerusakan:</strong></p>
-            {{-- <div class="container"> --}}
             <div class="table-responsive">
                 <table class="table table-sm table-borderless">
                     <tbody>
                         <tr>
-                            <td scope="col">1. Cross Travelling</td>
+                            <td scope="col">1. Visual Check</td>
                             <td scope="col">= a</td>
-                            <td scope="col">5. Button Push</td>
+                            <td scope="col">5. Down Direction</td>
                             <td scope="col">= e</td>
-                            <td scope="col">9. Emergency Stop</td>
+                            <td scope="col">9. Horn</td>
                             <td scope="col">= i</td>
                         </tr>
                         <tr>
-                            <td scope="col">2. Long Travelling</td>
+                            <td scope="col">2. Cross Traveling</td>
                             <td scope="col">= b</td>
-                            <td scope="col">6. Wire Rope</td>
+                            <td scope="col">6. Pendant Hoist</td>
                             <td scope="col">= f</td>
+                            <td scope="col">10. Emergency Stop</td>
+                            <td scope="col">= j</td>
                         </tr>
                         <tr>
-                            <td scope="col">3. Button Up</td>
+                            <td scope="col">3. Long Traveling</td>
                             <td scope="col">= c</td>
-                            <td scope="col">7. Block Hook</td>
+                            <td scope="col">7. Wire Rope / Chain</td>
                             <td scope="col">= g</td>
                         </tr>
                         <tr>
-                            <td scope="col">4. Button Down</td>
+                            <td scope="col">4. Up Direction</td>
                             <td scope="col">= d</td>
-                            <td scope="col">8. Hom</td>
+                            <td scope="col">8. Block Hook</td>
                             <td scope="col">= h</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            {{-- </div> --}}
         </div>
     </div>
 
 @endsection
+
