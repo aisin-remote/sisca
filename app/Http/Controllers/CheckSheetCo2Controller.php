@@ -55,6 +55,7 @@ class CheckSheetCo2Controller extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         // Mendapatkan bulan dan tahun saat ini
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;

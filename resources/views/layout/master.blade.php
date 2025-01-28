@@ -13,9 +13,14 @@
     <link rel="icon" href="/foto/aii.ico">
 
     <!-- CSS & JS Bootstrap -->
+<<<<<<< HEAD
     <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">
     <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js">
+>>>>>>> 31c3bfa0dd42cc10e0d15cd01d685fecd048c616
     </script>
     <link rel="stylesheet" href="{{ asset('dist/css/bootstrap-icons.css') }}">
 
