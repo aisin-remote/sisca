@@ -28,32 +28,34 @@
             <form action="{{ route('export.checksheetsheadcrane') }}" method="POST">
                 @method('POST')
                 @csrf
-                <label for="tahun">Download Check Sheet Apar</label>
+                <label for="tahun">Download Check Sheet HeadCrane</label>
                 <div class="input-group">
-                    <select name="tahun" id="tahun" class="form-control">
+                    <select name="bulan" id="bulan" class="form-control">
                         @php
-                            // Inisialisasi array untuk menyimpan tahun-tahun yang tersedia
-                            $years = [];
-
-                            // Loop melalui data checksheet apar untuk mendapatkan tahun-tahun unik
+                            // Inisialisasi array untuk menyimpan bulan yang tersedia
+                            $months = [];
+                
+                            // Loop melalui data checksheet apar untuk mendapatkan bulan unik
                             foreach ($headcraneData as $headcrane) {
-                                $year = date('Y', strtotime($headcrane['tanggal_pengecekan']));
-                                if (!in_array($year, $years)) {
-                                    $years[] = $year;
+                                $month = date('F', strtotime($headcrane['tanggal_pengecekan'])); // Nama bulan (January, February, dst.)
+                                $monthNum = date('m', strtotime($headcrane['tanggal_pengecekan'])); // Angka bulan (01, 02, dst.)
+                
+                                if (!isset($months[$monthNum])) {
+                                    $months[$monthNum] = $month;
                                 }
                             }
-
-                            // Urutkan tahun-tahun dalam urutan terbalik (terbaru ke terlama)
-                            rsort($years);
-
+                
+                            // Urutkan bulan berdasarkan angka bulan (terbaru ke terlama)
+                            krsort($months);
+                
                             // Buat opsi-opsi pada elemen select
-                            foreach ($years as $year) {
-                                echo "<option value=\"$year\">$year</option>";
+                            foreach ($months as $num => $name) {
+                                echo "<option value=\"$num\">$name</option>";
                             }
                         @endphp
                     </select>
                     <button class="btn btn-primary" id="filterButton">Download</button>
-                </div>
+                </div>                
             </form>
         </div>
     </div>

@@ -388,90 +388,23 @@ public function update(Request $request, $id)
 }
 
 
-    public function exportExcelWithTemplate(Request $request)
-    {
-        // Load the template Excel file
-        $templatePath = public_path('templates/template-checksheet-headcrane.xlsx');
-        $spreadsheet = IOFactory::load($templatePath);
-        $worksheet = $spreadsheet->getActiveSheet();
-
-        // Retrieve tag_number from the form
-        $headcraneNumber = $request->input('headcrane_number');
-
-        // Retrieve the selected year from the form
-        $selectedYear = $request->input('tahun');
-
-
-        // Retrieve data from the checksheetsco2 table for the selected year and tag_number
-        $data = ChecksheetItemHeadcrane::select(
-        'tt_check_sheet_item_headcrane.*',
-        'tm_item_check_head_crane.item_check',
-        'tm_item_check_head_crane.prosedur',
-        'tm_check_sheet_head_crane.tanggal_pengecekan',
-        'tm_check_sheet_head_crane.npk',
-        'tm_headcranes.no_headcrane',
-        'tm_headcranes.plant',
-        'tm_locations.location_name'
-        )
-
-        ->join('tm_item_check_head_crane', 'tt_check_sheet_item_headcrane.item_check_id', '=', 'tm_item_check_head_crane.id')
-        ->join('tm_check_sheet_head_crane', 'tt_check_sheet_item_headcrane.check_sheet_id', '=', 'tm_check_sheet_head_crane.id')
-        ->join('tm_headcranes', 'tm_check_sheet_head_crane.headcrane_id', '=', 'tm_headcranes.id')
-        ->join('tm_locations', 'tm_headcranes.location_id', '=', 'tm_locations.id')
-        ->get();
-        // dd($data);
-
-        $worksheet->setCellValue('AH' . 1, date('Y', strtotime($data[0]->tanggal_pengecekan)));
-        $worksheet->setCellValue('AH' . 2, date('F', strtotime($data[0]->tanggal_pengecekan)));
-        $worksheet->setCellValue('AH' . 3, $data[0]->no_headcrane);
-        $worksheet->setCellValue('AH' . 4, $data[0]->location_name);
-        $worksheet->setCellValue('AH' . 5, $data[0]->plant);
-
-        $startColumn = 'H'; // Assuming column B is for day 1
-        foreach ($data as $item) {
-        // Get the day of the month from tanggal_pengecekan
-        $day = Carbon::parse($item->tanggal_pengecekan)->day;
-
-        // Calculate the column dynamically based on the day
-        $col = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex(
-            \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($startColumn) + ($day - 1)
-        );
-
-        // Determine the correct row based on item_check and prosedur
-        switch ($item->prosedur) {
-            case 'Status Equipment':
-                $row = 9;
-                break;
-            case 'Arah Pergerakan Hoist':
-                $row = 10;
-                break;
-            case 'Suara Saat Hoist Berjalan':
-                $row = 11;
-                break;
-            case 'Kelancaran Pergerakan Hoist':
-                $row = 12;
-                break;
-            // Add other cases here for each prosedur...
-            default:
-                $row = null; // If no matching prosedur, skip
-                break;
-        }
-
-        if ($row) {
-            // Set data in the correct column and row
-            if ($item->result === 'OK') {
-                $worksheet->setCellValue($col . $row, '√');
-            } else if ($item->result === 'NG') {
-                $worksheet->setCellValue($col . $row, 'X');
-            }
-        }
+public function exportExcelWithTemplate(Request $request)
+{
+    $selectedMonth = $request->query('month', date('m')); // Default ke bulan sekarang jika tidak dipilih
+    $year = date('Y');
+    // Load the template Excel file
+    $templatePath = public_path('templates/RekapMonthlyEcodocs.xlsx');
+    if (!file_exists($templatePath)) {
+        return response()->json(['error' => 'Template file not found.'], 404);
     }
 
-        // Create a new Excel writer and save the modified spreadsheet
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $outputPath = public_path('templates/checksheet-head-crane.xlsx');
-        $writer->save($outputPath);
 
-        return response()->download($outputPath)->deleteFileAfterSend(true);
-    }
+    // Simpan file Excel yang telah diperbarui
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $outputPath = public_path('templates/checksheet-head-crane.xlsx');
+    $writer->save($outputPath);
+
+    return response()->download($outputPath)->deleteFileAfterSend(true);
+}
+
 }
